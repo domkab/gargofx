@@ -1,0 +1,48 @@
+@use '../styles/mixins' as *;
+
+.about-page {
+  display: flex;
+  flex-direction: row;
+
+  @include onMobile {
+    flex-direction: column;
+  }
+
+  &__container {
+    max-width: 700px;
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-size: 1rem;
+  }
+
+  &__heading {
+    @include onMobile {
+      align-self: center;
+    }
+
+    &--last {
+      align-self: center;
+    }
+  }
+
+  &__paragraph {
+    line-height: 1.6;
+
+    &--next {
+      // text-align: start;
+    }
+  }
+}

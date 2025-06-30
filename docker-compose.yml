@@ -1,0 +1,61 @@
+services:
+  # Production
+  nextblog:
+    container_name: gargofx
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.production
+    restart: unless-stopped
+    volumes:
+     - ./uploads:/app/public/uploads
+
+  nextblog-preview:
+    container_name: gargofx-preview
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.preview
+    restart: unless-stopped
+
+  # Development
+  nextblog-dev:
+    container_name: gargofx-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000"
+    env_file:
+      - .env.local
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+
+  #caddy
+  caddy:
+    image: caddy:alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - nextblog
+
+volumes:
+  caddy_data:
+  caddy_config:

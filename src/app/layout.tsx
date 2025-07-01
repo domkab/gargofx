@@ -26,7 +26,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   // title: `${SITE_NAME} | Home`,
-  title: "Pixel Tech | Home",
+  title: "GargoFx | Home",
   keywords: [
     "tech blog",
     "technology",

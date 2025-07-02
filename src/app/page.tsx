@@ -1,30 +1,14 @@
-import Link from 'next/link';
-import RecentPosts from './components/RecentPosts';
-import FeaturedPost from './components/FeaturedPost/FeaturedPost';
-import { EmailSubscribeWModal } from './components/CallToAction/EmailSubscribeWModal';
-
 export const revalidate = 120;
 
 export default async function Home() {
   return (
-    <main className="flex flex-col justify-center items-center">
-      <section className='w-full' aria-label="Featured Post">
-        <FeaturedPost />
-      </section>
-
-      <section className="p-3 flex flex-col gap-8 pt-7" aria-label="Recent Articles">
-        <RecentPosts limit={9} />
-        <Link
-          href={'/search?category'}
-          className="text-lg text-teal-500 hover:underline text-center"
-        >
-          View all posts
-        </Link>
-      </section>
-
-      <section aria-label="Subscribe to Newsletter">
-        <EmailSubscribeWModal />
-      </section>
+    <main className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center">
+      <h1 className="text-2xl font-semibold text-foreground">
+        Welcome to your new project
+      </h1>
+      <p className="mt-2 text-muted-foreground text-base max-w-prose">
+        This is a blank starter. You can begin building your layout, dashboard, or landing page here.
+      </p>
     </main>
   );
 }

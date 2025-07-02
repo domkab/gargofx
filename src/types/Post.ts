@@ -1,3 +1,7 @@
+// default post types and interfaces for the blog editor
+// This file defines the types and interfaces used in the blog editor for posts, images, and categories.
+// It includes types for post creation, updating, and featured posts.
+
 export interface ImageMeta {
   description: string;
   author?: string;

@@ -1,3 +1,5 @@
+import FeaturedPost from './components/FeaturedPost/FeaturedPost';
+
 export const revalidate = 120;
 
 export default async function Home() {
@@ -9,6 +11,8 @@ export default async function Home() {
       <p className="mt-2 text-muted-foreground text-base max-w-prose">
         This is a blank starter. You can begin building your layout, dashboard, or landing page here.
       </p>
+
+      <FeaturedPost />
     </main>
   );
 }

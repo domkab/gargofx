@@ -119,7 +119,7 @@ export default function UpdatePost() {
       fetchPost();
     }
 
-  }, [postId, user?.publicMetadata?.isAdmin, isSignedIn, dispatch]);
+  }, [postId, user?.publicMetadata?.isAdmin, isSignedIn, dispatch, user?.publicMetadata?.userMongoId]);
 
   // debug
   useEffect(() => {

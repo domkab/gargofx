@@ -1,11 +1,13 @@
+import NotFound from '@/app/not-found';
 import { getPostBySlug } from '@/lib/services/postService';
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
-  const post = await getPostBySlug(params.slug);
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
   if (!post) {
-    return <div className="text-center py-10 text-muted-foreground">Post not found</div>;
-  }
+    return <NotFound />;
+  };
 
   return (
     <main className="max-w-3xl mx-auto py-12 px-4">
@@ -13,4 +15,4 @@ export default async function PostPage({ params }: { params: { slug: string } })
       <p>this is a sample post</p>
     </main>
   );
-}
+};

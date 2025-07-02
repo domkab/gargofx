@@ -9,7 +9,7 @@ export default async function FeaturedPost() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <h2 className="text-2xl font-semibold mb-4">Featured Posts</h2>
-      
+
       <ul className="space-y-2">
         {featured.map(({ post }) => (
           <li key={post._id}>
@@ -19,6 +19,10 @@ export default async function FeaturedPost() {
             >
               {post.title}
             </Link>
+
+            <p className="text-sm text-muted-foreground">
+              {post.description || 'No description available.'}
+            </p>
           </li>
         ))}
       </ul>

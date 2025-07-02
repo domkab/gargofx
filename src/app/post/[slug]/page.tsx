@@ -10,6 +10,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
   return (
     <main className="max-w-3xl mx-auto py-12 px-4">
       <h1 className="text-3xl font-bold text-center">{post.title}</h1>
+      <p>this is a sample post</p>
     </main>
   );
 }

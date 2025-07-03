@@ -8,7 +8,7 @@ import {
   FooterLinkGroup,
   FooterTitle,
 } from 'flowbite-react';
-import Logo from './Logo';
+import Logo from '../Logo';
 
 export default function FooterCom() {
   return (
@@ -34,9 +34,11 @@ export default function FooterCom() {
                 <FooterLink href='/privacy-policy'>
                   Privacy&nbsp;&amp;&nbsp;Cookies
                 </FooterLink>
+
                 <FooterLink href='/terms-conditions'>
                   Terms&nbsp;&amp;&nbsp;Conditions
                 </FooterLink>
+
                 <FooterLink href='/privacy-controls'>
                   Do&nbsp;Not&nbsp;Sell&nbsp;/&nbsp;Share&nbsp;My&nbsp;Info
                 </FooterLink>

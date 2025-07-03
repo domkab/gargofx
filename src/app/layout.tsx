@@ -4,8 +4,8 @@ import ReduxProvider from '@/redux/ReduxProvider';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Geist, Geist_Mono } from "next/font/google";
 import { Suspense } from 'react';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import NavigationLoader from './components/Navigation/NavigationLoader';
 import PageViewTracker from './components/Tracking/PageViewTracker';
 import GA from './components/Tracking/GA';
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased background`}>
           <ReduxProvider>
             <ThemeComponent>
               <div className="flex min-h-screen flex-col">

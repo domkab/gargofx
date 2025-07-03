@@ -25,13 +25,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const useThemeFlag = process.env.NEXT_PUBLIC_USE_THEME;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const bodyClassName = `${geistSans.variable} ${geistMono.variable} antialiased${useThemeFlag ? ' ' : ' background'}`;
+
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased background`}>
+        <body className={bodyClassName}>
           <ReduxProvider>
             <ThemeComponent>
               <div className="flex min-h-screen flex-col">

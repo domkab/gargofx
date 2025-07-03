@@ -11,7 +11,7 @@ export default function FooterClientSide() {
           <div>
             <Logo />
             <p className="mt-4 text-sm max-w-sm">
-              Bringing transparency to consumer pricing.
+              Public facing footer component
             </p>
           </div>
 

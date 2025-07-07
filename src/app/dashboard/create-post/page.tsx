@@ -1,6 +1,5 @@
 "use client"
 
-import CategorySelect from '@/app/components/Dashboard/Categories/CategorySelect';
 import InlineImageEditor from '@/app/components/PostEditor/InlineImageEditor';
 import PostEditor from '@/app/components/PostEditor/PostEditor';
 import Image from 'next/image';
@@ -58,15 +57,16 @@ export default function CreatePostPage() {
       setPublishError(`Something went wrong: ${error}`);
     }
   };
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setFormData({ title: e.target.value }));
+
+  const handleTitleChange = (field: 'bold' | 'regular', value: string) => {
+    dispatch(setFormData({
+      title: {
+        ...formData.title,
+        [field]: value
+      }
+    }));
   };
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setFormData({ description: e.target.value }));
-  };
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setFormData({ category: e.target.value }));
-  };
+
   const handleMainImageUpload = (file: File) => {
     if (file) {
       dispatch(uploadPostImage({ file, target: 'main' }));
@@ -124,28 +124,22 @@ export default function CreatePostPage() {
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
           <TextInput
             type='text'
-            placeholder='Title'
+            placeholder='Title BOLD'
             id='title'
             className='flex-1'
-            value={formData.title}
-            onChange={handleTitleChange}
-          />
-
-          <CategorySelect
-            value={formData.category}
-            onChange={handleCategoryChange}
+            value={formData.title.bold}
+            onChange={(e) => handleTitleChange('bold', e.target.value)}
           />
         </div>
 
         <div className="description flex flex-col gap-4 sm:flex-row ">
           <TextInput
             type='text'
-            placeholder='Description'
+            placeholder='Title REGULAR'
             id='description'
             className='flex-1'
-            value={formData.description}
-            onChange={handleDescriptionChange}
-            maxLength={187}
+            value={formData.title.regular}
+            onChange={(e) => handleTitleChange('regular', e.target.value)}
           />
         </div>
 
@@ -210,16 +204,12 @@ export default function CreatePostPage() {
                   type="text"
                   placeholder="Author"
                   value={formData.images.main.meta?.author || ''}
-                  onChange={(e) =>
+                  onChange={() =>
                     dispatch(setFormData({
                       images: {
                         ...formData.images,
                         main: {
                           ...formData.images.main,
-                          meta: {
-                            ...formData.images.main.meta,
-                            author: e.target.value,
-                          },
                         },
                       },
                     }))

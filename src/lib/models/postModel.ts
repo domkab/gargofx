@@ -1,77 +1,50 @@
-import { PostCategory } from '@/types/Post';
-import mongoose from 'mongoose';
+import { Schema, Document, model, models } from 'mongoose';
 
-const InlineImageSchema = new mongoose.Schema(
+interface ContentBlock {
+  type: 'image' | 'video';
+  url: string;
+  layout: 'full' | 'half';
+  alt?: string;
+}
+
+export interface IPost extends Document {
+  title: {
+    bold: string;
+    regular?: string;
+  };
+  shortDescription: string;
+  heroImage: string;
+  description?: string;
+  content: ContentBlock[];
+  credits: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const ContentBlockSchema = new Schema<ContentBlock>({
+  type: { type: String, enum: ['image', 'video'], required: true },
+  url: { type: String, required: true },
+  layout: { type: String, enum: ['full', 'half'], default: 'full' },
+  alt: { type: String }
+});
+
+const PostSchema = new Schema<IPost>(
   {
-    id: {
-      type: String,
-      required: true
+    title: {
+      bold: { type: String, required: true },
+      regular: { type: String, required: false }
     },
-    url: {
-      type: String,
-      required: true
-    },
-    meta: {
-      author: { type: String, default: '' },
-      description: { type: String, default: '' }
-    }
+    shortDescription: { type: String, required: true },
+    heroImage: { type: String, required: true },
+    description: { type: String },
+    content: { type: [ContentBlockSchema], default: [] },
+    credits: { type: String, required: true, default: '' },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
   },
   {
-    _id: false,
-    id: false,
-    strict: true
+    timestamps: true
   }
 );
 
-const postSchema = new mongoose.Schema(
-  {
-    userId: {
-      type: String,
-      required: true,
-    },
-    content: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    description: {
-      type: String,
-      required: true,
-      maxlength: 187,
-    },
-    images: {
-      main: {
-        url: {
-          type: String,
-          default: 'https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2021/09/how-to-write-a-blog-post.png',
-        },
-        meta: {
-          author: { type: String, default: '' },
-          description: { type: String, default: '' },
-        },
-      },
-      inline: {
-        type: [InlineImageSchema],
-        default: []
-      }
-    },
-    category: {
-      type: String,
-      default: PostCategory.All,
-    },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-  },
-  { timestamps: true }
-);
-
-const Post = mongoose.models.Post || mongoose.model('Post', postSchema);
-
-export default Post;
+export default models.Post || model<IPost>('Post', PostSchema);

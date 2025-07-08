@@ -180,7 +180,7 @@ export default function CreatePostPage() {
           <Alert color='failure'>{imageUploadError}</Alert>
         )}
 
-        {formData.heroImage && (
+        {formData.heroImage.url && (
           <>
             <div style={{ position: 'relative', width: '100%', height: '400px' }}>
               <Image

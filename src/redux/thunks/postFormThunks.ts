@@ -22,7 +22,8 @@ export const uploadPostImage = createAsyncThunk<
     const state = getState();
     const { title, slug: currentSlug } = state.postForm;
 
-    const slug = currentSlug || generateSlug(title);
+    const slugSource = [title.bold, title.regular].filter(Boolean).join(' ');
+    const slug = currentSlug || generateSlug(slugSource);
 
     if (!currentSlug) {
       dispatch(setFormData({ slug }));

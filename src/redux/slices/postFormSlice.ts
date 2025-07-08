@@ -44,12 +44,9 @@ const postFormSlice = createSlice({
     //   state.images.inline =
     //     state.images.inline.filter(img => img.id !== action.payload);
     // },
-    // updateMainImageMeta: (state, action: PayloadAction<{ meta: Partial<ImageMeta> }>) => {
-    //   state.images.main.meta = {
-    //     ...state.images.main.meta,
-    //     ...action.payload.meta,
-    //   };
-    // },
+    updateMainImageMeta: (state, action: PayloadAction<{ alt: string }>) => {
+      state.heroImage.alt = action.payload.alt;
+    },
     // updateInlineImageMeta: (
     //   state,
     //   action: PayloadAction<{ id: string; meta: ImageMeta }>
@@ -76,12 +73,12 @@ const postFormSlice = createSlice({
         state.imageUploadProgress = '0';
         state.imageUploadError = null;
       })
-      // .addCase(uploadPostImage.fulfilled, (state, action) => {
-      //   if (action.payload.target === 'main') {
-      //     state.images.main.url = action.payload.url;
-      //   }
-      //   state.imageUploadProgress = null;
-      // })
+      .addCase(uploadPostImage.fulfilled, (state, action) => {
+        if (action.payload.target === 'main') {
+          state.heroImage.url = action.payload.url;
+        }
+        state.imageUploadProgress = null;
+      })
       .addCase(uploadPostImage.rejected, (state) => {
         state.imageUploadProgress = null;
         state.imageUploadError = 'Upload failed';

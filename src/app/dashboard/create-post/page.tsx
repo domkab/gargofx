@@ -1,7 +1,5 @@
 "use client"
 
-import InlineImageEditor from '@/app/components/PostEditor/InlineImageEditor';
-import PostEditor from '@/app/components/PostEditor/PostEditor';
 import Image from 'next/image';
 import { uploadPostImage, useAppDispatch, useAppSelector } from '@/redux';
 import { setFormData } from '@/redux/slices/postFormSlice';
@@ -12,7 +10,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import 'react-quill-new/dist/quill.snow.css';
 import { getImageUrl } from '@/utils/getImageUrl';
 
 export default function CreatePostPage() {
@@ -73,20 +70,20 @@ export default function CreatePostPage() {
     }
   };
 
-  const handleInlineImageUpload = async (file: File): Promise<string> => {
-    try {
-      const resultAction = await dispatch(uploadPostImage({ file, target: 'inline' }));
+  // const handleInlineImageUpload = async (file: File): Promise<string> => {
+  //   try {
+  //     const resultAction = await dispatch(uploadPostImage({ file, target: 'inline' }));
 
-      if (uploadPostImage.fulfilled.match(resultAction)) {
-        const imageUrl = resultAction.payload.url;
-        return imageUrl;
-      } else {
-        throw new Error('Image upload failed');
-      }
-    } catch (err) {
-      throw new Error(`Inline image upload failed: ${err}`);
-    }
-  };
+  //     if (uploadPostImage.fulfilled.match(resultAction)) {
+  //       const imageUrl = resultAction.payload.url;
+  //       return imageUrl;
+  //     } else {
+  //       throw new Error('Image upload failed');
+  //     }
+  //   } catch (err) {
+  //     throw new Error(`Inline image upload failed: ${err}`);
+  //   }
+  // };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFile(e.target.files?.[0] || null);
@@ -183,12 +180,12 @@ export default function CreatePostPage() {
           <Alert color='failure'>{imageUploadError}</Alert>
         )}
 
-        {formData.images.main.url && (
+        {formData.heroImage && (
           <>
             <div style={{ position: 'relative', width: '100%', height: '400px' }}>
               <Image
-                src={getImageUrl(formData.images.main.url)}
-                alt={formData.images.main.meta?.description || "Uploaded image"}
+                src={getImageUrl(formData.heroImage.url)}
+                alt={formData.heroImage.alt || "Uploaded image"}
                 fill
                 className="object-cover"
               />
@@ -196,48 +193,20 @@ export default function CreatePostPage() {
 
             <div className="flex flex-col gap-4 mt-6">
               <div className="flex flex-col gap-2">
-                <label htmlFor="main-image-author" className="text-sm font-medium">
-                  Image Author
-                </label>
-                <TextInput
-                  id="main-image-author"
-                  type="text"
-                  placeholder="Author"
-                  value={formData.images.main.meta?.author || ''}
-                  onChange={() =>
-                    dispatch(setFormData({
-                      images: {
-                        ...formData.images,
-                        main: {
-                          ...formData.images.main,
-                        },
-                      },
-                    }))
-                  }
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
                 <label htmlFor="main-image-description" className="text-sm font-medium">
                   Image Description
                 </label>
                 <TextInput
                   id="main-image-description"
                   type="text"
-                  placeholder="Description"
-                  value={formData.images.main.meta?.description || ''}
+                  placeholder="Description for SEO"
+                  value={formData.heroImage.alt || ''}
                   onChange={(e) =>
                     dispatch(setFormData({
-                      images: {
-                        ...formData.images,
-                        main: {
-                          ...formData.images.main,
-                          meta: {
-                            ...formData.images.main.meta,
-                            description: e.target.value,
-                          },
-                        },
-                      },
+                      heroImage: {
+                        ...formData.heroImage,
+                        alt: e.target.value
+                      }
                     }))
                   }
                 />
@@ -245,15 +214,6 @@ export default function CreatePostPage() {
             </div>
           </>
         )}
-
-        <PostEditor
-          formData={formData}
-          setFormData={(data) => dispatch(setFormData(data))}
-          imageUploadProgress={imageUploadProgress}
-          handleUploadImage={handleInlineImageUpload}
-        />
-
-        <InlineImageEditor />
 
         <Button type='submit' gradientDuoTone='purpleToPink'>
           Publish

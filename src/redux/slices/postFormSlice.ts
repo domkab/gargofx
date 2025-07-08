@@ -1,37 +1,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FormData } from '@/types/FormData';
+// import { FormData } from '@/types/FormData';
 import { uploadPostImage } from '../thunks/postFormThunks';
+import { postFormData } from '@/types/post/postFormNew';
 
-export interface ImageMeta {
-  author?: string
-  description?: string
-}
-
-export interface ImageData {
-  id: string,
-  url: string
-  meta?: ImageMeta
-}
-
-export interface PostFormState extends FormData {
+export interface PostFormState extends postFormData {
   fileUrl: string | null;
   imageUploadProgress: string | null;
   imageUploadError: string | null;
 }
 
 const initialState: PostFormState = {
-  title: '',
-  description: '',
-  content: '',
-  slug: '',
-  category: '',
-  images: {
-    main: {
-      url: '',
-      meta: {},
-    },
-    inline: []
+  title: {
+    bold: '',
+    regular: ''
   },
+  slug: '',
+  heroImage: {
+    url: '',
+    alt: ''
+  },
+  description: '',
+  content: [],
+  credits: '',
   fileUrl: null,
   imageUploadProgress: null,
   imageUploadError: null
@@ -44,31 +34,31 @@ const postFormSlice = createSlice({
     setFormData: (state, action: PayloadAction<Partial<PostFormState>>) => {
       return { ...state, ...action.payload };
     },
-    addInlineImage: (state, action: PayloadAction<ImageData>) => {
-      state.images.inline.push(action.payload);
-    },
-    removeInlineImage: (
-      state,
-      action: PayloadAction<string>
-    ) => {
-      state.images.inline =
-        state.images.inline.filter(img => img.id !== action.payload);
-    },
-    updateMainImageMeta: (state, action: PayloadAction<{ meta: Partial<ImageMeta> }>) => {
-      state.images.main.meta = {
-        ...state.images.main.meta,
-        ...action.payload.meta,
-      };
-    },
-    updateInlineImageMeta: (
-      state,
-      action: PayloadAction<{ id: string; meta: ImageMeta }>
-    ) => {
-      const img = state.images.inline.find(i => i.id === action.payload.id);
-      if (img) {
-        img.meta = { ...img.meta, ...action.payload.meta };
-      }
-    },
+    // addInlineImage: (state, action: PayloadAction<ImageData>) => {
+    //   state.images.inline.push(action.payload);
+    // },
+    // removeInlineImage: (
+    //   state,
+    //   action: PayloadAction<string>
+    // ) => {
+    //   state.images.inline =
+    //     state.images.inline.filter(img => img.id !== action.payload);
+    // },
+    // updateMainImageMeta: (state, action: PayloadAction<{ meta: Partial<ImageMeta> }>) => {
+    //   state.images.main.meta = {
+    //     ...state.images.main.meta,
+    //     ...action.payload.meta,
+    //   };
+    // },
+    // updateInlineImageMeta: (
+    //   state,
+    //   action: PayloadAction<{ id: string; meta: ImageMeta }>
+    // ) => {
+    //   const img = state.images.inline.find(i => i.id === action.payload.id);
+    //   if (img) {
+    //     img.meta = { ...img.meta, ...action.payload.meta };
+    //   }
+    // },
     setFile: (state, action: PayloadAction<string | null>) => {
       state.fileUrl = action.payload;
     },
@@ -86,12 +76,12 @@ const postFormSlice = createSlice({
         state.imageUploadProgress = '0';
         state.imageUploadError = null;
       })
-      .addCase(uploadPostImage.fulfilled, (state, action) => {
-        if (action.payload.target === 'main') {
-          state.images.main.url = action.payload.url;
-        }
-        state.imageUploadProgress = null;
-      })
+      // .addCase(uploadPostImage.fulfilled, (state, action) => {
+      //   if (action.payload.target === 'main') {
+      //     state.images.main.url = action.payload.url;
+      //   }
+      //   state.imageUploadProgress = null;
+      // })
       .addCase(uploadPostImage.rejected, (state) => {
         state.imageUploadProgress = null;
         state.imageUploadError = 'Upload failed';
@@ -101,10 +91,10 @@ const postFormSlice = createSlice({
 
 export const {
   setFormData,
-  addInlineImage,
-  removeInlineImage,
-  updateMainImageMeta,
-  updateInlineImageMeta,
+  // addInlineImage,
+  // removeInlineImage,
+  // updateMainImageMeta,
+  // updateInlineImageMeta,
   setFile,
   setImageUploadProgress,
   setImageUploadError,

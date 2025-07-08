@@ -10,7 +10,11 @@ export interface IPost {
     bold: string;
     regular?: string;
   };
-  heroImage: string;
+  slug: string;
+  heroImage: {
+    url: string;
+    alt?: string;
+  };
   description?: string;
   optionalDescription?: string;
   content: ContentBlock[];

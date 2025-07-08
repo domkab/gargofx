@@ -16,7 +16,11 @@ const PostSchema = new Schema<IPostDocument>(
       bold: { type: String, required: true },
       regular: { type: String, required: false }
     },
-    heroImage: { type: String, required: true },
+    slug: { type: String, required: true, unique: true },
+    heroImage: {
+      url: { type: String, required: true },
+      alt: { type: String, default: '' }
+    },
     description: { type: String },
     optionalDescription: { type: String, default: '' },
     content: { type: [ContentBlockSchema], default: [] },

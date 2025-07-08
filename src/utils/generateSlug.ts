@@ -7,4 +7,4 @@ export const generateSlug = (text: string): string =>
 
 export function getSlugSource(title: { bold: string; regular?: string }) {
   return [title.bold, title.regular].filter(Boolean).join(' ');
-}
+};

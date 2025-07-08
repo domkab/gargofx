@@ -22,3 +22,20 @@ export interface IPost {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type PostCreateInput = {
+  title: {
+    bold: string;
+    regular?: string;
+  };
+  slug: string;
+  heroImage: {
+    url: string;
+    alt?: string;
+  };
+  description?: string;
+  optionalDescription?: string;
+  content: ContentBlock[];
+  credits: string;
+  userId: string;
+};

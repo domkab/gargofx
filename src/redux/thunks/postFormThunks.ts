@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setImageUploadProgress, setImageUploadError, setFormData } from '../slices/postFormSlice';
-import { generateSlug } from '@/utils/generateSlug';
+import { generateSlug, getSlugSource } from '@/utils/generateSlug';
 import { RootState } from '../store';
 import { uploadImageViaApi } from '@/firebase/uploadImageViaApi';
 
@@ -22,8 +22,7 @@ export const uploadPostImage = createAsyncThunk<
     const state = getState();
     const { title, slug: currentSlug } = state.postForm;
 
-    const slugSource = [title.bold, title.regular].filter(Boolean).join(' ');
-    const slug = currentSlug || generateSlug(slugSource);
+    const slug = generateSlug(getSlugSource(title))
 
     if (!currentSlug) {
       dispatch(setFormData({ slug }));

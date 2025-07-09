@@ -11,20 +11,26 @@ import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { getImageUrl } from '@/utils/getImageUrl';
+import { DeleteMainImageButton } from '@/app/components/Dashboard/DeleteImage/DeleteMainImageButton';
+import { generateSlug, getSlugSource } from '@/utils/generateSlug';
 
 export default function CreatePostPage() {
   const { isSignedIn, user, isLoaded } = useUser();
   const [publishError, setPublishError] = useState<string | null>(null);
   const [publishSuccess, setPublishSuccess] = useState<string | null>(null);
+
   const [file, setFile] = useState<File | null>(null);
 
   const dispatch = useAppDispatch();
   const formData = useAppSelector((state) => state.postForm);
   const imageUploadProgress = useAppSelector((state) => state.postForm.imageUploadProgress);
   const imageUploadError = useAppSelector((state) => state.postForm.imageUploadError);
+  const slug = generateSlug(getSlugSource(formData.title));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('calling handleSubmit with formData:', formData);
+
     try {
       const { data, status } = await axios.post(
         '/api/post/create',
@@ -68,6 +74,15 @@ export default function CreatePostPage() {
     if (file) {
       dispatch(uploadPostImage({ file, target: 'main' }));
     }
+  };
+
+  const handleDescriptionChange = (
+    field: 'description' | 'optionalDescription' = 'description',
+    value: string
+  ) => {
+    dispatch(setFormData({
+      [field]: value
+    }));
   };
 
   // const handleInlineImageUpload = async (file: File): Promise<string> => {
@@ -122,7 +137,7 @@ export default function CreatePostPage() {
           <TextInput
             type='text'
             placeholder='Title BOLD'
-            id='title'
+            id='title-bold'
             className='flex-1'
             value={formData.title.bold}
             onChange={(e) => handleTitleChange('bold', e.target.value)}
@@ -133,7 +148,7 @@ export default function CreatePostPage() {
           <TextInput
             type='text'
             placeholder='Title REGULAR'
-            id='description'
+            id='title-regular'
             className='flex-1'
             value={formData.title.regular}
             onChange={(e) => handleTitleChange('regular', e.target.value)}
@@ -189,6 +204,19 @@ export default function CreatePostPage() {
                 fill
                 className="object-cover"
               />
+              <div className="absolute top-1 right-1 z-10">
+                <DeleteMainImageButton
+                  slug={slug}
+                  onSuccess={() => {
+                    dispatch(setFormData({
+                      heroImage: {
+                        url: '',
+                        alt: ''
+                      }
+                    }));
+                  }}
+                />
+              </div>
             </div>
 
             <div className="flex flex-col gap-4 mt-6">
@@ -199,7 +227,7 @@ export default function CreatePostPage() {
                 <TextInput
                   id="main-image-description"
                   type="text"
-                  placeholder="Description for SEO"
+                  placeholder="Description for SEO (ALT TAG)"
                   value={formData.heroImage.alt || ''}
                   onChange={(e) =>
                     dispatch(setFormData({
@@ -214,6 +242,39 @@ export default function CreatePostPage() {
             </div>
           </>
         )}
+
+        <div className="flex flex-col gap-4 mt-6">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="post-description" className="text-sm font-medium">
+              Post Description MAIN
+            </label>
+            <TextInput
+              type='text'
+              placeholder='Main description, written in bold text'
+              id='post-description'
+              className='flex-1'
+              value={formData.description || ''}
+              onChange={(e) => handleDescriptionChange('description', e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 mt-6">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="post-optional-description" className="text-sm font-medium">
+              Post Description Optional
+            </label>
+
+            <TextInput
+              type='text'
+              placeholder='Optional description, written in regular text'
+              id='post-optional-description'
+              className='flex-1'
+              value={formData.optionalDescription || ''}
+              onChange={(e) => handleDescriptionChange('optionalDescription', e.target.value)}
+            />
+          </div>
+        </div>
 
         <Button type='submit' gradientDuoTone='purpleToPink'>
           Publish

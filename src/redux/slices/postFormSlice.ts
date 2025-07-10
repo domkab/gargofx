@@ -46,31 +46,33 @@ const postFormSlice = createSlice({
 
     updateContentBlock: (
       state,
-      action: PayloadAction<{ index: number; block: Partial<ContentBlock> }>
+      action: PayloadAction<{ id: string; block: Partial<ContentBlock> }>
     ) => {
-      const { index, block } = action.payload;
-      state.content[index] = { ...state.content[index], ...block };
-    },
-
-    removeContentBlock: (state, action: PayloadAction<number>) => {
-      state.content.splice(action.payload, 1);
-    },
-
-    moveContentBlockUp: (state, action: PayloadAction<number>) => {
-      const i = action.payload;
-      if (i > 0) {
-        const temp = state.content[i];
-        state.content[i] = state.content[i - 1];
-        state.content[i - 1] = temp;
+      const index = state.content.findIndex(b => b.id === action.payload.id);
+      if (index !== -1) {
+        state.content[index] = { ...state.content[index], ...action.payload.block };
       }
     },
 
-    moveContentBlockDown: (state, action: PayloadAction<number>) => {
-      const i = action.payload;
-      if (i < state.content.length - 1) {
-        const temp = state.content[i];
-        state.content[i] = state.content[i + 1];
-        state.content[i + 1] = temp;
+    removeContentBlock: (state, action: PayloadAction<string>) => {
+      state.content = state.content.filter(block => block.id !== action.payload);
+    },
+
+    moveContentBlockUp: (state, action: PayloadAction<string>) => {
+      const index = state.content.findIndex(block => block.id === action.payload);
+      if (index > 0) {
+        const temp = state.content[index];
+        state.content[index] = state.content[index - 1];
+        state.content[index - 1] = temp;
+      }
+    },
+
+    moveContentBlockDown: (state, action: PayloadAction<string>) => {
+      const index = state.content.findIndex(block => block.id === action.payload);
+      if (index < state.content.length - 1 && index !== -1) {
+        const temp = state.content[index];
+        state.content[index] = state.content[index + 1];
+        state.content[index + 1] = temp;
       }
     },
 

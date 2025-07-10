@@ -1,4 +1,5 @@
 export interface ContentBlock {
+  id: string;
   type: 'image' | 'video';
   url: string;
   layout: 'full' | 'half';

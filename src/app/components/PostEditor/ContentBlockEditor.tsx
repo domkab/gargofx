@@ -11,17 +11,27 @@ import {
   moveContentBlockDown
 } from '@/redux/slices/postFormSlice';
 import { JSX } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { ContentBlock } from '@/types/post/iPost';
 
 export default function ContentBlockEditor() {
   const dispatch = useAppDispatch();
   const content = useAppSelector((state) => state.postForm.content);
 
   const handleAddBlock = (layout: 'full' | 'half') => {
+    const newBlock = (): ContentBlock => ({
+      id: uuidv4(),
+      type: 'image',
+      url: '',
+      alt: '',
+      layout,
+    });
+
     if (layout === 'half') {
-      dispatch(addContentBlock({ type: 'image', url: '', layout: 'half', alt: '' }));
-      dispatch(addContentBlock({ type: 'image', url: '', layout: 'half', alt: '' }));
+      dispatch(addContentBlock(newBlock()));
+      dispatch(addContentBlock(newBlock()));
     } else {
-      dispatch(addContentBlock({ type: 'image', url: '', layout: 'full', alt: '' }));
+      dispatch(addContentBlock(newBlock()));
     }
   };
 
@@ -38,30 +48,30 @@ export default function ContentBlockEditor() {
 
           if (block.layout === 'half' && nextBlock?.layout === 'half') {
             rendered.push(
-              <div key={`pair-${i}`} className="grid grid-cols-2 gap-4">
+              <div key={`pair-${block.id}`} className="grid grid-cols-2 gap-4">
                 <ContentBlockItem
-                  key={`block-${i}`}
+                  key={block.id}
                   block={block}
                   index={i}
                   onChange={(updated) =>
-                    dispatch(updateContentBlock({ index: i, block: updated }))
+                    dispatch(updateContentBlock({ id: block.id, block: updated }))
                   }
-                  onRemove={() => dispatch(removeContentBlock(i))}
-                  onMoveUp={() => dispatch(moveContentBlockUp(i))}
-                  onMoveDown={() => dispatch(moveContentBlockDown(i))}
+                  onRemove={() => dispatch(removeContentBlock(block.id))}
+                  onMoveUp={() => dispatch(moveContentBlockUp(block.id))}
+                  onMoveDown={() => dispatch(moveContentBlockDown(block.id))}
                   isFirst={i === 0}
                   isLast={i === content.length - 1}
                 />
                 <ContentBlockItem
-                  key={`block-${i + 1 }`}
+                  key={nextBlock.id}
                   block={nextBlock}
                   index={i + 1}
                   onChange={(updated) =>
-                    dispatch(updateContentBlock({ index: i + 1, block: updated }))
+                    dispatch(updateContentBlock({ id: nextBlock.id, block: updated }))
                   }
-                  onRemove={() => dispatch(removeContentBlock(i + 1))}
-                  onMoveUp={() => dispatch(moveContentBlockUp(i + 1))}
-                  onMoveDown={() => dispatch(moveContentBlockDown(i + 1))}
+                  onRemove={() => dispatch(removeContentBlock(nextBlock.id))}
+                  onMoveUp={() => dispatch(moveContentBlockUp(nextBlock.id))}
+                  onMoveDown={() => dispatch(moveContentBlockDown(nextBlock.id))}
                   isFirst={i + 1 === 0}
                   isLast={i + 1 === content.length - 1}
                 />
@@ -72,15 +82,15 @@ export default function ContentBlockEditor() {
           } else {
             rendered.push(
               <ContentBlockItem
-                key={`block-${i}`}
+                key={block.id}
                 block={block}
                 index={i}
                 onChange={(updated) =>
-                  dispatch(updateContentBlock({ index: i, block: updated }))
+                  dispatch(updateContentBlock({ id: block.id, block: updated }))
                 }
-                onRemove={() => dispatch(removeContentBlock(i))}
-                onMoveUp={() => dispatch(moveContentBlockUp(i))}
-                onMoveDown={() => dispatch(moveContentBlockDown(i))}
+                onRemove={() => dispatch(removeContentBlock(block.id))}
+                onMoveUp={() => dispatch(moveContentBlockUp(block.id))}
+                onMoveDown={() => dispatch(moveContentBlockDown(block.id))}
                 isFirst={i === 0}
                 isLast={i === content.length - 1}
               />

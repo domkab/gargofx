@@ -3,6 +3,7 @@ import { PostType } from '@/types/Post';
 import Post from '../models/postModel';
 import { Types } from 'mongoose';
 import FeaturedPost from '../models/featuredPostModel';
+import { IPost } from '@/types/post/iPost';
 
 export async function getRecentPosts(limit = 9, order = 'desc'): Promise<PostType[]> {
   await connect();
@@ -13,11 +14,11 @@ export async function getRecentPosts(limit = 9, order = 'desc'): Promise<PostTyp
   return posts as PostType[]
 };
 
-export async function getPostBySlug(slug: string): Promise<PostType> {
+export async function getPostBySlug(slug: string): Promise<IPost> {
   await connect();
-  const post = await Post.findOne({ slug }).lean()
+  const post = await Post.findOne({ slug }).lean<IPost>();
 
-  return post as PostType;
+  return post as IPost;
 }
 
 

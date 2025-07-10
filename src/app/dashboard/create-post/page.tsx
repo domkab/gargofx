@@ -13,6 +13,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { DeleteMainImageButton } from '@/app/components/Dashboard/DeleteImage/DeleteMainImageButton';
 import { generateSlug, getSlugSource } from '@/utils/generateSlug';
+import ContentBlockEditor from '@/app/components/PostEditor/ContentBlockEditor';
 
 export default function CreatePostPage() {
   const { isSignedIn, user, isLoaded } = useUser();
@@ -274,6 +275,10 @@ export default function CreatePostPage() {
               onChange={(e) => handleDescriptionChange('optionalDescription', e.target.value)}
             />
           </div>
+        </div>
+
+        <div className="flex flex-col gap-4 mt-6">
+          <ContentBlockEditor />
         </div>
 
         <Button type='submit' gradientDuoTone='purpleToPink'>

@@ -4,6 +4,7 @@ import { uploadPostImage, useAppDispatch } from '@/redux';
 import { ContentBlock } from '@/types/post/iPost';
 import { TextInput, Select, Button, FileInput, Label } from 'flowbite-react';
 import Image from 'next/image';
+import { DeleteInlineImageButton } from '../Dashboard/DeleteImage/DeleteInlineImageButton';
 
 type Props = {
   block: ContentBlock;
@@ -68,12 +69,17 @@ export default function ContentBlockItem({
           </div>
 
           {block.url && (
-            <div style={{ position: 'relative', width: '100%', height: '300px' }} className="rounded overflow-hidden">
+            <div className="relative w-full h-[300px] rounded overflow-hidden">
               <Image
                 src={block.url}
                 alt={block.alt || 'Uploaded image'}
                 fill
                 className="object-contain"
+              />
+              <DeleteInlineImageButton
+                url={block.url}
+                label="inline image"
+                onSuccess={() => onChange({ ...block, url: '' })}
               />
             </div>
           )}

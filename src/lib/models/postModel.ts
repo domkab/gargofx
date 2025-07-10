@@ -4,6 +4,7 @@ import { Schema, Document, model, models } from 'mongoose';
 interface IPostDocument extends IPost, Document { };
 
 const ContentBlockSchema = new Schema<ContentBlock>({
+  id: { type: String, required: true },
   type: { type: String, enum: ['image', 'video'], },
   url: { type: String, },
   layout: { type: String, enum: ['full', 'half'], default: 'full' },

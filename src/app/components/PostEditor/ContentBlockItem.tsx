@@ -1,7 +1,9 @@
 'use client';
 
+import { uploadPostImage, useAppDispatch } from '@/redux';
 import { ContentBlock } from '@/types/post/iPost';
-import { TextInput, Select, Button } from 'flowbite-react';
+import { TextInput, Select, Button, FileInput, Label } from 'flowbite-react';
+import Image from 'next/image';
 
 type Props = {
   block: ContentBlock;
@@ -24,8 +26,21 @@ export default function ContentBlockItem({
   isFirst,
   isLast
 }: Props) {
+  const dispatch = useAppDispatch();
+
   const handleChange = (field: keyof ContentBlock, value: string) => {
     onChange({ ...block, [field]: value });
+  };
+
+  const handleInlineImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const result = await dispatch(uploadPostImage({ file, target: 'inline' }));
+
+    if (uploadPostImage.fulfilled.match(result)) {
+      onChange({ ...block, url: result.payload.url });
+    }
   };
 
   return (
@@ -45,17 +60,24 @@ export default function ContentBlockItem({
         </Select>
       </div>
 
-      <div>
-        <label className="block mb-1 text-sm text-gray-600 dark:text-gray-300">Media URL</label>
-        <TextInput
-          placeholder="Paste image or video URL"
-          value={block.url}
-          onChange={(e) => handleChange('url', e.target.value)}
-        />
-      </div>
-
       {block.type === 'image' && (
         <>
+          <div>
+            <Label className="block mb-1 text-sm text-gray-600 dark:text-gray-300">Upload Image</Label>
+            <FileInput accept="image/*" onChange={handleInlineImageUpload} />
+          </div>
+
+          {block.url && (
+            <div style={{ position: 'relative', width: '100%', height: '300px' }} className="rounded overflow-hidden">
+              <Image
+                src={block.url}
+                alt={block.alt || 'Uploaded image'}
+                fill
+                className="object-contain"
+              />
+            </div>
+          )}
+
           <div>
             <label className="block mb-1 text-sm text-gray-600 dark:text-gray-300">Alt Text</label>
             <TextInput

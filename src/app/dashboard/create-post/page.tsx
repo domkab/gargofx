@@ -5,7 +5,7 @@ import { uploadPostImage, useAppDispatch, useAppSelector } from '@/redux';
 import { setFormData } from '@/redux/slices/postFormSlice';
 import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
-import { Alert, Button, FileInput, TextInput } from 'flowbite-react';
+import { Alert, Button, FileInput, Label, Textarea, TextInput } from 'flowbite-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
@@ -86,20 +86,11 @@ export default function CreatePostPage() {
     }));
   };
 
-  // const handleInlineImageUpload = async (file: File): Promise<string> => {
-  //   try {
-  //     const resultAction = await dispatch(uploadPostImage({ file, target: 'inline' }));
-
-  //     if (uploadPostImage.fulfilled.match(resultAction)) {
-  //       const imageUrl = resultAction.payload.url;
-  //       return imageUrl;
-  //     } else {
-  //       throw new Error('Image upload failed');
-  //     }
-  //   } catch (err) {
-  //     throw new Error(`Inline image upload failed: ${err}`);
-  //   }
-  // };
+  const handleCreditsChange = (value: string) => {
+    dispatch(setFormData({
+      credits: value
+    }));
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFile(e.target.files?.[0] || null);
@@ -273,6 +264,22 @@ export default function CreatePostPage() {
               className='flex-1'
               value={formData.optionalDescription || ''}
               onChange={(e) => handleDescriptionChange('optionalDescription', e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 mt-6">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="post-optional-description" className="text-sm font-medium">
+              Post Credits
+            </Label>
+
+            <Textarea
+              id="post-optional-description"
+              placeholder={`Production: NOIR Production\n3D modelling, shading, animation: Laurynas Gargasas\nComposition: Tomas Pranevičius, Laurynas Gargasas`}
+              className="flex-1 min-h-[80px] resize-y"
+              value={formData.credits || ''}
+              onChange={(e) => handleCreditsChange(e.target.value)}
             />
           </div>
         </div>

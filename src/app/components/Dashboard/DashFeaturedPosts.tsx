@@ -5,8 +5,11 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { uploadFeaturedImage } from '@/firebase/uploadFeaturedImage';
 import { useAppDispatch } from '@/redux';
-import { deleteFeaturedPost, fetchFeaturedPosts, saveFeaturedPost } from '@/redux/thunks/featuredPostThunks';
-import { PostType } from '@/types/Post';
+import {
+  deleteFeaturedPost,
+  fetchFeaturedPosts,
+  saveFeaturedPost
+} from '@/redux/thunks/featuredPostThunks';
 import { useUser } from '@clerk/clerk-react';
 import axios from 'axios';
 import {
@@ -20,6 +23,7 @@ import {
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { getImageUrl } from '@/utils/getImageUrl';
+import { IPost } from '@/types/post/iPost';
 
 export default function FeaturedPostAdminPage() {
   const { user } = useUser();
@@ -32,7 +36,7 @@ export default function FeaturedPostAdminPage() {
   const userMongoId = user?.publicMetadata?.userMongoId as string;
   const featuredPosts = useSelector((state: RootState) => state.featuredPost.featured);
 
-  const [posts, setPosts] = useState<PostType[]>([]);
+  const [posts, setPosts] = useState<IPost[]>([]);
   const [selectedPostId, setSelectedPostId] = useState('');
   const [overrideSummary, setOverrideSummary] = useState('');
   const [overrideImage, setOverrideImage] = useState('');

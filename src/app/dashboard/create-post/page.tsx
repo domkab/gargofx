@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { getImageUrl } from '@/utils/getImageUrl';
 import { DeleteMainImageButton } from '@/app/components/Dashboard/DeleteImage/DeleteMainImageButton';
 import { generateSlug, getSlugSource } from '@/utils/generateSlug';
 import ContentBlockEditor from '@/app/components/PostEditor/ContentBlockEditor';
@@ -191,7 +190,7 @@ export default function CreatePostPage() {
           <>
             <div style={{ position: 'relative', width: '100%', height: '400px' }}>
               <Image
-                src={getImageUrl(formData.heroImage.url)}
+                src={formData.heroImage.url}
                 alt={formData.heroImage.alt || "Uploaded image"}
                 fill
                 className="object-cover"
@@ -237,9 +236,10 @@ export default function CreatePostPage() {
 
         <div className="flex flex-col gap-4 mt-6">
           <div className="flex flex-col gap-2">
-            <label htmlFor="post-description" className="text-sm font-medium">
+            <Label htmlFor="post-description" className="text-sm font-medium">
               Post Description MAIN
-            </label>
+            </Label>
+
             <TextInput
               type='text'
               placeholder='Main description, written in bold text'

@@ -1,7 +1,7 @@
 import { withAdminAuth } from '@/lib/auth/withAdminAuth';
 import Post from '@/lib/models/postModel';
 import { connect } from '@/lib/mongodb/mongoose';
-import { PostUpdateInput } from '@/types/Post';
+import { PostUpdateInput } from '@/types/post/iPost';
 
 export const PUT = withAdminAuth<PostUpdateInput>(async (user, body) => {
   await connect();
@@ -13,15 +13,10 @@ export const PUT = withAdminAuth<PostUpdateInput>(async (user, body) => {
         $set: {
           title: body.title,
           description: body.description,
+          optionalDescription: body.optionalDescription || '',
+          heroImage: body.heroImage,
           content: body.content,
-          category: body.category,
-          images: {
-            main: {
-              url: body.images.main.url,
-              meta: body.images.main.meta || {},
-            },
-            inline: body.images.inline || [],
-          },
+          credits: body.credits,
         },
       },
       { new: true }
@@ -30,7 +25,6 @@ export const PUT = withAdminAuth<PostUpdateInput>(async (user, body) => {
     return new Response(JSON.stringify(updatedPost), { status: 200 });
   } catch (error) {
     console.error('Error updating post:', error);
-
     return new Response('Error updating post', { status: 500 });
   }
 });

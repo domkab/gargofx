@@ -7,6 +7,7 @@ export interface ContentBlock {
 }
 
 export interface IPost {
+  _id: string;
   title: {
     bold: string;
     regular?: string;
@@ -40,3 +41,19 @@ export type PostCreateInput = {
   credits: string;
   userId: string;
 };
+
+export interface PostUpdateInput {
+  postId: string;
+  title: {
+    bold: string;
+    regular?: string;
+  };
+  description?: string;
+  optionalDescription?: string;
+  heroImage: {
+    url: string;
+    alt?: string;
+  };
+  content: ContentBlock[];
+  credits: string;
+}

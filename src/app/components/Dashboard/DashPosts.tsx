@@ -18,15 +18,14 @@ import Link from 'next/link';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import axios from 'axios';
 import { HiChevronUpDown } from 'react-icons/hi2';
-import { PostType } from '@/types/Post';
 import Image from 'next/image';
-import { getImageUrl } from '@/utils/getImageUrl';
+import { IPost } from '@/types/post/iPost';
 
-type SortablePostField = 'title' | 'updatedAt' | 'category';
+type SortablePostField = 'title' | 'updatedAt';
 
 export default function DashPosts() {
   const { user } = useUser();
-  const [userPosts, setUserPosts] = useState<PostType[]>([]);
+  const [userPosts, setUserPosts] = useState<IPost[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState('');
 
@@ -52,6 +51,7 @@ export default function DashPosts() {
       }
     }
     fetchPosts();
+
   }, [user?.publicMetadata?.isAdmin, user?.publicMetadata?.userMongoId])
 
   const handleDeletePost = async () => {
@@ -190,12 +190,12 @@ export default function DashPosts() {
               >
                 Post title <HiChevronUpDown className="inline ml-2" />
               </TableHeadCell>
-              <TableHeadCell
+              {/* <TableHeadCell
                 className="cursor-pointer"
                 onClick={() => handleSort('category')}
               >
                 Category <HiChevronUpDown className="inline ml-2" />
-              </TableHeadCell>
+              </TableHeadCell> */}
               <TableHeadCell>Delete</TableHeadCell>
               <TableHeadCell>Edit</TableHeadCell>
             </TableHead>
@@ -217,8 +217,10 @@ export default function DashPosts() {
                   <TableCell>
                     <Link href={`/post/${post.slug}`}>
                       <Image
-                        src={getImageUrl(post.images.main.url)}
-                        alt={post.title}
+                        src={post.heroImage?.url || '/images/placeholder/placeholder.png'}
+                        alt={post.title.regular
+                          ? `${post.title.bold} ${post.title.regular}`
+                          : post.title.bold}
                         width={80}
                         height={40}
                         className="w-20 h-10 object-cover bg-gray-500"
@@ -230,10 +232,14 @@ export default function DashPosts() {
                       className="font-medium text-gray-900 dark:text-white"
                       href={`/post/${post.slug}`}
                     >
-                      {post.title}
+                      <span>
+                        {post.title.regular
+                          ? `${post.title.bold} ${post.title.regular}`
+                          : post.title.bold}
+                      </span>
                     </Link>
                   </TableCell>
-                  <TableCell>{post.category}</TableCell>
+                  {/* <TableCell>{post.category}</TableCell> */}
                   <TableCell>
                     <span
                       className="font-medium text-red-500 hover:underline cursor-pointer"

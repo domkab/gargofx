@@ -1,34 +1,36 @@
 "use client"
 
-import CategorySelect from '@/app/components/Dashboard/Categories/CategorySelect';
-import InlineImageEditor from '@/app/components/PostEditor/InlineImageEditor';
-import PostEditor from '@/app/components/PostEditor/PostEditor';
 import Image from 'next/image';
 import { uploadPostImage, useAppDispatch, useAppSelector } from '@/redux';
 import { setFormData } from '@/redux/slices/postFormSlice';
 import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
-import { Alert, Button, FileInput, TextInput } from 'flowbite-react';
+import { Alert, Button, FileInput, Label, Textarea, TextInput } from 'flowbite-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import 'react-quill-new/dist/quill.snow.css';
-import { getImageUrl } from '@/utils/getImageUrl';
+import { DeleteMainImageButton } from '@/app/components/Dashboard/DeleteImage/DeleteMainImageButton';
+import { generateSlug, getSlugSource } from '@/utils/generateSlug';
+import ContentBlockEditor from '@/app/components/PostEditor/ContentBlockEditor';
 
 export default function CreatePostPage() {
   const { isSignedIn, user, isLoaded } = useUser();
   const [publishError, setPublishError] = useState<string | null>(null);
   const [publishSuccess, setPublishSuccess] = useState<string | null>(null);
+
   const [file, setFile] = useState<File | null>(null);
 
   const dispatch = useAppDispatch();
   const formData = useAppSelector((state) => state.postForm);
   const imageUploadProgress = useAppSelector((state) => state.postForm.imageUploadProgress);
   const imageUploadError = useAppSelector((state) => state.postForm.imageUploadError);
+  const slug = generateSlug(getSlugSource(formData.title));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('calling handleSubmit with formData:', formData);
+
     try {
       const { data, status } = await axios.post(
         '/api/post/create',
@@ -58,34 +60,35 @@ export default function CreatePostPage() {
       setPublishError(`Something went wrong: ${error}`);
     }
   };
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setFormData({ title: e.target.value }));
+
+  const handleTitleChange = (field: 'bold' | 'regular', value: string) => {
+    dispatch(setFormData({
+      title: {
+        ...formData.title,
+        [field]: value
+      }
+    }));
   };
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setFormData({ description: e.target.value }));
-  };
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setFormData({ category: e.target.value }));
-  };
+
   const handleMainImageUpload = (file: File) => {
     if (file) {
       dispatch(uploadPostImage({ file, target: 'main' }));
     }
   };
 
-  const handleInlineImageUpload = async (file: File): Promise<string> => {
-    try {
-      const resultAction = await dispatch(uploadPostImage({ file, target: 'inline' }));
+  const handleDescriptionChange = (
+    field: 'description' | 'optionalDescription' = 'description',
+    value: string
+  ) => {
+    dispatch(setFormData({
+      [field]: value
+    }));
+  };
 
-      if (uploadPostImage.fulfilled.match(resultAction)) {
-        const imageUrl = resultAction.payload.url;
-        return imageUrl;
-      } else {
-        throw new Error('Image upload failed');
-      }
-    } catch (err) {
-      throw new Error(`Inline image upload failed: ${err}`);
-    }
+  const handleCreditsChange = (value: string) => {
+    dispatch(setFormData({
+      credits: value
+    }));
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,28 +127,22 @@ export default function CreatePostPage() {
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
           <TextInput
             type='text'
-            placeholder='Title'
-            id='title'
+            placeholder='Title BOLD'
+            id='title-bold'
             className='flex-1'
-            value={formData.title}
-            onChange={handleTitleChange}
-          />
-
-          <CategorySelect
-            value={formData.category}
-            onChange={handleCategoryChange}
+            value={formData.title.bold}
+            onChange={(e) => handleTitleChange('bold', e.target.value)}
           />
         </div>
 
         <div className="description flex flex-col gap-4 sm:flex-row ">
           <TextInput
             type='text'
-            placeholder='Description'
-            id='description'
+            placeholder='Title REGULAR'
+            id='title-regular'
             className='flex-1'
-            value={formData.description}
-            onChange={handleDescriptionChange}
-            maxLength={187}
+            value={formData.title.regular}
+            onChange={(e) => handleTitleChange('regular', e.target.value)}
           />
         </div>
 
@@ -189,44 +186,31 @@ export default function CreatePostPage() {
           <Alert color='failure'>{imageUploadError}</Alert>
         )}
 
-        {formData.images.main.url && (
+        {formData.heroImage.url && (
           <>
             <div style={{ position: 'relative', width: '100%', height: '400px' }}>
               <Image
-                src={getImageUrl(formData.images.main.url)}
-                alt={formData.images.main.meta?.description || "Uploaded image"}
+                src={formData.heroImage.url}
+                alt={formData.heroImage.alt || "Uploaded image"}
                 fill
                 className="object-cover"
               />
+              <div className="absolute top-1 right-1 z-10">
+                <DeleteMainImageButton
+                  slug={slug}
+                  onSuccess={() => {
+                    dispatch(setFormData({
+                      heroImage: {
+                        url: '',
+                        alt: ''
+                      }
+                    }));
+                  }}
+                />
+              </div>
             </div>
 
             <div className="flex flex-col gap-4 mt-6">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="main-image-author" className="text-sm font-medium">
-                  Image Author
-                </label>
-                <TextInput
-                  id="main-image-author"
-                  type="text"
-                  placeholder="Author"
-                  value={formData.images.main.meta?.author || ''}
-                  onChange={(e) =>
-                    dispatch(setFormData({
-                      images: {
-                        ...formData.images,
-                        main: {
-                          ...formData.images.main,
-                          meta: {
-                            ...formData.images.main.meta,
-                            author: e.target.value,
-                          },
-                        },
-                      },
-                    }))
-                  }
-                />
-              </div>
-
               <div className="flex flex-col gap-2">
                 <label htmlFor="main-image-description" className="text-sm font-medium">
                   Image Description
@@ -234,20 +218,14 @@ export default function CreatePostPage() {
                 <TextInput
                   id="main-image-description"
                   type="text"
-                  placeholder="Description"
-                  value={formData.images.main.meta?.description || ''}
+                  placeholder="Description for SEO (ALT TAG)"
+                  value={formData.heroImage.alt || ''}
                   onChange={(e) =>
                     dispatch(setFormData({
-                      images: {
-                        ...formData.images,
-                        main: {
-                          ...formData.images.main,
-                          meta: {
-                            ...formData.images.main.meta,
-                            description: e.target.value,
-                          },
-                        },
-                      },
+                      heroImage: {
+                        ...formData.heroImage,
+                        alt: e.target.value
+                      }
                     }))
                   }
                 />
@@ -256,14 +234,59 @@ export default function CreatePostPage() {
           </>
         )}
 
-        <PostEditor
-          formData={formData}
-          setFormData={(data) => dispatch(setFormData(data))}
-          imageUploadProgress={imageUploadProgress}
-          handleUploadImage={handleInlineImageUpload}
-        />
+        <div className="flex flex-col gap-4 mt-6">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="post-description" className="text-sm font-medium">
+              Post Description MAIN
+            </Label>
 
-        <InlineImageEditor />
+            <TextInput
+              type='text'
+              placeholder='Main description, written in bold text'
+              id='post-description'
+              className='flex-1'
+              value={formData.description || ''}
+              onChange={(e) => handleDescriptionChange('description', e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 mt-6">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="post-optional-description" className="text-sm font-medium">
+              Post Description Optional
+            </label>
+
+            <TextInput
+              type='text'
+              placeholder='Optional description, written in regular text'
+              id='post-optional-description'
+              className='flex-1'
+              value={formData.optionalDescription || ''}
+              onChange={(e) => handleDescriptionChange('optionalDescription', e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 mt-6">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="post-optional-description" className="text-sm font-medium">
+              Post Credits
+            </Label>
+
+            <Textarea
+              id="post-optional-description"
+              placeholder={`Production: NOIR Production\n3D modelling, shading, animation: Laurynas Gargasas\nComposition: Tomas Pranevičius, Laurynas Gargasas`}
+              className="flex-1 min-h-[80px] resize-y"
+              value={formData.credits || ''}
+              onChange={(e) => handleCreditsChange(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 mt-6">
+          <ContentBlockEditor />
+        </div>
 
         <Button type='submit' gradientDuoTone='purpleToPink'>
           Publish

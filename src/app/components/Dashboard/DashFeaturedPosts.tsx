@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { uploadFeaturedImage } from '@/firebase/uploadFeaturedImage';
 import { useAppDispatch } from '@/redux';
-import { deleteFeaturedPost, fetchFeaturedPosts, saveFeaturedPost } from '@/redux/thunks/featuredPostThunks';
-import { PostType } from '@/types/Post';
+import { 
+  deleteFeaturedPost, 
+  fetchFeaturedPosts, 
+  saveFeaturedPost } from '@/redux/thunks/featuredPostThunks';
 import { useUser } from '@clerk/clerk-react';
 import axios from 'axios';
 import {
@@ -20,6 +22,8 @@ import {
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { getImageUrl } from '@/utils/getImageUrl';
+import { PostType } from '@/types/Post';
+// import { IPost } from '@/types/post/iPost';
 
 export default function FeaturedPostAdminPage() {
   const { user } = useUser();

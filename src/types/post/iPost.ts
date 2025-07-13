@@ -57,3 +57,10 @@ export interface PostUpdateInput {
   content: ContentBlock[];
   credits: string;
 }
+
+export interface FeaturedPostType {
+  _id?: string;
+  post: IPost;
+  overrideSummary?: string;
+  overrideImage?: string;
+}

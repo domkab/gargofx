@@ -33,6 +33,7 @@ export default function FeaturedPostAdminPage() {
     type: 'success' | 'error';
     message: string
   } | null>(null);
+  
   const userMongoId = user?.publicMetadata?.userMongoId as string;
   const featuredPosts = useSelector((state: RootState) => state.featuredPost.featured);
 

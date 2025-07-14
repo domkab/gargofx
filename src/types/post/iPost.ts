@@ -6,23 +6,21 @@ export interface ContentBlock {
   alt?: string;
 }
 
-export interface IPost {
-  _id: string;
-  title: {
-    bold: string;
-    regular?: string;
-  };
+
+export interface IPostBase {
+  title: { bold: string; regular?: string };
   slug: string;
-  heroImage: {
-    url: string;
-    alt?: string;
-  };
+  heroImage: { url: string; alt?: string };
   description?: string;
   optionalDescription?: string;
   content: ContentBlock[];
   credits: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface IPost extends IPostBase {
+  _id: string;
 }
 
 export type PostCreateInput = {

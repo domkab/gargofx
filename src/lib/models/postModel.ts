@@ -1,19 +1,9 @@
-import { ContentBlock } from '@/types/post/iPost';
+import { ContentBlock, IPostBase } from '@/types/post/iPost';
 import { Schema, Document, model, models } from 'mongoose';
 
-interface IPostBase {
-  title: { bold: string; regular?: string };
-  slug: string;
-  heroImage: { url: string; alt?: string };
-  description?: string;
-  optionalDescription?: string;
-  content: ContentBlock[];
-  credits: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
 
-interface IPostDocument extends IPostBase, Document { };
+
+export interface IPostDocument extends IPostBase, Document { }
 
 const ContentBlockSchema = new Schema<ContentBlock>({
   id: { type: String, required: true },
@@ -46,4 +36,4 @@ const PostSchema = new Schema<IPostDocument>(
   }
 );
 
-export default models.Post || model<IPostBase>('Post', PostSchema);
+export default models.Post || model<IPostDocument>('Post', PostSchema);

@@ -1,12 +1,12 @@
-import { Schema, Document, model, models } from 'mongoose';
-import { FeaturedBlock, FeaturedLayoutRowBase } from '@/types/featuredLayout';
+import { Schema, model, models } from 'mongoose';
+import { FeaturedBlock, FeaturedLayoutRow } from '@/types/featuredLayout';
 
-interface IFeaturedLayoutRowDocument extends FeaturedLayoutRowBase, Document { }
+// interface IFeaturedLayoutRowDocument extends FeaturedLayoutRowBase, Document { }
 
 const FeaturedBlockSchema = new Schema<FeaturedBlock>(
   {
     id: { type: String, required: true },
-    postId: { type: String, required: true },
+    // postId: { type: String, required: true },
     layout: {
       type: String,
       enum: ['1/3', '1/2', '2/3', 'full'],
@@ -26,7 +26,7 @@ const FeaturedBlockSchema = new Schema<FeaturedBlock>(
   { _id: false }
 );
 
-const FeaturedLayoutRowSchema = new Schema<IFeaturedLayoutRowDocument>(
+const FeaturedLayoutRowSchema = new Schema<FeaturedLayoutRow>(
   {
     order: { type: Number, required: true },
     blocks: { type: [FeaturedBlockSchema], default: [] }
@@ -35,4 +35,4 @@ const FeaturedLayoutRowSchema = new Schema<IFeaturedLayoutRowDocument>(
 );
 
 export default models.FeaturedLayoutRow ||
-  model<IFeaturedLayoutRowDocument>('FeaturedLayoutRow', FeaturedLayoutRowSchema);
+  model<FeaturedLayoutRow>('FeaturedLayoutRow', FeaturedLayoutRowSchema);

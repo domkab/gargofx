@@ -226,6 +226,33 @@ export default function FeaturedLayoutEditorPage() {
       <div className="pt-4">
         <Button color="teal" onClick={() => dispatch(addRow())}>+ Add Layout Row</Button>
       </div>
+
+      <div className="pt-2">
+        <Button
+          color="success"
+          onClick={async () => {
+            console.log('Saving layout:', layoutRows);
+
+            try {
+              const response = await axios.post('/api/featured', {
+                rows: layoutRows,
+                userMongoId: user?.publicMetadata?.userMongoId,
+              });
+
+              if (response.status === 200) {
+                setToast({ type: 'success', message: 'Layout saved successfully!' });
+              } else {
+                setToast({ type: 'error', message: 'Something went wrong while saving.' });
+              }
+            } catch (err) {
+              console.error(err);
+              setToast({ type: 'error', message: 'Failed to save layout.' });
+            }
+          }}
+        >
+          💾 Save Layout
+        </Button>
+      </div>
     </main>
   );
 }

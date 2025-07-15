@@ -2,7 +2,7 @@ import { connect } from '@/lib/mongodb/mongoose';
 import { PostType } from '@/types/Post';
 import Post from '../models/postModel';
 import { Types } from 'mongoose';
-import FeaturedPost from '../models/featuredPostModel';
+import FeaturedPost from '../models/featuredLayoutModel';
 import { IPost } from '@/types/post/iPost';
 
 export async function getRecentPosts(limit = 9, order = 'desc'): Promise<PostType[]> {

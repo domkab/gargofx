@@ -46,6 +46,8 @@ export default function ReusableImageUploader({
           <Image
             src={currentImageUrl}
             alt={`${type} preview`}
+            width={800}
+            height={type === 'mobile' ? 320 : 450}
             className="object-cover rounded w-full h-full"
           />
         </div>

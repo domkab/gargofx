@@ -1,6 +1,6 @@
 import { deleteFeaturedImage, deletePostImages } from '@/firebase/deleteImages';
 import { withAdminAuth } from '@/lib/auth/withAdminAuth';
-import FeaturedPost from '@/lib/models/featuredPostModel';
+import FeaturedPost from '@/lib/models/featuredLayoutModel';
 import Post from '@/lib/models/postModel';
 import { connect } from '@/lib/mongodb/mongoose';
 

@@ -3,13 +3,11 @@
 import { FeaturedBlock, LayoutSize } from '@/types/featuredLayout';
 import {
   Button,
-  // FileInput,
   Label,
   Select
 } from 'flowbite-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Image from 'next/image';
 import clsx from 'clsx';
 import { RootState, useAppDispatch, useAppSelector } from '@/redux';
 import {
@@ -18,18 +16,53 @@ import {
   removeBlock,
   updateBlock
 } from '@/redux/slices/featuredPostSlice';
+import axios from 'axios';
+import { useUser } from '@clerk/clerk-react';
+import { IPost } from '@/types/post/iPost';
+import ReusableImageUploader from './ReusableImageUploader';
 
 const layoutOptions: LayoutSize[] = ['1/3', '1/2', '2/3', 'full'];
 
 export default function FeaturedLayoutEditorPage() {
+  const { user } = useUser();
   const dispatch = useAppDispatch();
   const layoutRows = useAppSelector((state: RootState) => state.featuredPost.rows);
+  const [posts, setPosts] = useState<IPost[]>([]);
 
-  const [availablePosts] = useState<{ _id: string; title: string }[]>([
-    { _id: '1', title: 'Mock Post A' },
-    { _id: '2', title: 'Mock Post B' },
-    { _id: '3', title: 'Mock Post C' },
-  ]);
+  const [toast, setToast] = useState<{
+    type: 'success' | 'error';
+    message: string
+  } | null>(null);
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const { data } = await axios.post(
+          `/api/post/get`,
+          {
+            userId: user?.publicMetadata?.userMongoId,
+            isAdmin: user?.publicMetadata?.isAdmin
+          }
+        );
+
+        setPosts(data.posts);
+        // await dispatch(fetchFeaturedPosts());
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (user?.publicMetadata?.userMongoId) {
+      fetchPosts();
+    }
+  }, [dispatch, user?.publicMetadata?.userMongoId, user?.publicMetadata?.isAdmin]);
 
   const handleAddBlockToRow = (rowIndex: number) => {
     const block: FeaturedBlock = {
@@ -41,22 +74,38 @@ export default function FeaturedLayoutEditorPage() {
     dispatch(addBlockToRow({ rowIndex, block }));
   };
 
-  // const handleImageUpload = async (file: File, rowIndex: number, blockIndex: number) => {
-  //   // Replace with your actual upload logic
-  //   const fakeUrl = URL.createObjectURL(file);
-  //   updateBlock(rowIndex, blockIndex, {
-  //     image: { url: fakeUrl, alt: 'Uploaded image' }
-  //   });
-  // };
-
   return (
     <main className="w-full max-w-[1440px] mx-auto p-6 space-y-10">
+
+      {toast && (
+        <div className="fixed top-4 right-4 z-50">
+          <div
+            className={
+              `p-4 rounded-lg shadow-md text-white 
+              ${toast.type === 'success' ? 'bg-green-600' : 'bg-red-600'}`
+            }
+          >
+            {toast.message}
+          </div>
+        </div>
+      )}
+
       <h1 className="text-2xl font-bold">🎯 Featured Layout Editor</h1>
 
       {layoutRows.map((row, rowIndex) => (
         <div
           key={rowIndex}
-          className="space-y-4 border p-4 rounded-md shadow-sm bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+          className={clsx(
+            'space-y-4',
+            'border',
+            'p-4',
+            'rounded-md',
+            'shadow-sm',
+            'bg-white',
+            'dark:bg-gray-800',
+            'border-gray-200',
+            'dark:border-gray-700'
+          )}
         >
           <div className="flex justify-between items-center">
             <h2 className="font-semibold">Row #{rowIndex + 1}</h2>
@@ -93,8 +142,12 @@ export default function FeaturedLayoutEditorPage() {
                     }
                   >
                     <option value="">Select post</option>
-                    {availablePosts.map(p => (
-                      <option key={p._id} value={p._id}>{p.title}</option>
+                    {posts.map(post => (
+                      <option key={post._id} value={post._id}>
+                        {post.title.regular
+                          ? `${post.title.bold} ${post.title.regular}`
+                          : post.title.bold}
+                      </option>
                     ))}
                   </Select>
                 </div>
@@ -117,24 +170,45 @@ export default function FeaturedLayoutEditorPage() {
                   </Select>
                 </div>
 
-                {/* <div className="mb-2">
-                  <Label value="Image" />
-                  <FileInput onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) handleImageUpload(file, rowIndex, blockIndex);
-                  }} />
-                </div> */}
+                <ReusableImageUploader
+                  label="Desktop Image (required)"
+                  type="desktop"
+                  slug={block.postId || 'default-slug'}
+                  currentImageUrl={block.image?.desktop?.url}
+                  setToast={setToast}
+                  onUpload={(url) => {
+                    dispatch(updateBlock({
+                      rowIndex,
+                      blockIndex,
+                      updates: {
+                        image: {
+                          ...block.image,
+                          desktop: { url, alt: 'Desktop image' }
+                        }
+                      }
+                    }));
+                  }}
+                />
 
-                {block.image?.desktop.url && (
-                  <div className="relative w-full h-40 mb-2">
-                    <Image
-                      src={block.image.desktop.url}
-                      alt={block.image.desktop.alt || 'Preview'}
-                      fill
-                      className="object-cover rounded"
-                    />
-                  </div>
-                )}
+                <ReusableImageUploader
+                  label="Mobile Image (optional)"
+                  type="mobile"
+                  slug={block.postId || 'default-slug'}
+                  currentImageUrl={block.image?.mobile?.url}
+                  setToast={setToast}
+                  onUpload={(url) => {
+                    dispatch(updateBlock({
+                      rowIndex,
+                      blockIndex,
+                      updates: {
+                        image: {
+                          desktop: block.image?.desktop ?? { url: '', alt: '' },
+                          mobile: { url, alt: 'Mobile image' }
+                        }
+                      }
+                    }));
+                  }}
+                />
 
                 <Button
                   size="xs"

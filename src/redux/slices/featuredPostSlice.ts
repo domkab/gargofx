@@ -69,26 +69,6 @@ const featuredLayoutSlice = createSlice({
       state.rows[rowIndex].blocks.splice(blockIndex, 1);
     },
   },
-
-  // You’ll hook in your async thunks (save/fetch layout) later
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(fetchFeaturedPosts.pending, (state) => {
-  //       state.loading = true;
-  //       state.error = null;
-  //     })
-  //     .addCase(fetchFeaturedPosts.fulfilled, (state, action: PayloadAction<FeaturedPostType[]>) => {
-  //       state.loading = false;
-  //       state.featured = action.payload;
-  //     })
-  //     .addCase(fetchFeaturedPosts.rejected, (state, action) => {
-  //       state.loading = false;
-  //       state.error = action.error.message ?? 'Failed to fetch featured posts';
-  //     })
-  //     .addCase(deleteFeaturedPost.fulfilled, (state, action: PayloadAction<string>) => {
-  //       state.featured = state.featured.filter((f) => f.post._id !== action.payload);
-  //     });
-  // },
 });
 
 export const {

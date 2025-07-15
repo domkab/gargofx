@@ -19,14 +19,13 @@ export const POST = withAdminAuth(async (_user, body: { rows: FeaturedLayoutRow[
   await connect();
 
   try {
-    console.log('body layout:',body.rows);
-
     await featuredLayoutModel.deleteMany();
     await featuredLayoutModel.insertMany(body.rows);
 
     return new Response('Layout saved', { status: 200 });
   } catch (error) {
     console.error('[FEATURED_LAYOUT_SAVE_ERROR]', error);
+
     return new Response('Error saving layout', { status: 500 });
   }
 });
@@ -36,9 +35,11 @@ export const DELETE = withAdminAuth(async () => {
 
   try {
     await featuredLayoutModel.deleteMany();
+
     return new Response('Featured layout deleted', { status: 200 });
   } catch (error) {
     console.error('[FEATURED_LAYOUT_DELETE_ERROR]', error);
+
     return new Response('Error deleting featured layout', { status: 500 });
   }
 });

@@ -14,6 +14,7 @@ import {
   addBlockToRow,
   addRow,
   removeBlock,
+  setLayout,
   updateBlock
 } from '@/redux/slices/featuredPostSlice';
 import axios from 'axios';
@@ -53,11 +54,24 @@ export default function FeaturedLayoutEditorPage() {
         );
 
         setPosts(data.posts);
-        // await dispatch(fetchFeaturedPosts());
       } catch (error) {
         console.error(error);
       }
     };
+
+    const fetchLayout = async () => {
+      try {
+        const { data } = await axios.get('/api/featured');
+        console.log('Fetched layout:', data);
+        if (Array.isArray(data)) {
+          dispatch(setLayout(data));
+        }
+      } catch (error) {
+        console.error('Failed to fetch featured layout:', error);
+      }
+    };
+
+    fetchLayout();
 
     if (user?.publicMetadata?.userMongoId) {
       fetchPosts();
@@ -170,6 +184,11 @@ export default function FeaturedLayoutEditorPage() {
                   </Select>
                 </div>
 
+
+                {/* {block.postId && (
+                  
+                )} */}
+
                 <ReusableImageUploader
                   label="Desktop Image (required)"
                   type="desktop"
@@ -189,6 +208,10 @@ export default function FeaturedLayoutEditorPage() {
                     }));
                   }}
                 />
+
+                {/* {block.postId && (
+                  
+                )} */}
 
                 <ReusableImageUploader
                   label="Mobile Image (optional)"
@@ -231,8 +254,6 @@ export default function FeaturedLayoutEditorPage() {
         <Button
           color="success"
           onClick={async () => {
-            console.log('Saving layout:', layoutRows);
-
             try {
               const response = await axios.post('/api/featured', {
                 rows: layoutRows,

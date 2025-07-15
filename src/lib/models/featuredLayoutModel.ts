@@ -1,8 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 import { FeaturedBlock, FeaturedLayoutRow } from '@/types/featuredLayout';
 
-// interface IFeaturedLayoutRowDocument extends FeaturedLayoutRowBase, Document { }
-
 const FeaturedBlockSchema = new Schema<FeaturedBlock>(
   {
     id: { type: String, required: true },

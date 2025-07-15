@@ -156,6 +156,15 @@ export default function FeaturedLayoutEditorPage() {
                     }
                   >
                     <option value="">Select post</option>
+
+                    {/* Show missing post fallback */}
+                    {!posts.find(p => p._id === block.postId) && block.postId && (
+                      <option value={block.postId} disabled>
+                        (Missing Post)
+                      </option>
+                    )}
+
+                    {/* Valid post options */}
                     {posts.map(post => (
                       <option key={post._id} value={post._id}>
                         {post.title.regular

@@ -1,283 +1,157 @@
 'use client';
 
-import { RootState } from '@/redux/store';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { uploadFeaturedImage } from '@/firebase/uploadFeaturedImage';
-import { useAppDispatch } from '@/redux';
-import { 
-  deleteFeaturedPost, 
-  fetchFeaturedPosts, 
-  saveFeaturedPost } from '@/redux/thunks/featuredPostThunks';
-import { useUser } from '@clerk/clerk-react';
-import axios from 'axios';
+import { FeaturedBlock, LayoutSize } from '@/types/featuredLayout';
 import {
   Button,
-  Card,
-  FileInput,
+  // FileInput,
   Label,
-  Select,
-  Textarea,
+  Select
 } from 'flowbite-react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image';
-import { getImageUrl } from '@/utils/getImageUrl';
-import { PostType } from '@/types/Post';
-// import { IPost } from '@/types/post/iPost';
+import clsx from 'clsx';
+import { RootState, useAppDispatch, useAppSelector } from '@/redux';
+import {
+  addBlockToRow,
+  addRow,
+  removeBlock,
+  updateBlock
+} from '@/redux/slices/featuredPostSlice';
 
-export default function FeaturedPostAdminPage() {
-  const { user } = useUser();
-  const router = useRouter();
+const layoutOptions: LayoutSize[] = ['1/3', '1/2', '2/3', 'full'];
+
+export default function FeaturedLayoutEditorPage() {
   const dispatch = useAppDispatch();
-  const [toast, setToast] = useState<{
-    type: 'success' | 'error';
-    message: string
-  } | null>(null);
-  
-  const userMongoId = user?.publicMetadata?.userMongoId as string;
-  const featuredPosts = useSelector((state: RootState) => state.featuredPost.featured);
+  const layoutRows = useAppSelector((state: RootState) => state.featuredPost.rows);
 
-  const [posts, setPosts] = useState<PostType[]>([]);
-  const [selectedPostId, setSelectedPostId] = useState('');
-  const [overrideSummary, setOverrideSummary] = useState('');
-  const [overrideImage, setOverrideImage] = useState('');
+  const [availablePosts] = useState<{ _id: string; title: string }[]>([
+    { _id: '1', title: 'Mock Post A' },
+    { _id: '2', title: 'Mock Post B' },
+    { _id: '3', title: 'Mock Post C' },
+  ]);
 
-  useEffect(() => {
-    if (toast) {
-      const timer = setTimeout(() => setToast(null), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [toast]);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const { data } = await axios.post(
-          `/api/post/get`,
-          {
-            userId: user?.publicMetadata?.userMongoId,
-            isAdmin: user?.publicMetadata?.isAdmin,
-          }
-        );
-
-        setPosts(data.posts);
-        await dispatch(fetchFeaturedPosts());
-      } catch (error) {
-        console.error(error);
-      }
+  const handleAddBlockToRow = (rowIndex: number) => {
+    const block: FeaturedBlock = {
+      id: uuidv4(),
+      postId: '',
+      layout: '1/3',
     };
 
-    if (user?.publicMetadata?.userMongoId) {
-      fetchPosts();
-    }
-  }, [dispatch, user?.publicMetadata?.userMongoId, user?.publicMetadata?.isAdmin]);
-
-  const handleSave = async () => {
-    if (!selectedPostId) return;
-
-    await dispatch(
-      saveFeaturedPost({
-        postId: selectedPostId,
-        overrideSummary,
-        overrideImage,
-        userMongoId,
-      })
-    );
-
-    await dispatch(fetchFeaturedPosts());
-
-    setSelectedPostId('');
-    setOverrideSummary('');
-    setOverrideImage('');
+    dispatch(addBlockToRow({ rowIndex, block }));
   };
 
-  const handleDelete = async (postId: string) => {
-    await dispatch(deleteFeaturedPost({ postId, userMongoId }));
-    await dispatch(fetchFeaturedPosts());
-  };
-
-  const handleUploadOverrideImage = async (file: File) => {
-    try {
-      const post = getPostById(selectedPostId);
-      if (!post?.slug) throw new Error('Slug not found for selected post.');
-
-      const url = await uploadFeaturedImage(file, post.slug, (progress) =>
-        console.log('Uploading override image:', progress + '%')
-      );
-
-      setOverrideImage(url);
-      setToast({ type: 'success', message: 'Image uploaded successfully!' });
-    } catch {
-      setToast({ type: 'error', message: 'Upload failed. Please try again.' });
-    }
-  };
-
-  const getPostById = (id: string) => posts.find((p) => p._id === id);
+  // const handleImageUpload = async (file: File, rowIndex: number, blockIndex: number) => {
+  //   // Replace with your actual upload logic
+  //   const fakeUrl = URL.createObjectURL(file);
+  //   updateBlock(rowIndex, blockIndex, {
+  //     image: { url: fakeUrl, alt: 'Uploaded image' }
+  //   });
+  // };
 
   return (
-    <div className="w-[50%] max-w-7xl mx-auto p-6">
+    <main className="w-full max-w-[1440px] mx-auto p-6 space-y-10">
+      <h1 className="text-2xl font-bold">🎯 Featured Layout Editor</h1>
 
-      {toast && (
-        <div className="fixed top-4 right-4 z-50">
-          <div
-            className={
-              `p-4 rounded-lg shadow-md text-white 
-              ${toast.type === 'success' ? 'bg-green-600' : 'bg-red-600'}`
-            }
-          >
-            {toast.message}
+      {layoutRows.map((row, rowIndex) => (
+        <div
+          key={rowIndex}
+          className="space-y-4 border p-4 rounded-md shadow-sm bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+        >
+          <div className="flex justify-between items-center">
+            <h2 className="font-semibold">Row #{rowIndex + 1}</h2>
+            <Button size="xs" color="gray" onClick={() => handleAddBlockToRow(rowIndex)}>
+              + Add Block
+            </Button>
           </div>
-        </div>
-      )}
 
-      <h1 className="text-2xl font-bold mb-6">📝 Manage Featured Posts</h1>
-
-      <div className="space-y-4 mb-10">
-        <div>
-          <Label htmlFor="postSelect" value="Choose a post" />
-          <Select
-            id="postSelect"
-            required
-            onChange={(e) => setSelectedPostId(e.target.value)}
-            value={selectedPostId}
-          >
-            <option disabled value="">-- Select a post --</option>
-            {posts.map((post) => (
-              <option key={post._id} value={post._id}>
-                {post.title}
-              </option>
-            ))}
-          </Select>
-        </div>
-
-        <div>
-          <Label htmlFor="summary" value="Override summary (optional)" />
-          <Textarea
-            id="summary"
-            placeholder="Write a short summary..."
-            rows={3}
-            value={overrideSummary}
-            onChange={(e) => setOverrideSummary(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="image" value="Override image URL (optional)" />
-          <FileInput
-            accept='image/*'
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) handleUploadOverrideImage(file);
-            }}
-          />
-        </div>
-
-        <Button color="teal" onClick={handleSave}>
-          Add Featured Post
-        </Button>
-      </div>
-
-      {selectedPostId && (
-        <div className="my-10">
-          <h2 className="text-lg font-semibold mb-4">🖼 Preview Selected Post</h2>
-
-          <Card>
-            <div className="w-full h-40 relative mb-2">
-              <Image
-                src={getImageUrl(
-                  overrideImage ||
-                  getPostById(selectedPostId)?.images?.main?.url
+          <div className="flex flex-wrap gap-4">
+            {row.blocks.map((block, blockIndex) => (
+              <div
+                key={block.id}
+                className={clsx(
+                  'p-4 border rounded-md shadow-sm flex-1 min-w-[150px]',
+                  'bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200',
+                  {
+                    'w-full': block.layout === 'full',
+                    'w-1/2': block.layout === '1/2',
+                    'w-1/3': block.layout === '1/3',
+                    'w-2/3': block.layout === '2/3',
+                  }
                 )}
-                alt={getPostById(selectedPostId)?.title || 'Post image'}
-                fill
-                className="object-cover rounded-md"
-              />
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <h3 className="text-lg font-bold line-clamp-2">
-                {getPostById(selectedPostId)?.title || 'Untitled'}
-              </h3>
-
-              <div className="
-                flex justify-between text-sm 
-              text-gray-600 dark:text-gray-300 italic"
               >
-                <span>{getPostById(selectedPostId)?.category}</span>
-                <span>
-                  {getPostById(selectedPostId)?.createdAt &&
-                    new Date(getPostById(selectedPostId)!.createdAt).toLocaleDateString()}
-                </span>
-              </div>
+                <div className="mb-2">
+                  <Label value="Post" />
+                  <Select
+                    value={block.postId}
+                    onChange={(e) =>
+                      dispatch(updateBlock({
+                        rowIndex,
+                        blockIndex,
+                        updates: { postId: e.target.value }
+                      }))
+                    }
+                  >
+                    <option value="">Select post</option>
+                    {availablePosts.map(p => (
+                      <option key={p._id} value={p._id}>{p.title}</option>
+                    ))}
+                  </Select>
+                </div>
 
-              {overrideSummary && (
-                <p className="
-                  text-sm text-gray-600 dark:text-gray-300 
-                  italic mt-2 line-clamp-3"
-                >
-                  {overrideSummary}
-                </p>
-              )}
-            </div>
-          </Card>
-        </div>
-      )}
+                <div className="mb-2">
+                  <Label value="Layout" />
+                  <Select
+                    value={block.layout}
+                    onChange={(e) =>
+                      dispatch(updateBlock({
+                        rowIndex,
+                        blockIndex,
+                        updates: { layout: e.target.value as LayoutSize }
+                      }))
+                    }
+                  >
+                    {layoutOptions.map(opt => (
+                      <option key={opt} value={opt}>{opt}</option>
+                    ))}
+                  </Select>
+                </div>
 
-      <hr className="my-6" />
+                {/* <div className="mb-2">
+                  <Label value="Image" />
+                  <FileInput onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleImageUpload(file, rowIndex, blockIndex);
+                  }} />
+                </div> */}
 
-      <div>
-        <h2 className="text-xl font-semibold mb-4">⭐ Current Featured Posts</h2>
-
-        {featuredPosts.length === 0 ? (
-          <p className="text-gray-500">No featured posts selected yet.</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredPosts.map((f) => {
-              const post = getPostById(f.post._id);
-              return (
-                <Card
-                  key={f.post._id}
-                  className="relative cursor-pointer hover:ring-2 hover:ring-teal-500 transition-all"
-                >
-                  <div className="w-full h-40 relative mb-2">
+                {block.image?.desktop.url && (
+                  <div className="relative w-full h-40 mb-2">
                     <Image
-                      src={getImageUrl(f.overrideImage || post?.images?.main?.url)}
-                      alt={post?.title || 'Post image'}
-                      onClick={() => router.push(`/post/${post?.slug}`)}
+                      src={block.image.desktop.url}
+                      alt={block.image.desktop.alt || 'Preview'}
                       fill
-                      className="object-cover rounded-md"
+                      className="object-cover rounded"
                     />
                   </div>
+                )}
 
-                  <div className="flex flex-col gap-1">
-                    <h3 className="text-lg font-bold line-clamp-2">{post?.title || 'Untitled'}</h3>
-
-                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300 italic">
-                      <span>{post?.category}</span>
-                      <span>{post?.createdAt && new Date(post.createdAt).toLocaleDateString()}</span>
-                    </div>
-
-                    <Button
-                      size="xs"
-                      color="failure"
-                      onClick={() => { handleDelete(f.post._id) }}
-                      className="mt-3 w-fit self-end"
-                    >
-                      Remove
-                    </Button>
-
-                    {f.overrideSummary && (
-                      <p className="italic mt-2 line-clamp-3 text-sm text-gray-600 dark:text-gray-300">
-                        {f.overrideSummary}
-                      </p>
-                    )}
-                  </div>
-                </Card>
-              );
-            })}
+                <Button
+                  size="xs"
+                  color="failure"
+                  onClick={() => dispatch(removeBlock({ rowIndex, blockIndex }))}
+                >
+                  Remove Block
+                </Button>
+              </div>
+            ))}
           </div>
-        )}
+        </div>
+      ))}
+
+      <div className="pt-4">
+        <Button color="teal" onClick={() => dispatch(addRow())}>+ Add Layout Row</Button>
       </div>
-    </div>
+    </main>
   );
 }

@@ -13,21 +13,15 @@ const FeaturedBlockSchema = new Schema<FeaturedBlock>(
       required: true
     },
     image: {
-      url: { type: String },
-      alt: { type: String, default: '' }
-    }
-
-    // Optional future support:
-    // image: {
-    //   desktop: {
-    //     url: { type: String, required: true },
-    //     alt: { type: String, default: '' }
-    //   },
-    //   mobile: {
-    //     url: { type: String },
-    //     alt: { type: String, default: '' }
-    //   }
-    // }
+      desktop: {
+        url: { type: String, required: true },
+        alt: { type: String, default: '' }
+      },
+      mobile: {
+        url: { type: String },
+        alt: { type: String, default: '' }
+      }
+    },
   },
   { _id: false }
 );

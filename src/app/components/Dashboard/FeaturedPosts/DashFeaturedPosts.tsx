@@ -264,6 +264,7 @@ export default function FeaturedLayoutEditorPage() {
           color="success"
           onClick={async () => {
             try {
+              console.log('Saved layout:', layoutRows);
               const response = await axios.post('/api/featured', {
                 rows: layoutRows,
                 userMongoId: user?.publicMetadata?.userMongoId,

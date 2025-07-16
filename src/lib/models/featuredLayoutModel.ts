@@ -4,6 +4,7 @@ import { FeaturedBlock, FeaturedLayoutRow } from '@/types/featuredLayout';
 const FeaturedBlockSchema = new Schema<FeaturedBlock>(
   {
     id: { type: String, required: true },
+    postId: { type: String, required: true },
     layout: {
       type: String,
       enum: ['1/3', '1/2', '2/3', 'full'],

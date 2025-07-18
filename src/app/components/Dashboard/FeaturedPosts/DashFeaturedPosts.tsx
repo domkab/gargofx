@@ -63,7 +63,7 @@ export default function FeaturedLayoutEditorPage() {
     const fetchLayout = async () => {
       try {
         const { data } = await axios.get('/api/featured');
-        console.log('Fetched layout:', data);
+
         if (Array.isArray(data)) {
           dispatch(setLayout(data));
         }
@@ -177,7 +177,8 @@ export default function FeaturedLayoutEditorPage() {
                       <option key={post._id} value={post._id}>
                         {post.title.regular
                           ? `${post.title.bold} ${post.title.regular}`
-                          : post.title.bold}
+                          : post.title.bold
+                        }
                       </option>
                     ))}
                   </Select>

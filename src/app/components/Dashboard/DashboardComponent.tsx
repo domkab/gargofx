@@ -11,11 +11,11 @@ import { useUser } from '@clerk/nextjs';
 import Link from 'next/link';
 import axios from 'axios';
 import { DBUser } from '@/types/DBUser';
-import { PostType } from '@/types/Post';
+import { IPost } from '@/types/post/iPost';
 
 export default function DashboardComp() {
   const [users, setUsers] = useState<DBUser[]>([]);
-  const [posts, setPosts] = useState<PostType[]>([]);
+  const [posts, setPosts] = useState<IPost[]>([]);
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalPosts, setTotalPosts] = useState(0);
   const [lastMonthUsers, setLastMonthUsers] = useState(0);
@@ -161,7 +161,6 @@ export default function DashboardComp() {
             <TableHead>
               <TableHeadCell>Post image</TableHeadCell>
               <TableHeadCell>Post Title</TableHeadCell>
-              <TableHeadCell>Category</TableHeadCell>
             </TableHead>
             {posts &&
               posts.map((post) => (
@@ -170,13 +169,17 @@ export default function DashboardComp() {
                     <TableCell>
                       {/*eslint-disable-next-line @next/next/no-img-element*/}
                       <img
-                        src={post.images.main.url}
+                        src={post.heroImage?.url || ''}
                         alt='user'
                         className='w-14 h-10 rounded-md bg-gray-500'
                       />
                     </TableCell>
-                    <TableCell className='w-96'>{post.title}</TableCell>
-                    <TableCell className='w-5'>{post.category}</TableCell>
+                    <TableCell className='w-96'>
+                      {post.title.regular
+                        ? `${post.title.bold} ${post.title.regular}`
+                        : post.title.bold
+                      }
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               ))}

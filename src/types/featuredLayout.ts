@@ -1,4 +1,7 @@
-export type LayoutSize = '1/3' | '1/2' | '2/3' | 'full';
+export type LayoutSize =
+  | '1/4'
+  | '1/2'
+  | 'full';
 
 export interface FeaturedBlock {
   id: string;

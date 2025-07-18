@@ -12,17 +12,17 @@ export default async function FeaturedLayout() {
 
       <div className="space-y-8">
         {layout.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex flex-wrap gap-4">
+          <div key={rowIndex} className="flex flex-wrap">
             {row.blocks.map((block, blockIndex) => (
               <div
                 key={`${rowIndex}-${blockIndex}-${block.id}`}
                 className={clsx(
+                  'mx-2 mb-4',
                   'rounded overflow-hidden shadow-sm bg-white dark:bg-gray-900',
                   {
-                    'w-full': block.layout === 'full',
-                    'w-2/3': block.layout === '2/3',
+                    'w-1/4': block.layout === '1/4',
                     'w-1/2': block.layout === '1/2',
-                    'w-1/3': block.layout === '1/3',
+                    'w-full': block.layout === 'full',
                   }
                 )}
               >

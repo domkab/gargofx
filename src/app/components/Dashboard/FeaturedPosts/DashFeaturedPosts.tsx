@@ -22,7 +22,7 @@ import { useUser } from '@clerk/clerk-react';
 import { IPost } from '@/types/post/iPost';
 import ReusableImageUploader from './ReusableImageUploader';
 
-const layoutOptions: LayoutSize[] = ['1/3', '1/2', '2/3', 'full'];
+const layoutOptions: LayoutSize[] = ['1/4', '1/2', 'full'];
 
 export default function FeaturedLayoutEditorPage() {
   const { user } = useUser();
@@ -82,7 +82,7 @@ export default function FeaturedLayoutEditorPage() {
     const block: FeaturedBlock = {
       id: uuidv4(),
       postId: '',
-      layout: '1/3',
+      layout: '1/4',
     };
 
     dispatch(addBlockToRow({ rowIndex, block }));
@@ -136,10 +136,9 @@ export default function FeaturedLayoutEditorPage() {
                   'p-4 border rounded-md shadow-sm flex-1 min-w-[150px]',
                   'bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200',
                   {
-                    'w-full': block.layout === 'full',
+                    'w-1/4': block.layout === '1/4',
                     'w-1/2': block.layout === '1/2',
-                    'w-1/3': block.layout === '1/3',
-                    'w-2/3': block.layout === '2/3',
+                    'w-full': block.layout === 'full',
                   }
                 )}
               >

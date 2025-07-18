@@ -41,15 +41,17 @@ export default function ReusableImageUploader({
       <FileInput onChange={handleChange} />
 
       {currentImageUrl && (
-        <div className={`relative w-full ${type === 'mobile' ? 'h-32' : 'h-40'} mb-2`}>
+        <div className="w-full space-y-2 mb-4">
           <Label value={`Preview: ${type[0].toUpperCase() + type.slice(1)}`} />
-          <Image
-            src={currentImageUrl}
-            alt={`${type} preview`}
-            width={800}
-            height={type === 'mobile' ? 320 : 450}
-            className="object-cover rounded w-full h-full"
-          />
+          <div className="w-full rounded overflow-hidden">
+            <Image
+              src={currentImageUrl}
+              alt={`${type} preview`}
+              width={800}
+              height={type === 'mobile' ? 320 : 450}
+              className="object-cover w-full h-auto rounded"
+            />
+          </div>
         </div>
       )}
     </div>

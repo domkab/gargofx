@@ -4,7 +4,8 @@ import { FeaturedBlock, LayoutSize } from '@/types/featuredLayout';
 import {
   Button,
   Label,
-  Select
+  Select,
+  TextInput
 } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -226,6 +227,31 @@ export default function FeaturedLayoutEditorPage() {
                     }));
                   }}
                 />
+
+                <div className="mb-2">
+                  <Label value="Alt text (desktop image)" />
+                  <TextInput
+                    type="text"
+                    value={block.image?.desktop?.alt || ''}
+                    onChange={(e) =>
+                      dispatch(updateBlock({
+                        rowIndex,
+                        blockIndex,
+                        updates: {
+                          image: {
+                            ...block.image,
+                            desktop: {
+                              ...(block.image?.desktop ?? { url: '' }),
+                              alt: e.target.value,
+                            }
+                          }
+                        }
+                      }))
+                    }
+                    placeholder="Describe the image for SEO..."
+                    className=""
+                  />
+                </div>
 
                 {/* {block.postId && (
                   

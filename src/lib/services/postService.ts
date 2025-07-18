@@ -14,21 +14,12 @@ import { IPost } from '@/types/post/iPost';
 //   return posts as PostType[]
 // };
 
-// export async function getPostBySlug(slug: string): Promise<IPost> {
-//   await connect();
-//   const post = await Post.findOne({ slug }).lean<IPost>();
+export async function getPostBySlug(slug: string): Promise<IPost> {
+  await connect();
+  const post = await Post.findOne({ slug }).lean<IPost>();
 
-//   return post as IPost;
-// }
-
-
-
-// type FeaturedWithPost = {
-//   _id?: string | Types.ObjectId;
-//   postId?: PostType;
-//   overrideSummary?: string;
-//   overrideImage?: string;
-// };
+  return post as IPost;
+}
 
 export async function getFeaturedLayout(): Promise<FeaturedLayoutRow[]> {
   await connect();

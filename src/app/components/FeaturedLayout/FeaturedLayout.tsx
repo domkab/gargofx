@@ -1,8 +1,10 @@
 import { getFeaturedLayout } from '@/lib/services/postService';
 import clsx from 'clsx';
+import Link from 'next/link';
+import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 
 export default async function FeaturedLayout() {
-  const layout = await getFeaturedLayout(); // returns rows with blocks (each has image, postId, layout)
+  const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
 
   if (!layout?.length) return null;
 
@@ -26,18 +28,14 @@ export default async function FeaturedLayout() {
                   }
                 )}
               >
-                {block.image?.desktop?.url ? (
-                  // eslint-disable-next-line @next/next/no-img-element
+                <Link href={`/post/${block.post?.slug}`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={block.image.desktop.url}
-                    alt={block.image.desktop.alt || ''}
+                    src={block.image?.desktop?.url || ''}
+                    alt={block.image?.desktop?.alt || ''}
                     className="w-full h-64 object-cover"
                   />
-                ) : (
-                  <div className="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
-                    No image
-                  </div>
-                )}
+                </Link>
               </div>
             ))}
           </div>

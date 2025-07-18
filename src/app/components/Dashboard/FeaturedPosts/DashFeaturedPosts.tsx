@@ -13,6 +13,7 @@ import { RootState, useAppDispatch, useAppSelector } from '@/redux';
 import {
   addBlockToRow,
   addRow,
+  removeRow,
   removeBlock,
   setLayout,
   updateBlock
@@ -125,6 +126,14 @@ export default function FeaturedLayoutEditorPage() {
             <h2 className="font-semibold">Row #{rowIndex + 1}</h2>
             <Button size="xs" color="gray" onClick={() => handleAddBlockToRow(rowIndex)}>
               + Add Block
+            </Button>
+
+            <Button
+              size="xs"
+              color="failure"
+              onClick={() => dispatch(removeRow(rowIndex))}
+            >
+              🗑 Remove Row
             </Button>
           </div>
 

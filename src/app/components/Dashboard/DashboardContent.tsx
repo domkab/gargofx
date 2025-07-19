@@ -7,9 +7,9 @@ import DashProfile from './DashProfile';
 import DashPosts from './DashPosts';
 import DashUsers from './DashUsers';
 import DashboardComponent from './DashboardComponent';
-import DashFeaturedPosts from './DashFeaturedPosts';
 import DashCategories from './Categories/DashCategories';
 import DashImageSettings from './DashImageSettings';
+import DashFeaturedPosts from './FeaturedPosts/DashFeaturedPosts';
 
 export default function DashboardContent() {
   const searchParams = useSearchParams();

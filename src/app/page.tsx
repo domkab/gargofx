@@ -1,4 +1,4 @@
-import FeaturedPost from './components/FeaturedPost/FeaturedPost';
+import FeaturedLayout from './components/FeaturedLayout/FeaturedLayout';
 
 export const revalidate = 120;
 
@@ -12,7 +12,7 @@ export default async function Home() {
         This is a blank starter. You can begin building your layout, dashboard, or landing page here.
       </p>
 
-      <FeaturedPost />
+      <FeaturedLayout />
     </main>
   );
 }

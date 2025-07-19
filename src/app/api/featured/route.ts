@@ -1,74 +1,45 @@
 import { connect } from '@/lib/mongodb/mongoose';
-import FeaturedPost from '@/lib/models/featuredPostModel';
 import { withAdminAuth } from '@/lib/auth/withAdminAuth';
+import featuredLayoutModel from '@/lib/models/featuredLayoutModel';
+import { FeaturedLayoutRow } from '@/types/featuredLayout';
 
 export const GET = async () => {
   await connect();
 
   try {
-    const featuredPosts = await FeaturedPost.find()
-      .sort({ priority: -1 })
-      .populate('postId')
-
-    const normalized = featuredPosts.map((item) => ({
-      _id: item._id.toString(),
-      post: item.postId,
-      overrideSummary: item.overrideSummary,
-      overrideImage: item.overrideImage,
-    }));
-
-    return new Response(JSON.stringify(normalized), { status: 200 });
+    const rows = await featuredLayoutModel.find().sort({ order: 1 }).lean();
+    return new Response(JSON.stringify(rows), { status: 200 });
   } catch (error) {
-    console.error('[FEATURED_POST_GET_ERROR]', error);
-    return new Response('Error fetching featured posts', { status: 500 });
+    console.error('[FEATURED_LAYOUT_GET_ERROR]', error);
+    return new Response('Error fetching layout', { status: 500 });
   }
 };
 
-type FeaturedPostPayload = {
-  postId: string;
-  overrideSummary?: string;
-  overrideImage?: string;
-  priority?: number;
-  userMongoId: string;
-};
-
-export const POST = withAdminAuth<FeaturedPostPayload>(async (_user, body) => {
+export const POST = withAdminAuth(async (_user, body: { rows: FeaturedLayoutRow[] }) => {
   await connect();
 
   try {
-    const existing = await FeaturedPost.findOne({ postId: body.postId });
+    await featuredLayoutModel.deleteMany();
+    await featuredLayoutModel.insertMany(body.rows);
 
-    if (existing) {
-      await FeaturedPost.updateOne({ postId: body.postId }, body);
-    } else {
-      await FeaturedPost.create(body);
-    }
-
-    return new Response('Featured post saved', { status: 200 });
+    return new Response('Layout saved', { status: 200 });
   } catch (error) {
-    console.error('[FEATURED_POST_SAVE_ERROR]', error);
+    console.error('[FEATURED_LAYOUT_SAVE_ERROR]', error);
 
-    return new Response('Error saving featured post', { status: 500 });
+    return new Response('Error saving layout', { status: 500 });
   }
 });
 
-type DeletePayload = {
-  postId: string;
-  userMongoId: string;
-};
-
-export const DELETE = withAdminAuth<DeletePayload>(async (_user, body) => {
+export const DELETE = withAdminAuth(async () => {
   await connect();
 
-  if (!body.postId) {
-    return new Response('Missing postId', { status: 400 });
-  }
-
   try {
-    await FeaturedPost.deleteOne({ postId: body.postId });
-    return new Response('Featured post deleted', { status: 200 });
+    await featuredLayoutModel.deleteMany();
+
+    return new Response('Featured layout deleted', { status: 200 });
   } catch (error) {
-    console.error('[FEATURED_POST_DELETE_ERROR]', error);
-    return new Response('Error deleting featured post', { status: 500 });
+    console.error('[FEATURED_LAYOUT_DELETE_ERROR]', error);
+
+    return new Response('Error deleting featured layout', { status: 500 });
   }
 });

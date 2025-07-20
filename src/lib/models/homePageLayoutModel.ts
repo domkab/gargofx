@@ -1,7 +1,7 @@
+import { HomePageBlock, HomePageLayoutRow } from '@/types/HomePageLayout';
 import { Schema, model, models } from 'mongoose';
-import { FeaturedBlock, FeaturedLayoutRow } from '@/types/featuredLayout';
 
-const HomePageBlockSchema = new Schema<FeaturedBlock>(
+const HomePageBlockSchema = new Schema<HomePageBlock>(
   {
     id: { type: String, required: true },
     postId: { type: String, required: true },
@@ -28,7 +28,7 @@ const HomePageBlockSchema = new Schema<FeaturedBlock>(
   { _id: false }
 );
 
-const HomeLayoutRowSchema = new Schema<FeaturedLayoutRow>(
+const HomePageLayoutRowSchema = new Schema<HomePageLayoutRow>(
   {
     order: { type: Number, required: true },
     blocks: { type: [HomePageBlockSchema], default: [] }
@@ -36,5 +36,5 @@ const HomeLayoutRowSchema = new Schema<FeaturedLayoutRow>(
   { timestamps: true }
 );
 
-export default models.HomeLayoutRow ||
-  model<HomeLayoutRow>('HomeLayoutRow', HomeLayoutRowSchema);
+export default models.HomePageLayoutRow ||
+  model<HomePageLayoutRow>('HomePageLayoutRow', HomePageLayoutRowSchema);

@@ -11,6 +11,7 @@ import DashboardComponent from './DashboardComponent';
 import DashCategories from './Categories/DashCategories';
 import DashImageSettings from './DashImageSettings';
 import DashFeaturedPosts from './FeaturedPosts/DashFeaturedPosts';
+import DashHomeLayout from './DashHomeLayout';
 
 export default function DashboardContent() {
   const searchParams = useSearchParams();
@@ -40,6 +41,7 @@ export default function DashboardContent() {
         <DashSidebar />
       </div>
       {tab === 'profile' && <DashProfile />}
+      {tab === 'home-settings' && <DashHomeLayout />}
       {tab === 'posts' && <DashPosts />}
       {tab === 'featured-posts' && <DashFeaturedPosts />}
       {tab === 'categories' && <DashCategories />}

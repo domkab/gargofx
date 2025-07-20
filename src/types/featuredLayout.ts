@@ -6,9 +6,6 @@ export type LayoutSize =
 export interface FeaturedBlock {
   id: string;
   postId: string;
-  /**
-   * Optional: populated post reference, used for frontend rendering
-   */
   post?: {
     _id: string;
     slug: string;

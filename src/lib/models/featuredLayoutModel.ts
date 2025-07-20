@@ -7,7 +7,7 @@ const FeaturedBlockSchema = new Schema<FeaturedBlock>(
     postId: { type: String, required: true },
     layout: {
       type: String,
-      enum: ['1/4', '1/3', '1/2', '2/3', '3/4', 'full'],
+      enum: ['1/4', '1/2', 'full'],
       required: true
     },
     image: {

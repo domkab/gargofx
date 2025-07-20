@@ -1,4 +1,5 @@
-import FeaturedLayout from './components/FeaturedLayout/FeaturedLayout';
+import FeaturedLayout from './components/Layout/FeaturedLayout';
+import HomePageLayout from './components/Layout/HomePageLayout';
 
 export const revalidate = 120;
 
@@ -12,6 +13,7 @@ export default async function Home() {
         This is a blank starter. You can begin building your layout, dashboard, or landing page here.
       </p>
 
+      <HomePageLayout />
       <FeaturedLayout />
     </main>
   );

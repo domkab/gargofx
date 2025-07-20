@@ -173,7 +173,6 @@ export default function FeaturedLayoutEditorPage() {
                       </option>
                     )}
 
-                    {/* Valid post options */}
                     {posts.map(post => (
                       <option key={post._id} value={post._id}>
                         {post.title.regular

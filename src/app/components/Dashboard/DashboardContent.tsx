@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useUser } from '@clerk/nextjs';
 import DashSidebar from './DashSidebar';
 import DashProfile from './DashProfile';
 import DashPosts from './DashPosts';
@@ -14,6 +15,14 @@ import DashFeaturedPosts from './FeaturedPosts/DashFeaturedPosts';
 export default function DashboardContent() {
   const searchParams = useSearchParams();
   const [tab, setTab] = useState('');
+  const router = useRouter();
+  const { isSignedIn, isLoaded } = useUser();
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push('/');
+    }
+  }, [isLoaded, isSignedIn, router]);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(searchParams);
@@ -22,6 +31,8 @@ export default function DashboardContent() {
       setTab(tabFromUrl);
     }
   }, [searchParams]);
+
+  if (!isLoaded || !isSignedIn) return null;
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">

@@ -29,6 +29,7 @@ export default function HeaderClientSide() {
       )}
     >
       <Logo />
+
       <Image
         src="/icons/hamburger.svg"
         alt="burger menu open"

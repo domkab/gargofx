@@ -1,6 +1,18 @@
 'use client';
 
-import { FeaturedBlock, LayoutSize } from '@/types/featuredLayout';
+import { RootState, useAppDispatch, useAppSelector } from '@/redux';
+import {
+  addBlockToRow,
+  addRow,
+  removeBlock,
+  removeRow,
+  setLayout,
+  updateBlock
+} from '@/redux/slices/homePageSlice';
+import { IPost } from '@/types/post/iPost';
+import { useUser } from '@clerk/clerk-react';
+import axios from 'axios';
+import clsx from 'clsx';
 import {
   Button,
   Label,
@@ -9,27 +21,15 @@ import {
 } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import clsx from 'clsx';
-import { RootState, useAppDispatch, useAppSelector } from '@/redux';
-import {
-  addBlockToRow,
-  addRow,
-  removeRow,
-  removeBlock,
-  setLayout,
-  updateBlock
-} from '@/redux/slices/featuredPostSlice';
-import axios from 'axios';
-import { useUser } from '@clerk/clerk-react';
-import { IPost } from '@/types/post/iPost';
-import ReusableImageUploader from './ReusableImageUploader';
+import ReusableImageUploader from './FeaturedPosts/ReusableImageUploader';
+import { HomePageBlock, LayoutSize } from '@/types/HomePageLayout';
 
 const layoutOptions: LayoutSize[] = ['1/4', '1/2', 'full'];
 
-export default function FeaturedLayoutEditorPage() {
+export default function HomePageLayoutEditorPage() {
   const { user } = useUser();
   const dispatch = useAppDispatch();
-  const layoutRows = useAppSelector((state: RootState) => state.featuredPost.rows);
+  const layoutRows = useAppSelector((state: RootState) => state.homePage.rows);
   const [posts, setPosts] = useState<IPost[]>([]);
 
   const [toast, setToast] = useState<{
@@ -63,7 +63,7 @@ export default function FeaturedLayoutEditorPage() {
 
     const fetchLayout = async () => {
       try {
-        const { data } = await axios.get('/api/featured');
+        const { data } = await axios.get('/api/home');
 
         if (Array.isArray(data)) {
           dispatch(setLayout(data));
@@ -81,7 +81,7 @@ export default function FeaturedLayoutEditorPage() {
   }, [dispatch, user?.publicMetadata?.userMongoId, user?.publicMetadata?.isAdmin]);
 
   const handleAddBlockToRow = (rowIndex: number) => {
-    const block: FeaturedBlock = {
+    const block: HomePageBlock = {
       id: uuidv4(),
       postId: '',
       layout: '1/4',
@@ -106,7 +106,7 @@ export default function FeaturedLayoutEditorPage() {
         </div>
       )}
 
-      <h1 className="text-2xl font-bold">🎯 Featured Layout Editor</h1>
+      <h1 className="text-2xl font-bold"> 🏠 Home Page Layout Editor</h1>
 
       {layoutRows.map((row, rowIndex) => (
         <div
@@ -299,7 +299,7 @@ export default function FeaturedLayoutEditorPage() {
           onClick={async () => {
             try {
               console.log('Saved layout:', layoutRows);
-              const response = await axios.post('/api/featured', {
+              const response = await axios.post('/api/home', {
                 rows: layoutRows,
                 userMongoId: user?.publicMetadata?.userMongoId,
               });

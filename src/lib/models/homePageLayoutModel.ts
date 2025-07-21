@@ -1,13 +1,17 @@
+import { HomePageBlock, HomePageLayoutRow } from '@/types/HomePageLayout';
 import { Schema, model, models } from 'mongoose';
-import { FeaturedBlock, FeaturedLayoutRow } from '@/types/featuredLayout';
 
-const FeaturedBlockSchema = new Schema<FeaturedBlock>(
+const HomePageBlockSchema = new Schema<HomePageBlock>(
   {
     id: { type: String, required: true },
     postId: { type: String, required: true },
     layout: {
       type: String,
-      enum: ['1/4', '1/2', 'full'],
+      layout: {
+        type: String,
+        enum: ['1/4', '1/2', 'full'],
+        required: true
+      },
       required: true
     },
     image: {
@@ -24,13 +28,13 @@ const FeaturedBlockSchema = new Schema<FeaturedBlock>(
   { _id: false }
 );
 
-const FeaturedLayoutRowSchema = new Schema<FeaturedLayoutRow>(
+const HomePageLayoutRowSchema = new Schema<HomePageLayoutRow>(
   {
     order: { type: Number, required: true },
-    blocks: { type: [FeaturedBlockSchema], default: [] }
+    blocks: { type: [HomePageBlockSchema], default: [] }
   },
   { timestamps: true }
 );
 
-export default models.FeaturedLayoutRow ||
-  model<FeaturedLayoutRow>('FeaturedLayoutRow', FeaturedLayoutRowSchema);
+export default models.HomePageLayoutRow ||
+  model<HomePageLayoutRow>('HomePageLayoutRow', HomePageLayoutRowSchema);

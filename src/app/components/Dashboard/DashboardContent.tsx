@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useUser } from '@clerk/nextjs';
 import DashSidebar from './DashSidebar';
 import DashProfile from './DashProfile';
 import DashPosts from './DashPosts';
@@ -10,10 +11,19 @@ import DashboardComponent from './DashboardComponent';
 import DashCategories from './Categories/DashCategories';
 import DashImageSettings from './DashImageSettings';
 import DashFeaturedPosts from './FeaturedPosts/DashFeaturedPosts';
+import DashHomeLayout from './DashHomeLayout';
 
 export default function DashboardContent() {
   const searchParams = useSearchParams();
   const [tab, setTab] = useState('');
+  const router = useRouter();
+  const { isSignedIn, isLoaded } = useUser();
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push('/');
+    }
+  }, [isLoaded, isSignedIn, router]);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(searchParams);
@@ -23,12 +33,15 @@ export default function DashboardContent() {
     }
   }, [searchParams]);
 
+  if (!isLoaded || !isSignedIn) return null;
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       <div className="md:w-56">
         <DashSidebar />
       </div>
       {tab === 'profile' && <DashProfile />}
+      {tab === 'home-settings' && <DashHomeLayout />}
       {tab === 'posts' && <DashPosts />}
       {tab === 'featured-posts' && <DashFeaturedPosts />}
       {tab === 'categories' && <DashCategories />}

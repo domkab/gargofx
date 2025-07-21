@@ -1,11 +1,13 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import postFormReducer from './slices/postFormSlice';
 import featuredPostReducer from './slices/featuredPostSlice';
+import homePageLayoutReducer from './slices/homePageSlice';
 
 export const store = configureStore({
   reducer: {
     postForm: postFormReducer,
     featuredPost: featuredPostReducer,
+    homePage: homePageLayoutReducer,
   },
 });
 

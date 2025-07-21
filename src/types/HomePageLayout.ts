@@ -3,7 +3,7 @@ export type LayoutSize =
   | '1/2'
   | 'full';
 
-export interface FeaturedBlock {
+export interface HomePageBlock {
   id: string;
   postId: string;
   post?: {
@@ -25,13 +25,13 @@ export interface FeaturedBlock {
   };
 }
 
-export interface FeaturedLayoutRow {
+export interface HomePageLayoutRow {
   order: number;
-  blocks: FeaturedBlock[];
+  blocks: HomePageBlock[];
   _id?: string;
 }
 
-export interface FeaturedLayoutPayload {
-  rows: FeaturedLayoutRow[];
+export interface HomePageLayoutPayload {
+  rows: HomePageLayoutRow[];
   userMongoId: string;
 }

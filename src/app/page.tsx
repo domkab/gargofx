@@ -20,7 +20,7 @@ export default async function Home() {
         'text-center'
       )}
     >
-      <div className={clsx('relative', 'w-full', 'aspect-[16/9]')}>
+      <div className={clsx('relative', 'w-full')}>
         <HomeImageCarousel images={images} />
 
         <div
@@ -42,12 +42,12 @@ export default async function Home() {
             )}
           >
             Unlocking the{' '}
-            <span className={clsx('font-bold', 'italic')}>power</span>
+            <span className='font-bold italic'>power</span>
             <br />
             of <span className="font-bold">CGI</span> to bring
             <br />
             stories to{' '}
-            <span className={clsx('italic', 'font-semibold')}>life.</span>
+            <span className='italic font-semibold'>life.</span>
           </h1>
         </div>
       </div>

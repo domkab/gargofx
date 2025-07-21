@@ -8,7 +8,7 @@
 
 @use '../styles/components/Dashboard/DashProfile.module.scss';
 @use '../styles/components/Navigation/nprogress-custom.scss';
-@use '../styles/components/home.scss';
+@use '../styles/components/home.module.scss';
 
 body.front {
   font-family: var(--font-inter), Arial;

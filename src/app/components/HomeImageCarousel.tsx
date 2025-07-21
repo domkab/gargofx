@@ -14,7 +14,7 @@ export default function HomeImageCarousel({ images }: Props) {
   if (!images.length) return null;
 
   return (
-    <div className="w-full aspect-[16/9] relative">
+    <div className="home__carousel w-full aspect-[16/9] relative z-0">
       <Swiper
         modules={[EffectFade, Autoplay]}
         effect="fade"

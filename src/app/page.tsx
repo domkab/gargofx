@@ -9,14 +9,7 @@ export default async function Home() {
   const images = await getCarouselImages();
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center">
-      <h1 className="text-2xl font-semibold text-foreground">
-        Welcome to your new project
-      </h1>
-      <p className="mt-2 text-muted-foreground text-base max-w-prose">
-        This is a blank starter. You can begin building your layout, dashboard, or landing page here.
-      </p>
-
+    <main className="home flex flex-col items-center justify-center min-h-[70vh] px-4 text-center">
       <HomeImageCarousel images={images} />
       <HomePageLayout />
       <FeaturedLayout />

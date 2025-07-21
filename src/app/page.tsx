@@ -1,3 +1,4 @@
+import HomeImageCarousel from './components/HomeImageCarousel';
 import FeaturedLayout from './components/Layout/FeaturedLayout';
 import HomePageLayout from './components/Layout/HomePageLayout';
 
@@ -13,8 +14,10 @@ export default async function Home() {
         This is a blank starter. You can begin building your layout, dashboard, or landing page here.
       </p>
 
+      <HomeImageCarousel />
       <HomePageLayout />
       <FeaturedLayout />
+
     </main>
   );
 }

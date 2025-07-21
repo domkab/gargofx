@@ -1,3 +1,4 @@
+import { getCarouselImages } from '@/lib/services/imageService';
 import HomeImageCarousel from './components/HomeImageCarousel';
 import FeaturedLayout from './components/Layout/FeaturedLayout';
 import HomePageLayout from './components/Layout/HomePageLayout';
@@ -5,6 +6,8 @@ import HomePageLayout from './components/Layout/HomePageLayout';
 export const revalidate = 120;
 
 export default async function Home() {
+  const images = await getCarouselImages();
+
   return (
     <main className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center">
       <h1 className="text-2xl font-semibold text-foreground">
@@ -14,7 +17,7 @@ export default async function Home() {
         This is a blank starter. You can begin building your layout, dashboard, or landing page here.
       </p>
 
-      <HomeImageCarousel />
+      <HomeImageCarousel images={images} />
       <HomePageLayout />
       <FeaturedLayout />
 

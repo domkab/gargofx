@@ -55,4 +55,5 @@ launch.json
 e2e/node_modules
 
 #uploads
-public/uploads
+public/uploads/posts
+public/uploads/featured-posts

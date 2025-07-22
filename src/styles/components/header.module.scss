@@ -1,6 +1,39 @@
 @use '@/styles/_mixins' as *;
 
 .header {
-  height: 68px;
+  transition: all 0.3s ease;
+  height: 64px;
   padding: 16px 12px;
+
+  @include onLaptop {
+    padding: 16px 50px;
+    height: 80px;
+  }
+
+  nav a {
+    position: relative;
+    color: white;
+    // font-size: 0.875rem; // text-sm
+    // text-transform: capitalize;
+    transition: color 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0%;
+      height: 1px;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+
+    &:hover {
+      color: #ccc;
+    }
+  }
 }

@@ -32,7 +32,7 @@ export default function CustomSelect({
   }, []);
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative w-full">
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}

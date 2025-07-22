@@ -47,7 +47,6 @@ export default async function HomePageLayout() {
                 )}
               >
                 <Link href={`/post/${block.post?.slug}`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={block.image?.desktop?.url || ''}
                     alt={block.image?.desktop?.alt || ''}

@@ -54,7 +54,7 @@ export default async function Home() {
 
       <HomePageLayout />
       {/* <FeaturedLayout /> */}
-      <ContactSection />
+      <ContactSection as='section' />
     </main>
   );
 }

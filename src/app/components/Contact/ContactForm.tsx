@@ -31,7 +31,6 @@ export default function ContactForm() {
             required={name !== 'company'}
             className={clsx(
               'bg-transparent text-white placeholder-gray-400 outline-none flex-1 py-2',
-              styles.input
             )}
           />
           <span className="text-secondary text-xl">+</span>
@@ -57,7 +56,6 @@ export default function ContactForm() {
         type="submit"
         className={clsx(
           'mt-6 text-white py-3 px-8 rounded-full border border-white hover:bg-white hover:text-black transition-all duration-300',
-          styles.submit
         )}
       >
         send

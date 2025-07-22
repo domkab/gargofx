@@ -28,7 +28,6 @@ export default async function Home() {
             'inset-0',
             'text-start',
             'flex flex-col justify-center',
-            'px-4 sm:px-6',
             'text-white',
             'z-10',
             styles['home__text-container']

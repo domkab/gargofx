@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Logo from '../Logo';
 import Image from 'next/image';
 import clsx from 'clsx';
+import styles from '@/styles/components/header.module.scss';
 
 export default function HeaderClientSide() {
 
@@ -21,7 +22,7 @@ export default function HeaderClientSide() {
   return (
     <header
       className={clsx(
-        'header',
+        styles.header,
         'fixed top-0 left-0 w-full z-50 flex justify-between items-center p-4 transition-all duration-300',
         scrolled
           ? 'bg-black/30 backdrop-blur-md shadow-md'

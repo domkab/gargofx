@@ -1,4 +1,5 @@
 @use '@/styles/_mixins' as *;
+@use '@/styles/vars' as *;
 
 .header {
   transition: all 0.3s ease;
@@ -21,7 +22,7 @@
       bottom: -3px;
       width: 0%;
       height: 1px;
-      background-color: white;
+      background-color: $color-secondary;
       transition: width 0.3s ease;
     }
 
@@ -30,7 +31,7 @@
     }
 
     &:hover {
-      color: #ccc;
+      color: $color-secondary;
     }
   }
 }

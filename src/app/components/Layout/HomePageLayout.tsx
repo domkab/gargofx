@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import { getHomePageLayout } from '@/lib/services/postService';
 import { HomePageLayoutRow } from '@/types/HomePageLayout';
 import clsx from 'clsx';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from '@/styles/components/home.module.scss';
 
 export default async function HomePageLayout() {
@@ -40,7 +40,6 @@ export default async function HomePageLayout() {
                   'overflow-hidden shadow-sm bg-white dark:bg-gray-900',
                   'w-[calc(50%-0.5rem)]',
                   {
-                    // Override on medium+ screens
                     'md:w-[calc(25%-1rem)]': block.layout === '1/4',
                     'md:w-[calc(50%-1rem)]': block.layout === '1/2',
                     'md:w-full': block.layout === 'full',
@@ -65,11 +64,18 @@ export default async function HomePageLayout() {
         ))}
       </div>
 
-      <div className="text-center mt-7">
+      <div
+        className={clsx(
+          styles['home__featured-all'],
+          'text-center mt-7',
+          'flex items-center justify-center gap-3')
+        }
+      >
         <Link
           href="/featured"
+          className={styles['home__featured-all-link']}
         >
-          <Image
+          <img
             src="/icons/chevron-right.svg"
             alt="View all projects"
             width={22}

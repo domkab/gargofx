@@ -1,4 +1,5 @@
 @use '@/styles/_mixins' as *;
+@use '@/styles/vars' as *;
 
 .home {
   &__carousel {
@@ -54,6 +55,23 @@
       height: 270px;
       @include onLaptop {
         height: 600px;
+      }
+    }
+
+    .home__featured-all-link {
+      font-size: 24px;
+      line-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $color-secondary;
+
+        img {
+          filter: brightness(0) saturate(100%) invert(34%) sepia(97%) saturate(636%) hue-rotate(142deg) brightness(88%) contrast(92%);
+          transition: filter 0.3s ease;
+        }
       }
     }
   }

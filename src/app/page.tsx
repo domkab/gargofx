@@ -1,9 +1,9 @@
 import { getCarouselImages } from '@/lib/services/imageService';
 import HomeImageCarousel from './components/HomeImageCarousel';
-import FeaturedLayout from './components/Layout/FeaturedLayout';
-import HomePageLayout from './components/Layout/HomePageLayout';
-import clsx from 'clsx';
+// import FeaturedLayout from './components/Layout/FeaturedLayout';
 import styles from '@/styles/components/home.module.scss';
+import clsx from 'clsx';
+import HomePageLayout from './components/Layout/HomePageLayout';
 
 // export const revalidate = 120;
 // export const dynamic = 'force-dynamic';
@@ -52,7 +52,7 @@ export default async function Home() {
       </div>
 
       <HomePageLayout />
-      <FeaturedLayout />
+      {/* <FeaturedLayout /> */}
     </main>
   );
 }

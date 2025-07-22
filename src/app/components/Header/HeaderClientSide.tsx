@@ -19,7 +19,19 @@ export default function HeaderClientSide() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navItems = ['home', 'about', 'contact'];
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
+  const navItems = ['projects', 'about', 'contact'];
 
   return (
     <header

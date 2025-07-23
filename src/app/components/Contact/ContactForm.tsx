@@ -81,7 +81,7 @@ export default function ContactForm() {
           checked={agree}
           onChange={(e) => setAgree(e.target.checked)}
         />
-        <span>
+        <span className={styles['contact__form-consent']}>
           By ticking this box, you’re allowing us to handle{' '}
           <a href="/privacy" className="underline">
             your personal data

@@ -2,10 +2,24 @@
 @use '@/styles/_mixins' as *;
 
 .contact {
+  &__header {
+    flex-direction: column;
+
+    @include onLaptop {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
   &__title {
     font-size: 40px;
     line-height: 108px;
     text-align: start;
+
+    @include onLaptop {
+      font-size: 80px;
+      line-height: 108px;
+    }
   }
 
   &__socials {
@@ -16,7 +30,6 @@
   &__socials a {
     font-size: 24px;
     line-height: 32px;
-
     position: relative;
     &::after {
       content: '';
@@ -118,6 +131,12 @@
           font-size: 12px;
           color: black;
         }
+      }
+    }
+
+    &-submit {
+      &:hover {
+        background-color: $color-secondary;
       }
     }
   }

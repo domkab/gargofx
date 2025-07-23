@@ -21,14 +21,12 @@ export default function ContactForm() {
         value={`${process.env.NEXT_PUBLIC_SITE_URL}/thank-you`}
       />
 
-      {/* Topic (text input) */}
       <TextInput
         name="topic"
         placeholder="I’d love to chat about"
         required
       />
 
-      {/* Budget (number or select) */}
       <div className={clsx(styles['contact__form-input-container'])}>
         <CustomSelect
           name="budget"
@@ -71,7 +69,8 @@ export default function ContactForm() {
           type={type}
           required={name !== 'company'}
         />
-      ))}
+      ))
+      }
 
       {/* Checkbox */}
       <label className="flex items-start gap-3 text-white text-sm mt-4">
@@ -94,11 +93,12 @@ export default function ContactForm() {
       <button
         type="submit"
         className={clsx(
-          'mt-6 text-white py-3 px-8 rounded-full border border-white hover:bg-white hover:text-black transition-all duration-300'
+          styles['contact__form-submit'],
+          'mt-6 text-white py-3 px-8 rounded-full border border-white transition-all duration-300'
         )}
       >
         send
       </button>
-    </form>
+    </form >
   );
 }

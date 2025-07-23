@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import CustomSelect from './CustomSelect';
-// import styles from '@/styles/components/contact.module.scss';
+import styles from '@/styles/components/contact.module.scss';
 
 export default function ContactForm() {
   const [agree, setAgree] = useState(false);
@@ -28,7 +28,8 @@ export default function ContactForm() {
           placeholder="I’d love to chat about"
           required
           className={clsx(
-            'bg-transparent text-white placeholder-gray-400 outline-none flex-1 py-2'
+            styles['contact__form-input'],
+            'placeholder-gray-400'
           )}
         />
         <span className="text-secondary text-xl">+</span>
@@ -36,42 +37,18 @@ export default function ContactForm() {
 
       {/* Budget (number or select) */}
       <div className="flex justify-between items-center border-b border-white">
-        <select
+        <CustomSelect
           name="budget"
+          placeholder="Select budget"
           required
-          className={clsx(
-            'flex-1 min-w-0',
-            'bg-transparent text-white placeholder-gray-400 outline-none py-2 appearance-none truncate'
-          )}
-        >
-          <option value="">Select budget</option>
-          <option value="under-1k">&lt; $1,000</option>
-          <option value="1k-5k">$1,000 – $5,000</option>
-          <option value="5k-10k">$5,000 – $10,000</option>
-          <option value="10k+">&gt; $10,000</option>
-        </select>
-        <span className="text-secondary text-xl">+</span>
+          options={[
+            { label: '< $1,000', value: 'under-1k' },
+            { label: '$1,000 – $5,000', value: '1k-5k' },
+            { label: '$5,000 – $10,000', value: '5k-10k' },
+            { label: '> $10,000', value: '10k+' },
+          ]}
+        />
       </div>
-
-      {/* Referrer (select) */}
-      {/* <div className="flex justify-between items-center border-b border-white">
-        <select
-          name="referrer"
-          required
-          className={clsx(
-            'bg-transparent text-white placeholder-gray-400 outline-none flex-1 py-2',
-            'appearance-none'
-          )}
-        >
-          <option value="">How did you find us?</option>
-          <option value="google">Google search</option>
-          <option value="social">Social media (e.g., Instagram, Facebook, TikTok)</option>
-          <option value="ads">Online ad (Google, Facebook, etc.)</option>
-          <option value="referral">A friend or colleague (Word of mouth)</option>
-          <option value="youtube">YouTube</option>
-        </select>
-        <span className="text-secondary text-xl">+</span>
-      </div> */}
 
       <div className="flex justify-between items-center border-b border-white">
         <CustomSelect
@@ -80,9 +57,9 @@ export default function ContactForm() {
           required
           options={[
             { label: 'Google search', value: 'google' },
-            { label: 'Social media (e.g., Instagram, Facebook, TikTok)', value: 'social' },
+            { label: 'Social media', value: 'social' },
             { label: 'Online ad (Google, Facebook, etc.)', value: 'ads' },
-            { label: 'A friend or colleague (Word of mouth)', value: 'referral' },
+            { label: 'A friend or colleague', value: 'referral' },
             { label: 'YouTube', value: 'youtube' },
           ]}
         />
@@ -104,7 +81,8 @@ export default function ContactForm() {
             placeholder={placeholder}
             required={name !== 'company'}
             className={clsx(
-              'bg-transparent text-white placeholder-gray-400 outline-none flex-1 py-2'
+              styles['contact__form-input'],
+              'placeholder-gray-400'
             )}
           />
           <span className="text-secondary text-xl">+</span>

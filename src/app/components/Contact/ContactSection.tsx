@@ -18,7 +18,7 @@ export default function ContactSection({ as = 'section' }: ContactSectionProps) 
 
       <div className={clsx(styles['contact__socials'], 'gap-8 text-secondary mb-10')}>
         <a href="https://facebook.com" target="_blank">facebook</a>
-        <a href="https://instagram.com" target="_blank">instagram</a>
+        <a href="https://www.instagram.com/gargofx?igsh=MWNlbmg2endoemVtbA==" target="_blank">instagram</a>
         <a href="https://x.com" target="_blank">x</a>
       </div>
 

@@ -20,7 +20,6 @@ export default function CustomSelect({
   const [selected, setSelected] = useState<Option | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {

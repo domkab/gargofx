@@ -43,7 +43,14 @@ export default function CustomSelect({
         )}
       >
         {selected?.label || placeholder}
-        <span className="text-secondary text-xl">+</span>
+        <span
+          className={clsx(
+            'text-secondary text-xl transition-transform duration-300',
+            open ? 'rotate-45' : 'rotate-0'
+          )}
+        >
+          +
+        </span>
       </button>
 
       {/* Hidden input for form submission */}

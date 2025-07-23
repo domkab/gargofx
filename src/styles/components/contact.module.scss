@@ -39,12 +39,25 @@
   }
 
   &__form {
+    &-input-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid white;
+    }
+
     &-input {
       flex: 1 1 0%;
-      padding: 10px 8px;
+      padding: 10px 0px 10px 8px;
       color: white;
+      border: none;
       background-color: transparent;
-      outline: 2px solid transparent;
+
+      &:focus {
+        outline: none;
+        border: none;
+      }
+      // outline: 2px solid transparent;
     }
   }
 }

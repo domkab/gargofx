@@ -77,11 +77,9 @@ export default function ContactForm() {
       <label className="flex items-start gap-3 text-white text-sm mt-4">
         <input
           type="checkbox"
-          name="consent"
-          required
+          className={styles['contact__form-checkbox']}
           checked={agree}
           onChange={(e) => setAgree(e.target.checked)}
-          className="appearance-none w-5 h-5 border border-white checked:bg-secondary"
         />
         <span>
           By ticking this box, you’re allowing us to handle{' '}

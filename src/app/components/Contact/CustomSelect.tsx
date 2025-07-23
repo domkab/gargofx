@@ -57,15 +57,20 @@ export default function CustomSelect({
       <input type="hidden" name={name} value={selected?.value || ''} required={required} />
 
       {open && (
-        <ul className="absolute z-50 mt-2 w-full bg-black border border-white text-white rounded shadow">
+        <ul
+          className={clsx(styles['contact__form-dropdown'])}
+          role='listbox'
+        >
           {options.map((opt) => (
             <li
               key={opt.value}
+              role='option'
+              aria-selected={selected?.value === opt.value}
               onClick={() => {
                 setSelected(opt);
                 setOpen(false);
               }}
-              className="px-4 py-2 hover:bg-secondary hover:text-black cursor-pointer transition-all"
+              className={clsx(styles['contact__form-dropdown-item'])}
             >
               {opt.label}
             </li>

@@ -43,7 +43,7 @@ export default function HeaderClientSide() {
     >
       {/* LEFT GROUP: Logo + Desktop Nav */}
       <div className="flex items-center gap-10">
-        <Logo className='pr-' />
+        <Logo />
 
         <nav className="hidden md:flex gap-6 text-white text-sm">
           {navItems.map((item) => (

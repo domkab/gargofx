@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
+import styles from '@/styles/components/contact.module.scss';
 
 type Option = { label: string; value: string };
 
@@ -36,8 +37,9 @@ export default function CustomSelect({
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         className={clsx(
-          'w-full text-left py-2 bg-transparent border-b border-white text-white placeholder-gray-400',
-          'flex justify-between items-center'
+          styles['contact__form-input'],
+          'w-full flex justify-between items-center',
+          'placeholder-gray-400'
         )}
       >
         {selected?.label || placeholder}

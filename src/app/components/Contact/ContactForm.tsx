@@ -4,6 +4,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import CustomSelect from './CustomSelect';
 import styles from '@/styles/components/contact.module.scss';
+import TextInput from './TextInput';
 
 export default function ContactForm() {
   const [agree, setAgree] = useState(false);
@@ -21,22 +22,14 @@ export default function ContactForm() {
       />
 
       {/* Topic (text input) */}
-      <div className="flex justify-between items-center border-b border-white">
-        <input
-          name="topic"
-          type="text"
-          placeholder="I’d love to chat about"
-          required
-          className={clsx(
-            styles['contact__form-input'],
-            'placeholder-gray-400'
-          )}
-        />
-        <span className="text-secondary text-xl">+</span>
-      </div>
+      <TextInput
+        name="topic"
+        placeholder="I’d love to chat about"
+        required
+      />
 
       {/* Budget (number or select) */}
-      <div className="flex justify-between items-center border-b border-white">
+      <div className={clsx(styles['contact__form-input-container'])}>
         <CustomSelect
           name="budget"
           placeholder="Select budget"
@@ -50,7 +43,7 @@ export default function ContactForm() {
         />
       </div>
 
-      <div className="flex justify-between items-center border-b border-white">
+      <div className={clsx(styles['contact__form-input-container'])}>
         <CustomSelect
           name="referrer"
           placeholder="How did you find us?"
@@ -71,22 +64,13 @@ export default function ContactForm() {
         { name: 'company', placeholder: 'Company (optional)' },
         { name: 'email', placeholder: 'Your email', type: 'email' },
       ].map(({ name, placeholder, type = 'text' }, i) => (
-        <div
+        <TextInput
           key={i}
-          className="flex justify-between items-center border-b border-white"
-        >
-          <input
-            name={name}
-            type={type}
-            placeholder={placeholder}
-            required={name !== 'company'}
-            className={clsx(
-              styles['contact__form-input'],
-              'placeholder-gray-400'
-            )}
-          />
-          <span className="text-secondary text-xl">+</span>
-        </div>
+          name={name}
+          placeholder={placeholder}
+          type={type}
+          required={name !== 'company'}
+        />
       ))}
 
       {/* Checkbox */}

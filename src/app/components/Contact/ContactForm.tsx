@@ -79,35 +79,37 @@ export default function ContactForm() {
       </div>
 
       {/* Checkbox */}
-      <div className="consent-group">
-        
-      </div>
-      <label className="flex items-start gap-3 text-white text-sm mt-4">
-        <input
-          type="checkbox"
-          className={styles['contact__form-checkbox']}
-          checked={agree}
-          onChange={(e) => setAgree(e.target.checked)}
-        />
-        <span className={styles['contact__form-consent']}>
-          By ticking this box, you’re allowing us to handle{' '}
-          <a href="/privacy" className="underline">
-            your personal data
-          </a>
-          , we’ll take good care of it.
-        </span>
-      </label>
-
-      {/* Submit Button */}
-      <button
-        type="submit"
-        className={clsx(
-          styles['contact__form-submit'],
-          'mt-6 text-white py-3 px-8 rounded-full border border-white transition-all duration-300'
-        )}
+      <div 
+      className="consent-group flex flex-col md:flex-row md:border-t border-white"
       >
-        send
-      </button>
+        <label className="flex items-start gap-3 text-white text-sm mt-7">
+          <input
+            type="checkbox"
+            className={styles['contact__form-checkbox']}
+            checked={agree}
+            onChange={(e) => setAgree(e.target.checked)}
+          />
+          <span className={styles['contact__form-consent']}>
+            By ticking this box, you’re allowing us to handle{' '}
+            <a href="/privacy" className="underline">
+              your personal data
+            </a>
+            , we’ll take good care of it.
+          </span>
+        </label>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className={clsx(
+            styles['contact__form-submit'],
+            'mt-7 text-white py-3 px-8 rounded-full border border-white transition-all duration-300'
+          )}
+        >
+          send
+        </button>
+      </div>
+
     </form >
   );
 }

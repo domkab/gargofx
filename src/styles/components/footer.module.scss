@@ -1,0 +1,37 @@
+@use '@/styles/vars' as *;
+
+.footer {
+  background-color: $color-secondary;
+  color: black;
+
+  &__contact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &:hover {
+      a {
+        color: $color-secondary;
+      }
+
+      img {
+        filter: brightness(0) saturate(100%) invert(20%) sepia(80%) saturate(400%) hue-rotate(150deg);
+      }
+    }
+  }
+
+  a {
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-secondary;
+    }
+  }
+
+  img {
+    transition: filter 0.3s ease;
+    &:hover {
+      filter: brightness(0) saturate(100%) invert(20%) sepia(80%) saturate(400%) hue-rotate(150deg);
+    }
+  }
+}

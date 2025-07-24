@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import styles from '@/styles/components/contact.module.scss';
 import ContactForm from './ContactForm';
 import { JSX } from 'react';
+import { facebook, instagram, x } from '@/lib/constants';
 
 type ContactSectionProps = {
   as?: keyof JSX.IntrinsicElements;
@@ -23,9 +24,9 @@ export default function ContactSection({ as = 'section' }: ContactSectionProps) 
         </h2>
 
         <div className={clsx(styles['contact__socials'], 'gap-8 text-secondary')}>
-          <a href="https://facebook.com" target="_blank">facebook</a>
-          <a href="https://www.instagram.com/gargofx?igsh=MWNlbmg2endoemVtbA==" target="_blank">instagram</a>
-          <a href="https://x.com" target="_blank">x</a>
+          <a href={facebook} target="_blank">facebook</a>
+          <a href={instagram} target="_blank">instagram</a>
+          <a href={x} target="_blank">x</a>
         </div>
       </div>
 

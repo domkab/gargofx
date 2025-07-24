@@ -2,3 +2,11 @@ export const SITE_TITLE = 'GargoFX';
 export const SITE_NAME = 'gargofx'; // lowercase for URLs
 export const DOMAIN_NAME = 'example.com';
 export const CHARACTER_NAME = 'Pixel';
+
+export const facebook = 'https://www.facebook.com/profile.php?id=61574452853021';
+export const instagram = 'https://www.instagram.com/gargofx?igsh=MWNlbmg2endoemVtbA=='
+export const x = 'https://x.com/gargo_ll';
+export const phone = '+370 6 155 0539';
+export const phoneRef = 'tel:+37061550539';
+export const mailRef = 'mailto:laurynas.gargasas@gmail.com'
+export const mail = 'laurynas.gargasas@gmail.com';

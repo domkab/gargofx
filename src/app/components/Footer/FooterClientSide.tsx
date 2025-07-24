@@ -4,62 +4,63 @@ import Link from 'next/link';
 import Image from 'next/image';
 import clsx from 'clsx';
 import styles from '@/styles/components/footer.module.scss';
+import { facebook, instagram, mail, mailRef, phone, phoneRef, x } from '@/lib/constants';
 
 export default function Footer() {
   return (
     <footer className={clsx(styles.footer, 'w-full')}>
-      <div className="max-w-7xl mx-auto px-6 py-10">
+      <div className="max-w-7xl mx-auto px-5 md:px-10 py-10">
         {/* Wrapper: switches layout at md */}
         <div className="flex flex-col items-center text-center gap-6 md:flex-row md:justify-between md:items-start md:text-left">
 
-          {/* GROUP 1: Email + Phone */}
+          {/* GROUP 1 */}
           <div className="flex flex-col gap-4">
             <div className={clsx(styles['footer__contact-row'])}>
               <Image src="/icons/email.svg" alt="email" width={20} height={20} />
               <Link
-                href="mailto:laurynas.gargasas@gmail.com"
+                href={mailRef}
                 className="uppercase tracking-wide text-sm"
               >
-                laurynas.gargasas@gmail.com
+                {mail}
               </Link>
             </div>
 
             <div className={clsx(styles['footer__contact-row'])}>
               <Image src="/icons/phone.svg" alt="phone" width={20} height={20} />
               <Link
-                href="tel:+37061550539"
-                className="uppercase tracking-wide text-sm hover:underline"
+                href={phoneRef}
+                className="uppercase tracking-wide text-sm"
               >
-                <b>TEL:</b> +370 6 155 0539
+                <b>TEL:</b> {phone}
               </Link>
             </div>
           </div>
 
-          {/* GROUP 2: Socials, Logo, Links */}
+          {/* GROUP 2 */}
           <div className="flex flex-col items-center gap-6 md:items-end">
             {/* Social icons */}
             <div className="flex gap-6">
               <span>FOLLOW US</span>
-              <Link href="https://facebook.com" target="_blank">
+              <Link href={facebook} target="_blank">
                 <Image src="/icons/social/facebook.svg" alt="facebook" width={24} height={24} />
               </Link>
-              <Link href="https://instagram.com" target="_blank">
+              <Link href={instagram} target="_blank">
                 <Image src="/icons/social/instagram.svg" alt="instagram" width={24} height={24} />
               </Link>
-              <Link href="https://x.com" target="_blank">
+              <Link href={x} target="_blank">
                 <Image src="/icons/social/x.svg" alt="x" width={24} height={24} />
               </Link>
             </div>
 
             {/* Logo */}
-            <Image src="/icons/Logo-footer.svg" alt="Logo" width={120} height={40} />
+            <Image className='py-2' src="/icons/Logo-footer.svg" alt="Logo" width={120} height={40} />
 
             {/* Links */}
             <div className="flex flex-col items-center gap-2 text-sm md:items-end">
               <span>
-                © {new Date().getFullYear()} <span>COPYRIGHT</span>
+                © {new Date().getFullYear()} <span>GARGOFX</span>
               </span>
-              <Link href="/terms" className="underline">
+              <Link href="/terms">
                 TERMS OF USE AND PRIVACY
               </Link>
             </div>

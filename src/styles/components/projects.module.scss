@@ -1,0 +1,22 @@
+@use '@/styles/_mixins' as *;
+@use '@/styles/vars' as *;
+
+.projects {
+  &__text-container {
+    position: absolute;
+    bottom: 20%;
+    padding: 0 20px;
+
+    @include onLaptop {
+      padding: 0 60px;
+    }
+  }
+
+  &__text {
+    line-height: 36px;
+    @include onLaptop {
+      font-size: 65px;
+      line-height: 80px;
+    }
+  }
+}

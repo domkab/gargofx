@@ -1,43 +1,70 @@
 'use client';
 
 import Link from 'next/link';
-import Logo from '../Logo';
+import Image from 'next/image';
+import clsx from 'clsx';
+import styles from '@/styles/components/footer.module.scss';
+import { facebook, instagram, mail, mailRef, phone, phoneRef, x } from '@/lib/constants';
 
-export default function FooterClientSide() {
+export default function Footer() {
   return (
-    <footer>
-      <div className="max-w-7xl mx-auto px-4 py-10">
-        <div className="flex flex-col md:flex-row justify-between gap-8">
-          <div>
-            <Logo />
-            <p className="mt-4 text-sm max-w-sm">
-              Public facing footer component
-            </p>
-          </div>
+    <footer className={clsx(styles.footer, 'w-full')}>
+      <div className="max-w-7xl mx-auto px-5 md:px-10 py-10">
+        {/* Wrapper: switches layout at md */}
+        <div className="flex flex-col items-center text-center gap-6 md:flex-row md:justify-between md:items-start md:text-left">
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 text-sm">
-            <div>
-              <h3 className="font-semibold mb-3">Blog</h3>
-              <ul className="space-y-2">
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/about">About Us</Link></li>
-                <li><Link href="/contact">Contact Us</Link></li>
-              </ul>
+          {/* GROUP 1 */}
+          <div className="flex flex-col gap-4">
+            <div className={clsx(styles['footer__contact-row'])}>
+              <Image src="/icons/email.svg" alt="email" width={20} height={20} />
+              <Link
+                href={mailRef}
+                className="uppercase tracking-wide text-sm"
+              >
+                {mail}
+              </Link>
             </div>
 
-            <div>
-              <h3 className="font-semibold mb-3">Legal</h3>
-              <ul className="space-y-2">
-                <li><Link href="/privacy-policy">Privacy Policy</Link></li>
-                <li><Link href="/terms-conditions">Terms & Conditions</Link></li>
-                <li><Link href="/privacy-controls">Do Not Sell My Info</Link></li>
-              </ul>
+            <div className={clsx(styles['footer__contact-row'])}>
+              <Image src="/icons/phone.svg" alt="phone" width={20} height={20} />
+              <Link
+                href={phoneRef}
+                className="uppercase tracking-wide text-sm"
+              >
+                <b>TEL:</b> {phone}
+              </Link>
             </div>
           </div>
-        </div>
 
-        <div className="mt-8 pt-6 text-sm text-center">
-          <p>© {new Date().getFullYear()} Consumer’s Prices. All rights reserved.</p>
+          {/* GROUP 2 */}
+          <div className="flex flex-col items-center gap-6 md:items-end">
+            {/* Social icons */}
+            <div className="flex gap-6">
+              <span>FOLLOW US</span>
+              <Link href={facebook} target="_blank">
+                <Image src="/icons/social/facebook.svg" alt="facebook" width={24} height={24} />
+              </Link>
+              <Link href={instagram} target="_blank">
+                <Image src="/icons/social/instagram.svg" alt="instagram" width={24} height={24} />
+              </Link>
+              <Link href={x} target="_blank">
+                <Image src="/icons/social/x.svg" alt="x" width={24} height={24} />
+              </Link>
+            </div>
+
+            {/* Logo */}
+            <Image className='py-2' src="/icons/Logo-footer.svg" alt="Logo" width={120} height={40} />
+
+            {/* Links */}
+            <div className="flex flex-col items-center gap-2 text-sm md:items-end">
+              <span>
+                © {new Date().getFullYear()} <span>GARGOFX</span>
+              </span>
+              <Link href="/terms">
+                TERMS OF USE AND PRIVACY
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

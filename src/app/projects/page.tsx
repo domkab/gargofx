@@ -2,15 +2,58 @@ import { getFeaturedLayout } from '@/lib/services/postService';
 import clsx from 'clsx';
 import Link from 'next/link';
 import type { FeaturedLayoutRow } from '@/types/featuredLayout';
+import { getCarouselImages } from '@/lib/services/imageService';
+import HomeImageCarousel from '../components/HomeImageCarousel';
+import styles from '@/styles/components/projects.module.scss';
 
-export default async function FeaturedLayout() {
+export default async function FeaturedProjectsLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
+  const images = await getCarouselImages();
 
   if (!layout?.length) return null;
 
   return (
-    <section className="max-w-6xl mx-auto py-10">
-      <h2 className="text-2xl font-bold mb-6">🎯 Featured Layout</h2>
+    <main
+      className={clsx(
+        'flex flex-col items-center justify-center',
+        'min-h-[70vh]',
+      )}>
+
+      <div className={clsx('relative', 'w-full')}>
+        <HomeImageCarousel images={images} />
+
+        <div
+          className={clsx(
+            styles['projects__text-container'],
+            'text-start',
+            'text-white',
+            'z-10',
+          )}
+        >
+          <h1
+            className={clsx(
+              styles['projects__text'],
+              'text-2xl sm:text-4xl',
+              'font-semibold'
+            )}
+          >
+            Featured projects
+          </h1>
+
+          <h2
+            className={clsx(
+              styles['projects__text'],
+              'text-2xl sm:text-4xl',
+              'font-semibold'
+            )}
+          >
+            2024-2025
+          </h2>
+
+        </div>
+      </div>
+
+
 
       <div className="space-y-8">
         {layout.map((row, rowIndex) => (
@@ -41,6 +84,6 @@ export default async function FeaturedLayout() {
           </div>
         ))}
       </div>
-    </section>
+    </main>
   );
 }

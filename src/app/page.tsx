@@ -20,7 +20,7 @@ export default async function Home() {
         'text-center'
       )}
     >
-      <div className={clsx('relative', 'w-full')}>
+      <section className={clsx('relative', 'w-full')}>
         <HomeImageCarousel images={images} />
 
         <div
@@ -49,7 +49,7 @@ export default async function Home() {
             <span className='italic font-semibold'>life.</span>
           </h1>
         </div>
-      </div>
+      </section>
 
       <HomePageLayout />
       <ContactSection as='section' />

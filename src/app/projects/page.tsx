@@ -33,7 +33,6 @@ export default async function FeaturedProjectsLayout() {
           <h1
             className={clsx(
               styles['projects__text'],
-              'text-2xl sm:text-4xl',
               'font-semibold'
             )}
           >
@@ -43,17 +42,14 @@ export default async function FeaturedProjectsLayout() {
           <h2
             className={clsx(
               styles['projects__text'],
+              styles['projects__text--year'],
               'text-2xl sm:text-4xl',
-              'font-semibold'
             )}
           >
             2024-2025
           </h2>
-
         </div>
       </div>
-
-
 
       <div className="space-y-8">
         {layout.map((row, rowIndex) => (

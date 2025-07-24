@@ -25,11 +25,8 @@ export default async function Home() {
 
         <div
           className={clsx(
-            'inset-0',
             'text-start',
-            'flex flex-col justify-center',
             'text-white',
-            'z-10',
             styles['home__text-container']
           )}
         >

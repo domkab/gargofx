@@ -27,14 +27,15 @@ export default async function Home() {
           className={clsx(
             'text-start',
             'text-white',
+            // 'inset-0',
+            // 'flex flex-col justify-center',
+            // 'z-10',
             styles['home__text-container']
           )}
         >
           <h1
             className={clsx(
               styles['home__text'],
-              'text-2xl sm:text-4xl',
-              'font-semibold'
             )}
           >
             Unlocking the{' '}

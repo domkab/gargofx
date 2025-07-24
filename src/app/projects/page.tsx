@@ -9,7 +9,7 @@ export default async function FeaturedLayout() {
   if (!layout?.length) return null;
 
   return (
-    <section className="max-w-6xl mx-auto py-10">
+    <main className="max-w-6xl mx-auto py-10">
       <h2 className="text-2xl font-bold mb-6">🎯 Featured Layout</h2>
 
       <div className="space-y-8">
@@ -41,6 +41,6 @@ export default async function FeaturedLayout() {
           </div>
         ))}
       </div>
-    </section>
+    </main>
   );
 }

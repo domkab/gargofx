@@ -72,12 +72,20 @@ export default async function FeaturedProjectsLayout() {
                 )}
               >
                 <Link href={`/post/${block.post?.slug}`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={block.image?.desktop?.url || ''}
-                    alt={block.image?.desktop?.alt || ''}
-                    className="w-full h-96 object-cover"
-                  />
+                  <picture>
+                    {block.image?.mobile?.url && (
+                      <source
+                        srcSet={block.image.mobile.url}
+                        media="(max-width: 768px)"
+                      />
+                    )}
+
+                    <img
+                      src={block.image?.desktop?.url || block.image?.mobile?.url || ''}
+                      alt={block.image?.desktop?.alt}
+                      className="w-full h-96 object-cover"
+                    />
+                  </picture>
                 </Link>
               </div>
             ))}

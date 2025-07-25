@@ -8,6 +8,8 @@ import styles from '@/styles/components/projects.module.scss';
 
 export default async function FeaturedProjectsLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
+  console.log('FeaturedProjectsLayout', layout);
+
   const images = await getCarouselImages();
 
   if (!layout?.length) return null;
@@ -51,7 +53,7 @@ export default async function FeaturedProjectsLayout() {
         </div>
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-8 px-5">
         {layout.map((row, rowIndex) => (
           <div key={rowIndex} className="flex flex-wrap gap-4">
             {row.blocks.map((block, blockIndex) => (
@@ -60,10 +62,12 @@ export default async function FeaturedProjectsLayout() {
                 className={clsx(
                   'mb-4',
                   'rounded overflow-hidden shadow-sm bg-white dark:bg-gray-900',
+                  'w-full',
+
                   {
-                    'w-[calc(25%-1rem)]': block.layout === '1/4',
-                    'w-[calc(50%-1rem)]': block.layout === '1/2',
-                    'w-full': block.layout === 'full',
+                    'md:w-[calc(25%-1rem)]': block.layout === '1/4',
+                    'md:w-[calc(50%-1rem)]': block.layout === '1/2',
+                    'md:w-full': block.layout === 'full',
                   }
                 )}
               >
@@ -72,7 +76,7 @@ export default async function FeaturedProjectsLayout() {
                   <img
                     src={block.image?.desktop?.url || ''}
                     alt={block.image?.desktop?.alt || ''}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-96 object-cover"
                   />
                 </Link>
               </div>

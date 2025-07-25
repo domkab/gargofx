@@ -52,7 +52,7 @@ export default async function FeaturedProjectsLayout() {
         </div>
       </div>
 
-      <div className="space-y-8 md:px-5 px-6 mb-20">
+      <div className="space-y-8 md:px-5 px-6 mt-24 mb-20">
         {layout.map((row, rowIndex) => (
           <div key={rowIndex} className="flex flex-wrap gap-12 md:gap-4">
             {row.blocks.map((block, blockIndex) => (

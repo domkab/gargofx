@@ -37,6 +37,10 @@
     &-title-container {
       margin-top: 24px;
       margin-bottom: 24px;
+
+      @include onLaptop {
+        margin-bottom: 36px;
+      }
     }
 
     &-title {

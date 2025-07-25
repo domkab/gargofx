@@ -52,23 +52,6 @@ export default async function FeaturedProjectsLayout() {
         </div>
       </div>
 
-      <div
-        className={clsx(
-          styles['projects__featured-title-container'],
-          'flex items-center gap-4'
-        )}
-      >
-        <h2
-          className={clsx(
-            styles['projects__featured-title'],
-            'text-white whitespace-nowrap'
-          )}
-        >
-          Featured projects
-        </h2>
-        <div className="flex-1 h-px bg-white opacity-50" />
-      </div>
-
       <div className="space-y-8 md:px-5 px-6 mb-20">
         {layout.map((row, rowIndex) => (
           <div key={rowIndex} className="flex flex-wrap gap-12 md:gap-4">

@@ -20,7 +20,7 @@ export default async function FeaturedProjectsLayout() {
         'min-h-[70vh]',
       )}>
 
-      <div className={clsx('relative', 'w-full')}>
+      <div className={clsx('projects__hero','relative', 'w-full')}>
         <HomeImageCarousel images={images} />
 
         <div
@@ -54,6 +54,7 @@ export default async function FeaturedProjectsLayout() {
         {/* Divider line */}
         <div
           className={clsx(
+            'divider-wrapper',
             styles['projects__featured-title-container'],
             'flex items-center gap-4',
             'mt-12 mx-5'
@@ -63,20 +64,25 @@ export default async function FeaturedProjectsLayout() {
         </div>
       </div>
 
-      <div className="space-y-8 md:px-5 px-6 mt-12 mb-20">
+      <div className="layout md:px-5 px-6 mt-12 mb-20">
         {layout.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex flex-wrap gap-12 md:gap-4">
+          <div
+            key={rowIndex}
+            className={clsx(
+              styles['projects__card-wrapper'],
+              'grid grid-cols-4 gap-8',
+            )}
+          >
             {row.blocks.map((block, blockIndex) => (
               <div
                 key={`${rowIndex}-${blockIndex}-${block.id}`}
                 className={clsx(
                   styles['projects__card'],
-                  'rounded overflow-hidden shadow-sm bg-white dark:bg-gray-900',
-                  'w-full',
+                  'overflow-hidden shadow-sm',
                   {
-                    'md:w-[calc(25%-1rem)]': block.layout === '1/4',
-                    'md:w-[calc(50%-1rem)]': block.layout === '1/2',
-                    'md:w-full': block.layout === 'full',
+                    'col-span-4 md:col-span-1': block.layout === '1/4',
+                    'col-span-4 md:col-span-2': block.layout === '1/2',
+                    'col-span-4': block.layout === 'full',
                   }
                 )}
               >
@@ -92,8 +98,10 @@ export default async function FeaturedProjectsLayout() {
                     <img
                       src={block.image?.desktop?.url || block.image?.mobile?.url || ''}
                       alt={block.image?.desktop?.alt}
-                      className="w-full h-96 object-cover"
-                    />
+                      // className="w-full h-96 object-cover"
+                      className={clsx(
+                        styles['projects__card-image']
+                      )}                    />
                   </picture>
                 </Link>
               </div>

@@ -31,7 +31,6 @@ export default function HomeImageCarousel({ images }: Props) {
               alt={`Slide ${idx}`}
               fill
               priority={idx === 0}
-              className=""
             />
           </SwiperSlide>
         ))}

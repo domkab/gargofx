@@ -98,7 +98,6 @@ export default async function FeaturedProjectsLayout() {
                     <img
                       src={block.image?.desktop?.url || block.image?.mobile?.url || ''}
                       alt={block.image?.desktop?.alt}
-                      // className="w-full h-96 object-cover"
                       className={clsx(
                         styles['projects__card-image']
                       )}                    />

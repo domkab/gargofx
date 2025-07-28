@@ -4,6 +4,7 @@ import { IPost } from '@/types/post/iPost';
 import Image from 'next/image';
 import styles from '@/styles/components/project.module.scss';
 import clsx from 'clsx';
+import { Divider } from '@/app/components/Divider';
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -16,7 +17,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <main className={clsx(
       styles['project'],
-      'space-y-8',
     )}
     >
       <section className={styles['project__hero']}>
@@ -41,10 +41,21 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       {/* Descriptions */}
       {post.description && <p className={styles['project__desc']}>{post.description}</p>}
 
-      {post.optionalDescription && <p className="text-base text-gray-600">{post.optionalDescription}</p>}
+      {post.optionalDescription && (
+        <p
+          className={clsx(
+            styles['project__opt-desc'],
+            'text-gray-300'
+          )}
+        >
+          {post.optionalDescription}
+        </p>
+      )}
+
+      <Divider marginTop={44} marginBottom={30} />
 
       {/* Content Blocks */}
-      <section className="mt-14 grid grid-cols-2 gap-4">
+      <section className="grid grid-cols-2 gap-4 mx-5">
         {post.content.map(block => {
           const isFull = block.layout === 'full';
 
@@ -59,7 +70,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   alt={block.alt || ''}
                   width={1024}
                   height={300}
-                  className="w-full h-54 object-cover rounded"
+                  className="w-full h-54 object-cover"
                 />
               ) : block.type === 'video' ? (
                 <video

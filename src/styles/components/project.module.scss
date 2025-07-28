@@ -47,8 +47,11 @@
       display: block;
       font-weight: normal;
       font-style: italic;
-      font-size: 40px;
-      line-height: 24px;
+
+      @include onLaptop {
+        font-size: 40px;
+        line-height: 24px;
+      }
     }
   }
 
@@ -57,24 +60,22 @@
     line-height: 24px;
     text-align: center;
     font-weight: 600;
-    margin: 20px 0;
+    margin: 20px;
+
+    @include onLaptop {
+      text-align: start;
+      font-size: 60px;
+      line-height: 80px;
+    }
   }
+
+  &__opt-desc {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 200px;
+    font-size: 12px;
+    line-height: 24px;
+  }
+
+
 }
-
-  // &__featured-title-container {
-  //   display: flex;
-  //   width: 100%;
-  //   flex: none;
-  //   margin-top: 24px;
-  //   margin-bottom: 24px;
-  //   padding: 0 20px;
-  // }
-
-  // &__featured-title {
-  //   font-size: 16px;
-  //   line-height: 48px;
-
-  //   @include onLaptop {
-  //     font-size: 42px;
-  //   }
-  // }l

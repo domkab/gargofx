@@ -5,6 +5,7 @@ import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 import { getCarouselImages } from '@/lib/services/imageService';
 import HomeImageCarousel from '../components/HomeImageCarousel';
 import styles from '@/styles/components/projects.module.scss';
+import { Divider } from '../components/Divider';
 
 export default async function FeaturedProjectsLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
@@ -52,16 +53,7 @@ export default async function FeaturedProjectsLayout() {
         </div>
 
         {/* Divider line */}
-        <div
-          className={clsx(
-            'divider-wrapper',
-            styles['projects__featured-title-container'],
-            'flex items-center gap-4',
-            'mt-12 mx-5'
-          )}
-        >
-          <div className="flex-1 h-px bg-white opacity-50" />
-        </div>
+        <Divider />
       </div>
 
       <div className="layout md:px-5 px-6 mt-12 mb-20">

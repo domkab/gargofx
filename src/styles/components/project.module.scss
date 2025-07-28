@@ -45,6 +45,8 @@
 
     &-subtitle {
       display: block;
+      font-size: 14px;
+      line-height: 14px;
       font-weight: normal;
       font-style: italic;
 
@@ -55,12 +57,23 @@
     }
   }
 
+  &__desc-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 20px;
+    @include onLaptop {
+      margin: 140px 60px 0 60px;
+    }
+  }
+
   &__desc {
+    max-width: 1440px;
     font-size: 14px;
     line-height: 24px;
     text-align: center;
     font-weight: 600;
-    margin: 20px;
 
     @include onLaptop {
       text-align: start;
@@ -70,12 +83,23 @@
   }
 
   &__opt-desc {
+    max-width: 1440px;
     text-align: center;
     text-transform: uppercase;
     font-weight: 200px;
     font-size: 12px;
     line-height: 24px;
+
+    @include onLaptop {
+      font-size: 40px;
+      line-height: 80px;
+      margin-top: 80px;
+    }
   }
 
-
+  &__separator {
+    @include onLaptop {
+      margin-bottom: 80px !important;
+    }
+  }
 }

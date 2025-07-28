@@ -17,6 +17,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <main className={clsx(
       styles['project'],
+      // 'md:flex md:flex-col'
     )}
     >
       <section className={styles['project__hero']}>
@@ -39,20 +40,23 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       </section>
 
       {/* Descriptions */}
-      {post.description && <p className={styles['project__desc']}>{post.description}</p>}
 
-      {post.optionalDescription && (
-        <p
-          className={clsx(
-            styles['project__opt-desc'],
-            'text-gray-300'
-          )}
-        >
-          {post.optionalDescription}
-        </p>
-      )}
+      <div className={styles['project__desc-container']}>
+        {post.description && <p className={styles['project__desc']}>{post.description}</p>}
 
-      <Divider marginTop={44} marginBottom={30} />
+        {post.optionalDescription && (
+          <p
+            className={clsx(
+              styles['project__opt-desc'],
+              'text-gray-300'
+            )}
+          >
+            {post.optionalDescription}
+          </p>
+        )}
+      </div>
+
+      <Divider marginBottom={30} className={styles['project__separator']} />
 
       {/* Content Blocks */}
       <section className="grid grid-cols-2 gap-4 mx-5">
@@ -70,7 +74,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   alt={block.alt || ''}
                   width={1024}
                   height={300}
-                  className="w-full h-54 object-cover"
+                  className="w-full h-52 object-cover"
                 />
               ) : block.type === 'video' ? (
                 <video

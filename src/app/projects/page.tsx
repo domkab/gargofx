@@ -21,7 +21,7 @@ export default async function FeaturedProjectsLayout() {
         'min-h-[70vh]',
       )}>
 
-      <div className={clsx('projects__hero','relative', 'w-full')}>
+      <div className={clsx('projects__hero', 'relative', 'w-full')}>
         <HomeImageCarousel images={images} />
 
         <div
@@ -53,7 +53,12 @@ export default async function FeaturedProjectsLayout() {
         </div>
 
         {/* Divider line */}
-        <Divider />
+        <Divider
+          marginTop={44}
+          marginLeft={20}
+          marginRight={20}
+        />
+
       </div>
 
       <div className="layout md:px-5 px-6 mt-12 mb-20">
@@ -92,7 +97,7 @@ export default async function FeaturedProjectsLayout() {
                       alt={block.image?.desktop?.alt}
                       className={clsx(
                         styles['projects__card-image']
-                      )}                    />
+                      )} />
                   </picture>
                 </Link>
               </div>

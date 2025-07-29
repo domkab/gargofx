@@ -13,9 +13,9 @@ export default function Footer() {
         {/* Wrapper: switches layout at md */}
         <div className="flex flex-col items-center text-center gap-6 md:flex-row md:justify-between md:items-start md:text-left">
 
-          {/* GROUP 1 */}
+          {/* EMAIL */}
           <div className="flex flex-col gap-4">
-            <div className={clsx(styles['footer__contact-row'])}>
+            <div className={clsx(styles['footer__contact-row'], 'font-bold')}>
               <Image src="/icons/email.svg" alt="email" width={20} height={20} />
               <Link
                 href={mailRef}

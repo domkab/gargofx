@@ -139,7 +139,7 @@ export default function UpdatePost() {
   }
 
   return (
-    <div className="p-3 mx-auto min-h-screen">
+    <div className="p-5 mx-96 min-h-screen">
       {publishSuccess && (
         <Alert color='success'>{publishSuccess}</Alert>
       )}

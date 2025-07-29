@@ -17,7 +17,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <main className={clsx(
       styles['project'],
-      // 'md:flex md:flex-col'
     )}
     >
       <section className={styles['project__hero']}>
@@ -47,8 +46,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         {post.optionalDescription && (
           <p
             className={clsx(
-              styles['project__opt-desc'],
-              'text-gray-300'
+              styles['project__opt-desc'], 'font-extralight'
             )}
           >
             {post.optionalDescription}
@@ -59,37 +57,52 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <Divider marginBottom={30} className={styles['project__separator']} />
 
       {/* Content Blocks */}
-      <section className="grid grid-cols-2 gap-4 mx-5">
-        {post.content.map(block => {
-          const isFull = block.layout === 'full';
-
-          return (
-            <div
-              key={block.id}
-              className={isFull ? 'col-span-2' : ''}
-            >
-              {block.type === 'image' ? (
+      <section
+        className={clsx(
+          'grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-16',
+          styles['project__content-wrapper']
+        )}
+      >
+        {post.content.map((block) => (
+          <div
+            key={block.id}
+            className={clsx(
+              block.layout === 'full' && 'col-span-1 md:col-span-2',
+              styles['project__content-block-wrapper']
+            )}
+          >
+            {block.type === 'image' ? (
+              <div
+                className={clsx(
+                  styles['project__content-block'],
+                  'relative w-full'
+                )}
+              >
                 <Image
                   src={block.url}
                   alt={block.alt || ''}
-                  width={1024}
-                  height={300}
-                  className="w-full h-52 object-cover"
+                  fill
+                  className={clsx(styles['project__content-block-image'])}
                 />
-              ) : block.type === 'video' ? (
-                <video
-                  src={block.url}
-                  controls
-                  className="w-full h-auto rounded"
-                />
-              ) : null}
-            </div>
-          );
-        })}
+              </div>
+            ) : block.type === 'video' ? (
+              <video
+                src={block.url}
+                controls
+                className="w-full h-auto rounded"
+              />
+            ) : null}
+          </div>
+        ))}
       </section>
 
       {/* Credits */}
-      <p className="text-sm text-gray-500 text-right">Credits: {post.credits}</p>
+
+      <div className={clsx(styles['project__credits'])}>
+        {post.credits?.split('\n').map((line, i) => (
+          <p key={i}>{line}</p>
+        ))}
+      </div>
     </main>
   );
 }

@@ -27,9 +27,6 @@ export default async function Home() {
           className={clsx(
             'text-start',
             'text-white',
-            // 'inset-0',
-            // 'flex flex-col justify-center',
-            // 'z-10',
             styles['home__text-container']
           )}
         >

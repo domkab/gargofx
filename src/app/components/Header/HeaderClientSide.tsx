@@ -49,7 +49,7 @@ export default function HeaderClientSide() {
           {navItems.map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`${item.toLowerCase()}`}
               className={styles.link}
             >
               {item}

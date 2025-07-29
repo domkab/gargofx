@@ -5,10 +5,13 @@ import Logo from '../Logo';
 import Image from 'next/image';
 import clsx from 'clsx';
 import styles from '@/styles/components/header.module.scss';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function HeaderClientSide() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => {
@@ -46,15 +49,20 @@ export default function HeaderClientSide() {
         <Logo />
 
         <nav className="hidden md:flex gap-6 text-white text-sm">
-          {navItems.map((item) => (
-            <a
-              key={item}
-              href={`${item.toLowerCase()}`}
-              className={styles.link}
-            >
-              {item}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const link = `/${item.toLowerCase()}`;
+            const isActive = pathname === link;
+
+            return (
+              <a
+                key={item}
+                href={link}
+                className={clsx(styles.link, isActive && styles.active)}
+              >
+                {item}
+              </a>
+            );
+          })}
         </nav>
       </div>
 

@@ -86,10 +86,15 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 />
               </div>
             ) : block.type === 'video' ? (
-              <video
+              <iframe
                 src={block.url}
-                controls
-                className="w-full h-auto rounded"
+                className={clsx(
+                  styles['project__content-block'],
+                  styles['project__content-block-video'],
+                  'w-full'
+                )}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
               />
             ) : null}
           </div>

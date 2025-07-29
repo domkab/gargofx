@@ -58,7 +58,7 @@ export default function UpdatePost() {
       localStorage.setItem('publishSuccess', 'Post updated successfully!');
       setPublishSuccess('Post updated successfully!');
 
-      router.push(`/post/${data.slug}`);
+      // router.push(`/post/${data.slug}`);
     } catch (error: unknown) {
       setPublishError(`Something went wrong: ${error}`);
     }

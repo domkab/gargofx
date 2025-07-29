@@ -20,21 +20,12 @@ export const POST = withAdminAuth(async (_user, req: NextRequest) => {
   try {
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    let resized: Buffer;
-    if (target === 'main' || target === 'featured') {
-      resized = await sharp(buffer)
-        .resize({ width: 1200, height: 800, fit: 'cover' })
-        .webp()
-        .toBuffer();
-    } else if (target === 'inline') {
-      resized = await sharp(buffer)
-        .resize({ width: 640, height: 480, fit: 'inside' })
-        .webp()
-        .toBuffer();
-    } else {
-      return NextResponse.json({ error: 'Invalid target' }, { status: 400 });
-    }
+    // Convert to WebP (no resize)
+    const webpBuffer = await sharp(buffer)
+      .webp({ quality: 90 }) // 85–95 range is good for high quality
+      .toBuffer();
 
+    // File paths
     const fileName = `${target}-${Date.now()}-${uuidv4()}.webp`;
     const relativePath =
       target === 'featured'
@@ -46,10 +37,8 @@ export const POST = withAdminAuth(async (_user, req: NextRequest) => {
 
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
-    // 💾 Save image to disk
-    fs.writeFileSync(filePath, resized);
+    fs.writeFileSync(filePath, webpBuffer);
 
-    // ☁️ Upload to Firebase if enabled
     if (process.env.ENABLE_FIREBASE_SYNC === 'true') {
       await uploadToFirebase(filePath, relativePath);
     }

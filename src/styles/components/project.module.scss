@@ -14,6 +14,14 @@
     &-image {
       z-index: 0;
       max-height: 772px;
+
+      // rules for image to test:
+
+      // object-fit: cover; 
+
+      // or 'contain' if you want full image visible
+      // object-position: center;
+
       @include onMobile {
         height: 284px;
       }

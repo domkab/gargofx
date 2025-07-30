@@ -54,13 +54,13 @@ export default function HeaderClientSide() {
             const isActive = pathname === link;
 
             return (
-              <a
+              <Link
                 key={item}
                 href={link}
                 className={clsx(styles.link, isActive && styles.active)}
               >
                 {item}
-              </a>
+              </Link>
             );
           })}
         </nav>

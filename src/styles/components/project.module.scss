@@ -116,6 +116,11 @@
       @include onLaptop {
         margin: 0 60px
       }
+
+      @include onLaptopL {
+        max-width: 1440px;
+        margin: 0 auto;
+      }
     }
 
     &-block {

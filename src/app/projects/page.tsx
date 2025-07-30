@@ -45,7 +45,6 @@ export default async function FeaturedProjectsLayout() {
             className={clsx(
               styles['projects__text'],
               styles['projects__text--year'],
-              'text-2xl sm:text-4xl',
             )}
           >
             2024-2025

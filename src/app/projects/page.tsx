@@ -21,7 +21,7 @@ export default async function FeaturedProjectsLayout() {
         'min-h-[70vh]',
       )}>
 
-      <div className={clsx('projects__hero', 'relative', 'w-full')}>
+      <section className={clsx('projects__hero', 'relative', 'w-full')}>
         <HomeImageCarousel images={images} />
 
         <div
@@ -59,9 +59,9 @@ export default async function FeaturedProjectsLayout() {
           marginRight={20}
         />
 
-      </div>
+      </section>
 
-      <div className="layout md:px-5 px-6 mt-12 mb-20">
+      <section className="layout md:px-5 px-6 mt-12 mb-20">
         {layout.map((row, rowIndex) => (
           <div
             key={rowIndex}
@@ -104,7 +104,7 @@ export default async function FeaturedProjectsLayout() {
             ))}
           </div>
         ))}
-      </div>
+      </section>
     </main>
   );
 }

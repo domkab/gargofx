@@ -3,6 +3,9 @@
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
+// manages fonts for dash side and client side, option to have different fonts
+// triggers classnames from globals.scss
+
 export default function BodyFontManager() {
   const pathname = usePathname();
 

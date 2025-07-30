@@ -4,6 +4,7 @@ import { adminStorage } from '@/firebase/firebase-admin';
 import { getUploadsPath } from '@/utils/uploadPath';
 import featuredLayoutModel from './models/featuredLayoutModel';
 import postModel from './models/postModel';
+import homePageLayoutModel from './models/homePageLayoutModel';
 
 export async function uploadToFirebase(localPath: string, destination: string) {
   const bucket = adminStorage.bucket();
@@ -94,6 +95,22 @@ export async function cleanupUnusedImagesFromFirebaseAndFilestore() {
       const match = url.match(/(featured-posts\/.+|posts\/.+)/);
       if (match?.[1]) usedImagePaths.add(match[1]);
     });
+  }
+
+  // ✅ Collect image URLs from HomePage Layout
+  const homePageRows = await homePageLayoutModel.find({});
+  for (const row of homePageRows) {
+    for (const block of row.blocks) {
+      const urls = [
+        block.image?.desktop?.url,
+        block.image?.mobile?.url,
+      ].filter(Boolean);
+
+      urls.forEach((url: string) => {
+        const match = url.match(/(featured-posts\/.+|posts\/.+)/);
+        if (match?.[1]) usedImagePaths.add(match[1]);
+      });
+    }
   }
 
   // ✅ Delete unused images

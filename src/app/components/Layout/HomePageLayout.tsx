@@ -71,7 +71,7 @@ export default async function HomePageLayout() {
         }
       >
         <Link
-          href="/featured"
+          href="/projects"
           className={styles['home__featured-all-link']}
         >
           <img

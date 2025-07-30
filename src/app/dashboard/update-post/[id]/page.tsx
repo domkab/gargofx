@@ -7,7 +7,7 @@ import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
 import { Alert, Button, FileInput, Label, Textarea, TextInput } from 'flowbite-react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -27,7 +27,6 @@ export default function UpdatePost() {
   const imageUploadError = useAppSelector((state) => state.postForm.imageUploadError);
   const slug = generateSlug(getSlugSource(formData.title));
 
-  const router = useRouter();
   const pathname = usePathname();
   const postId = pathname.split('/').pop() || '';
 
@@ -58,7 +57,7 @@ export default function UpdatePost() {
       localStorage.setItem('publishSuccess', 'Post updated successfully!');
       setPublishSuccess('Post updated successfully!');
 
-      router.push(`/post/${data.slug}`);
+      // router.push(`/post/${data.slug}`);
     } catch (error: unknown) {
       setPublishError(`Something went wrong: ${error}`);
     }
@@ -139,7 +138,7 @@ export default function UpdatePost() {
   }
 
   return (
-    <div className="p-3 mx-auto min-h-screen">
+    <div className="p-5 mx-96 min-h-screen">
       {publishSuccess && (
         <Alert color='success'>{publishSuccess}</Alert>
       )}

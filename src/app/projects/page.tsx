@@ -5,9 +5,11 @@ import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 import { getCarouselImages } from '@/lib/services/imageService';
 import HomeImageCarousel from '../components/HomeImageCarousel';
 import styles from '@/styles/components/projects.module.scss';
+import { Divider } from '../components/Divider';
 
 export default async function FeaturedProjectsLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
+
   const images = await getCarouselImages();
 
   if (!layout?.length) return null;
@@ -19,7 +21,7 @@ export default async function FeaturedProjectsLayout() {
         'min-h-[70vh]',
       )}>
 
-      <div className={clsx('relative', 'w-full')}>
+      <div className={clsx('projects__hero', 'relative', 'w-full')}>
         <HomeImageCarousel images={images} />
 
         <div
@@ -33,7 +35,6 @@ export default async function FeaturedProjectsLayout() {
           <h1
             className={clsx(
               styles['projects__text'],
-              'text-2xl sm:text-4xl',
               'font-semibold'
             )}
           >
@@ -43,41 +44,61 @@ export default async function FeaturedProjectsLayout() {
           <h2
             className={clsx(
               styles['projects__text'],
+              styles['projects__text--year'],
               'text-2xl sm:text-4xl',
-              'font-semibold'
             )}
           >
             2024-2025
           </h2>
-
         </div>
+
+        {/* Divider line */}
+        <Divider
+          marginTop={44}
+          marginLeft={20}
+          marginRight={20}
+        />
+
       </div>
 
-
-
-      <div className="space-y-8">
+      <div className="layout md:px-5 px-6 mt-12 mb-20">
         {layout.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex flex-wrap gap-4">
+          <div
+            key={rowIndex}
+            className={clsx(
+              styles['projects__card-wrapper'],
+              'grid grid-cols-4 gap-8',
+            )}
+          >
             {row.blocks.map((block, blockIndex) => (
               <div
                 key={`${rowIndex}-${blockIndex}-${block.id}`}
                 className={clsx(
-                  'mb-4',
-                  'rounded overflow-hidden shadow-sm bg-white dark:bg-gray-900',
+                  styles['projects__card'],
+                  'overflow-hidden shadow-sm',
                   {
-                    'w-[calc(25%-1rem)]': block.layout === '1/4',
-                    'w-[calc(50%-1rem)]': block.layout === '1/2',
-                    'w-full': block.layout === 'full',
+                    'col-span-4 md:col-span-1': block.layout === '1/4',
+                    'col-span-4 md:col-span-2': block.layout === '1/2',
+                    'col-span-4': block.layout === 'full',
                   }
                 )}
               >
                 <Link href={`/post/${block.post?.slug}`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={block.image?.desktop?.url || ''}
-                    alt={block.image?.desktop?.alt || ''}
-                    className="w-full h-64 object-cover"
-                  />
+                  <picture>
+                    {block.image?.mobile?.url && (
+                      <source
+                        srcSet={block.image.mobile.url}
+                        media="(max-width: 768px)"
+                      />
+                    )}
+
+                    <img
+                      src={block.image?.desktop?.url || block.image?.mobile?.url || ''}
+                      alt={block.image?.desktop?.alt}
+                      className={clsx(
+                        styles['projects__card-image']
+                      )} />
+                  </picture>
                 </Link>
               </div>
             ))}

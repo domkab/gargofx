@@ -17,6 +17,11 @@ type Props = {
   isLast: boolean;
 };
 
+function convertYouTubeUrlToEmbed(url: string) {
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+}
+
 export default function ContentBlockItem({
   block,
   index,
@@ -103,6 +108,31 @@ export default function ContentBlockItem({
               <option value="half">Half Width</option>
             </Select>
           </div>
+        </>
+      )}
+
+      {block.type === 'video' && (
+        <>
+          <div>
+            <label className="block mb-1 text-sm text-gray-600 dark:text-gray-300">Video URL</label>
+            <TextInput
+              placeholder="Paste YouTube URL"
+              value={block.url || ''}
+              onChange={(e) => handleChange('url', convertYouTubeUrlToEmbed(e.target.value))}
+            />
+          </div>
+
+          {block.url && (
+            <div className="relative w-full h-[300px] rounded overflow-hidden">
+              <iframe
+                src={block.url}
+                title={block.alt || 'Embedded video'}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          )}
         </>
       )}
 

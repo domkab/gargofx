@@ -9,7 +9,11 @@ export async function getCarouselImages(): Promise<string[]> {
   );
 
   const postsDir = path.join(uploadsDir, 'posts');
-  const postDirs = fs.readdirSync(postsDir);
+  const postDirs = fs.readdirSync(postsDir).filter(name => {
+    const fullPath = path.join(postsDir, name);
+    return !name.startsWith('.') && fs.statSync(fullPath).isDirectory();
+  });
+
   const postImages: string[] = [];
 
   for (const dir of postDirs) {

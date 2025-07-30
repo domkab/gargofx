@@ -1,0 +1,163 @@
+@use '@/styles/_mixins' as *;
+@use '@/styles/vars' as *;
+
+.project {
+  &__hero {
+    position: relative;
+    width: 100%;
+    height: 772px;
+
+    @include onMobile {
+      height: 284px;
+    }
+
+    &-image {
+      z-index: 0;
+      max-height: 772px;
+
+      // rules for image to test:
+
+      // object-fit: cover; 
+
+      // or 'contain' if you want full image visible
+      // object-position: center;
+
+      @include onMobile {
+        height: 284px;
+      }
+
+      filter: brightness(0.75);
+    }
+
+    &-text-container {
+      position: absolute;
+      bottom: 20%;
+      color: white;
+      padding: 0 20px;
+
+      @include onLaptop {
+        padding: 0 60px;
+      }
+    }
+
+    &-title {
+      font-size: 24px;
+      line-height: 36px;
+      font-weight: bold;
+
+      @include onLaptop {
+        font-size: 66px;
+        line-height: 80px;
+      }
+    }
+
+    &-subtitle {
+      display: block;
+      font-size: 14px;
+      line-height: 14px;
+      font-weight: normal;
+      font-style: italic;
+
+      @include onLaptop {
+        font-size: 40px;
+        line-height: 40px;
+      }
+    }
+  }
+
+  &__desc-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 20px;
+    @include onLaptop {
+      margin: 140px 60px 0 60px;
+    }
+  }
+
+  &__desc {
+    max-width: 1440px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: 600;
+
+    @include onLaptop {
+      text-align: start;
+      font-size: 60px;
+      line-height: 80px;
+    }
+  }
+
+  &__opt-desc {
+    max-width: 1440px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 24px;
+
+    @include onLaptop {
+      font-size: 40px;
+      line-height: 80px;
+      margin-top: 80px;
+    }
+  }
+
+  &__separator {
+    @include onLaptop {
+      margin-bottom: 80px !important;
+    }
+  }
+
+  &__content {
+    &-wrapper {
+      margin: 0 20px;
+      @include onLaptop {
+        margin: 0 60px
+      }
+
+      @include onLaptopL {
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+    }
+
+    &-block {
+      height: 200px;
+      @include onLaptop {
+        height: 600px;
+      }
+
+      &-image {
+        border: 1px solid transparent;
+        border-radius: 14px;
+      }
+
+      &-video {
+        border: 1px solid transparent;
+        border-radius: 14px;
+      }
+    }
+  }
+
+  &__credits {
+    font-weight: 200;
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+
+    @include onMobileS {
+      font-size: 13px;
+    }
+
+    margin: 60px 20px 48px 20px;
+
+    @include onLaptop {
+      font-size: 40px;
+      line-height: 80px;
+      margin-top: 80px;
+      margin-bottom: 160px;
+    }
+  }
+}

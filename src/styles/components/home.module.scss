@@ -35,7 +35,12 @@
     padding: 0 20px;
 
     &-title-container {
-      margin-bottom: 22px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+
+      @include onLaptop {
+        margin-bottom: 36px;
+      }
     }
 
     &-title {

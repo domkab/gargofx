@@ -10,7 +10,7 @@ import {
   HiStar,
   HiHome,
 } from 'react-icons/hi';
-import { FiFolder, FiImage } from 'react-icons/fi';
+import { FiImage, FiFilm } from 'react-icons/fi';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SignOutButton, useUser } from '@clerk/nextjs';
@@ -67,9 +67,9 @@ export default function DashSidebar() {
                 </SidebarItem>
               </Link>
 
-              <Link href="/dashboard?tab=categories">
-                <SidebarItem active={tab === 'categories'} icon={FiFolder} as="div">
-                  Categories
+              <Link href="/dashboard?tab=logo-slider">
+                <SidebarItem active={tab === 'logo-slider'} icon={FiFilm} as="div">
+                  Logo Slider
                 </SidebarItem>
               </Link>
 

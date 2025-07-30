@@ -8,10 +8,10 @@ import DashProfile from './DashProfile';
 import DashPosts from './DashPosts';
 import DashUsers from './DashUsers';
 import DashboardComponent from './DashboardComponent';
-import DashCategories from './Categories/DashCategories';
 import DashImageSettings from './DashImageSettings';
 import DashFeaturedPosts from './FeaturedPosts/DashFeaturedPosts';
 import DashHomeLayout from './DashHomeLayout';
+import DashLogoSlider from './DashLogoSlider';
 
 export default function DashboardContent() {
   const searchParams = useSearchParams();
@@ -44,7 +44,7 @@ export default function DashboardContent() {
       {tab === 'home-settings' && <DashHomeLayout />}
       {tab === 'posts' && <DashPosts />}
       {tab === 'featured-posts' && <DashFeaturedPosts />}
-      {tab === 'categories' && <DashCategories />}
+      {tab === 'logo-slider' && <DashLogoSlider />}
       {tab === 'image-settings' && <DashImageSettings />}
       {tab === 'users' && <DashUsers />}
       {tab === 'dash' && <DashboardComponent />}

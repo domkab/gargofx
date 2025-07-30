@@ -3,6 +3,7 @@ import { getCarouselImages } from '@/lib/services/imageService';
 import styles from '@/styles/components/about.module.scss';
 import clsx from 'clsx';
 import HomeImageCarousel from '../components/HomeImageCarousel';
+import LogoSlider from '../components/LogoSlider/LogoSlider';
 
 export const metadata = aboutMetadata;
 
@@ -116,7 +117,7 @@ export default async function AboutPage() {
       </section>
 
       <section>
-        <div className="">suktukas</div>
+        <LogoSlider />
       </section>
     </main>
   );

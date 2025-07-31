@@ -7,8 +7,7 @@ import { getLogoSlider } from '@/lib/services/imageService';
 export const revalidate = 240;
 
 export default async function LogoSlider() {
-    const logos = await getLogoSlider();
-  console.log(logos);
+  const logos = await getLogoSlider();
 
   if (!logos.length) return null;
 

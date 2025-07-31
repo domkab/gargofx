@@ -6,13 +6,17 @@ import { facebook, instagram, x } from '@/lib/constants';
 
 type ContactSectionProps = {
   as?: keyof JSX.IntrinsicElements;
+  className?: string;
 };
 
-export default function ContactSection({ as = 'section' }: ContactSectionProps) {
+export default function ContactSection({
+  as = 'section',
+  className,
+}: ContactSectionProps) {
   const Component = as;
 
   return (
-    <Component className={clsx(styles.contact, 'px-5 py-5 mb-7')}>
+    <Component className={clsx(styles.contact, 'p-5 mb-7', className)}>
       <div
         className={clsx(
           styles['contact__header'],

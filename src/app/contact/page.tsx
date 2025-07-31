@@ -1,9 +1,8 @@
 import clsx from 'clsx';
-import ContactForm from '../components/Contact/ContactForm';
 import HomeImageCarousel from '../components/HomeImageCarousel';
 import { getCarouselImages } from '@/lib/services/imageService';
-import contactForm from '@/styles/components/contact.module.scss';
 import contactPage from '@/styles/components/contactPage.module.scss';
+import ContactSection from '../components/Contact/ContactSection';
 
 export default async function ContactPage() {
   const images = await getCarouselImages();
@@ -11,7 +10,7 @@ export default async function ContactPage() {
   return (
     <main
       className={clsx(
-        contactPage['contact'], 'contact'
+        contactPage['contact'], 'contact max-h-full'
       )}>
 
       <section className={clsx('contact__hero', 'relative', 'w-full')}>
@@ -31,7 +30,7 @@ export default async function ContactPage() {
               'mb-1'
             )}
           >
-            About us
+            Contact
           </h1>
 
           <p
@@ -40,26 +39,12 @@ export default async function ContactPage() {
               contactPage['contact__hero-text--secondary'],
             )}
           >
-            Who we are and what we do
+            Questions? We’ve got answers
           </p>
         </div>
       </section>
 
-      <section className={clsx(contactPage['contact__content'])}>
-        <h1 className={clsx(contactForm.title, 'text-white text-3xl mb-8')}>contact</h1>
-
-        <div className={clsx(contactForm.socials, 'flex gap-8 text-secondary mb-10')}>
-          <a href="https://facebook.com" target="_blank" className={contactForm.link}>
-            facebook
-          </a>
-          <a href="https://instagram.com" target="_blank" className={contactForm.link}>
-            instagram
-          </a>
-          <button className={contactForm.close}>x</button>
-        </div>
-
-        <ContactForm />
-      </section>
+      <ContactSection className={clsx(contactPage['contact__section'])}/>
     </main>
   );
 }

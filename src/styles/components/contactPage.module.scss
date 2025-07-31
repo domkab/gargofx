@@ -35,7 +35,17 @@
     }
   }
 
-  &__content {
-    margin: 0 60px;
+  &__section {
+    padding: 20px 0;
+    margin: 0 20px;
+
+    @include onLaptop {
+      margin:  0 60px 40px 60px;
+    }
+
+    @include onLaptopL {
+      margin:  0 auto 60px auto;
+      max-width: 1200px;
+    }
   }
 }

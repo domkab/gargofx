@@ -3,11 +3,11 @@
 
 .home {
   &__carousel {
-    @include onMobile {
-      height: 284px;
-    }
+    height: 284px;
 
-    height: 772px;
+    @include onLaptop {
+      height: 772px;
+    }
   }
 
   &__text-container {

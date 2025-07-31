@@ -10,9 +10,6 @@ export const POST = withAdminAuth(async (_user, req: NextRequest) => {
   const formData = await req.formData();
   const file = formData.get('file') as File;
 
-  const body = await req.json();
-  console.log('LOGOS RECEIVED:', body.logos);
-
   if (!file) {
     return NextResponse.json({ error: 'Missing file' }, { status: 400 });
   }

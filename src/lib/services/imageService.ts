@@ -33,6 +33,7 @@ export async function getCarouselImages(): Promise<string[]> {
 export async function getLogoSlider(): Promise<{ url: string; alt: string }[]> {
   await connect();
   const logos = await LogoSliderModel.find().sort({ order: 1 }).lean();
+
   return logos.map(logo => ({
     url: logo.url,
     alt: logo.alt || logo.url.split('/').pop()?.split('.')[0] || 'logo'

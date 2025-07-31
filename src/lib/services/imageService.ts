@@ -36,6 +36,7 @@ export async function getLogoSlider(): Promise<{ url: string; alt: string }[]> {
 
   return logos.map(logo => ({
     url: logo.url,
-    alt: logo.alt || logo.url.split('/').pop()?.split('.')[0] || 'logo'
+    alt: logo.alt || logo.url.split('/').pop()?.split('.')[0] || 'logo',
+    order: logo.order
   }));
 }

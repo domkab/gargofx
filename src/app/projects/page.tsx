@@ -1,6 +1,5 @@
 import { getFeaturedLayout } from '@/lib/services/postService';
 import clsx from 'clsx';
-import Link from 'next/link';
 import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 import { getCarouselImages } from '@/lib/services/imageService';
 import HomeImageCarousel from '../components/HomeImageCarousel';

@@ -1,14 +1,10 @@
-'use client';
-
-import { useState } from 'react';
 import clsx from 'clsx';
 import CustomSelect from './CustomSelect';
 import styles from '@/styles/components/contact.module.scss';
 import TextInput from './TextInput';
+import AgreeCheckbox from './AgreeCheckbox';
 
-export default function ContactForm() {
-  const [agree, setAgree] = useState(false);
-
+export default async function ContactForm() {
   return (
     <form
       action="https://formspree.io/f/mnndyryb"
@@ -78,38 +74,8 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Checkbox */}
-      <div 
-      className="consent-group flex flex-col md:flex-row md:border-t border-white"
-      >
-        <label className="flex items-start gap-3 text-white text-sm mt-7">
-          <input
-            type="checkbox"
-            className={styles['contact__form-checkbox']}
-            checked={agree}
-            onChange={(e) => setAgree(e.target.checked)}
-          />
-          <span className={styles['contact__form-consent']}>
-            By ticking this box, you’re allowing us to handle{' '}
-            <a href="/privacy" className="underline">
-              your personal data
-            </a>
-            , we’ll take good care of it.
-          </span>
-        </label>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className={clsx(
-            styles['contact__form-submit'],
-            'mt-7 text-white py-3 px-8 rounded-full border border-white transition-all duration-300'
-          )}
-        >
-          send
-        </button>
-      </div>
-
+      {/* Checkbox & button */}
+      <AgreeCheckbox />
     </form >
   );
 }

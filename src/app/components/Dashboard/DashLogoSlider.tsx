@@ -88,6 +88,37 @@ export default function DashLogoSlider() {
     }
   };
 
+  const handleDelete = async (logoUrl: string) => {
+    try {
+      await axios.delete('/api/image/delete', { data: { url: logoUrl } });
+
+      setLogos((prev) => prev.filter((l) => l.url !== logoUrl));
+      setToast({ type: 'success', message: 'Logo deleted successfully!' });
+    } catch (err) {
+      console.error('Delete failed', err);
+      setToast({ type: 'error', message: 'Failed to delete logo' });
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    if (!logos) return;
+    if (!confirm('Are you sure you want to delete ALL logos?')) return;
+
+    try {
+      await Promise.all(
+        logos.map((logo) =>
+          axios.delete('api/image/delete', { data: { url: logo.url } })
+        )
+      );
+
+      setLogos([]);
+      setToast({ type: 'success', message: 'All logos deleted successfully!' });
+    } catch (err) {
+      console.error('Delete all failed', err);
+      setToast({ type: 'error', message: 'Failed to delete all logos' });
+    }
+  };
+
   return (
     <main className="w-full max-w-[900px] mx-auto p-6 space-y-6">
       {toast && (
@@ -117,6 +148,15 @@ export default function DashLogoSlider() {
         <Button onClick={handleUpload} disabled={!file}>
           Upload Logo
         </Button>
+
+        <Button
+          size="xs"
+          color="failure"
+          onClick={() => handleDeleteAll()}
+          className='items-center'
+        >
+          Delete all
+        </Button>
       </div>
 
       {/* Logo List with manual order inputs */}
@@ -129,6 +169,8 @@ export default function DashLogoSlider() {
             <Image src={logo.url} alt={logo.alt} width={80} height={80} />
             <span className="flex-1">{logo.alt}</span>
 
+
+
             <TextInput
               type="number"
               min={0}
@@ -136,6 +178,14 @@ export default function DashLogoSlider() {
               onChange={(e) => handleOrderChange(index, parseInt(e.target.value, 10))}
               className="w-20"
             />
+
+            <Button
+              size="xs"
+              color="failure"
+              onClick={() => handleDelete(logo.url)}
+            >
+              Delete
+            </Button>
           </div>
         ))}
       </div>

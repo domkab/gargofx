@@ -3,7 +3,9 @@ import { getCarouselImages } from '@/lib/services/imageService';
 import styles from '@/styles/components/about.module.scss';
 import clsx from 'clsx';
 import HomeImageCarousel from '../components/HomeImageCarousel';
-import LogoSlider from '../components/LogoSlider/LogoSlider';
+import LogoSlider from '../components/LogoSlider/LogoSliderSSR';
+import { Divider } from '../components/Divider';
+import FeaturedProjectsCards from '../components/FeaturedProjectsCards';
 
 export const metadata = aboutMetadata;
 
@@ -116,9 +118,16 @@ export default async function AboutPage() {
         </article>
       </section>
 
-      <section>
+      <section className={clsx(styles['about__slider'])}>
+        <h2 className={clsx(styles['about__slider-title'])}>
+          Selected clients & collaborations
+        </h2>
+        <Divider />
         <LogoSlider />
+        <Divider marginBottom={80} />
       </section>
+
+      <FeaturedProjectsCards />
     </main>
   );
 }

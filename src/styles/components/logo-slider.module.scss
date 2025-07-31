@@ -12,43 +12,53 @@
 
 .logos {
   overflow: hidden;
-  padding: 30px 0;
+  padding: 10px 0;
   white-space: nowrap;
   position: relative;
 
-  // gradient fade edges
-  &::before,
-  &::after {
-    position: absolute;
-    top: 0;
-    content: '';
-    width: 250px;
-    height: 100%;
-    z-index: 2;
-  }
-
-  &::before {
-    left: 0;
-    // background: gradient(to left, rgba(255, 255, 255, 0), #000);
-  }
-
-  &::after {
-    right: 0;
-    // background: gradient(to right, rgba(255, 255, 255, 0.195), #000);
+  @include onLaptop {
+    padding: 30px 0;
   }
 
   .logo {
     &__items {
       display: inline-block;
-      animation: 30s slides infinite linear;
+      animation: 5s slides infinite linear;
 
       img {
         display: inline-block;
         width: auto;
         vertical-align: middle;
         height: 100px;
+        max-width: 120px;
         margin-right: 40px;
+
+        @include onMobile {
+          height: 80px;
+          max-width: 80px;
+        }
       }
     }
   }
 }
+
+// gradient fade edges
+// &::before,
+// &::after {
+//   position: absolute;
+//   top: 0;
+//   content: '';
+//   width: 250px;
+//   height: 100%;
+//   z-index: 2;
+// }
+
+// &::before {
+//   left: 0;
+//   // background: gradient(to left, rgba(255, 255, 255, 0), #000);
+// }
+
+// &::after {
+//   right: 0;
+//   // background: gradient(to right, rgba(255, 255, 255, 0.195), #000);
+// }

@@ -17,20 +17,22 @@ export const POST = withAdminAuth(async (_user, req: NextRequest) => {
   try {
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Validate SVG (basic check)
     if (!file.name.endsWith('.svg')) {
       return NextResponse.json(
         { error: 'Only SVG files are allowed' }, { status: 400 }
       );
     }
 
+    const originalName = path.parse(file.name).name;
+    const safeName = originalName.replace(/[^a-z0-9_-]/gi, '-').toLowerCase();
+    const uniqueId = uuidv4();
+
     // Generate filename
-    const fileName = `${uuidv4()}.svg`;
+    const fileName = `${safeName}-${uniqueId}.svg`;
     const relativePath = `logo-slider/${fileName}`;
     const filePath = getUploadsPath(relativePath);
     const publicUrl = `/uploads/${relativePath}`;
 
-    // Ensure directory exists
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
 
     // Save file locally
@@ -44,6 +46,7 @@ export const POST = withAdminAuth(async (_user, req: NextRequest) => {
     return NextResponse.json({ url: publicUrl });
   } catch (error) {
     console.error('Logo upload failed:', error);
+
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
   }
 });

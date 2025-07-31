@@ -72,14 +72,12 @@ export default function DashLogoSlider() {
     }
   };
 
-  // Handle manual order change
   const handleOrderChange = (index: number, newOrder: number) => {
     const updated = [...logos];
     updated[index].order = newOrder;
     setLogos(updated.sort((a, b) => a.order - b.order));
   };
 
-  // Save to database
   const handleSave = async () => {
     try {
       await axios.post('/api/logo-slider/save', { logos });
@@ -91,7 +89,6 @@ export default function DashLogoSlider() {
   };
 
   return (
-
     <main className="w-full max-w-[900px] mx-auto p-6 space-y-6">
       {toast && (
         <div className="fixed top-4 right-4 z-50">

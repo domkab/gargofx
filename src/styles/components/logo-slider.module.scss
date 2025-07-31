@@ -8,6 +8,8 @@
 }
 
 .logos {
+  display: flex;
+  // flex-flow:  column wrap;
   overflow: hidden;
   padding: 30px 0;
   white-space: nowrap;

@@ -23,7 +23,7 @@
   .logo {
     &__items {
       display: inline-block;
-      animation: 5s slides infinite linear;
+      animation: 25s slides infinite linear;
 
       img {
         display: inline-block;
@@ -41,24 +41,3 @@
     }
   }
 }
-
-// gradient fade edges
-// &::before,
-// &::after {
-//   position: absolute;
-//   top: 0;
-//   content: '';
-//   width: 250px;
-//   height: 100%;
-//   z-index: 2;
-// }
-
-// &::before {
-//   left: 0;
-//   // background: gradient(to left, rgba(255, 255, 255, 0), #000);
-// }
-
-// &::after {
-//   right: 0;
-//   // background: gradient(to right, rgba(255, 255, 255, 0.195), #000);
-// }

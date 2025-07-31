@@ -3,7 +3,7 @@ import { getCarouselImages } from '@/lib/services/imageService';
 import styles from '@/styles/components/about.module.scss';
 import clsx from 'clsx';
 import HomeImageCarousel from '../components/HomeImageCarousel';
-import LogoSlider from '../components/LogoSlider/LogoSliderSSR';
+import LogoSlider from '../components/LogoSlider/LogoSlider';
 import { Divider } from '../components/Divider';
 import FeaturedProjectsCards from '../components/FeaturedProjectsCards';
 
@@ -124,7 +124,7 @@ export default async function AboutPage() {
         </h2>
         <Divider />
         <LogoSlider />
-        <Divider marginBottom={80} />
+        <Divider />
       </section>
 
       <FeaturedProjectsCards />

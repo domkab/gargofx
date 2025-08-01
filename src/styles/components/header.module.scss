@@ -37,6 +37,7 @@
   }
 
   &__burger {
+    background-color: $color-secondary;
     opacity: 0;
     transform: translateX(100%);
 
@@ -53,7 +54,7 @@
     }
 
     &--closing {
-      opacity: 0;
+      // opacity: 0;
       transform: translateX(100%);
       pointer-events: none;
     }

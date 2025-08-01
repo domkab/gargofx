@@ -98,7 +98,6 @@ export default function HeaderClientSide() {
             'fixed inset-0 z-[999]',
             'flex flex-col justify-between',
             'text-white text-xl',
-            'bg-black/90',
             styles['header__burger'],
             menuOpen && styles['header__burger--active'],
             isAnimatingOut && styles['header__burger--closing']

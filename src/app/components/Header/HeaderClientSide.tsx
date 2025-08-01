@@ -5,8 +5,10 @@ import Logo from '../Logo';
 import Image from 'next/image';
 import clsx from 'clsx';
 import styles from '@/styles/components/header.module.scss';
+import footerStyles from '@/styles/components/footer.module.scss';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { facebook, instagram, mail, mailRef, phone, phoneRef, x } from '@/lib/constants';
 
 export default function HeaderClientSide() {
   const [scrolled, setScrolled] = useState(false);
@@ -40,7 +42,7 @@ export default function HeaderClientSide() {
     <header
       className={clsx(
         styles.header,
-        'fixed top-0 left-0 w-full z-50 flex items-center justify-between ',
+        'fixed top-0 left-0 w-full z-50 flex items-center justify-between',
         'px-6 py-4 transition-all duration-300',
         scrolled ? 'bg-black/30 backdrop-blur-md shadow-md' : 'bg-transparent'
       )}
@@ -84,28 +86,39 @@ export default function HeaderClientSide() {
         <div
           className={clsx(
             'fixed inset-0 z-[999]',
-            'flex flex-col justify-center',
+            'flex flex-col justify-between',
             'text-white text-xl',
             'bg-black/90'
           )}
         >
-          <div className="flex justify-between gap-10">
+          {/* Top bar: Logo + Close button */}
+          <div
+            className={clsx(
+              'flex items-center justify-between',
+              'px-5 pt-5 pb-8' // spacing
+            )}
+          >
             <Logo />
+
             <button
               onClick={() => setMenuOpen(false)}
               className={clsx(
-                // 'absolute top-6 right-6',
-                'text-white text-3xl',
+                'text-white text-3xl leading-none',
                 styles['header__burger-close']
               )}
+              aria-label="Close menu"
             >
               ×
             </button>
           </div>
-          <nav className={clsx(
-            'flex flex-col items-center gap-8',
-            styles['header__burger']
-          )}>
+
+          {/* Navigation */}
+          <nav
+            className={clsx(
+              'flex flex-col items-center gap-8 flex-1 justify-center',
+              styles['header__burger']
+            )}
+          >
             {navItems.map((item) => (
               <Link
                 key={item}
@@ -118,7 +131,63 @@ export default function HeaderClientSide() {
             ))}
           </nav>
 
+          {/* Footer (Contact + Social) */}
+          <div className={clsx(footerStyles['footer'])}>
+            <div className="max-w-7xl mx-auto px-5 md:px-10 py-10">
+              <div className="flex flex-col items-center text-center gap-6 md:flex-row md:justify-between md:items-start md:text-left">
 
+                {/* EMAIL + PHONE */}
+                <div className="flex flex-col gap-4">
+                  <div className={clsx(styles['footer__contact-row'], 'font-bold')}>
+                    <Image src="/icons/email.svg" alt="email" width={20} height={20} />
+                    <Link
+                      href={mailRef}
+                      className="uppercase tracking-wide text-sm"
+                    >
+                      {mail}
+                    </Link>
+                  </div>
+
+                  <div className={clsx(styles['footer__contact-row'])}>
+                    <Image src="/icons/phone.svg" alt="phone" width={20} height={20} />
+                    <Link
+                      href={phoneRef}
+                      className="uppercase tracking-wide text-sm"
+                    >
+                      <b>TEL:</b> {phone}
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Social + Footer Links */}
+                <div className="flex flex-col items-center gap-6 md:items-end">
+                  <div className="flex gap-6">
+                    <span>FOLLOW US</span>
+                    <Link href={facebook} target="_blank">
+                      <Image src="/icons/social/facebook.svg" alt="facebook" width={24} height={24} />
+                    </Link>
+                    <Link href={instagram} target="_blank">
+                      <Image src="/icons/social/instagram.svg" alt="instagram" width={24} height={24} />
+                    </Link>
+                    <Link href={x} target="_blank">
+                      <Image src="/icons/social/x.svg" alt="x" width={24} height={24} />
+                    </Link>
+                  </div>
+
+                  <Image className='py-2' src="/icons/Logo-footer.svg" alt="Logo" width={120} height={40} />
+
+                  <div className="flex flex-col items-center gap-2 text-sm md:items-end">
+                    <span>
+                      © {new Date().getFullYear()} <span>GARGOFX</span>
+                    </span>
+                    <Link href="/terms">
+                      TERMS OF USE AND PRIVACY
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </header>

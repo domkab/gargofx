@@ -29,16 +29,22 @@ export default async function HomePageLayout() {
         <div className="flex-1 h-px bg-white opacity-50" />
       </div>
 
-      <div className="space-y-8">
+      <div className={clsx('space-y-8', styles['home__featured-blocks'])}>
         {layout.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex flex-wrap gap-4">
+          <div
+            key={rowIndex}
+            className={clsx(
+              'flex flex-wrap justify-center',
+              'gap-x-7 gap-y-5 md:gap-5'
+            )}
+          >
             {row.blocks.map((block, blockIndex) => (
               <div
                 key={`${rowIndex}-${blockIndex}-${block.id}`}
                 className={clsx(
                   styles['home__featured-block'],
-                  'overflow-hidden shadow-sm bg-white dark:bg-gray-900',
-                  'w-[calc(50%-0.5rem)]',
+                  'overflow-hidden shadow-sm bg-white',
+                  'w-[calc(50%-1rem)]',
                   {
                     'md:w-[calc(25%-1rem)]': block.layout === '1/4',
                     'md:w-[calc(50%-1rem)]': block.layout === '1/2',
@@ -67,7 +73,7 @@ export default async function HomePageLayout() {
         className={clsx(
           styles['home__featured-all'],
           'text-center mt-7',
-          'flex items-center justify-center gap-3')
+          'flex items-center justify-center gap-4')
         }
       >
         <Link

@@ -23,7 +23,7 @@ export default function HeaderClientSide() {
     setTimeout(() => {
       setMenuOpen(false);
       setIsAnimatingOut(false);
-    }, 400); // same as CSS transition duration
+    }, 500);
   };
 
   useEffect(() => {
@@ -93,7 +93,6 @@ export default function HeaderClientSide() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      {menuOpen && (
         <div
           className={clsx(
             'fixed inset-0 z-[999]',
@@ -101,7 +100,8 @@ export default function HeaderClientSide() {
             'text-white text-xl',
             'bg-black/90',
             styles['header__burger'],
-            menuOpen && styles['header__burger--active']
+            menuOpen && styles['header__burger--active'],
+            isAnimatingOut && styles['header__burger--closing']
           )}
         >
           {/* Top bar: Logo + Close button */}
@@ -121,7 +121,7 @@ export default function HeaderClientSide() {
               alt='close icon'
               width={32}
               height={32}
-              onClick={() => setMenuOpen(false)}
+              onClick={closeMenu}
               className={clsx(
                 'cursor-pointer',
                 'text-white text-3xl leading-none',
@@ -210,7 +210,6 @@ export default function HeaderClientSide() {
             </div>
           </div>
         </div>
-      )}
     </header>
   );
 }

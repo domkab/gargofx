@@ -40,7 +40,8 @@ export default function HeaderClientSide() {
     <header
       className={clsx(
         styles.header,
-        'fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4 transition-all duration-300',
+        'fixed top-0 left-0 w-full z-50 flex items-center justify-between ',
+        'px-6 py-4 transition-all duration-300',
         scrolled ? 'bg-black/30 backdrop-blur-md shadow-md' : 'bg-transparent'
       )}
     >
@@ -83,31 +84,41 @@ export default function HeaderClientSide() {
         <div
           className={clsx(
             'fixed inset-0 z-[999]',
-            'flex flex-col items-center justify-center',
-            'gap-8 text-white text-xl',
+            'flex flex-col justify-center',
+            'text-white text-xl',
             'bg-black/90'
           )}
         >
-          {navItems.map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+          <div className="flex justify-between gap-10">
+            <Logo />
+            <button
               onClick={() => setMenuOpen(false)}
-              className={styles.link}
+              className={clsx(
+                // 'absolute top-6 right-6',
+                'text-white text-3xl',
+                styles['header__burger-close']
+              )}
             >
-              {item}
-            </a>
-          ))}
+              ×
+            </button>
+          </div>
+          <nav className={clsx(
+            'flex flex-col items-center gap-8',
+            styles['header__burger']
+          )}>
+            {navItems.map((item) => (
+              <Link
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                onClick={() => setMenuOpen(false)}
+                className={styles.link}
+              >
+                {item}
+              </Link>
+            ))}
+          </nav>
 
-          <button
-            onClick={() => setMenuOpen(false)}
-            className={clsx(
-              'absolute top-6 right-6',
-              'text-white text-3xl'
-            )}
-          >
-            ×
-          </button>
+
         </div>
       )}
     </header>

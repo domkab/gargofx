@@ -47,6 +47,11 @@ export default function HeaderClientSide() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    setMenuOpen(false);
+    setIsAnimatingOut(false);
+  }, [pathname]);
+
   const navItems = ['projects', 'about', 'contact'];
 
   return (
@@ -63,7 +68,6 @@ export default function HeaderClientSide() {
         <Logo />
 
         <nav
-          // className="desktop-nav hidden md:flex gap-6 text-white text-sm"
           className={clsx(
             styles['desktop-nav'],
             'hidden md:flex gap-6 text-white text-sm'
@@ -145,17 +149,24 @@ export default function HeaderClientSide() {
 
           )}
         >
-          {navItems.map((item) => (
-            <Link
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              onClick={() => setMenuOpen(false)}
-              // className={styles.link}
-              className={clsx(styles['header__burger-navitem'], 'text-start')}
-            >
-              {item}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const link = `/${item.toLowerCase()}`;
+            const isActive = pathname === link;
+
+            return (
+              <Link
+                key={item}
+                href={link}
+                onClick={() => setMenuOpen(false)}
+                className={clsx(
+                  styles['header__burger-navitem'], 'text-start',
+                  isActive && styles.active
+                )}
+              >
+                {item}
+              </Link>
+            )
+          })}
         </nav>
 
         {/* Footer (Contact + Social) */}

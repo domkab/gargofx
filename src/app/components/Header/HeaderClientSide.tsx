@@ -243,7 +243,7 @@ export default function HeaderClientSide() {
                     © {new Date().getFullYear()} <span>GARGOFX</span>
                   </span>
 
-                  <Link href="/terms">
+                  <Link href="/terms-conditions">
                     TERMS OF USE AND PRIVACY
                   </Link>
                 </div>

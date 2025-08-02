@@ -57,3 +57,4 @@ e2e/node_modules
 #uploads
 public/uploads/posts
 public/uploads/featured-posts
+public/uploads/logo-slider

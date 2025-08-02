@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import { connect } from '../mongodb/mongoose';
+import LogoSliderModel from '../models/LogoSliderModel';
 
 export async function getCarouselImages(): Promise<string[]> {
   const uploadsDir = path.join(process.cwd(), 'public/uploads');
@@ -26,4 +28,15 @@ export async function getCarouselImages(): Promise<string[]> {
     first ? `/uploads/${first}` : '',
     ...postImages,
   ].filter(Boolean);
+}
+
+export async function getLogoSlider(): Promise<{ url: string; alt: string }[]> {
+  await connect();
+  const logos = await LogoSliderModel.find().sort({ order: 1 }).lean();
+
+  return logos.map(logo => ({
+    url: logo.url,
+    alt: logo.alt || logo.url.split('/').pop()?.split('.')[0] || 'logo',
+    order: logo.order
+  }));
 }

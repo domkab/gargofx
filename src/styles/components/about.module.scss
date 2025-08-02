@@ -1,0 +1,104 @@
+@use '@/styles/_mixins' as *;
+@use '@/styles/vars' as *;
+
+.about {
+  &__text-container {
+    position: absolute;
+    bottom: 20%;
+    padding: 0 20px;
+
+    @include onLaptop {
+      padding: 0 60px;
+    }
+  }
+
+  &__text {
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 600;
+
+    @include onLaptop {
+      font-size: 66px;
+      line-height: 80px;
+    }
+
+    &--secondary {
+      font-size: 15px;
+      line-height: 24px;
+      font-weight: 400;
+
+      @include onLaptop {
+        font-size: 40px;
+      }
+    }
+  }
+
+  &__content {
+    margin: 34px 20px 0px 20px;
+
+    @include onLaptop {
+      margin: 34px 60px 0px 60px;
+    }
+
+    @include onLaptopL {
+      max-width: 1440px;
+      margin: 102px auto 0 auto;
+    }
+
+    &-title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 26px;
+
+      margin-bottom: 34px;
+
+      @include onLaptop {
+        font-size: 66px;
+        line-height: 80px;
+        margin-bottom: 136px;
+      }
+    }
+  }
+
+  &__article {
+    padding: 0 40px;
+    margin-bottom: 24px;
+  }
+
+  &__subheading {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 28px;
+
+    @include onLaptop {
+      font-size: 38px;
+      line-height: 80px;
+    }
+  }
+
+  &__paragraph {
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 28px;
+
+    @include onLaptop {
+      font-size: 36px;
+      line-height: 80px;
+    }
+  }
+
+  &__slider {
+    &-title {
+      font-size: 32px;
+      line-height: 80px;
+      font-weight: 400;
+      color: #848586;
+      text-transform: uppercase;
+      text-align: center;
+
+      @include onMobile {
+        font-size: 14px;
+      }
+    } 
+  }
+}

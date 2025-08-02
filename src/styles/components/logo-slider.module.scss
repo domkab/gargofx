@@ -1,0 +1,43 @@
+@use '@/styles/_mixins' as *;
+@use '@/styles/vars' as *;
+
+@keyframes slides {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.logos {
+  overflow: hidden;
+  padding: 10px 0;
+  white-space: nowrap;
+  position: relative;
+
+  @include onLaptop {
+    padding: 30px 0;
+  }
+
+  .logo {
+    &__items {
+      display: inline-block;
+      animation: 25s slides infinite linear;
+
+      img {
+        display: inline-block;
+        width: auto;
+        vertical-align: middle;
+        height: 100px;
+        max-width: 120px;
+        margin-right: 40px;
+
+        @include onMobile {
+          height: 80px;
+          max-width: 80px;
+        }
+      }
+    }
+  }
+}

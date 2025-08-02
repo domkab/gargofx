@@ -5,6 +5,7 @@ import { getUploadsPath } from '@/utils/uploadPath';
 import featuredLayoutModel from './models/featuredLayoutModel';
 import postModel from './models/postModel';
 import homePageLayoutModel from './models/homePageLayoutModel';
+import LogoSliderModel from './models/LogoSliderModel';
 
 export async function uploadToFirebase(localPath: string, destination: string) {
   const bucket = adminStorage.bucket();
@@ -110,6 +111,15 @@ export async function cleanupUnusedImagesFromFirebaseAndFilestore() {
         const match = url.match(/(featured-posts\/.+|posts\/.+)/);
         if (match?.[1]) usedImagePaths.add(match[1]);
       });
+    }
+  }
+
+  // Logo Slider
+  const logoSliderDocs = await LogoSliderModel.find({});
+  for (const logo of logoSliderDocs) {
+    if (logo.url) {
+      const match = logo.url.match(/(logo-slider\/.+)/);
+      if (match?.[1]) usedImagePaths.add(match[1]);
     }
   }
 

@@ -21,6 +21,12 @@
     }
   }
 
+  &__followus {
+    @include onMobile {
+      display: none;
+    }
+  }
+
   a {
     transition: color 0.3s ease;
     position: relative;

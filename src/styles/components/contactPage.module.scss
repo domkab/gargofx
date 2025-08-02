@@ -1,0 +1,51 @@
+@use '@/styles/_mixins' as *;
+@use '@/styles/vars' as *;
+
+.contact {
+  &__hero {
+    &-text-container {
+      position: absolute;
+      bottom: 20%;
+      padding: 0 20px;
+
+      @include onLaptop {
+        padding: 0 60px;
+      }
+    }
+
+    &-text {
+      font-size: 24px;
+      line-height: 36px;
+      font-weight: 600;
+
+      @include onLaptop {
+        font-size: 66px;
+        line-height: 80px;
+      }
+
+      &--secondary {
+        font-size: 15px;
+        line-height: 24px;
+        font-weight: 400;
+
+        @include onLaptop {
+          font-size: 40px;
+        }
+      }
+    }
+  }
+
+  &__section {
+    padding: 20px 0;
+    margin: 0 20px;
+
+    @include onLaptop {
+      margin:  0 60px 40px 60px;
+    }
+
+    @include onLaptopL {
+      margin:  0 auto 60px auto;
+      max-width: 1200px;
+    }
+  }
+}

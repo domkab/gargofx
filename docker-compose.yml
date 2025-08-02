@@ -1,6 +1,6 @@
 services:
   # Production
-  nextblog:
+  gargofx:
     container_name: gargofx
     build:
       context: .
@@ -13,7 +13,7 @@ services:
     volumes:
      - ./uploads:/app/public/uploads
 
-  nextblog-preview:
+  gargofx-preview:
     container_name: gargofx-preview
     build:
       context: .
@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
 
   # Development
-  nextblog-dev:
+  gargofx-dev:
     container_name: gargofx-dev
     build:
       context: .
@@ -54,7 +54,7 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
-      - nextblog
+      - gargofx
 
 volumes:
   caddy_data:

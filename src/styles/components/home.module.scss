@@ -3,11 +3,11 @@
 
 .home {
   &__carousel {
-    @include onMobile {
-      height: 284px;
-    }
+    height: 284px;
 
-    height: 772px;
+    @include onLaptop {
+      height: 772px;
+    }
   }
 
   &__text-container {
@@ -23,7 +23,7 @@
   &__text {
     position: absolute;
     top: 50%;
-    line-height: 36px;
+    line-height: 24px;
 
     @include onLaptop {
       font-size: 65px;
@@ -52,14 +52,24 @@
       }
     }
 
+    &-blocks {
+      padding: 0 20px;
+    }
+
     &-block {
       border-radius: 14px;
     }
 
     &-image {
-      height: 270px;
+      height: 215px;
+
+      // old 600px height
       @include onLaptop {
-        height: 600px;
+        height: 400px;
+      }
+
+      @include onLaptopL {
+        height: 500px;
       }
     }
 

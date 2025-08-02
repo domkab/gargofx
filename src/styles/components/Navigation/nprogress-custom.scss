@@ -3,7 +3,7 @@
 }
 
 #nprogress .bar {
-  background: teal;
+  background: #009191;
   position: fixed;
   z-index: 9999;
   top: 0;
@@ -15,5 +15,5 @@
 }
 
 #nprogress .peg {
-  box-shadow: 0 0 10px teal, 0 0 5px teal;
+  box-shadow: 0 0 10px #009191, 0 0 5px #009191;
 }

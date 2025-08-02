@@ -45,15 +45,34 @@ export default function Footer() {
           <section className="flex flex-col items-center gap-6 md:items-end">
             {/* Social icons */}
             <div className="flex gap-10">
-              <span className={styles['footer__followus']}>FOLLOW US</span>
+              <span
+                className={styles['footer__followus']}
+              >
+                FOLLOW US
+              </span>
+
               <Link href={facebook} target="_blank">
-                <Image src="/icons/social/facebook.svg" alt="facebook" width={48} height={48} />
+                <Image src="/icons/social/facebook.svg"
+                  alt="facebook"
+                  width={48}
+                  height={48}
+                />
               </Link>
+
               <Link href={instagram} target="_blank">
-                <Image src="/icons/social/instagram.svg" alt="instagram" width={48} height={48} />
+                <Image src="/icons/social/instagram.svg"
+                  alt="instagram"
+                  width={48}
+                  height={48}
+                />
               </Link>
+
               <Link href={x} target="_blank">
-                <Image src="/icons/social/x.svg" alt="x" width={48} height={48} />
+                <Image src="/icons/social/x.svg"
+                  alt="x"
+                  width={48}
+                  height={48}
+                />
               </Link>
             </div>
 

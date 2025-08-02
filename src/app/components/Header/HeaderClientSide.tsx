@@ -169,7 +169,7 @@ export default function HeaderClientSide() {
             >
 
               {/* EMAIL + PHONE */}
-              <div className="flex flex-col items-center gap-4">
+              <div className="flex flex-col items-center gap-8">
                 <div className={clsx(styles['footer__contact-row'], 'font-bold flex gap-2')}>
                   <Image src="/icons/email.svg" alt="email" width={20} height={20} />
                   <Link
@@ -193,16 +193,16 @@ export default function HeaderClientSide() {
 
               {/* Social + Footer Links */}
               <section className="flex flex-col items-center gap-6 md:items-end">
-                <article className="flex gap-6">
-                  <span>FOLLOW US</span>
+                <article className="flex gap-10">
+                  <span className={footerStyles['footer__followus']}>FOLLOW US</span>
                   <Link href={facebook} target="_blank">
-                    <Image src="/icons/social/facebook.svg" alt="facebook" width={24} height={24} />
+                    <Image src="/icons/social/facebook.svg" alt="facebook" width={48} height={48} />
                   </Link>
                   <Link href={instagram} target="_blank">
-                    <Image src="/icons/social/instagram.svg" alt="instagram" width={24} height={24} />
+                    <Image src="/icons/social/instagram.svg" alt="instagram" width={48} height={48} />
                   </Link>
                   <Link href={x} target="_blank">
-                    <Image src="/icons/social/x.svg" alt="x" width={24} height={24} />
+                    <Image src="/icons/social/x.svg" alt="x" width={48} height={48} />
                   </Link>
                 </article>
 

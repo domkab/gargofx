@@ -160,7 +160,7 @@ export default function HeaderClientSide() {
 
         {/* Footer (Contact + Social) */}
         <section className={clsx(footerStyles['footer'])}>
-          <div className="max-w-7xl mx-auto px-5 md:px-10 py-10">
+          <div className="max-w-7xl mx-auto px-5 md:px-10 pt-10 pb-14">
             <div
               className={clsx(
                 'flex flex-col items-center text-center gap-6',
@@ -193,7 +193,11 @@ export default function HeaderClientSide() {
 
               {/* Social + Footer Links */}
               <section className="flex flex-col items-center gap-6 md:items-end">
-                <article className="flex gap-10">
+                <article className={clsx(
+                  'flex gap-10',
+                  'mt-3 md:mt-0'
+                )}
+                >
                   <span
                     className={footerStyles['footer__followus']}
                   >
@@ -225,12 +229,20 @@ export default function HeaderClientSide() {
                   </Link>
                 </article>
 
-                <Image className='py-2' src="/icons/Logo-footer.svg" alt="Logo" width={120} height={40} />
-
-                <div className="flex flex-col items-center gap-2 text-sm md:items-end">
+                {/* Logo */}
+                <Image
+                  className='py-2'
+                  src="/icons/Logo-footer.svg"
+                  alt="Logo"
+                  width={160}
+                  height={40}
+                />
+                {/* Links */}
+                <div className="flex flex-col items-center gap-4 text-sm md:items-end">
                   <span>
                     © {new Date().getFullYear()} <span>GARGOFX</span>
                   </span>
+
                   <Link href="/terms">
                     TERMS OF USE AND PRIVACY
                   </Link>

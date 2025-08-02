@@ -9,7 +9,7 @@ import { facebook, instagram, mail, mailRef, phone, phoneRef, x } from '@/lib/co
 export default function Footer() {
   return (
     <footer className={clsx(styles.footer, 'w-full')}>
-      <div className="max-w-7xl mx-auto px-5 md:px-10 py-10">
+      <div className="max-w-7xl mx-auto px-5 md:px-10 pt-10 pb-14">
         {/* Wrapper: switches layout at md */}
         <div
           className={clsx(
@@ -42,9 +42,14 @@ export default function Footer() {
           </section>
 
           {/* GROUP 2 */}
-          <section className="flex flex-col items-center gap-6 md:items-end">
+          <section className="flex flex-col items-center gap-8 md:items-end">
             {/* Social icons */}
-            <div className="flex gap-10">
+            <div
+              className={clsx(
+                'flex gap-10 items-center',
+                'mt-3 md:mt-0'
+              )}
+            >
               <span
                 className={styles['footer__followus']}
               >
@@ -77,13 +82,20 @@ export default function Footer() {
             </div>
 
             {/* Logo */}
-            <Image className='py-2' src="/icons/Logo-footer.svg" alt="Logo" width={120} height={40} />
+            <Image
+              className='py-2'
+              src="/icons/Logo-footer.svg"
+              alt="Logo"
+              width={160}
+              height={40}
+            />
 
             {/* Links */}
-            <div className="flex flex-col items-center gap-2 text-sm md:items-end">
+            <div className="flex flex-col items-center gap-4 text-sm md:items-end">
               <span>
                 © {new Date().getFullYear()} <span>GARGOFX</span>
               </span>
+
               <Link href="/terms">
                 TERMS OF USE AND PRIVACY
               </Link>

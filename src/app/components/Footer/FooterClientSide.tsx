@@ -11,10 +11,15 @@ export default function Footer() {
     <footer className={clsx(styles.footer, 'w-full')}>
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-10">
         {/* Wrapper: switches layout at md */}
-        <div className="flex flex-col items-center text-center gap-6 md:flex-row md:justify-between md:items-start md:text-left">
+        <div
+          className={clsx(
+            'flex flex-col items-center text-center gap-6',
+            'md:flex-row md:justify-between md:items-start md:text-left'
+          )}
+        >
 
-          {/* EMAIL */}
-          <div className="flex flex-col gap-4">
+          {/* EMAIL & PHONE */}
+          <section className="flex flex-col gap-4">
             <div className={clsx(styles['footer__contact-row'], 'font-bold')}>
               <Image src="/icons/email.svg" alt="email" width={20} height={20} />
               <Link
@@ -34,10 +39,10 @@ export default function Footer() {
                 <b>TEL:</b> {phone}
               </Link>
             </div>
-          </div>
+          </section>
 
           {/* GROUP 2 */}
-          <div className="flex flex-col items-center gap-6 md:items-end">
+          <section className="flex flex-col items-center gap-6 md:items-end">
             {/* Social icons */}
             <div className="flex gap-6">
               <span>FOLLOW US</span>
@@ -64,7 +69,7 @@ export default function Footer() {
                 TERMS OF USE AND PRIVACY
               </Link>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </footer>

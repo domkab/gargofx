@@ -159,9 +159,14 @@ export default function HeaderClientSide() {
         </nav>
 
         {/* Footer (Contact + Social) */}
-        <div className={clsx(footerStyles['footer'])}>
+        <section className={clsx(footerStyles['footer'])}>
           <div className="max-w-7xl mx-auto px-5 md:px-10 py-10">
-            <div className="flex flex-col items-center text-center gap-6 md:flex-row md:justify-between md:items-start md:text-left">
+            <div
+              className={clsx(
+                'flex flex-col items-center text-center gap-6',
+                'md:flex-row md:justify-between md:items-start md:text-left'
+              )}
+            >
 
               {/* EMAIL + PHONE */}
               <div className="flex flex-col items-center gap-4">
@@ -214,7 +219,7 @@ export default function HeaderClientSide() {
               </section>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </header>
   );

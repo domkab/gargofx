@@ -13,8 +13,14 @@ dashboard variables for dark mode:
   for h1: text-gray-800 dark:text-gray-300
   for p: text-gray-600 dark:text-gray-300
 
-for future, rendering credits multiline:
+updating packgaes:
 
-{post.credits?.split('\n').map((line, i) => (
-  <p key={i}>{line}</p>
-))}
+npx npm-check-updates --reject tailwindcss,flowbite-react
+
+then:
+
+npx npm-check-updates --reject tailwindcss,flowbite-react -u
+
+finally:
+
+npm i

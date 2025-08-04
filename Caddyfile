@@ -1,4 +1,4 @@
-laurynogargasoapiserver.xyz {
+gargofx.com {
 
   encode zstd gzip
 
@@ -8,7 +8,7 @@ laurynogargasoapiserver.xyz {
 
   handle /uploads/* {
     uri strip_prefix /uploads
-    root * /var/www/next-blog/uploads
+    root * /var/www/gargofx/uploads
     file_server
   }
 

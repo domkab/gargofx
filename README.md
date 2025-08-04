@@ -1,6 +1,4 @@
-# next-blog
-
-project template
+# gargofx
 
 mock geo for eu countries
 http://localhost:3000/?mockGeo=lt

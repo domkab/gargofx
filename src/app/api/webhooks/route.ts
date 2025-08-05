@@ -72,7 +72,6 @@ export async function POST(req: Request) {
         last_name,
         image_url,
         email_addresses,
-        username
       );
 
       const client = await clerkClient();

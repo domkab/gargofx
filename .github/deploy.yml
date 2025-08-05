@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - vps-fixes
+      - main
 
   workflow_dispatch:
 

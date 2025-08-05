@@ -36,6 +36,10 @@ jobs:
       # 5. Build project
       - name: Build project
         run: npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_DBNAME: ${{ secrets.MONGODB_DBNAME }}
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
 
       # 6. Deploy build artifacts to VPS
       - name: Deploy to VPS

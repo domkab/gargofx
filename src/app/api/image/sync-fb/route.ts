@@ -3,6 +3,7 @@ import { withAdminAuth } from '@/lib/auth/withAdminAuth';
 
 export const POST = withAdminAuth(async () => {
   const { syncFromFirebase } = await import('@/lib/firebaseSync')
+
   try {
     await syncFromFirebase();
 

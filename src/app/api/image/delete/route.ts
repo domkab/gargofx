@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import { getUploadsPath } from '@/utils/uploadPath';
 import { deleteInlineImageFromUrl } from '@/firebase/deleteImages';
-import { existsSync } from 'fs';
+// import { existsSync } from 'fs';
 
 export const DELETE = withAdminAuth<{ url: string }>(async (_user, body) => {
   const { url } = body;

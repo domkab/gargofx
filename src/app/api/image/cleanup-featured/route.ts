@@ -3,6 +3,10 @@ import { cleanupUnusedImagesFromFirebaseAndFilestore } from '@/lib/firebaseSync'
 import { connect } from '@/lib/mongodb/mongoose';
 
 export const POST = withAdminAuth(async () => {
+  if (process.env.NEXT_PHASE?.includes('build')) {
+    return new Response('Skipped during build', { status: 200 });
+  }
+
   await connect();
 
   try {

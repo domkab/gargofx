@@ -13,7 +13,6 @@ import 'react-circular-progressbar/dist/styles.css';
 import { DeleteMainImageButton } from '@/app/components/Dashboard/DeleteImage/DeleteMainImageButton';
 import { generateSlug, getSlugSource } from '@/utils/generateSlug';
 import ContentBlockEditor from '@/app/components/PostEditor/ContentBlockEditor';
-export const dynamic = 'force-dynamic';
 
 export default function CreatePostPage() {
   const { isSignedIn, user, isLoaded } = useUser();

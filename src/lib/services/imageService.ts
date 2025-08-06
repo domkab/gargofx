@@ -6,6 +6,10 @@ import LogoSliderModel from '../models/LogoSliderModel';
 export async function getCarouselImages(): Promise<string[]> {
   const uploadsDir = path.join(process.cwd(), 'public/uploads');
 
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+
   const first = fs.readdirSync(uploadsDir).find(name =>
     name.includes('home-default')
   );

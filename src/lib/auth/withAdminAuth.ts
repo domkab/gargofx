@@ -5,10 +5,6 @@ export function withAdminAuth<T = Request | null>(
   handler: (user: User, body: T) => Promise<Response>
 ) {
   return async (req: Request): Promise<Response> => {
-    // if (process.env.NEXT_PHASE?.includes('build')) {
-    //   return new Response('Skipped during build', { status: 200 });
-    // }
-
     try {
       const user = await currentUser();
 

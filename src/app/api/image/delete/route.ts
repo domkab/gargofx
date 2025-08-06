@@ -20,11 +20,11 @@ export const DELETE = withAdminAuth<{ url: string }>(async (_user, body) => {
     const relativePath = pathname.replace(/^\/uploads\//, '');
     const fullPath = getUploadsPath(relativePath);
 
-    if (!fullPath || !existsSync(fullPath)) {
-      console.warn(`Skipping delete, file not found: ${fullPath}`);
-    } else {
-      await fs.unlink(fullPath);
-    }
+    // if (!fullPath || !existsSync(fullPath)) {
+    //   console.warn(`Skipping delete, file not found: ${fullPath}`);
+    // } else {
+    //   await fs.unlink(fullPath);
+    // }
 
     try {
       await fs.unlink(fullPath);

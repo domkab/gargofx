@@ -1,5 +1,3 @@
-#!/bin/bash
-# Usage: ./upload-secrets.sh [env-file]
 # Default: .env.production
 
 ENV_FILE="${1:-.env.production}"

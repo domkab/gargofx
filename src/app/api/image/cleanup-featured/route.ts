@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export const POST = withAdminAuth(async () => {
   await connect();
-
+  //
   try {
     const result = await cleanupUnusedImagesFromFirebaseAndFilestore();
     return new Response(`Deleted ${result.deletedCount} unused images.`, { status: 200 });

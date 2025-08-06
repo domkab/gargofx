@@ -1,6 +1,4 @@
 import { withAdminAuth } from '@/lib/auth/withAdminAuth';
-// import { cleanupUnusedImagesFromFirebaseAndFilestore } from '@/lib/firebaseSync';
-// import { connect } from '@/lib/mongodb/mongoose';
 
 export const POST = withAdminAuth(async () => {
   const { cleanupUnusedImagesFromFirebaseAndFilestore } = await import('@/lib/firebaseSync');

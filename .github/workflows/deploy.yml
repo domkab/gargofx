@@ -27,6 +27,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # 3.1 Create necessary upload folders (fix ENOENT errors)
+      - name: Prepare upload folders
+        run: |
+          mkdir -p public/uploads/posts
+          mkdir -p public/uploads/featured-posts
+          mkdir -p public/uploads/logo-slider
+
       # 4. Run lint (active) and placeholder tests (future-proof)
       - name: Run lint and placeholder tests
         run: |

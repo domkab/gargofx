@@ -61,7 +61,7 @@ jobs:
           package.json
           package-lock.json
           public
-        target: "/home/deploy/gargofx"
+          target: "/home/deploy/gargofx"
 
       # 7. Restart PM2 (zero downtime reload)
       - name: Restart PM2

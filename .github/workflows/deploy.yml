@@ -56,8 +56,12 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: ".next/ package.json package-lock.json public/"
-          target: "/home/deploy/gargofx"
+        source: |
+          .next
+          package.json
+          package-lock.json
+          public
+        target: "/home/deploy/gargofx"
 
       # 7. Restart PM2 (zero downtime reload)
       - name: Restart PM2

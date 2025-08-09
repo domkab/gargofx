@@ -2,10 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - vps-fixes
-      - main
-
+    branches: [vps-fixes, main]
   workflow_dispatch:
 
 jobs:
@@ -13,35 +10,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repo
-      - name: Checkout repository
+      # 1) Checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. Set up Node
+      # 2) Node
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      # 3. Install dependencies
+      # 3) Install deps
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      # 3.1 Create necessary upload folders (fix ENOENT errors)
+      # 3.1) Ensure upload folders exist
       - name: Prepare upload folders
         run: |
           mkdir -p public/uploads/posts
           mkdir -p public/uploads/featured-posts
           mkdir -p public/uploads/logo-slider
 
-      # 4. Run lint (active) and placeholder tests (future-proof)
-      - name: Run lint and placeholder tests
+      # 4) Lint (and placeholder tests)
+      - name: Lint & placeholder tests
         run: |
           npm run lint
-          echo "No tests yet - placeholder for future test suite"
+          echo "No tests yet"
 
-      # 5. Build project
-      - name: Build project
+      # 5) Build
+      - name: Build
         run: npm run build
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
@@ -49,7 +47,17 @@ jobs:
           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
 
-      # 6. Deploy build artifacts to VPS
+      # 6) Make sure target dir exists on VPS
+      - name: Ensure target directory exists
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            mkdir -p /home/deploy/gargofx
+
+      # 7) Ship artifacts
       - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -61,17 +69,38 @@ jobs:
             package.json
             package-lock.json
             public
-          target: "/home/deploy/gargofx"
+          target: /home/deploy/gargofx
 
-      # 7. Restart PM2 (zero downtime reload)
-      - name: Restart PM2
+      # 8) Write .env, install prod deps, (install pm2 if needed), restart app
+      - name: Configure and restart app (PM2)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            set -e
             cd /home/deploy/gargofx
-            npm install --production
-            pm2 reload gargofx || pm2 start npm --name "gargofx" -- run start
+
+            # Create/refresh runtime .env for next start (server-side env)
+            cat > .env << 'EOF'
+            MONGODB_URI=${{ secrets.MONGODB_URI }}
+            MONGODB_DBNAME=${{ secrets.MONGODB_DBNAME }}
+            NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+            NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+            NODE_ENV=production
+            EOF
+
+            # Install PM2 if missing
+            if ! command -v pm2 >/dev/null 2>&1; then
+              npm i -g pm2
+            fi
+
+            # Install prod deps for runtime
+            npm ci --omit=dev
+
+            # Start or reload (zero-downtime)
+            # Expose env from .env to PM2 process
+            export $(grep -v '^#' .env | xargs)
+            pm2 reload gargofx --update-env || pm2 start npm --name "gargofx" -- run start
             pm2 save

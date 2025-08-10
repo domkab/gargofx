@@ -52,11 +52,11 @@ jobs:
           [ -d ./public ] || (echo "❌ ./public missing" && exit 1)
           echo "✅ build artifacts present"
 
-      - name: Pack artifact (standalone, exclude uploads)
+      - name: Pack artifact (exclude uploads)
         run: |
           tar -czf release.tgz \
             --exclude='public/uploads/**' \
-            .next/standalone .next/static public
+            .next public package.json package-lock.json
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

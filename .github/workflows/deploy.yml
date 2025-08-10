@@ -49,9 +49,10 @@ jobs:
 
       - name: Debug build output
         run: |
-          echo "Current directory: $(pwd)"
-          echo "Directory tree after build:"
-          ls -R .
+          echo "📂 Current directory: $(pwd)"
+          echo "📂 Top-level folders after build:"
+          find . -maxdepth 1 -type d | sort
+
           echo "Checking for .next and public folders..."
 
           if [ ! -d ".next" ]; then
@@ -70,14 +71,23 @@ jobs:
           ls -al public
 
       # 6) Make sure target dir exists on VPS
-      - name: Ensure target directory exists
+      - name: Ensure VPS connection and target directory exists 
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            echo "📍 Connected to $(hostname)"
+            echo "📂 Current working directory: $(pwd)"
+            echo "📜 Listing home directory contents before mkdir:"
+            ls -al /home/deploy || echo "/home/deploy does not exist yet"
+            
+            echo "📦 Creating target directory: /home/deploy/gargofx"
             mkdir -p /home/deploy/gargofx
+            
+            echo "📜 Listing target directory after mkdir:"
+            ls -al /home/deploy/gargofx
 
       # 7) Ship artifacts
       - name: Deploy to VPS

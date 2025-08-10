@@ -47,6 +47,30 @@ jobs:
           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
 
+      - name: Debug build output
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Directory tree after build:"
+          ls -R .
+          echo "Checking for .next and public folders..."
+
+          if [ ! -d ".next" ]; then
+            echo "❌ ERROR: .next folder is missing!"
+            exit 1
+          fi
+
+          if [ ! -d "public" ]; then
+            echo "❌ ERROR: public folder is missing!"
+            exit 1
+          fi
+
+          echo "✅ .next and public folders exist."
+
+          echo "Contents of .next:"
+          ls -al .next
+          echo "Contents of public:"
+          ls -al public
+
       # 6) Make sure target dir exists on VPS
       - name: Ensure target directory exists
         uses: appleboy/ssh-action@v1.2.0
@@ -65,7 +89,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: |
-            .next
+            .next/**
             package.json
             package-lock.json
             public

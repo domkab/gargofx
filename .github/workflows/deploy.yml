@@ -73,11 +73,12 @@ jobs:
             echo "📜 /home/deploy/gargofx after mkdir:"
             ls -al /home/deploy/gargofx || true
 
-            # Pack artifacts locally, excluding uploads
+      # Pack artifacts locally, excluding uploads
       - name: Pack artifacts (exclude uploads)
         run: |
-          tar -czf release.tgz .next public package.json package-lock.json \
-            --exclude='public/uploads/**'
+            tar -czf release.tgz \
+              --exclude='public/uploads/**' \
+              .next public package.json package-lock.json
 
       # Copy the tarball to the VPS
       - name: Upload release.tgz

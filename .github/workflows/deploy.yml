@@ -5,40 +5,36 @@ on:
     branches: [vps-fixes, main]
   workflow_dispatch:
 
+concurrency:
+  group: gargofx-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Checkout
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2) Node
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      # 3) Install deps
       - name: Install dependencies
         run: npm ci
 
-      # 3.1) Ensure upload folders exist
       - name: Prepare upload folders
         run: |
           mkdir -p public/uploads/posts
           mkdir -p public/uploads/featured-posts
           mkdir -p public/uploads/logo-slider
 
-      # 4) Lint (and placeholder tests)
-      - name: Lint & placeholder tests
-        run: |
-          npm run lint
-          echo "No tests yet"
+      - name: Lint
+        run: npm run lint
 
-      # 5) Build
       - name: Build
         run: npm run build
         env:
@@ -49,16 +45,40 @@ jobs:
 
       - name: Debug build output
         run: |
-          echo "📂 Current directory: $(pwd)"
-          echo "📂 Top-level folders after build:"
+          echo "📂 pwd: $(pwd)"
+          echo "📂 Top-level folders:"
           find . -maxdepth 1 -type d | sort
-          echo "🔍 Checking for ./.next and ./public..."
           [ -d ./.next ] || (echo "❌ ./.next missing" && exit 1)
           [ -d ./public ] || (echo "❌ ./public missing" && exit 1)
-          echo "✅ Found ./.next and ./public"
+          echo "✅ build artifacts present"
 
-      # 6) Make sure target dir exists on VPS
-      - name: Ensure VPS connection and target directory exists
+      - name: Pack artifact (exclude uploads)
+        run: |
+          tar -czf release.tgz \
+            --exclude='public/uploads/**' \
+            .next public package.json package-lock.json
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gargofx-release
+          path: release.tgz
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gargofx-release
+          path: .
+
+      - name: Ensure VPS target exists (and log)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -66,22 +86,10 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             echo "📍 $(hostname)"
-            echo "📂 PWD: $(pwd)"
-            echo "📜 /home/deploy before:"
-            ls -al /home/deploy || true
             mkdir -p /home/deploy/gargofx
-            echo "📜 /home/deploy/gargofx after mkdir:"
             ls -al /home/deploy/gargofx || true
 
-      # Pack artifacts locally, excluding uploads
-      - name: Pack artifacts (exclude uploads)
-        run: |
-            tar -czf release.tgz \
-              --exclude='public/uploads/**' \
-              .next public package.json package-lock.json
-
-      # Copy the tarball to the VPS
-      - name: Upload release.tgz
+      - name: Upload tarball
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -91,8 +99,7 @@ jobs:
           target: /home/deploy/gargofx
           debug: true
 
-      # Extract and restart
-      - name: Extract & restart
+      - name: Extract & restart (PM2)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}

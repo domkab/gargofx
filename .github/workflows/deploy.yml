@@ -74,7 +74,7 @@ jobs:
             ls -al /home/deploy/gargofx || true
 
       - name: Deploy to VPS (rsync, keep uploads)
-        uses: burnett01/rsync-deployments@v7
+        uses: burnett01/rsync-deployments@v7.0.2
         with:
           switches: -az --delete --mkpath --exclude='public/uploads/**'
           path: |

@@ -52,59 +52,42 @@ jobs:
           echo "📂 Current directory: $(pwd)"
           echo "📂 Top-level folders after build:"
           find . -maxdepth 1 -type d | sort
-
-          echo "Checking for .next and public folders..."
-
-          if [ ! -d ".next" ]; then
-            echo "❌ ERROR: .next folder is missing!"
-            exit 1
-          fi
-
-          if [ ! -d "public" ]; then
-            echo "❌ ERROR: public folder is missing!"
-            exit 1
-          fi
-
-          echo "✅ .next and public folders exist."
-
-          echo "Contents of public:"
-          ls -al public
+          echo "🔍 Checking for ./.next and ./public..."
+          [ -d ./.next ] || (echo "❌ ./.next missing" && exit 1)
+          [ -d ./public ] || (echo "❌ ./public missing" && exit 1)
+          echo "✅ Found ./.next and ./public"
 
       # 6) Make sure target dir exists on VPS
-      - name: Ensure VPS connection and target directory exists 
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            echo "📍 Connected to $(hostname)"
-            echo "📂 Current working directory: $(pwd)"
-            echo "📜 Listing home directory contents before mkdir:"
-            ls -al /home/deploy || echo "/home/deploy does not exist yet"
-            
-            echo "📦 Creating target directory: /home/deploy/gargofx"
-            mkdir -p /home/deploy/gargofx
-            
-            echo "📜 Listing target directory after mkdir:"
-            ls -al /home/deploy/gargofx
+      - name: Ensure VPS connection and target directory exists
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        script: |
+          echo "📍 $(hostname)"
+          echo "📂 PWD: $(pwd)"
+          echo "📜 /home/deploy before:"
+          ls -al /home/deploy || true
+          mkdir -p /home/deploy/gargofx
+          echo "📜 /home/deploy/gargofx after mkdir:"
+          ls -al /home/deploy/gargofx || true
 
-      # 7) Ship artifacts
-      - name: Deploy to VPS
-        uses: appleboy/scp-action@v0.1.7
+      - name: Deploy to VPS (rsync, keep uploads)
+        uses: burnett01/rsync-deployments@v7.0.1
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          source: |
-            .next/**
+          switches: -az --delete --mkpath --exclude='public/uploads/**'
+          path: |
+            .next/
+            public/
             package.json
             package-lock.json
-            public
-          target: /home/deploy/gargofx
+          remote_path: /home/deploy/gargofx
+          remote_host: ${{ secrets.VPS_HOST }}
+          remote_user: ${{ secrets.VPS_USER }}
+          remote_key: ${{ secrets.VPS_SSH_KEY }}
 
-      # 8) Restart app with PM2 (no setup, assumes already installed & configured)
-      - name: Restart app (PM2)
+      - name: Verify & restart (PM2)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -113,5 +96,9 @@ jobs:
           script: |
             set -e
             cd /home/deploy/gargofx
+            echo "📜 Target snapshot:"
+            ls -al
+            echo "📜 public/uploads preserved:"
+            ls -al public/uploads || echo "uploads missing (first deploy?)"
             pm2 reload gargofx --update-env || pm2 start npm --name "gargofx" -- run start
             pm2 save

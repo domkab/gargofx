@@ -71,8 +71,8 @@ jobs:
             public
           target: /home/deploy/gargofx
 
-      # 8) Write .env, install prod deps, (install pm2 if needed), restart app
-      - name: Configure and restart app (PM2)
+      # 8) Restart app with PM2 (no setup, assumes already installed & configured)
+      - name: Restart app (PM2)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -81,26 +81,5 @@ jobs:
           script: |
             set -e
             cd /home/deploy/gargofx
-
-            # Create/refresh runtime .env for next start (server-side env)
-            cat > .env << 'EOF'
-            MONGODB_URI=${{ secrets.MONGODB_URI }}
-            MONGODB_DBNAME=${{ secrets.MONGODB_DBNAME }}
-            NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
-            NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
-            NODE_ENV=production
-            EOF
-
-            # Install PM2 if missing
-            if ! command -v pm2 >/dev/null 2>&1; then
-              npm i -g pm2
-            fi
-
-            # Install prod deps for runtime
-            npm ci --omit=dev
-
-            # Start or reload (zero-downtime)
-            # Expose env from .env to PM2 process
-            export $(grep -v '^#' .env | xargs)
             pm2 reload gargofx --update-env || pm2 start npm --name "gargofx" -- run start
             pm2 save

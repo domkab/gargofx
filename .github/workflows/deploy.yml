@@ -79,21 +79,19 @@ jobs:
           tar -czf release.tgz .next public package.json package-lock.json \
             --exclude='public/uploads/**'
 
-      - name: Deploy to VPS (rsync, keep uploads)
-        uses: Burnett01/rsync-deployments@v7.0.2
+      # Copy the tarball to the VPS
+      - name: Upload release.tgz
+        uses: appleboy/scp-action@v0.1.7
         with:
-          switches: -az --delete --mkpath --exclude='public/uploads/**'
-          path: |
-            .next/
-            public/
-            package.json
-            package-lock.json
-          remote_path: /home/deploy/gargofx
-          remote_host: ${{ secrets.VPS_HOST }}
-          remote_user: ${{ secrets.VPS_USER }}
-          remote_key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: release.tgz
+          target: /home/deploy/gargofx
+          debug: true
 
-      - name: Verify & restart (PM2)
+      # Extract and restart
+      - name: Extract & restart
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -102,8 +100,9 @@ jobs:
           script: |
             set -e
             cd /home/deploy/gargofx
-            echo "📜 Target snapshot:"
-            ls -al
+            echo "📦 Extracting release.tgz"
+            tar -xzf release.tgz
+            rm -f release.tgz
             echo "📜 public/uploads preserved:"
             ls -al public/uploads || echo "uploads missing (first deploy?)"
             pm2 reload gargofx --update-env || pm2 start npm --name "gargofx" -- run start

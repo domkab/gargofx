@@ -59,19 +59,19 @@ jobs:
 
       # 6) Make sure target dir exists on VPS
       - name: Ensure VPS connection and target directory exists
-      uses: appleboy/ssh-action@v1.2.0
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        key: ${{ secrets.VPS_SSH_KEY }}
-        script: |
-          echo "📍 $(hostname)"
-          echo "📂 PWD: $(pwd)"
-          echo "📜 /home/deploy before:"
-          ls -al /home/deploy || true
-          mkdir -p /home/deploy/gargofx
-          echo "📜 /home/deploy/gargofx after mkdir:"
-          ls -al /home/deploy/gargofx || true
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            echo "📍 $(hostname)"
+            echo "📂 PWD: $(pwd)"
+            echo "📜 /home/deploy before:"
+            ls -al /home/deploy || true
+            mkdir -p /home/deploy/gargofx
+            echo "📜 /home/deploy/gargofx after mkdir:"
+            ls -al /home/deploy/gargofx || true
 
       - name: Deploy to VPS (rsync, keep uploads)
         uses: burnett01/rsync-deployments@v7.0.1

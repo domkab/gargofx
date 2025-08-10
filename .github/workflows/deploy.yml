@@ -73,6 +73,12 @@ jobs:
             echo "📜 /home/deploy/gargofx after mkdir:"
             ls -al /home/deploy/gargofx || true
 
+            # Pack artifacts locally, excluding uploads
+      - name: Pack artifacts (exclude uploads)
+        run: |
+          tar -czf release.tgz .next public package.json package-lock.json \
+            --exclude='public/uploads/**'
+
       - name: Deploy to VPS (rsync, keep uploads)
         uses: Burnett01/rsync-deployments@v7.0.2
         with:

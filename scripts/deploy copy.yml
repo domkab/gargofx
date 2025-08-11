@@ -10,54 +10,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # --- 1) One-time / idempotent server prep (dirs, perms, ACLs) ---
-  bootstrap-server:
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Bootstrap uploads dir / ACLs (deploy+domka write, caddy read)
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            set -euo pipefail
-            # Figure out caddy user (caddy or www-data)
-            CADDY_USER="$( (id -u caddy >/dev/null 2>&1 && echo caddy) || (id -u www-data >/dev/null 2>&1 && echo www-data) || echo caddy )"
-
-            # Ensure ACL package
-            sudo apt-get update -y
-            sudo apt-get install -y acl
-
-            # Create tree
-            sudo mkdir -p /var/www/gargofx/uploads/{posts,featured-posts,logo-slider}
-
-            # Base ownership & perms
-            sudo chown -R deploy:deploy /var/www/gargofx
-            sudo chmod -R 755 /var/www/gargofx
-
-            # ACLs (existing files/dirs)
-            sudo setfacl -R  \
-              -m u:deploy:rwx \
-              -m u:domka:rwx  \
-              -m u:${CADDY_USER}:rx \
-              /var/www/gargofx
-
-            # Default ACLs (inherit for NEW files/dirs)
-            sudo setfacl -dR \
-              -m u:deploy:rwx \
-              -m u:domka:rwx  \
-              -m u:${CADDY_USER}:rx \
-              /var/www/gargofx
-
-            echo "== getfacl =="
-            getfacl /var/www/gargofx | sed -n '1,80p'
-
-  # --- 2) Build in CI ---
   build:
     runs-on: ubuntu-latest
-    needs: bootstrap-server
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -88,12 +43,13 @@ jobs:
           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
           NEXT_PUBLIC_USE_THEME: '${{ secrets.NEXT_PUBLIC_USE_THEME }}'
-          NEXT_PUBLIC_CLIENT_SIDE_HEADER: '${{ secrets.NEXT_PUBLIC_CLIENT_SIDE_HEADER }}'
-          NEXT_PUBLIC_CLIENT_SIDE_FOOTER: '${{ secrets.NEXT_PUBLIC_CLIENT_SIDE_FOOTER }}'
+          NEXT_PUBLIC_CLIENT_SIDE_HEADER: '${{ secrets.NEXT_PUBLIC_CLIENT_SIDE_HEADER }}' # 'true'
+          NEXT_PUBLIC_CLIENT_SIDE_FOOTER: '${{ secrets.NEXT_PUBLIC_CLIENT_SIDE_FOOTER }}' # 'true'
 
       - name: Debug build output
         run: |
           echo "📂 pwd: $(pwd)"
+          echo "📂 Top-level folders:"
           find . -maxdepth 1 -type d | sort
           [ -d ./.next ] || (echo "❌ ./.next missing" && exit 1)
           [ -d ./public ] || (echo "❌ ./public missing" && exit 1)
@@ -113,11 +69,11 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  # --- 3) Deploy & restart ---
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment: production
+
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
@@ -125,14 +81,16 @@ jobs:
           name: gargofx-release
           path: .
 
-      - name: Ensure app dir exists
+      - name: Ensure VPS target exists (and log)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            echo "📍 $(hostname)"
             mkdir -p /home/deploy/gargofx
+            ls -al /home/deploy/gargofx || true
 
       - name: Upload tarball
         uses: appleboy/scp-action@v0.1.7
@@ -156,12 +114,7 @@ jobs:
             echo "📦 Extracting release.tgz"
             tar -xzf release.tgz
             rm -f release.tgz
-
             echo "📜 public/uploads preserved:"
             ls -al public/uploads || echo "uploads missing (first deploy?)"
-
-            # Install pm2 if missing, install prod deps, restart
-            command -v pm2 >/dev/null 2>&1 || npm i -g pm2
-            npm ci --omit=dev
             pm2 reload gargofx --update-env || pm2 start npm --name "gargofx" -- run start
             pm2 save

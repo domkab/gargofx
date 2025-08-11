@@ -157,6 +157,9 @@ jobs:
             tar -xzf release.tgz
             rm -f release.tgz
 
+            # remove old build artifacts (keep uploads, configs, public)
+            find . -maxdepth 1 -type d -name ".next*" ! -path "./.next" -prune -exec rm -rf {} +
+
             echo "📜 public/uploads preserved:"
             ls -al public/uploads || echo "uploads missing (first deploy?)"
 

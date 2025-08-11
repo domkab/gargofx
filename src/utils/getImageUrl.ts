@@ -1,29 +1,11 @@
-// export function getImageUrl(relativePath?: string): string {
-//   if (!relativePath) return '/placeholder.jpg';
-
-//   const base =
-//     process.env.NODE_ENV === 'production'
-//       ? process.env.NEXT_PUBLIC_URL
-//       : 'http://localhost:3000';
-
-//   return `${base}${relativePath}`;
-// }
-
 export function getImageUrl(relativePath?: string): string {
   if (!relativePath) return '/placeholder.jpg';
 
-  let cleanPath = relativePath.startsWith('/')
-    ? relativePath
-    : '/' + relativePath;
+  if (/^https?:\/\//i.test(relativePath)) return relativePath;
 
-  if (!cleanPath.startsWith('/uploads')) {
-    cleanPath = '/uploads' + cleanPath;
-  }
+  const clean = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
 
-  const base =
-    process.env.NODE_ENV === 'production'
-      ? process.env.NEXT_PUBLIC_URL?.replace(/\/$/, '')
-      : 'http://localhost:3000';
+  if (clean.startsWith('/uploads/')) return clean;
 
-  return `${base}${cleanPath}`;
+  return clean;
 }

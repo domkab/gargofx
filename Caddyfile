@@ -9,6 +9,9 @@ gargofx.com {
   handle /uploads/* {
     uri strip_prefix /uploads
     root * /var/www/gargofx/uploads
+
+    header Cache-Control "public, max-age=300, must-revalidate"
+
     file_server
   }
 

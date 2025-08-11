@@ -27,7 +27,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           src={getImageUrl(post.heroImage.url)}
           alt={post.heroImage.alt || 'Hero Image'}
           fill
-          quality={90}
+          unoptimized
           className={styles['project__hero-image']}
           priority
         />
@@ -86,7 +86,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   src={getImageUrl(block.url)}
                   alt={block.alt || ''}
                   fill
-                  quality={90}
+                  unoptimized
                   className={clsx(styles['project__content-block-image'])}
                 />
               </div>

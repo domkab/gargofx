@@ -21,7 +21,13 @@ export default function Footer() {
           {/* EMAIL & PHONE */}
           <section className="flex flex-col gap-8">
             <div className={clsx(styles['footer__contact-row'], 'font-bold')}>
-              <Image src="/icons/email.svg" alt="email" width={20} height={20} />
+              <Image
+                src="/icons/email.svg"
+                alt="email"
+                width={20}
+                height={20}
+                unoptimized
+              />
               <Link
                 href={mailRef}
                 className="uppercase tracking-wide text-sm"
@@ -69,6 +75,7 @@ export default function Footer() {
                   alt="instagram"
                   width={48}
                   height={48}
+                  unoptimized
                 />
               </Link>
 
@@ -77,6 +84,7 @@ export default function Footer() {
                   alt="x"
                   width={48}
                   height={48}
+                  unoptimized
                 />
               </Link>
             </div>
@@ -88,6 +96,7 @@ export default function Footer() {
               alt="Logo"
               width={160}
               height={40}
+              unoptimized
             />
 
             {/* Links */}

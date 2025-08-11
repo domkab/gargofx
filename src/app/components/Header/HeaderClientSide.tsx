@@ -126,7 +126,7 @@ export default function HeaderClientSide() {
           <Logo />
 
           <Image
-            src="icons/close.svg"
+            src="/icons/close.svg"
             alt='close icon'
             width={32}
             height={32}

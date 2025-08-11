@@ -3,7 +3,9 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 
-export default async function FeaturedLayout() {
+// unused code?
+
+async function FeaturedLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
 
   if (!layout?.length) return null;

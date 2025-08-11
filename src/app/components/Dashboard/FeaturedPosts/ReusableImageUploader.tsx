@@ -49,6 +49,7 @@ export default function ReusableImageUploader({
               alt={`${type} preview`}
               width={800}
               height={type === 'mobile' ? 320 : 450}
+              unoptimized
               className="object-cover w-full h-auto rounded"
             />
           </div>

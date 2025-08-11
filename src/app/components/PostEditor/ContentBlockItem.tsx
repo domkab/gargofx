@@ -78,6 +78,7 @@ export default function ContentBlockItem({
               <Image
                 src={block.url}
                 alt={block.alt || 'Uploaded image'}
+                unoptimized
                 fill
                 className="object-contain"
               />

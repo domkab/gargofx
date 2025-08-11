@@ -1,5 +1,11 @@
 # gargofx
 
+
+search for: 
+  // unused code?
+
+to find components in question that need removing?
+
 mock geo for eu countries
 http://localhost:3000/?mockGeo=lt
 

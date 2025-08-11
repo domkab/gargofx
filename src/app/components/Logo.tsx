@@ -14,6 +14,7 @@ export default function Logo({ className }: LogoProps) {
         alt="GARGOFX Logo"
         width={120}
         height={100}
+        unoptimized
         priority
       />
     </Link>

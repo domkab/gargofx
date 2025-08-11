@@ -97,6 +97,7 @@ export default function HeaderClientSide() {
           alt="menu"
           width={32}
           height={32}
+          unoptimized
           className="cursor-pointer"
           onClick={() => setMenuOpen(true)}
         />
@@ -129,6 +130,7 @@ export default function HeaderClientSide() {
             alt='close icon'
             width={32}
             height={32}
+            unoptimized
             onClick={closeMenu}
             className={clsx(
               'cursor-pointer',
@@ -182,7 +184,13 @@ export default function HeaderClientSide() {
               {/* EMAIL + PHONE */}
               <div className="flex flex-col items-center gap-8">
                 <div className={clsx(styles['footer__contact-row'], 'font-bold flex gap-2')}>
-                  <Image src="/icons/email.svg" alt="email" width={20} height={20} />
+                  <Image
+                    src="/icons/email.svg"
+                    alt="email"
+                    width={20}
+                    height={20}
+                    unoptimized
+                  />
                   <Link
                     href={mailRef}
                     className="uppercase tracking-wide text-sm"
@@ -192,7 +200,13 @@ export default function HeaderClientSide() {
                 </div>
 
                 <div className={clsx(styles['footer__contact-row'], 'flex gap-2')}>
-                  <Image src="/icons/phone.svg" alt="phone" width={20} height={20} />
+                  <Image
+                    src="/icons/phone.svg"
+                    alt="phone"
+                    width={20}
+                    height={20}
+                    unoptimized
+                  />
                   <Link
                     href={phoneRef}
                     className="uppercase tracking-wide text-sm"
@@ -220,6 +234,7 @@ export default function HeaderClientSide() {
                       alt="facebook"
                       width={48}
                       height={48}
+                      unoptimized
                     />
                   </Link>
 
@@ -228,6 +243,7 @@ export default function HeaderClientSide() {
                       alt="instagram"
                       width={48}
                       height={48}
+                      unoptimized
                     />
                   </Link>
 
@@ -236,6 +252,7 @@ export default function HeaderClientSide() {
                       alt="x"
                       width={48}
                       height={48}
+                      unoptimized
                     />
                   </Link>
                 </article>
@@ -247,6 +264,7 @@ export default function HeaderClientSide() {
                   alt="Logo"
                   width={160}
                   height={40}
+                  unoptimized
                 />
                 {/* Links */}
                 <div className="flex flex-col items-center gap-4 text-sm md:items-end">

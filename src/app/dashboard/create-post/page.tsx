@@ -100,7 +100,7 @@ export default function CreatePostPage() {
   if (!(isSignedIn && user.publicMetadata.isAdmin)) {
     return (
       <h1 className="text-center text-3xl my-7 font-semibold min-h-screen">
-        You need to be an admin to update a post
+        You need to be an admin to create a post.
       </h1>
     );
   }

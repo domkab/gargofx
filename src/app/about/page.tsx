@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import HomeImageCarousel from '../components/HomeImageCarousel';
 import LogoSlider from '../components/LogoSlider/LogoSlider';
 import { Divider } from '../components/Divider';
-import FeaturedProjectsCards from '../components/FeaturedProjectsCards';
+import FeaturedLayout from '../components/Layout/FeaturedLayout';
 
 export const revalidate = 300;
 export const metadata = aboutMetadata;
@@ -128,7 +128,7 @@ export default async function AboutPage() {
         <Divider />
       </section>
 
-      <FeaturedProjectsCards />
+      <FeaturedLayout />
     </main>
   );
 }

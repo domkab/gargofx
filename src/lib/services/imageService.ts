@@ -34,6 +34,7 @@ export async function getCarouselImages(): Promise<string[]> {
   ].filter(Boolean);
 }
 
+
 export async function getLogoSlider(): Promise<{ url: string; alt: string }[]> {
   await connect();
   const logos = await LogoSliderModel.find().sort({ order: 1 }).lean();

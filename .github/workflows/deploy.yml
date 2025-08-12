@@ -99,72 +99,72 @@ jobs:
           [ -d ./public ] || (echo "❌ ./public missing" && exit 1)
           echo "✅ build artifacts present"
 
-      # - name: Pack artifact (exclude uploads)
-      #   run: |
-      #     tar -czf release.tgz \
-      #       --exclude='public/uploads/**' \
-      #       .next public package.json package-lock.json
+      - name: Pack artifact (exclude uploads)
+        run: |
+          tar -czf release.tgz \
+            --exclude='public/uploads/**' \
+            .next public package.json package-lock.json
 
-      # - name: Upload artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: gargofx-release
-      #     path: release.tgz
-      #     if-no-files-found: error
-      #     retention-days: 7
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gargofx-release
+          path: release.tgz
+          if-no-files-found: error
+          retention-days: 7
 
   # --- 3) Deploy & restart ---
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   environment: production
-  #   steps:
-  #     - name: Download artifact
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: gargofx-release
-  #         path: .
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gargofx-release
+          path: .
 
-  #     - name: Ensure app dir exists
-  #       uses: appleboy/ssh-action@v1.2.0
-  #       with:
-  #         host: ${{ secrets.VPS_HOST }}
-  #         username: ${{ secrets.VPS_USER }}
-  #         key: ${{ secrets.VPS_SSH_KEY }}
-  #         script: |
-  #           mkdir -p /home/deploy/gargofx
+      - name: Ensure app dir exists
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            mkdir -p /home/deploy/gargofx
 
-  #     - name: Upload tarball
-  #       uses: appleboy/scp-action@v0.1.7
-  #       with:
-  #         host: ${{ secrets.VPS_HOST }}
-  #         username: ${{ secrets.VPS_USER }}
-  #         key: ${{ secrets.VPS_SSH_KEY }}
-  #         source: release.tgz
-  #         target: /home/deploy/gargofx
-  #         debug: true
+      - name: Upload tarball
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: release.tgz
+          target: /home/deploy/gargofx
+          debug: true
 
-  #     - name: Extract & restart (PM2)
-  #       uses: appleboy/ssh-action@v1.2.0
-  #       with:
-  #         host: ${{ secrets.VPS_HOST }}
-  #         username: ${{ secrets.VPS_USER }}
-  #         key: ${{ secrets.VPS_SSH_KEY }}
-  #         script: |
-  #           set -e
-  #           cd /home/deploy/gargofx
-  #           echo "📦 Extracting release.tgz"
-  #           tar -xzf release.tgz
-  #           rm -f release.tgz
+      - name: Extract & restart (PM2)
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -e
+            cd /home/deploy/gargofx
+            echo "📦 Extracting release.tgz"
+            tar -xzf release.tgz
+            rm -f release.tgz
 
-  #           # remove old build artifacts (keep uploads, configs, public)
-  #           find . -maxdepth 1 -type d -name ".next*" ! -path "./.next" -prune -exec rm -rf {} +
+            # remove old build artifacts (keep uploads, configs, public)
+            find . -maxdepth 1 -type d -name ".next*" ! -path "./.next" -prune -exec rm -rf {} +
 
-  #           echo "📜 public/uploads preserved:"
-  #           ls -al public/uploads || echo "uploads missing (first deploy?)"
+            # echo "📜 public/uploads preserved:"
+            ls -al public/uploads || echo "uploads missing (first deploy?)"
 
-  #           # Install pm2 if missing, install prod deps, restart
-  #           command -v pm2 >/dev/null 2>&1 || npm i -g pm2
-  #           npm ci --omit=dev
-  #           pm2 reload gargofx --update-env || pm2 start npm --name "gargofx" -- run start
-  #           pm2 save
+            # Install pm2 if missing, install prod deps, restart
+            command -v pm2 >/dev/null 2>&1 || npm i -g pm2
+            npm ci --omit=dev
+            pm2 reload gargofx --update-env || pm2 start npm --name "gargofx" -- run start
+            pm2 save

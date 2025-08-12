@@ -223,8 +223,10 @@ export default function UpdatePost() {
                 src={formData.heroImage.url}
                 alt={formData.heroImage.alt || "Uploaded image"}
                 fill
+                unoptimized
                 className="object-cover"
               />
+
               <div className="absolute top-1 right-1 z-10">
                 <DeleteMainImageButton
                   slug={slug}

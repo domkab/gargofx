@@ -193,8 +193,10 @@ export default function CreatePostPage() {
                 src={formData.heroImage.url}
                 alt={formData.heroImage.alt || "Uploaded image"}
                 fill
+                unoptimized
                 className="object-cover"
               />
+
               <div className="absolute top-1 right-1 z-10">
                 <DeleteMainImageButton
                   slug={slug}
@@ -212,9 +214,10 @@ export default function CreatePostPage() {
 
             <div className="flex flex-col gap-4 mt-6">
               <div className="flex flex-col gap-2">
-                <label htmlFor="main-image-description" className="text-sm font-medium">
+                <Label htmlFor="main-image-description" className="text-sm font-medium">
                   Image Description
-                </label>
+                </Label>
+
                 <TextInput
                   id="main-image-description"
                   type="text"

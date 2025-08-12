@@ -6,7 +6,7 @@ import HomePageLayout from './components/Layout/HomePageLayout';
 import ContactSection from './components/Contact/ContactSection';
 
 export const revalidate = 120;
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const images = await getCarouselImages();

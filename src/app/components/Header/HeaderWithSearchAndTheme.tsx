@@ -58,7 +58,7 @@ export default function HeaderWithSearch() {
         <NavbarToggle />
       </div>
 
-      <NavbarCollapse>
+      {/* <NavbarCollapse>
         <Link href='/'>
           <NavbarLink active={path === '/'} as={'div'}>
             Home
@@ -76,7 +76,7 @@ export default function HeaderWithSearch() {
             Search
           </NavbarLink>
         </Link>
-      </NavbarCollapse>
+      </NavbarCollapse> */}
     </Navbar>
   );
 }

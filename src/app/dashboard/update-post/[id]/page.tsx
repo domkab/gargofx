@@ -152,7 +152,7 @@ export default function UpdatePost() {
       </Link>
 
       <h1 className="text-center text-3xl my-7 font-semibold">
-        Update a post CI/CD
+        Update a post
       </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

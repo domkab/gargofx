@@ -10,7 +10,7 @@ export const metadata = {
 const TermsAndConditions = () => {
   return (
     <main className="terms_wrapper">
-      <div className="terms md:mx-auto max-w-4xl p-6 sm:p-12">
+      <div className="terms mt-14 md:mx-auto max-w-4xl p-6 sm:p-12">
         <h1 className="flex items-center justify-center text-3xl font-bold mb-6 gap-2 text-gray-300">
           Terms&nbsp;&amp;&nbsp;Conditions
         </h1>

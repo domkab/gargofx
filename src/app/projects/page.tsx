@@ -1,15 +1,16 @@
-import { getFeaturedLayout } from '@/lib/services/postService';
-import clsx from 'clsx';
-import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 import { getCarouselImages } from '@/lib/services/imageService';
-import HomeImageCarousel from '../components/HomeImageCarousel';
+import { getFeaturedLayout } from '@/lib/services/postService';
 import styles from '@/styles/components/projects.module.scss';
+import type { FeaturedLayoutRow } from '@/types/featuredLayout';
+import clsx from 'clsx';
 import { Divider } from '../components/Divider';
 import FeaturedProjectsCards from '../components/FeaturedProjectsCards';
+import HomeImageCarousel from '../components/HomeImageCarousel';
+
+export const revalidate = 120;
 
 export default async function FeaturedProjectsLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
-
   const images = await getCarouselImages();
 
   if (!layout?.length) return null;

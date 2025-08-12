@@ -152,7 +152,7 @@ export default function UpdatePost() {
       </Link>
 
       <h1 className="text-center text-3xl my-7 font-semibold">
-        Update a post
+        Update a post CI/CD
       </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -223,8 +223,10 @@ export default function UpdatePost() {
                 src={formData.heroImage.url}
                 alt={formData.heroImage.alt || "Uploaded image"}
                 fill
+                unoptimized
                 className="object-cover"
               />
+
               <div className="absolute top-1 right-1 z-10">
                 <DeleteMainImageButton
                   slug={slug}

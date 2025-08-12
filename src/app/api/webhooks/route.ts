@@ -49,7 +49,6 @@ export async function POST(req: Request) {
   }
 
   // Do something with payload
-  // For this guide, log payload to console
   const { id } = evt?.data
   const eventType = evt?.type
   console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
@@ -72,7 +71,6 @@ export async function POST(req: Request) {
         last_name,
         image_url,
         email_addresses,
-        username
       );
 
       const client = await clerkClient();

@@ -6,6 +6,10 @@ import LogoSliderModel from '../models/LogoSliderModel';
 export async function getCarouselImages(): Promise<string[]> {
   const uploadsDir = path.join(process.cwd(), 'public/uploads');
 
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+
   const first = fs.readdirSync(uploadsDir).find(name =>
     name.includes('home-default')
   );
@@ -29,6 +33,7 @@ export async function getCarouselImages(): Promise<string[]> {
     ...postImages,
   ].filter(Boolean);
 }
+
 
 export async function getLogoSlider(): Promise<{ url: string; alt: string }[]> {
   await connect();

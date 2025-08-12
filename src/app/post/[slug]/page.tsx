@@ -5,6 +5,9 @@ import Image from 'next/image';
 import styles from '@/styles/components/project.module.scss';
 import clsx from 'clsx';
 import { Divider } from '@/app/components/Divider';
+import { getImageUrl } from '@/utils/getImageUrl';
+
+export const revalidate = 120;
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -21,10 +24,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     >
       <section className={styles['project__hero']}>
         <Image
-          src={post.heroImage.url}
+          src={getImageUrl(post.heroImage.url)}
           alt={post.heroImage.alt || 'Hero Image'}
           fill
-          quality={90}
+          unoptimized
           className={styles['project__hero-image']}
           priority
         />
@@ -80,10 +83,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 )}
               >
                 <Image
-                  src={block.url}
+                  src={getImageUrl(block.url)}
                   alt={block.alt || ''}
                   fill
-                  quality={90}
+                  unoptimized
                   className={clsx(styles['project__content-block-image'])}
                 />
               </div>

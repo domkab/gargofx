@@ -7,6 +7,7 @@ import LogoSlider from '../components/LogoSlider/LogoSlider';
 import { Divider } from '../components/Divider';
 import FeaturedProjectsCards from '../components/FeaturedProjectsCards';
 
+export const revalidate = 300;
 export const metadata = aboutMetadata;
 
 export default async function AboutPage() {

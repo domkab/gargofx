@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import styles from '@/styles/components/home.module.scss';
 
+export const revalidate = 120;
+
 export default async function HomePageLayout() {
   const layout: HomePageLayoutRow[] = await getHomePageLayout();
 

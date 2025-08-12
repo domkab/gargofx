@@ -2,6 +2,7 @@ import { connect } from '@/lib/mongodb/mongoose';
 import { withAdminAuth } from '@/lib/auth/withAdminAuth';
 import homePageLayoutModel from '@/lib/models/homePageLayoutModel';
 import { HomePageLayoutRow } from '@/types/HomePageLayout';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export const GET = async () => {
   await connect();
@@ -21,6 +22,9 @@ export const POST = withAdminAuth(async (_user, body: { rows: HomePageLayoutRow[
   try {
     await homePageLayoutModel.deleteMany();
     await homePageLayoutModel.insertMany(body.rows);
+
+    revalidateTag('home');
+    revalidatePath('/');
 
     return new Response('Layout saved', { status: 200 });
   } catch (error) {

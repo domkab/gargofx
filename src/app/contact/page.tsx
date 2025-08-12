@@ -4,6 +4,8 @@ import { getCarouselImages } from '@/lib/services/imageService';
 import contactPage from '@/styles/components/contactPage.module.scss';
 import ContactSection from '../components/Contact/ContactSection';
 
+export const revalidate = 300;
+
 export default async function ContactPage() {
   const images = await getCarouselImages();
 

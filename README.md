@@ -1,5 +1,11 @@
 # gargofx
 
+
+search for: 
+  // unused code?
+
+to find components in question that need removing?
+
 mock geo for eu countries
 http://localhost:3000/?mockGeo=lt
 
@@ -13,6 +19,7 @@ dashboard variables for dark mode:
   for h1: text-gray-800 dark:text-gray-300
   for p: text-gray-600 dark:text-gray-300
 
+
 updating packgaes:
 
 npx npm-check-updates --reject tailwindcss,flowbite-react
@@ -24,3 +31,14 @@ npx npm-check-updates --reject tailwindcss,flowbite-react -u
 finally:
 
 npm i
+
+# how to run gh actions secret variables migration:
+
+  run from root folder of the project
+
+  If your production env file is env.production:
+
+    chmod +x scripts/upload-secrets-gh.sh (optional if not already)
+    ./scripts/upload-secrets-gh.sh
+
+  (If you don’t pass a file, it defaults to .env.production)

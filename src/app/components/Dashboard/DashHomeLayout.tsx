@@ -202,6 +202,8 @@ export default function HomePageLayoutEditorPage() {
                   </Select>
                 </div>
 
+
+                {/* // unused code? */}
                 {/* check for if postid exists? */}
                 {/* {block.postId && (
                   
@@ -298,7 +300,6 @@ export default function HomePageLayoutEditorPage() {
           color="success"
           onClick={async () => {
             try {
-              console.log('Saved layout:', layoutRows);
               const response = await axios.post('/api/home', {
                 rows: layoutRows,
                 userMongoId: user?.publicMetadata?.userMongoId,

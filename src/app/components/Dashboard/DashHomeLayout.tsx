@@ -300,7 +300,6 @@ export default function HomePageLayoutEditorPage() {
           color="success"
           onClick={async () => {
             try {
-              console.log('Saved layout:', layoutRows);
               const response = await axios.post('/api/home', {
                 rows: layoutRows,
                 userMongoId: user?.publicMetadata?.userMongoId,

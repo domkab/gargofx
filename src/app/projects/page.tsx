@@ -8,7 +8,6 @@ import FeaturedProjectsCards from '../components/FeaturedProjectsCards';
 import HomeImageCarousel from '../components/HomeImageCarousel';
 
 export const revalidate = 120;
-// export const dynamic = 'force-dynamic';
 
 export default async function FeaturedProjectsLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();

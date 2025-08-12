@@ -5,6 +5,7 @@ import { FeaturedBlock, FeaturedLayoutRow } from '@/types/featuredLayout';
 import { IPost } from '@/types/post/iPost';
 import { HomePageBlock, HomePageLayoutRow } from '@/types/HomePageLayout';
 import homePageLayoutModel from '../models/homePageLayoutModel';
+import { unstable_cache } from 'next/cache';
 
 export async function getPostBySlug(slug: string): Promise<IPost> {
   await connect();
@@ -13,7 +14,7 @@ export async function getPostBySlug(slug: string): Promise<IPost> {
   return post as IPost;
 };
 
-export async function getFeaturedLayout(): Promise<FeaturedLayoutRow[]> {
+export async function _getFeaturedLayout(): Promise<FeaturedLayoutRow[]> {
   await connect();
 
   const layout = await FeaturedLayoutRowModel.find().sort({ order: 1 }).lean();
@@ -34,7 +35,13 @@ export async function getFeaturedLayout(): Promise<FeaturedLayoutRow[]> {
   }));
 };
 
-export async function getHomePageLayout(): Promise<HomePageLayoutRow[]> {
+export const getFeaturedLayout = unstable_cache(
+  _getFeaturedLayout,
+  ['featured:layout'],
+  { tags: ['projects']}
+)
+
+export async function _getHomePageLayout(): Promise<HomePageLayoutRow[]> {
   await connect();
 
   const layout = await homePageLayoutModel.find().sort({ order: 1 }).lean();
@@ -54,3 +61,9 @@ export async function getHomePageLayout(): Promise<HomePageLayoutRow[]> {
     }))
   }));
 };
+
+export const getHomePageLayout = unstable_cache(
+  _getHomePageLayout,
+  ['home:layout'],
+  { tags: ['home'] }
+);

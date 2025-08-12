@@ -2,6 +2,7 @@ import { connect } from '@/lib/mongodb/mongoose';
 import { withAdminAuth } from '@/lib/auth/withAdminAuth';
 import featuredLayoutModel from '@/lib/models/featuredLayoutModel';
 import { FeaturedLayoutRow } from '@/types/featuredLayout';
+import { revalidateTag, revalidatePath } from 'next/cache';
 
 export const GET = async () => {
   await connect();
@@ -21,6 +22,9 @@ export const POST = withAdminAuth(async (_user, body: { rows: FeaturedLayoutRow[
   try {
     await featuredLayoutModel.deleteMany();
     await featuredLayoutModel.insertMany(body.rows);
+
+    revalidateTag('projects');
+    revalidatePath('/projects');
 
     return new Response('Layout saved', { status: 200 });
   } catch (error) {

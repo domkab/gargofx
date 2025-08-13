@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { clerkMiddleware } from '@clerk/nextjs/server';
-import { isRateLimited, logRequest } from './middleware_utils/mwutils';
-import { getIpAndCountry } from './middleware_utils/geo';
+import { isRateLimited, logRequest } from './_middleware_utils/mwutils';
+import { getIpAndCountry } from './_middleware_utils/geo';
 
 // ---------- config ----------
 const MAX_REQUESTS = Number(process.env.RATE_LIMIT) || 40;

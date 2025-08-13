@@ -1,7 +1,6 @@
-export const SITE_TITLE = 'GargoFX';
-export const SITE_NAME = 'gargofx'; // lowercase for URLs
-export const DOMAIN_NAME = 'example.com';
-export const CHARACTER_NAME = 'Pixel';
+export const SITE_TITLE = 'Gargofx - 3D Design & Animation Studio';
+export const SITE_NAME = 'gargofx'
+export const DOMAIN_NAME = 'gargofx.com';
 
 export const facebook = 'https://www.facebook.com/profile.php?id=61574452853021';
 export const instagram = 'https://www.instagram.com/gargofx?igsh=MWNlbmg2endoemVtbA=='

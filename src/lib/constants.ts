@@ -15,3 +15,5 @@ export const phone = '+370 6 155 0539';
 export const phoneRef = 'tel:+37061550539';
 export const mailRef = 'mailto:laurynas.gargasas@gmail.com'
 export const mail = 'laurynas.gargasas@gmail.com';
+
+//  metadata

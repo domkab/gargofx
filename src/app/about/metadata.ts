@@ -4,20 +4,19 @@ import { SITE_NAME, SITE_URL } from '../../lib/constants'
 
 export const revalidate = 300
 
-export const AboutMetadata: Metadata = {
-  metadataBase: new URL(`${SITE_URL}`),
-  title: `${SITE_NAME} — 3D Animation, VFX & Product Renders`,
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: `${SITE_NAME} | About Us`,
   description:
-    'GargoFX is a 3D animation and VFX studio delivering game trailers, product visualization, and cinematic content for brands and studios.',
+    'Meet the GargoFX team — a creative collective specializing in 3D design, animation, VFX, and product visualization for brands, games, and studios worldwide.',
   keywords: [
-    '3D animation',
-    'VFX studio',
-    'game trailers',
-    'product visualization',
-    'cinematics',
-    'motion graphics',
+    'About GargoFX',
+    '3D animation studio team',
+    'VFX artists',
+    'product visualization experts',
+    'game cinematic creators',
   ],
-  alternates: { canonical: '/' },
+  alternates: { canonical: '/about' },
   robots: {
     index: true,
     follow: true,

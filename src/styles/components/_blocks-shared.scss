@@ -9,14 +9,27 @@ $dim-sat: .9 !default;
 @mixin blocks-card-base($radius: 14px) {
   position: relative;
   border-radius: $radius;
-  transition: transform .25s ease, filter .2s ease, box-shadow .25s ease;
+  transition:
+    transform .25s ease,
+    filter .2s ease,
+    box-shadow .25s ease;
+
   transform-origin: center;
   will-change: transform;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .15);
+    opacity: 0;
+    transition: opacity .4s ease;
+    pointer-events: none;
+  }
 
   &::after {
     content: '+';
     position: absolute;
-    top: -12px;
     inset: 0;
     display: grid;
     place-items: center;
@@ -26,14 +39,22 @@ $dim-sat: .9 !default;
     color: white;
     opacity: 0;
     transform: scale(.9) rotate(-90deg);
-    transition: opacity .4s ease, transform .4s ease;
+    transition:
+      opacity .4s ease,
+      transform .4s ease,
+      color 2s ease;
+    color: 3s ease-in;
     pointer-events: none;
-    background: rgba(0, 0, 0, .15);
+  }
+
+  &:hover::before {
+    opacity: 1;
   }
 
   &:hover::after {
     opacity: 1;
     transform: scale(1) rotate(0deg);
+    color: $color-secondary;
   }
 }
 

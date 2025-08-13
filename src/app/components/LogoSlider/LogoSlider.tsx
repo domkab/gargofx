@@ -13,7 +13,7 @@ export default async function LogoSlider() {
 
   return (
     <div className={clsx(styles['logos'])}>
-      {[...Array(3)].map((_, groupIdx) => (
+      {[...Array(5)].map((_, groupIdx) => (
         <div key={groupIdx} className={clsx(styles['logo__items'])}>
           {logos.map((logo, idx) => (
             <Image

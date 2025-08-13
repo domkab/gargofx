@@ -11,10 +11,10 @@ import PageViewTracker from './components/Tracking/PageViewTracker';
 import GA from './components/Tracking/GA';
 import CookieBannerToggle from './components/Tracking/CookieBannerToggle';
 import ThemeComponent from './components/ThemeComponent';
-import { layoutMetadata } from '@/lib/metadata/layout';
 import BodyFontManager from './components/BodyFontManager';
+import { LayoutMetadata } from './metadata';
 
-export const metadata = layoutMetadata;
+export const metadata = LayoutMetadata;
 
 const inter = Inter({
   variable: "--font-inter",

@@ -1,4 +1,4 @@
-import { aboutMetadata } from '@/lib/metadata/about';
+import { AboutMetadata } from '@/app/about/metadata';
 import { getCarouselImages } from '@/lib/services/imageService';
 import styles from '@/styles/components/about.module.scss';
 import clsx from 'clsx';
@@ -6,9 +6,10 @@ import HomeImageCarousel from '../components/HomeImageCarousel';
 import LogoSlider from '../components/LogoSlider/LogoSlider';
 import { Divider } from '../components/Divider';
 import FeaturedLayout from '../components/Layout/FeaturedLayout';
+import StructuredData from './StructuredData';
 
 export const revalidate = 300;
-export const metadata = aboutMetadata;
+export const metadata = AboutMetadata;
 
 export default async function AboutPage() {
   const images = await getCarouselImages();
@@ -17,6 +18,9 @@ export default async function AboutPage() {
     <main className={clsx(
       styles['about'], 'about'
     )}>
+
+      {/* structured data here */}
+      <StructuredData />
 
       <section className={clsx('about__hero', 'relative', 'w-full')}>
         <HomeImageCarousel images={images} />

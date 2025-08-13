@@ -25,10 +25,15 @@ $dim-sat: .9 !default;
     font-weight: 300;
     color: white;
     opacity: 0;
-    transform: scale(.9);
+    transform: scale(.9) rotate(-90deg);
     transition: opacity .4s ease, transform .4s ease;
     pointer-events: none;
     background: rgba(0, 0, 0, .15);
+  }
+
+  &:hover::after {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
 }
 

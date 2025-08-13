@@ -16,6 +16,7 @@ $dim-sat: .9 !default;
   &::after {
     content: '+';
     position: absolute;
+    top: -12px;
     inset: 0;
     display: grid;
     place-items: center;
@@ -25,9 +26,9 @@ $dim-sat: .9 !default;
     color: white;
     opacity: 0;
     transform: scale(.9);
-    transition: opacity .2s ease, transform .2s ease;
+    transition: opacity .4s ease, transform .4s ease;
     pointer-events: none;
-    background: rgba(0,0,0,.15);
+    background: rgba(0, 0, 0, .15);
   }
 }
 
@@ -37,21 +38,32 @@ $dim-sat: .9 !default;
 
 @mixin blocks-row-hover-state($row-class, $card-class, $image-class) {
   .#{$row-class}:has(.#{$card-class}:hover) {
-    .#{$card-class} { filter: brightness($dim-brightness) saturate($dim-sat); }
+    .#{$card-class} {
+      filter: brightness($dim-brightness) saturate($dim-sat);
+    }
 
     .#{$card-class}:hover {
       filter: none;
       transform: scale($card-scale);
       z-index: 1;
-      box-shadow: 0 10px 28px rgba(0,0,0,.18);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
 
-      &::after { opacity: 1; transform: scale(1); }
-      .#{$image-class} { transform: scale($image-scale); }
+      &::after {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .#{$image-class} {
+        transform: scale($image-scale);
+      }
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .#{$card-class}, .#{$image-class} { transition: none !important; }
+    .#{$card-class}, .#{$image-class} {
+      transition: none !important;
+    }
+
     .#{$row-class}:has(.#{$card-class}:hover) .#{$card-class}:hover {
       transform: none !important;
     }

@@ -12,7 +12,13 @@ export default async function FeaturedLayout() {
   if (!layout?.length) return null;
 
   return (
-    <section className="layout md:px-5 px-6 mt-12 mb-20">
+    <section
+      className={clsx(
+        styles['projects__featured'],
+        'md:px-5 px-6 mt-12 mb-20',
+        'min-h-[70vh]',
+      )}
+    >
       {layout.map((row, rowIndex) => (
         <div
           key={rowIndex}

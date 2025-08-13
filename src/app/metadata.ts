@@ -1,11 +1,12 @@
 import {
+  SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
   // TWITTER_HANDLE
 } from '@/lib/constants'
 import { Metadata } from 'next';
 
-const TWITTER_HANDLE = '';
+const TWITTER_HANDLE = ''; //
 
 export const LayoutMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -13,7 +14,7 @@ export const LayoutMetadata: Metadata = {
   // Site-wide title logic (page titles can use the template)
   title: {
     default: SITE_NAME,
-    template: `%s — ${SITE_NAME}`,
+    template: `%s — ${SITE_NAME} | ${SITE_DESCRIPTION}`,
   },
 
   robots: {

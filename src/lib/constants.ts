@@ -1,6 +1,7 @@
 // site constants
-export const SITE_TITLE = 'Gargofx - 3D Design & Animation Studio';
+export const SITE_TITLE = 'Gargofx - 3D Design & Animation Studio'; //depreciated
 export const SITE_NAME = 'gargofx'
+export const SITE_DESCRIPTION = '3D Animation, VFX & Product Renders'
 export const DOMAIN_NAME = 'gargofx.com';
 export const SITE_URL = `https://${DOMAIN_NAME}`;
 

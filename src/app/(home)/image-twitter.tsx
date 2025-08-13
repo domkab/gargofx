@@ -1,6 +1,6 @@
 // app/about/twitter-image.tsx
 import { ImageResponse } from 'next/og'
-import { SITE_NAME } from '@/lib/constants'
+import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/constants'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -21,7 +21,7 @@ export default async function TwitterImage() {
           fontFamily: 'sans-serif',
         }}
       >
-        {SITE_NAME} | About
+        {SITE_NAME} | {SITE_DESCRIPTION}
       </div>
     ),
     { ...size }

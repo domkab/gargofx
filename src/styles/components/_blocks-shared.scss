@@ -1,0 +1,59 @@
+@use '@/styles/_mixins' as *;
+@use '@/styles/vars' as *;
+
+$card-scale: 1.03 !default;
+$image-scale: 1.06 !default;
+$dim-brightness: .65 !default;
+$dim-sat: .9 !default;
+
+@mixin blocks-card-base($radius: 14px) {
+  position: relative;
+  border-radius: $radius;
+  transition: transform .25s ease, filter .2s ease, box-shadow .25s ease;
+  transform-origin: center;
+  will-change: transform;
+
+  &::after {
+    content: '+';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 56px;
+    line-height: 1;
+    font-weight: 300;
+    color: white;
+    opacity: 0;
+    transform: scale(.9);
+    transition: opacity .2s ease, transform .2s ease;
+    pointer-events: none;
+    background: rgba(0,0,0,.15);
+  }
+}
+
+@mixin blocks-image-base() {
+  transition: transform .25s ease;
+}
+
+@mixin blocks-row-hover-state($row-class, $card-class, $image-class) {
+  .#{$row-class}:has(.#{$card-class}:hover) {
+    .#{$card-class} { filter: brightness($dim-brightness) saturate($dim-sat); }
+
+    .#{$card-class}:hover {
+      filter: none;
+      transform: scale($card-scale);
+      z-index: 1;
+      box-shadow: 0 10px 28px rgba(0,0,0,.18);
+
+      &::after { opacity: 1; transform: scale(1); }
+      .#{$image-class} { transform: scale($image-scale); }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .#{$card-class}, .#{$image-class} { transition: none !important; }
+    .#{$row-class}:has(.#{$card-class}:hover) .#{$card-class}:hover {
+      transform: none !important;
+    }
+  }
+}

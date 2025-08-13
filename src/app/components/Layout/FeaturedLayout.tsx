@@ -17,7 +17,7 @@ export default async function FeaturedLayout() {
         <div
           key={rowIndex}
           className={clsx(
-            styles['projects__card-wrapper'],
+            styles['projects__featured-row'],
             'grid grid-cols-4 gap-8',
           )}
         >
@@ -25,7 +25,7 @@ export default async function FeaturedLayout() {
             <div
               key={`${rowIndex}-${blockIndex}-${block.id}`}
               className={clsx(
-                styles['projects__card'],
+                styles['projects__featured-block'],
                 'overflow-hidden shadow-sm',
                 {
                   'col-span-4 md:col-span-1': block.layout === '1/4',
@@ -44,9 +44,13 @@ export default async function FeaturedLayout() {
                   )}
 
                   <img
-                    src={block.image?.desktop?.url || block.image?.mobile?.url || ''}
+                    src={block.image?.desktop?.url
+                      || block.image?.mobile?.url
+                      || ''}
                     alt={block.image?.desktop?.alt || ''}
-                    className={clsx(styles['projects__card-image'])}
+                    className={clsx(
+                      styles['projects__featured-block-image']
+                    )}
                   />
                 </picture>
               </Link>

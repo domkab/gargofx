@@ -4,6 +4,9 @@
 search for: 
   // unused code?
 
+search for:
+  // depreciated
+
 to find components in question that need removing?
 
 mock geo for eu countries

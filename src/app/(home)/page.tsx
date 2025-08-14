@@ -1,9 +1,9 @@
 import { getCarouselImages } from '@/lib/services/imageService';
-import HomeImageCarousel from './components/HomeImageCarousel';
+import HomeImageCarousel from '../components/HomeImageCarousel';
 import styles from '@/styles/components/home.module.scss';
 import clsx from 'clsx';
-import HomePageLayout from './components/Layout/HomePageLayout';
-import ContactSection from './components/Contact/ContactSection';
+import HomePageLayout from '../components/Layout/HomePageLayout';
+import ContactSection from '../components/Contact/ContactSection';
 
 export const revalidate = 69;
 

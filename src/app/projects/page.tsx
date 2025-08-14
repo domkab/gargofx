@@ -4,8 +4,8 @@ import styles from '@/styles/components/projects.module.scss';
 import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 import clsx from 'clsx';
 import { Divider } from '../components/Divider';
-import FeaturedProjectsCards from '../components/FeaturedProjectsCards';
 import HomeImageCarousel from '../components/HomeImageCarousel';
+import FeaturedLayout from '../components/Layout/FeaturedLayout';
 
 export const revalidate = 120;
 
@@ -61,7 +61,7 @@ export default async function FeaturedProjectsLayout() {
 
       </section>
 
-      <FeaturedProjectsCards />
+      <FeaturedLayout />
     </main>
   );
 }

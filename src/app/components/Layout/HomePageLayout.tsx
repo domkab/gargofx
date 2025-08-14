@@ -36,6 +36,7 @@ export default async function HomePageLayout() {
           <div
             key={rowIndex}
             className={clsx(
+              styles['home__featured-row'],
               'flex flex-wrap justify-center',
               'gap-x-7 gap-y-5 md:gap-5'
             )}
@@ -62,7 +63,7 @@ export default async function HomePageLayout() {
                       styles['home__featured-image'],
                       'w-full object-cover',
                       'transition-transform duration-300 ease-in-out',
-                      'hover:scale-105')}
+                    )}
                   />
                 </Link>
               </div>

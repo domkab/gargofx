@@ -1,48 +1,69 @@
 import { getFeaturedLayout } from '@/lib/services/postService';
 import clsx from 'clsx';
 import Link from 'next/link';
+import styles from '@/styles/components/projects.module.scss';
 import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 
-// unused code?
+export const revalidate = 240;
 
-async function FeaturedLayout() {
+export default async function FeaturedLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
 
   if (!layout?.length) return null;
 
   return (
-    <section className="max-w-6xl mx-auto py-10">
-      <h2 className="text-2xl font-bold mb-6">🎯 Featured Layout</h2>
+    <section
+      className={clsx(
+        styles['projects__featured'],
+        'md:px-5 px-6 mt-12 mb-20',
+        'min-h-[70vh]',
+      )}
+    >
+      {layout.map((row, rowIndex) => (
+        <div
+          key={rowIndex}
+          className={clsx(
+            styles['projects__featured-row'],
+            'grid grid-cols-4 gap-8',
+          )}
+        >
+          {row.blocks.map((block, blockIndex) => (
+            <div
+              key={`${rowIndex}-${blockIndex}-${block.id}`}
+              className={clsx(
+                styles['projects__featured-block'],
+                'overflow-hidden shadow-sm',
+                {
+                  'col-span-4 md:col-span-1': block.layout === '1/4',
+                  'col-span-4 md:col-span-2': block.layout === '1/2',
+                  'col-span-4': block.layout === 'full',
+                }
+              )}
+            >
+              <Link href={`/post/${block.post?.slug}`}>
+                <picture>
+                  {block.image?.mobile?.url && (
+                    <source
+                      srcSet={block.image.mobile.url}
+                      media="(max-width: 768px)"
+                    />
+                  )}
 
-      <div className="space-y-8">
-        {layout.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex flex-wrap gap-4">
-            {row.blocks.map((block, blockIndex) => (
-              <div
-                key={`${rowIndex}-${blockIndex}-${block.id}`}
-                className={clsx(
-                  'mb-4',
-                  'rounded overflow-hidden shadow-sm bg-white dark:bg-gray-900',
-                  {
-                    'w-[calc(25%-1rem)]': block.layout === '1/4',
-                    'w-[calc(50%-1rem)]': block.layout === '1/2',
-                    'w-full': block.layout === 'full',
-                  }
-                )}
-              >
-                <Link href={`/post/${block.post?.slug}`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={block.image?.desktop?.url || ''}
+                    src={block.image?.desktop?.url
+                      || block.image?.mobile?.url
+                      || ''}
                     alt={block.image?.desktop?.alt || ''}
-                    className="w-full h-64 object-cover"
+                    className={clsx(
+                      styles['projects__featured-block-image']
+                    )}
                   />
-                </Link>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+                </picture>
+              </Link>
+            </div>
+          ))}
+        </div>
+      ))}
     </section>
   );
 }

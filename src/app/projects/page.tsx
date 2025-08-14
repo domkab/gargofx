@@ -6,8 +6,10 @@ import clsx from 'clsx';
 import { Divider } from '../components/Divider';
 import HomeImageCarousel from '../components/HomeImageCarousel';
 import FeaturedLayout from '../components/Layout/FeaturedLayout';
+import { projectsMetadata } from './metadata';
 
 export const revalidate = 120;
+export const metadata = projectsMetadata
 
 export default async function FeaturedProjectsLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();

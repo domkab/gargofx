@@ -3,6 +3,9 @@ import HomeImageCarousel from '../components/HomeImageCarousel';
 import { getCarouselImages } from '@/lib/services/imageService';
 import contactPage from '@/styles/components/contactPage.module.scss';
 import ContactSection from '../components/Contact/ContactSection';
+import { ContactMetadata } from './metadata';
+
+export const metadata = ContactMetadata;
 
 export const revalidate = 300;
 
@@ -46,7 +49,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      <ContactSection className={clsx(contactPage['contact__section'])}/>
+      <ContactSection className={clsx(contactPage['contact__section'])} />
     </main>
   );
 }

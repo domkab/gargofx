@@ -1,6 +1,5 @@
-// app/page.tsx
 import type { Metadata } from 'next'
-import { SITE_NAME, SITE_URL } from '../../lib/constants'
+import { SITE_NAME } from '../../lib/constants'
 
 export const revalidate = 300
 

@@ -13,6 +13,7 @@ import CookieBannerToggle from './components/Tracking/CookieBannerToggle';
 import GA from './components/Tracking/GA';
 import PageViewTracker from './components/Tracking/PageViewTracker';
 import { LayoutMetadata } from './metadata';
+import SiteJsonLd from './SiteJsonLd';
 
 export const metadata = LayoutMetadata;
 
@@ -49,6 +50,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={bodyClassName}>
+          <SiteJsonLd />
           <BodyFontManager />
           <ReduxProvider>
             <ThemeComponent>

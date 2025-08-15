@@ -68,22 +68,21 @@
 
     &-block {
       @include blocks.blocks-card-base(14px);
+
+      &-image {
+        height: 230px;
+
+        @include onLaptop {
+          height: 400px;
+        }
+
+        @include onLaptopL {
+          height: 500px;
+        }
+
+        @include blocks.blocks-image-base();
+      }
     }
-  }
-
-  &-image {
-    height: 215px;
-
-    @include onLaptop {
-      height: 400px;
-    }
-
-    @include onLaptopL {
-      height: 500px;
-    }
-
-    // transition: transform .25s ease;
-    @include blocks.blocks-image-base();
   }
 
   .home__featured-all-link {

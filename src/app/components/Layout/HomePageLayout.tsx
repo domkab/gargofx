@@ -60,7 +60,7 @@ export default async function HomePageLayout() {
                     src={block.image?.desktop?.url || ''}
                     alt={block.image?.desktop?.alt || ''}
                     className={clsx(
-                      styles['home__featured-image'],
+                      styles['home__featured-block-image'],
                       'w-full object-cover',
                       'transition-transform duration-300 ease-in-out',
                     )}

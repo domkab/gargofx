@@ -1,9 +1,13 @@
 import { mail, phone, SITE_NAME, SITE_URL } from '@/lib/constants'
 
+export const ORG_ID = `${SITE_URL}/#org`;
+export const SITE_ID = `${SITE_URL}/#website`;
+
 export function buildOrganization() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': ORG_ID,
     name: SITE_NAME,
     url: SITE_URL,
     logo: `${SITE_URL}/icons/logo.svg`,
@@ -23,16 +27,18 @@ export function buildOrganization() {
         url: `${SITE_URL}/contact`,
       },
     ],
-  }
+  };
 }
 
 export function buildWebsite() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': SITE_ID,
     name: SITE_NAME,
     url: SITE_URL,
-  }
+    publisher: { '@id': ORG_ID },
+  };
 }
 
 export function buildBreadcrumb(items: Array<{ name: string; item: string }>) {
@@ -45,17 +51,19 @@ export function buildBreadcrumb(items: Array<{ name: string; item: string }>) {
       name: it.name,
       item: it.item,
     })),
-  }
+  };
 }
 
 export function buildCollectionPage({
   name,
   url,
   description,
+  breadcrumb
 }: {
   name: string
   url: string
   description?: string
+  breadcrumb?: unknown;
 }) {
   return {
     '@context': 'https://schema.org',
@@ -63,5 +71,7 @@ export function buildCollectionPage({
     name,
     url,
     ...(description ? { description } : {}),
+    ...(breadcrumb ? { breadcrumb } : {}),
+    isPartOf: { '@id': SITE_ID },
   }
 }

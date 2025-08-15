@@ -24,7 +24,7 @@ export const seoDefaults: Pick<
   },
   twitter: {
     card: 'summary_large_image',
-    site: `${x}`,
+    site: `${SITE_URL}`,
     creator: `${x}`,
   },
 }

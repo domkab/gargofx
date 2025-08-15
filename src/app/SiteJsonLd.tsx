@@ -1,4 +1,4 @@
-import { buildOrganization, buildWebsite } from '@/lib/StructuredData';
+import { buildOrganization, buildWebsite } from '@/lib/structured-data';
 import JsonLd from './components/seo/JsonLd';
 
 export default function SiteJsonLd() {

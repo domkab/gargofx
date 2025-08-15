@@ -1,21 +1,23 @@
 import { HOME_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/constants';
-import { buildBreadcrumb, SITE_ID } from '@/lib/structured-data';
+import { buildBreadcrumb, buildCollectionPage} from '@/lib/structured-data';
 import JsonLd from '../components/seo/JsonLd';
 
 export default function HomeJsonLd() {
+  const url = SITE_URL;
+
   const breadcrumb = buildBreadcrumb([
     { name: 'Home', item: `${SITE_URL}/` },
   ]);
 
   const homePage = {
-    '@context': 'https://schema.org',
+    ...buildCollectionPage({
+      name: SITE_NAME,
+      url,
+      description: HOME_DESCRIPTION,
+      breadcrumb,
+    }),
     '@type': ['WebPage', 'CollectionPage'],
-    '@id': `${SITE_URL}/#home`,
-    url: SITE_URL,
-    name: SITE_NAME,
-    description: HOME_DESCRIPTION,
-    isPartOf: { '@id': SITE_ID },
-    breadcrumb,
+    '@id': `${url}#home`,
   };
 
   return (

@@ -7,7 +7,6 @@ import { Metadata } from 'next';
 
 export const LayoutMetadata: Metadata = {
   ...seoDefaults,
-  metadataBase: new URL(SITE_URL),
   title: {
     default: `${SITE_NAME} | 3D Animation, VFX & Product Renders`,
     template: `%s — ${SITE_NAME} | 3D Animation, VFX & Product Renders`,
@@ -22,4 +21,5 @@ export const LayoutMetadata: Metadata = {
     'cinematics',
     'motion graphics',
   ],
+    alternates: { canonical: '/'},
 }

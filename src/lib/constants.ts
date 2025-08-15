@@ -18,3 +18,5 @@ export const mailRef = 'mailto:laurynas.gargasas@gmail.com'
 export const mail = 'laurynas.gargasas@gmail.com';
 
 //  metadata
+
+export const HOME_DESCRIPTION = 'GargoFX is a 3D animation and VFX studio delivering game trailers, product visualization, and cinematic content for brands and studios.'

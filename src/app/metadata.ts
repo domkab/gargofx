@@ -1,4 +1,5 @@
 import {
+  HOME_DESCRIPTION,
   SITE_NAME,
 } from '@/lib/constants'
 import { seoDefaults } from '@/lib/seoDefaults';
@@ -10,8 +11,7 @@ export const LayoutMetadata: Metadata = {
     default: `${SITE_NAME} | 3D Animation, VFX & Product Renders`,
     template: `%s — ${SITE_NAME} | 3D Animation, VFX & Product Renders`,
   },
-  description:
-    'GargoFX is a 3D animation and VFX studio delivering game trailers, product visualization, and cinematic content for brands and studios.',
+  description: HOME_DESCRIPTION,
   keywords: [
     '3D animation',
     'VFX studio',

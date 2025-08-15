@@ -58,20 +58,21 @@ export function buildCollectionPage({
   name,
   url,
   description,
-  breadcrumb
+  breadcrumb,
 }: {
-  name: string
-  url: string
-  description?: string
+  name: string;
+  url: string;
+  description?: string;
   breadcrumb?: unknown;
 }) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name,
+    '@type': ['CollectionPage', 'WebPage'],
+    '@id': `${url}#collection`,
     url,
+    name,
     ...(description ? { description } : {}),
     ...(breadcrumb ? { breadcrumb } : {}),
     isPartOf: { '@id': SITE_ID },
-  }
+  };
 }

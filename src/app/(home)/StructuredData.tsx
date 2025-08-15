@@ -1,4 +1,3 @@
-// app/about/StructuredData.tsx
 import { SITE_NAME } from '@/lib/constants'
 import Script from 'next/script'
 

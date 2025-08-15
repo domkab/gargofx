@@ -1,6 +1,5 @@
 import {
   SITE_NAME,
-  SITE_URL,
 } from '@/lib/constants'
 import { seoDefaults } from '@/lib/seoDefaults';
 import { Metadata } from 'next';

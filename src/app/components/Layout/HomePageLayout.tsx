@@ -55,7 +55,7 @@ export default async function HomePageLayout() {
                   }
                 )}
               >
-                <Link href={`/post/${block.post?.slug}`}>
+                <Link href={`/projects/${block.post?.slug}`}>
                   <img
                     src={block.image?.desktop?.url || ''}
                     alt={block.image?.desktop?.alt || ''}

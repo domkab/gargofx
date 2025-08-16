@@ -12,7 +12,7 @@ export default function Footer() {
       <div
         className={clsx(
           styles['footer__container'],
-          'px-5 md:px-10 pt-10 pb-14'
+          'md:px-10 pt-10 pb-14'
         )}
       >
         {/* Wrapper: switches layout at md */}
@@ -25,7 +25,7 @@ export default function Footer() {
 
           {/* EMAIL & PHONE */}
           <section className="flex flex-col gap-8">
-            <div className={clsx(styles['footer__contact-row'], 'font-bold')}>
+            <div className={clsx(styles['footer__contact-row'], 'font-normal')}>
               <Image
                 src="/icons/email.svg"
                 alt="email"
@@ -50,9 +50,10 @@ export default function Footer() {
               />
               <Link
                 href={phoneRef}
-                className="uppercase tracking-wide text-sm"
+                className="uppercase tracking-wide text-sm font-normal"
               >
-                <b>TEL:</b> {phone}
+                {/* <b>TEL:</b>  */}
+                {phone}
               </Link>
             </div>
           </section>
@@ -115,7 +116,11 @@ export default function Footer() {
                 © {new Date().getFullYear()} <span>GARGOFX</span>
               </span>
 
-              <Link href="/terms-conditions">
+              <Link
+                // className='text-sm'
+                className={clsx(styles['footer__copyright-link'])}
+                href="/terms-conditions"
+              >
                 TERMS OF USE AND PRIVACY
               </Link>
             </div>

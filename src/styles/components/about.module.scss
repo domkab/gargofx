@@ -8,7 +8,7 @@
     padding: 0 20px;
 
     @include onLaptop {
-      padding: 0 60px;
+      padding: 0 $header-title-container-padding;
     }
   }
 
@@ -34,28 +34,33 @@
   }
 
   &__content {
-    margin: 34px 20px 0px 20px;
+    // margin: 34px 20px 0px 20px;
 
     @include onLaptop {
-      margin: 34px 60px 0px 60px;
+      // margin: 34px 60px 0px 60px;
+      padding: 0 $header-title-container-padding
     }
 
-    @include onLaptopL {
-      max-width: 1440px;
-      margin: 102px auto 0 auto;
-    }
+    // @include onLaptopL {
+    //   max-width: 1440px;
+    //   margin: 102px auto 0 auto;
+    // }
 
     &-title {
       font-size: 14px;
       font-weight: 600;
       line-height: 26px;
+      text-align: center;
+      font-style: italic;
 
+      margin-top: 34px;
       margin-bottom: 34px;
 
       @include onLaptop {
-        font-size: 55px;
-        line-height: 80px;
-        margin-bottom: 136px;
+        font-size: 36px;
+        line-height: 68px;
+        padding: 0 200px;
+        // margin-bottom: 136px;
       }
     }
   }
@@ -71,25 +76,25 @@
     line-height: 28px;
 
     @include onLaptop {
-      font-size: 38px;
-      line-height: 80px;
+      font-size: 24px;
+      line-height: 60px;
     }
   }
 
   &__paragraph {
     font-size: 14px;
-    font-weight: 200;
+    font-weight: 100;
     line-height: 28px;
 
     @include onLaptop {
-      font-size: 36px;
-      line-height: 80px;
+      font-size: 24px;
+      line-height: 48px;
     }
   }
 
   &__slider {
     &-title {
-      font-size: 32px;
+      font-size: 24px;
       line-height: 80px;
       font-weight: 400;
       color: #848586;
@@ -99,6 +104,6 @@
       @include onMobile {
         font-size: 14px;
       }
-    } 
+    }
   }
 }

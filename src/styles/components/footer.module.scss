@@ -6,13 +6,13 @@
   color: #1E1E1E;
 
   &__container {
-    max-width: $container-width;
+    // max-width: $container-width;
     margin: 0 auto;
     // padding: 20px;
 
-    // @include onLaptop {
-    //   padding: 40px;
-    // }
+    @include onLaptop {
+      padding: 40px $header-title-container-padding;
+    }
   }
 
   &__contact-row {
@@ -62,6 +62,12 @@
 
     &:hover::after {
       width: 100%;
+    }
+  }
+
+  &__copyright-link {
+    @include onLaptop {
+      font-size: 14px !important;
     }
   }
 

@@ -14,6 +14,7 @@ export default function HeaderClientSide() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+  const [viewportWidth, setViewPortWidth] = useState<number>(0);
 
   const pathname = usePathname();
 
@@ -51,6 +52,13 @@ export default function HeaderClientSide() {
     setIsAnimatingOut(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const setWidth = () => setViewPortWidth(window.innerWidth);
+    setWidth();
+    window.addEventListener('resize', setWidth);
+    return () => window.removeEventListener('resize', setWidth);
+  }, []);
+
   const navItems = ['projects', 'about', 'contact'];
 
   return (
@@ -63,7 +71,7 @@ export default function HeaderClientSide() {
       )}
     >
       {/* LEFT GROUP: Logo + Desktop Nav */}
-      <div className="flex items-center gap-10">
+      {/* <div className="flex items-center gap-10">
         <Logo />
 
         <nav
@@ -87,10 +95,37 @@ export default function HeaderClientSide() {
             );
           })}
         </nav>
-      </div>
+      </div> */}
+
+      {/* Desktop group: show only when viewportWidth > 768 */}
+      {viewportWidth > 768 && (
+        <div className="w-full flex items-center justify-between">
+          {/* Left: Logo */}
+          <div className="flex items-center">
+            <Logo />
+          </div>
+
+          {/* Right: Desktop navigation */}
+          <nav className={clsx(styles['desktop-nav'], 'flex gap-6 text-white')}>
+            {navItems.map((item) => {
+              const link = `/${item.toLowerCase()}`;
+              const isActive = pathname === link;
+              return (
+                <Link
+                  key={item}
+                  href={link}
+                  className={clsx(styles.link, isActive && styles.active)}
+                >
+                  {item}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      )}
 
       {/* RIGHT: Burger for mobile */}
-      <div className="md:hidden">
+      {/* <div className="md:hidden">
         <Image
           src="/icons/hamburger.svg"
           alt="menu"
@@ -100,7 +135,34 @@ export default function HeaderClientSide() {
           className="cursor-pointer"
           onClick={() => setMenuOpen(true)}
         />
-      </div>
+      </div> */}
+
+      {/* Mobile group: show only when viewportWidth <= 768 */}
+      {viewportWidth <= 768 && (
+        <div className="w-full flex items-center justify-between">
+          {/* Left: Logo */}
+          <div className="flex items-center">
+            <Logo />
+          </div>
+
+          {/* Right: Burger */}
+          <button
+            type="button"
+            aria-label="Open menu"
+            onClick={() => setMenuOpen(true)}
+            className="p-2 -m-2"
+          >
+            <Image
+              src="/icons/hamburger.svg"
+              alt="menu"
+              width={32}
+              height={32}
+              unoptimized
+              className="cursor-pointer"
+            />
+          </button>
+        </div>
+      )}
 
       {/* Mobile Menu Overlay */}
       <div

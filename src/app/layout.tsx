@@ -14,6 +14,8 @@ import PageViewTracker from './components/Tracking/PageViewTracker';
 import { LayoutMetadata } from './metadata';
 import SiteJsonLd from './SiteJsonLd';
 import Footer from './components/Footer/Footer';
+import Loading from './loading';
+import LoadingComp from './components/Loading/LoadingComp';
 
 export const metadata = LayoutMetadata;
 
@@ -61,6 +63,8 @@ export default function RootLayout({
                 <NavigationLoader />
                 <PageViewTracker />
                 <GA />
+                {/* <LoadingComp /> */}
+
                 <CookieBannerToggle />
                 {children}
                 <Footer />

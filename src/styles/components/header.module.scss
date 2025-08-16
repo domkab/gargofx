@@ -32,6 +32,17 @@
       transition: width 0.3s ease;
     }
 
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 1px;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+
     &:hover::after,
     &.active::after {
       width: 100%;

@@ -9,7 +9,7 @@
     padding: 0 20px;
 
     @include onLaptop {
-      padding: 0 60px;
+      padding: 0 $header-title-container-padding;
     }
   }
 
@@ -18,23 +18,29 @@
     line-height: 36px;
     font-weight: 600;
 
+    @include onLaptop {
+      font-size: 50px;
+      line-height: 80px;
+    }
+
     &--year {
       font-size: 20px;
       line-height: 24px;
       font-weight: 400;
 
       @include onLaptop {
-        // font-size: 30px;
+        font-size: 30px;
+        font-style: italic;
+        font-weight: 200;
       }
-    }
-
-    @include onLaptop {
-      font-size: 66px;
-      line-height: 80px;
     }
   }
 
   &__featured {
+    @include onLaptop {
+      padding: 0 $header-title-container-padding;
+    }
+
     &-row {
       position: relative;
 

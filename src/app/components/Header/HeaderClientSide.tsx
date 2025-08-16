@@ -106,7 +106,7 @@ export default function HeaderClientSide() {
           </div>
 
           {/* Right: Desktop navigation */}
-          <nav className={clsx(styles['desktop-nav'], 'flex gap-6 text-white')}>
+          <nav className={clsx(styles['desktop-nav'], 'flex gap-12 text-white')}>
             {navItems.map((item) => {
               const link = `/${item.toLowerCase()}`;
               const isActive = pathname === link;

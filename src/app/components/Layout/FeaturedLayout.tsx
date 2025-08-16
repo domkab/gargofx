@@ -15,7 +15,7 @@ export default async function FeaturedLayout() {
     <section
       className={clsx(
         styles['projects__featured'],
-        'md:px-5 px-6 mt-12 mb-20',
+        'md:px-5 px-6 md:px-0 mt-12 mb-20',
         'min-h-[70vh]',
       )}
     >

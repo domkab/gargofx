@@ -29,8 +29,8 @@ export default function Footer() {
               <Image
                 src="/icons/email.svg"
                 alt="email"
-                width={20}
-                height={20}
+                width={30}
+                height={30}
                 unoptimized
               />
               <Link
@@ -42,7 +42,12 @@ export default function Footer() {
             </div>
 
             <div className={clsx(styles['footer__contact-row'])}>
-              <Image src="/icons/phone.svg" alt="phone" width={20} height={20} />
+              <Image
+                src="/icons/phone.svg"
+                alt="phone"
+                width={30}
+                height={30}
+              />
               <Link
                 href={phoneRef}
                 className="uppercase tracking-wide text-sm"
@@ -57,7 +62,7 @@ export default function Footer() {
             {/* Social icons */}
             <div
               className={clsx(
-                'flex gap-10 items-center',
+                'flex gap-7 items-center',
                 'mt-3 md:mt-0'
               )}
             >
@@ -70,16 +75,16 @@ export default function Footer() {
               <Link href={facebook} target="_blank">
                 <Image src="/icons/social/facebook.svg"
                   alt="facebook"
-                  width={48}
-                  height={48}
+                  width={30}
+                  height={30}
                 />
               </Link>
 
               <Link href={instagram} target="_blank">
                 <Image src="/icons/social/instagram.svg"
                   alt="instagram"
-                  width={48}
-                  height={48}
+                  width={30}
+                  height={30}
                   unoptimized
                 />
               </Link>
@@ -87,8 +92,8 @@ export default function Footer() {
               <Link href={x} target="_blank">
                 <Image src="/icons/social/x.svg"
                   alt="x"
-                  width={48}
-                  height={48}
+                  width={30}
+                  height={30}
                   unoptimized
                 />
               </Link>

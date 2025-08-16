@@ -17,7 +17,6 @@ export default function HeaderClientSide() {
 
   const pathname = usePathname();
 
-
   const closeMenu = () => {
     setIsAnimatingOut(true);
     setTimeout(() => {
@@ -70,7 +69,7 @@ export default function HeaderClientSide() {
         <nav
           className={clsx(
             styles['desktop-nav'],
-            'hidden md:flex gap-6 text-white text-sm'
+            'hidden md:flex gap-6 text-white'
           )}
         >
           {navItems.map((item) => {

@@ -56,12 +56,24 @@ export default async function AboutPage() {
             We’re a creative team specializing in 3D design, animation, and visual effects. From stylized content to photorealistic renders, we help brands and studios bring ideas to life.
           </h2>
 
+        </section>
+
+        <section className={clsx(styles['about__slider'])}>
+          <h2 className={clsx(styles['about__slider-title'])}>
+            Selected clients & collaborations
+          </h2>
+          <Divider />
+          <LogoSlider />
+          <Divider marginBottom={80} />
+        </section>
+
+        <section className={clsx(styles['about__content'])}>
           <article className={clsx(styles['about__article'])}>
             <h3 className={clsx(styles['about__subheading'])}>
               3D Modeling
             </h3>
             <p className={clsx(styles['about__paragraph'])}>
-              Custom-built characters, environments, props, and product models for animation,
+              Custom-built characters, environments, props, and product models <br/> for animation,
               games, and visualizations.
             </p>
           </article>
@@ -71,7 +83,7 @@ export default async function AboutPage() {
               3D animation
             </h3>
             <p className={clsx(styles['about__paragraph'])}>
-              Full-service animation including character animation, creature animation, motion graphics, and explainer animations. Ideal for film, games, and branded content.
+              Full-service animation including character animation, motion graphics, and explainer animations.<br/> Ideal for film, games, and branded content.
             </p>
           </article>
 
@@ -80,7 +92,7 @@ export default async function AboutPage() {
               Game trailers & Cinematics
             </h3>
             <p className={clsx(styles['about__paragraph'])}>
-              High-impact trailers, teaser videos, and in-game cinematics that bring your game’s story and style to life. Perfect for launches, Steam pages, and social media campaigns.
+              High-impact trailers, teaser videos, and in-game cinematics that bring your game’s story and style to life.<br/> Perfect for launches, Steam pages, and social media campaigns.
             </p>
           </article>
 
@@ -98,7 +110,7 @@ export default async function AboutPage() {
               Commercial & Advertising Animation
             </h3>
             <p className={clsx(styles['about__paragraph'])}>
-              3D commercials tailored for online, TV, or social platforms. Includes stylized ads, animated promos, and branded storytelling.
+              3D commercials tailored for online, TV, or social platforms.<br/>Includes stylized ads, animated promos, and branded storytelling.
             </p>
           </article>
 
@@ -121,17 +133,10 @@ export default async function AboutPage() {
           </article>
         </section>
 
-        <section className={clsx(styles['about__slider'])}>
-          <h2 className={clsx(styles['about__slider-title'])}>
-            Selected clients & collaborations
-          </h2>
-          <Divider />
-          <LogoSlider />
-          <Divider />
-        </section>
+        <Divider />
 
         <FeaturedLayout />
-      </main>
+      </main >
     </>
   );
 }

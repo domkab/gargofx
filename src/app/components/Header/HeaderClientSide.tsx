@@ -173,7 +173,7 @@ export default function HeaderClientSide() {
 
         {/* Footer (Contact + Social) */}
         <section className={clsx(footerStyles['footer'])}>
-          <div className="max-w-7xl mx-auto px-5 md:px-10 pt-10 pb-14">
+          <div className="mx-auto px-5 md:px-10 pt-10 pb-14">
             <div
               className={clsx(
                 'flex flex-col items-center text-center gap-6',

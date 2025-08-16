@@ -9,7 +9,12 @@ import { facebook, instagram, mail, mailRef, phone, phoneRef, x } from '@/lib/co
 export default function Footer() {
   return (
     <footer className={clsx(styles.footer, 'w-full')}>
-      <div className="max-w-7xl mx-auto px-5 md:px-10 pt-10 pb-14">
+      <div
+        className={clsx(
+          styles['footer__container'],
+          'px-5 md:px-10 pt-10 pb-14'
+        )}
+      >
         {/* Wrapper: switches layout at md */}
         <div
           className={clsx(

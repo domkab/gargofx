@@ -17,7 +17,7 @@
     padding: 0 20px;
 
     @include onLaptop {
-      padding: 0 60px;
+      padding: 0 $header-title-container-padding;
     }
   }
 
@@ -33,7 +33,9 @@
   }
 
   &__featured {
+    max-width: 1440px;
     padding: 0 20px;
+    // margin: 0 auto;
 
     &-title-container {
       margin-top: 24px;

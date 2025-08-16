@@ -2,7 +2,6 @@ import "./globals.css";
 import "./globals.scss";
 import ReduxProvider from '@/redux/ReduxProvider';
 import { ClerkProvider } from '@clerk/nextjs';
-import { Footer } from 'flowbite-react';
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { Suspense } from 'react';
 import BodyFontManager from './components/BodyFontManager';
@@ -14,6 +13,7 @@ import GA from './components/Tracking/GA';
 import PageViewTracker from './components/Tracking/PageViewTracker';
 import { LayoutMetadata } from './metadata';
 import SiteJsonLd from './SiteJsonLd';
+import Footer from './components/Footer/Footer';
 
 export const metadata = LayoutMetadata;
 

@@ -6,7 +6,8 @@
   height: 64px;
 
   @include onLaptop {
-    padding: 16px 50px;
+    padding: 16px $header-title-container-padding;
+    // margin: 0 48px;
     height: 80px;
   }
 

@@ -5,6 +5,16 @@
   background-color: $color-secondary;
   color: #1E1E1E;
 
+  &__container {
+    max-width: $container-width;
+    margin: 0 auto;
+    // padding: 20px;
+
+    // @include onLaptop {
+    //   padding: 40px;
+    // }
+  }
+
   &__contact-row {
     display: flex;
     align-items: center;

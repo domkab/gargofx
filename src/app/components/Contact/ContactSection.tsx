@@ -16,7 +16,7 @@ export default function ContactSection({
   const Component = as;
 
   return (
-    <Component className={clsx(styles.contact, 'p-5 mb-7', className)}>
+    <Component className={clsx(styles.contact, className)}>
       <div
         className={clsx(
           styles['contact__header'],

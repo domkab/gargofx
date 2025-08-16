@@ -20,6 +20,7 @@ export default async function HomePageLayout() {
           'flex items-center gap-4'
         )}
       >
+        <div className="flex-1 h-px bg-white opacity-50" />
         <h2
           className={clsx(
             styles['home__featured-title'],
@@ -75,7 +76,7 @@ export default async function HomePageLayout() {
       <div
         className={clsx(
           styles['home__featured-all'],
-          'text-center mt-7',
+          'text-center',
           'flex items-center justify-center gap-4')
         }
       >

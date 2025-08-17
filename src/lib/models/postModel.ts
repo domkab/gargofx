@@ -27,7 +27,7 @@ const PostSchema = new Schema<IPostDocument>(
     description: { type: String },
     optionalDescription: { type: String, default: '' },
     content: { type: [ContentBlockSchema], default: [] },
-    credits: { type: String, required: false, },
+    credits: { type: String, required: false },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   },

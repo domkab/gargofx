@@ -21,19 +21,22 @@ function ThemeContent({ children }: { children: React.ReactNode }) {
   );
 }
 
+// ˆˆˆˆˆˆˆˆˆˆˆ
+
+// todo: add light mode settings
+
 export default function ThemeComponent({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const isDashboard = pathname.startsWith('/dashboard');
 
-  // enable theme if env flag is on, OR if we are in dashboard
   const themingEnabled = useThemeFlag || isDashboard;
 
   useEffect(() => { setMounted(true); }, []);
 
   // case 1: theming is disabled globally and we are NOT in dashboard → force dark
   if (!themingEnabled) {
-    return <div className="min-h-screen bg-gray-900 text-gray-200">{children}</div>;
+    return <div className="min-h-screen bg-black">{children}</div>;
   }
 
   // wait until mounted to avoid hydration mismatches

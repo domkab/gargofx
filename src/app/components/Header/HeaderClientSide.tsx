@@ -80,7 +80,7 @@ export default function HeaderClientSide() {
           </div>
 
           {/* Right: Desktop navigation */}
-          <nav className={clsx(styles['desktop-nav'], 'flex gap-12 text-white')}>
+          <nav className={clsx(styles['desktop-nav'], 'flex gap-12 text-white/95')}>
             {navItems.map((item) => {
               const link = `/${item.toLowerCase()}`;
               const isActive = pathname === link;
@@ -130,7 +130,7 @@ export default function HeaderClientSide() {
         className={clsx(
           'fixed inset-0 z-[999]',
           'flex flex-col justify-between',
-          'text-white text-xl',
+          'text-white/95 text-xl',
           styles['header__burger'],
           menuOpen && styles['header__burger--active'],
           isAnimatingOut && styles['header__burger--closing']
@@ -156,7 +156,7 @@ export default function HeaderClientSide() {
             onClick={closeMenu}
             className={clsx(
               'cursor-pointer',
-              'text-white text-3xl leading-none',
+              'text-white/95 text-3xl leading-none',
               styles['header__burger-close'],
             )}
             aria-label="Close menu"

@@ -230,7 +230,7 @@ export default function DashPosts() {
                   </TableCell>
                   <TableCell>
                     <Link
-                      className="font-medium text-gray-900 dark:text-white"
+                      className="font-medium text-gray-900 dark:text-white/95"
                       href={`/projects/${post.slug}`}
                     >
                       <span>

@@ -24,7 +24,7 @@ export default async function HomePageLayout() {
         <h2
           className={clsx(
             styles['home__featured-title'],
-            'text-white whitespace-nowrap'
+            'text-white/95 whitespace-nowrap'
           )}
         >
           Featured projects

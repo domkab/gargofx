@@ -28,7 +28,7 @@ export default async function Home() {
           <div
             className={clsx(
               'text-start',
-              'text-white',
+              'text-white/95',
               styles['home__text-container']
             )}
           >
@@ -37,13 +37,15 @@ export default async function Home() {
                 styles['home__text'],
               )}
             >
-              Unlocking the{' '}
-              <span className='font-bold italic'>power</span>
+
+              {/* Elevating storytelling through the power of CGI. */}
+              Elevating{' '}
+              <span className='font-bold italic'>storytelling</span>
               <br />
-              of <span className="font-bold">CGI</span> to bring
+              through <span className="font-bold">the</span> power
               <br />
-              stories to{' '}
-              <span className='italic font-semibold'>life.</span>
+              {/* stories to{' '} */}
+              <span className='italic font-semibold'>of CGI.</span>
             </h1>
           </div>
         </section>

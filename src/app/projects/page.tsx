@@ -39,7 +39,7 @@ export default async function FeaturedProjectsLayout() {
             className={clsx(
               styles['projects__text-container'],
               'text-start',
-              'text-white',
+              'text-white/95',
               'z-10',
             )}
           >

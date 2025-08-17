@@ -23,7 +23,7 @@ export default function ContactSection({
           'flex flex-col md:flex-row md:items-center md:justify-between mb-10'
         )}
       >
-        <h2 className={clsx(styles['contact__title'], 'text-white mb-4 md:mb-0')}>
+        <h2 className={clsx(styles['contact__title'], 'text-white/95 mb-4 md:mb-0')}>
           contact
         </h2>
 

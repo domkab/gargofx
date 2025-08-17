@@ -90,7 +90,7 @@ export default function DashboardComp() {
               <h3 className='text-gray-500 text-md uppercase'>Total Users</h3>
               <p className='text-2xl'>{totalUsers}</p>
             </div>
-            <HiOutlineUserGroup className='bg-teal-600  text-white rounded-full text-5xl p-3 shadow-lg' />
+            <HiOutlineUserGroup className='bg-teal-600  text-white/95 rounded-full text-5xl p-3 shadow-lg' />
           </div>
           <div className='flex  gap-2 text-sm'>
             <span className='text-green-500 flex items-center'>
@@ -107,7 +107,7 @@ export default function DashboardComp() {
               <h3 className='text-gray-500 text-md uppercase'>Total Posts</h3>
               <p className='text-2xl'>{totalPosts}</p>
             </div>
-            <HiDocumentText className='bg-lime-600  text-white rounded-full text-5xl p-3 shadow-lg' />
+            <HiDocumentText className='bg-lime-600  text-white/95 rounded-full text-5xl p-3 shadow-lg' />
           </div>
           <div className='flex  gap-2 text-sm'>
             <span className='text-green-500 flex items-center'>

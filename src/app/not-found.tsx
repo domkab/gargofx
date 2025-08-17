@@ -27,7 +27,7 @@ export default function NotFound() {
       <div className="flex gap-4">
         <Link
           href="/"
-          className='bg-teal-500 text-white border border-teal-500 
+          className='bg-teal-500 text-white/95 border border-teal-500 
             hover:text-teal-500 hover:bg-white 
             transition-all duration-300 text-center p-2 rounded-md m-2'
         >
@@ -37,7 +37,7 @@ export default function NotFound() {
           href="/contact"
           className='bg-white text-teal-600 border border-teal-500 
           hover:bg-teal-500 
-          hover:text-white transition-all duration-300 
+          hover:text-white/95 transition-all duration-300 
             text-center p-2 rounded-md m-2'
         >
           Report a Problem

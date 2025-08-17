@@ -26,7 +26,7 @@ export default async function ContactPage() {
           className={clsx(
             contactPage['contact__hero-text-container'],
             'text-start',
-            'text-white',
+            'text-white/95',
             'z-10',
           )}
         >

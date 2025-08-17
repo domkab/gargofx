@@ -32,7 +32,7 @@ export default async function AboutPage() {
             className={clsx(
               styles['about__text-container'],
               'text-start',
-              'text-white',
+              'text-white/95',
               'z-10',
             )}
           >

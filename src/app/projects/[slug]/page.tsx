@@ -58,7 +58,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {/* Descriptions */}
 
-        <div className={styles['project__desc-container']}>
+        <section className={styles['project__desc-container']}>
           {post.description && <p className={styles['project__desc']}>{post.description}</p>}
 
           {post.optionalDescription && (
@@ -70,7 +70,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               {post.optionalDescription}
             </p>
           )}
-        </div>
+        </section>
 
         <Divider marginBottom={30} className={styles['project__separator']} />
 

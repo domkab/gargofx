@@ -66,7 +66,7 @@ export default function HeaderClientSide() {
       className={clsx(
         styles['header'],
         'fixed top-0 left-0 w-full z-50 flex items-center justify-between',
-        'px-5 py-4 transition-all duration-300',
+        'transition-all duration-300',
         scrolled ? 'bg-black/30 backdrop-blur-md shadow-md' : 'bg-transparent'
       )}
     >

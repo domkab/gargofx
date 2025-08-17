@@ -1,6 +1,7 @@
 import { getCarouselImages } from '@/lib/services/imageService';
 import { getFeaturedLayout } from '@/lib/services/postService';
 import styles from '@/styles/components/projects.module.scss';
+import stylesShared from '@/styles/components/_hero-shared.module.scss';
 import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 import clsx from 'clsx';
 import { Divider } from '../components/Divider';
@@ -24,10 +25,15 @@ export default async function FeaturedProjectsLayout() {
       <main
         className={clsx(
           'flex flex-col items-center justify-center',
-          'min-h-[70vh]',
+          // 'min-h-[70vh]',
         )}>
 
-        <section className={clsx('projects__hero', 'relative', 'w-full')}>
+        <section className={clsx(
+          'projects__hero',
+          'relative',
+          'w-full'
+        )}
+        >
           <HomeImageCarousel images={images} />
 
           <div
@@ -41,20 +47,19 @@ export default async function FeaturedProjectsLayout() {
             <h1
               className={clsx(
                 styles['projects__text'],
-                'font-semibold'
               )}
             >
               Featured projects
             </h1>
 
-            <h2
+            <p
               className={clsx(
                 styles['projects__text'],
                 styles['projects__text--year'],
               )}
             >
               2024-2025
-            </h2>
+            </p>
           </div>
 
           {/* Divider line */}

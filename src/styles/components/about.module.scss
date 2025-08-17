@@ -4,7 +4,7 @@
 .about {
   &__text-container {
     position: absolute;
-    bottom: 20%;
+    bottom: 15%;
     padding: 0 20px;
 
     @include onLaptop {
@@ -18,17 +18,19 @@
     font-weight: 600;
 
     @include onLaptop {
-      font-size: 66px;
-      line-height: 80px;
+      font-size: $hero-title-font-size;
+      line-height: $hero-title-line-height;
     }
 
     &--secondary {
-      font-size: 15px;
+      font-size: 20px;
       line-height: 24px;
-      font-weight: 400;
+
+      font-style: italic;
+      font-weight: 200;
 
       @include onLaptop {
-        font-size: 40px;
+        font-size: $hero-subtitle-font-size;
       }
     }
   }

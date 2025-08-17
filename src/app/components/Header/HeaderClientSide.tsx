@@ -59,7 +59,7 @@ export default function HeaderClientSide() {
     return () => window.removeEventListener('resize', setWidth);
   }, []);
 
-  const navItems = ['projects', 'about', 'contact'];
+  const navItems = ['projects', 'about', 'contacte'];
 
   return (
     <header
@@ -70,32 +70,6 @@ export default function HeaderClientSide() {
         scrolled ? 'bg-black/30 backdrop-blur-md shadow-md' : 'bg-transparent'
       )}
     >
-      {/* LEFT GROUP: Logo + Desktop Nav */}
-      {/* <div className="flex items-center gap-10">
-        <Logo />
-
-        <nav
-          className={clsx(
-            styles['desktop-nav'],
-            'hidden md:flex gap-6 text-white'
-          )}
-        >
-          {navItems.map((item) => {
-            const link = `/${item.toLowerCase()}`;
-            const isActive = pathname === link;
-
-            return (
-              <Link
-                key={item}
-                href={link}
-                className={clsx(styles.link, isActive && styles.active)}
-              >
-                {item}
-              </Link>
-            );
-          })}
-        </nav>
-      </div> */}
 
       {/* Desktop group: show only when viewportWidth > 768 */}
       {viewportWidth > 768 && (
@@ -123,19 +97,6 @@ export default function HeaderClientSide() {
           </nav>
         </div>
       )}
-
-      {/* RIGHT: Burger for mobile */}
-      {/* <div className="md:hidden">
-        <Image
-          src="/icons/hamburger.svg"
-          alt="menu"
-          width={32}
-          height={32}
-          unoptimized
-          className="cursor-pointer"
-          onClick={() => setMenuOpen(true)}
-        />
-      </div> */}
 
       {/* Mobile group: show only when viewportWidth <= 768 */}
       {viewportWidth <= 768 && (

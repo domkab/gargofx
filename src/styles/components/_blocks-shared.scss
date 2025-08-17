@@ -59,7 +59,9 @@ $dim-sat: .9 !default;
 }
 
 @mixin blocks-image-base() {
-  transition: transform .25s ease;
+  & {
+    transition: transform .25s ease;
+  }
 }
 
 @mixin blocks-row-hover-state($row-class, $card-class, $image-class) {

@@ -2,6 +2,9 @@
 @use '@/styles/_mixins' as *;
 
 .contact {
+  margin-top: 48px;
+  padding-bottom: 86px;
+
   &__header {
     flex-direction: column;
 

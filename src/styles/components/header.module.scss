@@ -2,17 +2,25 @@
 @use '@/styles/vars' as *;
 
 .header {
+  padding: 16px 20px;
   transition: all 0.3s ease;
   height: 64px;
 
   @include onLaptop {
-    padding: 16px 50px;
+    padding: 16px $header-title-container-padding;
+    // margin: 0 48px;
     height: 80px;
+    display: flex;
   }
 
   nav.desktop-nav a {
+    align-self: flex-end;
     position: relative;
     transition: color 0.2s ease;
+
+    font-size: 16px;
+    // text-transform: uppercase;
+    font-weight: 100;
 
     &::after {
       content: '';
@@ -25,6 +33,17 @@
       transition: width 0.3s ease;
     }
 
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 1px;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+
     &:hover::after,
     &.active::after {
       width: 100%;
@@ -34,6 +53,10 @@
     &.active {
       color: $color-secondary;
     }
+  }
+
+  &__nav-mobile {
+    background-color: $color-secondary;
   }
 
   &__burger {

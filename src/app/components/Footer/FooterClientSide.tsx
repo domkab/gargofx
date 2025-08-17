@@ -9,7 +9,12 @@ import { facebook, instagram, mail, mailRef, phone, phoneRef, x } from '@/lib/co
 export default function Footer() {
   return (
     <footer className={clsx(styles.footer, 'w-full')}>
-      <div className="max-w-7xl mx-auto px-5 md:px-10 pt-10 pb-14">
+      <div
+        className={clsx(
+          styles['footer__container'],
+          'pt-10 pb-14'
+        )}
+      >
         {/* Wrapper: switches layout at md */}
         <div
           className={clsx(
@@ -20,12 +25,12 @@ export default function Footer() {
 
           {/* EMAIL & PHONE */}
           <section className="flex flex-col gap-8">
-            <div className={clsx(styles['footer__contact-row'], 'font-bold')}>
+            <div className={clsx(styles['footer__contact-row'], 'font-normal')}>
               <Image
                 src="/icons/email.svg"
                 alt="email"
-                width={20}
-                height={20}
+                width={30}
+                height={30}
                 unoptimized
               />
               <Link
@@ -36,13 +41,19 @@ export default function Footer() {
               </Link>
             </div>
 
-            <div className={clsx(styles['footer__contact-row'])}>
-              <Image src="/icons/phone.svg" alt="phone" width={20} height={20} />
+            <div className={clsx(styles['footer__contact-row'], 'md:pb-7')}>
+              <Image
+                src="/icons/phone.svg"
+                alt="phone"
+                width={30}
+                height={30}
+              />
               <Link
                 href={phoneRef}
-                className="uppercase tracking-wide text-sm"
+                className="uppercase tracking-wide text-sm font-normal"
               >
-                <b>TEL:</b> {phone}
+                {/* <b>TEL:</b>  */}
+                {phone}
               </Link>
             </div>
           </section>
@@ -52,7 +63,7 @@ export default function Footer() {
             {/* Social icons */}
             <div
               className={clsx(
-                'flex gap-10 items-center',
+                'flex gap-7 items-center',
                 'mt-3 md:mt-0'
               )}
             >
@@ -65,16 +76,16 @@ export default function Footer() {
               <Link href={facebook} target="_blank">
                 <Image src="/icons/social/facebook.svg"
                   alt="facebook"
-                  width={48}
-                  height={48}
+                  width={30}
+                  height={30}
                 />
               </Link>
 
               <Link href={instagram} target="_blank">
                 <Image src="/icons/social/instagram.svg"
                   alt="instagram"
-                  width={48}
-                  height={48}
+                  width={30}
+                  height={30}
                   unoptimized
                 />
               </Link>
@@ -82,8 +93,8 @@ export default function Footer() {
               <Link href={x} target="_blank">
                 <Image src="/icons/social/x.svg"
                   alt="x"
-                  width={48}
-                  height={48}
+                  width={30}
+                  height={30}
                   unoptimized
                 />
               </Link>
@@ -105,7 +116,11 @@ export default function Footer() {
                 © {new Date().getFullYear()} <span>GARGOFX</span>
               </span>
 
-              <Link href="/terms-conditions">
+              <Link
+                // className='text-sm'
+                className={clsx(styles['footer__copyright-link'])}
+                href="/terms-conditions"
+              >
                 TERMS OF USE AND PRIVACY
               </Link>
             </div>

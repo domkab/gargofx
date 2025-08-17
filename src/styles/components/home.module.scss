@@ -17,7 +17,7 @@
     padding: 0 20px;
 
     @include onLaptop {
-      padding: 0 60px;
+      padding: 0 $header-title-container-padding;
     }
   }
 
@@ -33,13 +33,17 @@
   }
 
   &__featured {
+    max-width: 1440px;
     padding: 0 20px;
+    // margin: 0 auto;
 
     &-title-container {
       margin-top: 24px;
       margin-bottom: 24px;
 
       @include onLaptop {
+        // margin-bottom: 36px;
+        margin-top: 36px;
         margin-bottom: 36px;
       }
     }
@@ -49,7 +53,7 @@
       line-height: 48px;
 
       @include onLaptop {
-        font-size: 42px;
+        font-size: 24px;
       }
     }
 
@@ -68,22 +72,31 @@
 
     &-block {
       @include blocks.blocks-card-base(14px);
+
+      &-image {
+        height: 230px;
+
+        @include onLaptop {
+          height: 400px;
+        }
+
+        @include onLaptopL {
+          height: 500px;
+        }
+
+        @include blocks.blocks-image-base();
+      }
     }
   }
 
-  &-image {
-    height: 215px;
+  .home__featured-all {
+    // margin-top: 24px;
+    // margin-bottom: 24px;
 
     @include onLaptop {
-      height: 400px;
+      margin-top: 36px;
+      margin-bottom: 36px;
     }
-
-    @include onLaptopL {
-      height: 500px;
-    }
-
-    // transition: transform .25s ease;
-    @include blocks.blocks-image-base();
   }
 
   .home__featured-all-link {

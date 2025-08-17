@@ -1,0 +1,24 @@
+// export default function LoadingComp() {
+//   return (
+//     <div className="flex justify-center items-center h-[80vh]">
+//       <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-teal-500" />
+//     </div>
+//   );
+// }
+
+import React from 'react'
+
+export default function LoadingComp() {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  )
+}

@@ -20,6 +20,7 @@ export default async function HomePageLayout() {
           'flex items-center gap-4'
         )}
       >
+        <div className="flex-1 h-px bg-white opacity-50" />
         <h2
           className={clsx(
             styles['home__featured-title'],
@@ -55,12 +56,12 @@ export default async function HomePageLayout() {
                   }
                 )}
               >
-                <Link href={`/post/${block.post?.slug}`}>
+                <Link href={`/projects/${block.post?.slug}`}>
                   <img
                     src={block.image?.desktop?.url || ''}
                     alt={block.image?.desktop?.alt || ''}
                     className={clsx(
-                      styles['home__featured-image'],
+                      styles['home__featured-block-image'],
                       'w-full object-cover',
                       'transition-transform duration-300 ease-in-out',
                     )}
@@ -75,7 +76,7 @@ export default async function HomePageLayout() {
       <div
         className={clsx(
           styles['home__featured-all'],
-          'text-center mt-7',
+          'text-center',
           'flex items-center justify-center gap-4')
         }
       >

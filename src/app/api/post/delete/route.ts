@@ -10,7 +10,7 @@ type PostDeleteInput = {
   userMongoId: string;
 };
 
-export const DELETE = withAdminAuth<PostDeleteInput>(async (user, body) => {
+export const DELETE = withAdminAuth<PostDeleteInput>(async (_user, body) => {
   const { deleteFeaturedImage, deletePostImages } = await import('@/firebase/deleteImages')
   await connect();
 

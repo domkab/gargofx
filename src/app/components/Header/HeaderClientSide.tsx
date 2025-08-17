@@ -14,9 +14,9 @@ export default function HeaderClientSide() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+  const [viewportWidth, setViewPortWidth] = useState<number>(0);
 
   const pathname = usePathname();
-
 
   const closeMenu = () => {
     setIsAnimatingOut(true);
@@ -52,6 +52,13 @@ export default function HeaderClientSide() {
     setIsAnimatingOut(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const setWidth = () => setViewPortWidth(window.innerWidth);
+    setWidth();
+    window.addEventListener('resize', setWidth);
+    return () => window.removeEventListener('resize', setWidth);
+  }, []);
+
   const navItems = ['projects', 'about', 'contact'];
 
   return (
@@ -59,49 +66,64 @@ export default function HeaderClientSide() {
       className={clsx(
         styles['header'],
         'fixed top-0 left-0 w-full z-50 flex items-center justify-between',
-        'px-5 py-4 transition-all duration-300',
+        'transition-all duration-300',
         scrolled ? 'bg-black/30 backdrop-blur-md shadow-md' : 'bg-transparent'
       )}
     >
-      {/* LEFT GROUP: Logo + Desktop Nav */}
-      <div className="flex items-center gap-10">
-        <Logo />
 
-        <nav
-          className={clsx(
-            styles['desktop-nav'],
-            'hidden md:flex gap-6 text-white text-sm'
-          )}
-        >
-          {navItems.map((item) => {
-            const link = `/${item.toLowerCase()}`;
-            const isActive = pathname === link;
+      {/* Desktop group: show only when viewportWidth > 768 */}
+      {viewportWidth > 768 && (
+        <div className="w-full flex items-center justify-between">
+          {/* Left: Logo */}
+          <div className="flex items-center">
+            <Logo />
+          </div>
 
-            return (
-              <Link
-                key={item}
-                href={link}
-                className={clsx(styles.link, isActive && styles.active)}
-              >
-                {item}
-              </Link>
-            );
-          })}
-        </nav>
-      </div>
+          {/* Right: Desktop navigation */}
+          <nav className={clsx(styles['desktop-nav'], 'flex gap-12 text-white')}>
+            {navItems.map((item) => {
+              const link = `/${item.toLowerCase()}`;
+              const isActive = pathname === link;
+              return (
+                <Link
+                  key={item}
+                  href={link}
+                  className={clsx(styles.link, isActive && styles.active)}
+                >
+                  {item}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      )}
 
-      {/* RIGHT: Burger for mobile */}
-      <div className="md:hidden">
-        <Image
-          src="/icons/hamburger.svg"
-          alt="menu"
-          width={32}
-          height={32}
-          unoptimized
-          className="cursor-pointer"
-          onClick={() => setMenuOpen(true)}
-        />
-      </div>
+      {/* Mobile group: show only when viewportWidth <= 768 */}
+      {viewportWidth <= 768 && (
+        <div className="w-full flex items-center justify-between">
+          {/* Left: Logo */}
+          <div className="flex items-center">
+            <Logo />
+          </div>
+
+          {/* Right: Burger */}
+          <button
+            type="button"
+            aria-label="Open menu"
+            onClick={() => setMenuOpen(true)}
+            className="p-2 -m-2"
+          >
+            <Image
+              src="/icons/hamburger.svg"
+              alt="menu"
+              width={32}
+              height={32}
+              unoptimized
+              className="cursor-pointer"
+            />
+          </button>
+        </div>
+      )}
 
       {/* Mobile Menu Overlay */}
       <div
@@ -146,9 +168,9 @@ export default function HeaderClientSide() {
         <nav
           className={clsx(
             'header__nav-mobile',
+            styles['header__nav-mobile'],
             'flex flex-col items-center gap-8 flex-1 justify-start',
             'mt-12'
-
           )}
         >
           {navItems.map((item) => {
@@ -173,7 +195,7 @@ export default function HeaderClientSide() {
 
         {/* Footer (Contact + Social) */}
         <section className={clsx(footerStyles['footer'])}>
-          <div className="max-w-7xl mx-auto px-5 md:px-10 pt-10 pb-14">
+          <div className="mx-auto px-5 md:px-10 pt-10 pb-14">
             <div
               className={clsx(
                 'flex flex-col items-center text-center gap-6',

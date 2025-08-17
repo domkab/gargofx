@@ -2,7 +2,6 @@ import "./globals.css";
 import "./globals.scss";
 import ReduxProvider from '@/redux/ReduxProvider';
 import { ClerkProvider } from '@clerk/nextjs';
-import { Footer } from 'flowbite-react';
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { Suspense } from 'react';
 import BodyFontManager from './components/BodyFontManager';
@@ -13,6 +12,8 @@ import CookieBannerToggle from './components/Tracking/CookieBannerToggle';
 import GA from './components/Tracking/GA';
 import PageViewTracker from './components/Tracking/PageViewTracker';
 import { LayoutMetadata } from './metadata';
+import SiteJsonLd from './SiteJsonLd';
+import Footer from './components/Footer/Footer';
 
 export const metadata = LayoutMetadata;
 
@@ -33,22 +34,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const useThemeFlag = process.env.NEXT_PUBLIC_USE_THEME;
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const useThemeFlag = process.env.NEXT_PUBLIC_USE_THEME === 'true';
+
   const bodyClassName = `
   ${inter.variable}
   ${geistSans.variable} 
   ${geistMono.variable} 
-  antialiased${useThemeFlag ? ' ' : ' background'}
+  antialiased${useThemeFlag ? '' : ' background'}
   `;
 
   return (
     <ClerkProvider>
       <html lang="en">
         <body className={bodyClassName}>
+          <SiteJsonLd />
           <BodyFontManager />
           <ReduxProvider>
             <ThemeComponent>
@@ -59,6 +62,8 @@ export default function RootLayout({
                 <NavigationLoader />
                 <PageViewTracker />
                 <GA />
+                {/* <LoadingComp /> */}
+
                 <CookieBannerToggle />
                 {children}
                 <Footer />

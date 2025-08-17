@@ -6,8 +6,11 @@ import clsx from 'clsx';
 import { Divider } from '../components/Divider';
 import HomeImageCarousel from '../components/HomeImageCarousel';
 import FeaturedLayout from '../components/Layout/FeaturedLayout';
+import { projectsMetadata } from './metadata';
+import ProjectsJsonLd from './ProjectsJsonLd';
 
 export const revalidate = 120;
+export const metadata = projectsMetadata
 
 export default async function FeaturedProjectsLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
@@ -16,52 +19,60 @@ export default async function FeaturedProjectsLayout() {
   if (!layout?.length) return null;
 
   return (
-    <main
-      className={clsx(
-        'flex flex-col items-center justify-center',
-        'min-h-[70vh]',
-      )}>
+    <>
+      <ProjectsJsonLd />
+      <main
+        className={clsx(
+          'flex flex-col items-center justify-center',
+          // 'min-h-[70vh]',
+        )}>
 
-      <section className={clsx('projects__hero', 'relative', 'w-full')}>
-        <HomeImageCarousel images={images} />
-
-        <div
-          className={clsx(
-            styles['projects__text-container'],
-            'text-start',
-            'text-white',
-            'z-10',
-          )}
+        <section className={clsx(
+          'projects__hero',
+          'relative',
+          'w-full'
+        )}
         >
-          <h1
+          <HomeImageCarousel images={images} />
+
+          <div
             className={clsx(
-              styles['projects__text'],
-              'font-semibold'
+              styles['projects__text-container'],
+              'text-start',
+              'text-white',
+              'z-10',
             )}
           >
-            Featured projects
-          </h1>
+            <h1
+              className={clsx(
+                styles['projects__text'],
+              )}
+            >
+              Featured projects
+            </h1>
 
-          <h2
-            className={clsx(
-              styles['projects__text'],
-              styles['projects__text--year'],
-            )}
-          >
-            2024-2025
-          </h2>
-        </div>
+            <p
+              className={clsx(
+                styles['projects__text'],
+                styles['projects__text--year'],
+              )}
+            >
+              2024-2025
+            </p>
+          </div>
 
-        {/* Divider line */}
-        <Divider
-          marginTop={44}
-          marginLeft={20}
-          marginRight={20}
-        />
+          {/* Divider line */}
+          <Divider
+            marginTop={44}
+            marginLeft={20}
+            marginRight={20}
+          />
 
-      </section>
+        </section>
 
-      <FeaturedLayout />
-    </main>
+        <FeaturedLayout />
+      </main>
+    </>
+
   );
 }

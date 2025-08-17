@@ -5,10 +5,24 @@
   background-color: $color-secondary;
   color: #1E1E1E;
 
+  &__container {
+    // max-width: $container-width;
+    margin: 0 auto;
+    // padding: 20px;
+
+    @include onLaptop {
+      padding: 40px $header-title-container-padding;
+    }
+  }
+
   &__contact-row {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+
+    @include onLaptop {
+      height: 60px;
+    }
 
     @include onMobile {
       justify-content: center;
@@ -22,6 +36,8 @@
   }
 
   &__followus {
+    font-size: 18px;
+    line-height: 60px;
     @include onMobile {
       display: none;
     }
@@ -33,25 +49,11 @@
 
     @include onLaptop {
       font-size: 18px;
+      // line-height: 60px;
     }
 
     &:hover {
       color: black;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -3px;
-      width: 0%;
-      height: 1px;
-      background-color: #1E1E1E;
-      transition: width 0.3s ease;
-    }
-
-    &:hover::after {
-      width: 100%;
     }
   }
 

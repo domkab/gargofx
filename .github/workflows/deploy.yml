@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [metadata ,main]
+    branches: [main]
   workflow_dispatch:
 
 concurrency:

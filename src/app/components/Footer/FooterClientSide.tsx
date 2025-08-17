@@ -41,7 +41,7 @@ export default function Footer() {
               </Link>
             </div>
 
-            <div className={clsx(styles['footer__contact-row'])}>
+            <div className={clsx(styles['footer__contact-row'], 'md:pb-7')}>
               <Image
                 src="/icons/phone.svg"
                 alt="phone"

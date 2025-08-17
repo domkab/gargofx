@@ -47,7 +47,7 @@ export default async function HomePageLayout() {
                 key={`${rowIndex}-${blockIndex}-${block.id}`}
                 className={clsx(
                   styles['home__featured-block'],
-                  'overflow-hidden shadow-sm bg-white',
+                  'overflow-hidden shadow-sm',
                   'w-[calc(50%-1rem)]',
                   {
                     'md:w-[calc(25%-1rem)]': block.layout === '1/4',

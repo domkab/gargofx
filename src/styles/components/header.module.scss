@@ -54,6 +54,10 @@
     }
   }
 
+  &__nav-mobile {
+    background-color: $color-secondary;
+  }
+
   &__burger {
     background-color: $color-secondary;
     opacity: 0;

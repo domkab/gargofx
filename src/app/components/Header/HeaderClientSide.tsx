@@ -207,9 +207,9 @@ export default function HeaderClientSide() {
         <nav
           className={clsx(
             'header__nav-mobile',
+            styles['header__nav-mobile'],
             'flex flex-col items-center gap-8 flex-1 justify-start',
             'mt-12'
-
           )}
         >
           {navItems.map((item) => {

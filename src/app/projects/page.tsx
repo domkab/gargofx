@@ -1,7 +1,6 @@
 import { getCarouselImages } from '@/lib/services/imageService';
 import { getFeaturedLayout } from '@/lib/services/postService';
 import styles from '@/styles/components/projects.module.scss';
-import stylesShared from '@/styles/components/_hero-shared.module.scss';
 import type { FeaturedLayoutRow } from '@/types/featuredLayout';
 import clsx from 'clsx';
 import { Divider } from '../components/Divider';

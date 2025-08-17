@@ -12,7 +12,7 @@ export default function Footer() {
       <div
         className={clsx(
           styles['footer__container'],
-          'md:px-10 pt-10 pb-14'
+          'pt-10 pb-14'
         )}
       >
         {/* Wrapper: switches layout at md */}

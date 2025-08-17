@@ -16,7 +16,7 @@ export const PUT = withAdminAuth<PostUpdateInput>(async (user, body) => {
           optionalDescription: body.optionalDescription || '',
           heroImage: body.heroImage,
           content: body.content,
-          credits: body.credits,
+          credits: body?.credits,
         },
       },
       { new: true }

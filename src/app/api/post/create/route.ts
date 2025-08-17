@@ -18,7 +18,7 @@ export const POST = withAdminAuth<PostCreateInput>(async (user, body) => {
       description: body.description,
       optionalDescription: body.optionalDescription,
       content: body.content,
-      credits: body.credits,
+      credits: body?.credits,
     });
 
     return new Response(JSON.stringify(newPost), {

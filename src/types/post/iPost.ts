@@ -14,7 +14,7 @@ export interface IPostBase {
   description?: string;
   optionalDescription?: string;
   content: ContentBlock[];
-  credits: string;
+  credits?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -36,7 +36,7 @@ export type PostCreateInput = {
   description?: string;
   optionalDescription?: string;
   content: ContentBlock[];
-  credits: string;
+  credits?: string;
   userId: string;
 };
 
@@ -53,7 +53,7 @@ export interface PostUpdateInput {
     alt?: string;
   };
   content: ContentBlock[];
-  credits: string;
+  credits?: string;
 }
 
 export interface FeaturedPostType {

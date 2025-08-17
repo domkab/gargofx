@@ -6,9 +6,7 @@
   color: #1E1E1E;
 
   &__container {
-    // max-width: $container-width;
     margin: 0 auto;
-    // padding: 20px;
 
     @include onLaptop {
       padding: 40px $header-title-container-padding;
@@ -43,6 +41,14 @@
     }
   }
 
+  &__social-icons a {
+    &::after {
+      display: none;
+    }
+  }
+
+  //  pakeisti i klases pavadinima
+
   a {
     transition: color 0.3s ease;
     position: relative;
@@ -55,12 +61,39 @@
     &:hover {
       color: black;
     }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0%;
+      height: 1px;
+      background-color: #1E1E1E;
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
   }
 
   img {
     transition: filter 0.3s ease;
     &:hover {
       filter: brightness(0) saturate(100%) invert(20%) sepia(80%) saturate(400%) hue-rotate(150deg);
+    }
+  }
+
+  &__copyright {
+    font-size: 14px;
+
+    &-link {
+      font-size: 14px;
+
+      @include onLaptop {
+        font-size: 14px !important;
+      }
     }
   }
 }

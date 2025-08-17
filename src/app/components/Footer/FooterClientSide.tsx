@@ -64,7 +64,8 @@ export default function Footer() {
             <div
               className={clsx(
                 'flex gap-7 items-center',
-                'mt-3 md:mt-0'
+                'mt-3 md:mt-0',
+                styles['footer__social-icons'],
               )}
             >
               <span
@@ -111,13 +112,12 @@ export default function Footer() {
             />
 
             {/* Links */}
-            <div className="flex flex-col items-center gap-4 text-sm md:items-end">
-              <span>
+            <div className="flex flex-col items-center gap-2 text-sm md:items-end">
+              <span className={clsx(styles['footer__copyright'])}>
                 © {new Date().getFullYear()} <span>GARGOFX</span>
               </span>
 
               <Link
-                // className='text-sm'
                 className={clsx(styles['footer__copyright-link'])}
                 href="/terms-conditions"
               >

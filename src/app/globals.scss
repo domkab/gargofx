@@ -10,6 +10,8 @@
 @use '../styles/components/Navigation/nprogress-custom.scss';
 @use '../styles/components/home.module.scss';
 
+//  font settings
+
 body.front {
   font-family: var(--font-inter), Arial;
 }

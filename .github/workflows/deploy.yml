@@ -53,6 +53,26 @@ jobs:
 
             echo "== getfacl =="
             getfacl /var/www/gargofx | sed -n '1,80p'
+      - name: Sync home-default.jpg
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -euo pipefail
+            VPS_FILE="/var/www/gargofx/uploads/home-default.jpg"
+            CI_FILE="/home/deploy/gargofx/public/uploads/home-default.jpg"
+
+            if [ ! -f "$VPS_FILE" ]; then
+              echo "📷 No home-default.jpg on server, copying..."
+              cp "$CI_FILE" "$VPS_FILE"
+            elif [ "$CI_FILE" -nt "$VPS_FILE" ]; then
+              echo "📷 Newer home-default.jpg found in CI, replacing..."
+              cp "$CI_FILE" "$VPS_FILE"
+            else
+              echo "✅ Server already has the latest home-default.jpg"
+            fi
 
   # --- 2) Build in CI ---
   build:

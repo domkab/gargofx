@@ -14,8 +14,6 @@ import PageViewTracker from './components/Tracking/PageViewTracker';
 import { LayoutMetadata } from './metadata';
 import SiteJsonLd from './SiteJsonLd';
 import Footer from './components/Footer/Footer';
-import Loading from './loading';
-import LoadingComp from './components/Loading/LoadingComp';
 
 export const metadata = LayoutMetadata;
 
@@ -36,16 +34,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const useThemeFlag = process.env.NEXT_PUBLIC_USE_THEME;
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const useThemeFlag = process.env.NEXT_PUBLIC_USE_THEME === 'true';
+
   const bodyClassName = `
   ${inter.variable}
   ${geistSans.variable} 
   ${geistMono.variable} 
-  antialiased${useThemeFlag ? ' ' : ' background'}
+  antialiased${useThemeFlag ? '' : ' background'}
   `;
 
   return (

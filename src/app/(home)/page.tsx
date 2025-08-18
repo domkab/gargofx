@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import HomePageLayout from '../components/Layout/HomePageLayout';
 import ContactSection from '../components/Contact/ContactSection';
 import HomeJsonLd from './HomeJsonLd';
-import { Divider } from '../components/Divider';
 
 export const revalidate = 69;
 
@@ -39,13 +38,11 @@ export default async function Home() {
               )}
             >
 
-              {/* Elevating storytelling through the power of CGI. */}
               Elevating{' '}
               <span className='font-bold italic'>storytelling</span>
               <br />
               through <span className="font-bold">the</span> power
               <br />
-              {/* stories to{' '} */}
               <span className='italic font-semibold'>of CGI.</span>
             </h1>
           </div>
@@ -55,6 +52,5 @@ export default async function Home() {
         <ContactSection as='section' />
       </main>
     </>
-
   );
 }

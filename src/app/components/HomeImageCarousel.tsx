@@ -39,6 +39,7 @@ export default function HomeImageCarousel({ images }: Props) {
               fill
               quality={90}
               priority={idx === 0}
+              unoptimized
               className='object-cover'
             />
           </SwiperSlide>

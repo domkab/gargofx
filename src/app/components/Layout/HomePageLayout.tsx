@@ -20,7 +20,7 @@ export default async function HomePageLayout() {
           'flex items-center gap-4'
         )}
       >
-        <div className="flex-1 h-px bg-white opacity-50" />
+        <div className="divider flex-1 h-px bg-white opacity-50" />
         <h2
           className={clsx(
             styles['home__featured-title'],
@@ -29,7 +29,7 @@ export default async function HomePageLayout() {
         >
           Featured projects
         </h2>
-        <div className="flex-1 h-px bg-white opacity-50" />
+        <div className="divider flex-1 h-px bg-white opacity-50" />
       </div>
 
       <div className={clsx('space-y-8', styles['home__featured-blocks'])}>

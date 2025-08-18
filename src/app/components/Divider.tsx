@@ -29,7 +29,7 @@ export function Divider({
         marginRight: `${marginRight}px`,
       }}
     >
-      <div className="flex-1 h-px bg-white opacity-50" />
+      <div className="divider flex-1 h-px bg-white opacity-50" />
     </div>
   );
 }

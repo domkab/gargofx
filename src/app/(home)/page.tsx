@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import HomePageLayout from '../components/Layout/HomePageLayout';
 import ContactSection from '../components/Contact/ContactSection';
 import HomeJsonLd from './HomeJsonLd';
+import { Divider } from '../components/Divider';
 
 export const revalidate = 69;
 

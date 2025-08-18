@@ -59,7 +59,6 @@ jobs:
               -o StrictHostKeyChecking=no \
               public/uploads/home-default.jpg \
               ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/tmp/home-default.jpg
-
       - name: Sync home-default.jpg if newer
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -82,40 +81,6 @@ jobs:
               echo "Remote file is up to date."
               rm "$TEMP_REMOTE_FILE"
             fi
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            set -euo pipefail
-
-            LOCAL_FILE="public/uploads/home-default.jpg"
-            REMOTE_FILE="/var/www/gargofx/uploads/home-default.jpg"
-            TEMP_REMOTE_FILE="/tmp/home-default.jpg"
-
-            # Upload local file to temp path on server
-            scp -i ${{ secrets.VPS_SSH_KEY }} "$LOCAL_FILE" ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:"$TEMP_REMOTE_FILE"
-
-            # SSH into server and compare timestamps
-            ssh -i ${{ secrets.VPS_SSH_KEY }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-              set -euo pipefail
-
-              REMOTE_FILE="/var/www/gargofx/uploads/home-default.jpg"
-              TEMP_REMOTE_FILE="/tmp/home-default.jpg"
-
-              if [ ! -f "$REMOTE_FILE" ]; then
-                echo "Remote file missing, copying new one."
-                mv "$TEMP_REMOTE_FILE" "$REMOTE_FILE"
-              elif [ "$TEMP_REMOTE_FILE" -nt "$REMOTE_FILE" ]; then
-                echo "Newer file detected, replacing."
-                mv "$TEMP_REMOTE_FILE" "$REMOTE_FILE"
-              else
-                echo "Remote file is up to date."
-                rm "$TEMP_REMOTE_FILE"
-              fi
-            EOF
-
   # --- 2) Build in CI ---
   build:
     runs-on: ubuntu-latest

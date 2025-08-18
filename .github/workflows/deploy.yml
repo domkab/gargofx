@@ -85,7 +85,7 @@ jobs:
               mv "$TEMP_REMOTE_FILE" "$REMOTE_FILE"
             else
               echo "Remote file is up to date."
-              rm "$TEMP_REMOTE_FILE"
+              rm -f "$TEMP_REMOTE_FILE"
             fi
 
 

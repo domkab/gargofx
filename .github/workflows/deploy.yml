@@ -75,6 +75,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             set -euo pipefail
+
             REMOTE_FILE="/var/www/gargofx/uploads/home-default.jpg"
             TEMP_REMOTE_FILE="/tmp/home-default.jpg"
 

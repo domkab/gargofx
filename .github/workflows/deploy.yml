@@ -34,7 +34,7 @@ jobs:
             sudo apt-get install -y acl
 
             # Create tree (edit this for project-specific cases)
-            sudo mkdir -p /var/www/gargofx/uploads/{posts,featured-posts,logo-slider}
+            sudo mkdir -p /var/www/gargofx/uploads/{home, posts,featured-posts,logo-slider}
 
             # Base ownership & perms
             sudo chown -R deploy:deploy /var/www/gargofx

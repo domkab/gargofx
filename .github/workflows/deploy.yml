@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Bootstrap uploads dir / ACLs (deploy+domka write, caddy read)
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -62,6 +65,7 @@ jobs:
           source: public/uploads/home-default.jpg
           target: /tmp
           overwrite: true
+
       - name: Sync home-default.jpg if newer
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -70,7 +74,6 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             set -euo pipefail
-
             REMOTE_FILE="/var/www/gargofx/uploads/home-default.jpg"
             TEMP_REMOTE_FILE="/tmp/home-default.jpg"
 
@@ -84,6 +87,9 @@ jobs:
               echo "Remote file is up to date."
               rm "$TEMP_REMOTE_FILE"
             fi
+
+
+
   # --- 2) Build in CI ---
   build:
     runs-on: ubuntu-latest

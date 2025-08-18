@@ -53,12 +53,15 @@ jobs:
 
             echo "== getfacl =="
             getfacl /var/www/gargofx | sed -n '1,80p'
-      - name: Upload home-default.jpg to temp location
-        run: |
-          scp -i ${{ secrets.VPS_SSH_KEY }} \
-              -o StrictHostKeyChecking=no \
-              public/uploads/home-default.jpg \
-              ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/tmp/home-default.jpg
+      - name: Upload home-default.jpg
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: public/uploads/home-default.jpg
+          target: /tmp
+          overwrite: true
       - name: Sync home-default.jpg if newer
         uses: appleboy/ssh-action@v1.2.0
         with:

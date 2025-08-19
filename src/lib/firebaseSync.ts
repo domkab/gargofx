@@ -64,6 +64,11 @@ export async function syncFromFirebase() {
 }
 
 export async function cleanupUnusedImagesFromFirebaseAndFilestore() {
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn('🛑 Skipping image cleanup: Not in production environment');
+    return { deletedCount: 0 };
+  };
+
   const bucket = adminStorage.bucket();
   const [files] = await bucket.getFiles();
 

@@ -5,6 +5,7 @@ import path from 'path';
 import sharp from 'sharp';
 import { getUploadsPath } from '@/utils/uploadPath';
 import { ImageCarousel } from '@/lib/models/ImageCarouselModel';
+import { deleteOldHomeDefaultImages } from '@/lib/services/imageService';
 
 export const POST = withAdminAuth(async (_user, req: NextRequest) => {
   const { uploadToFirebase } = await import('@/lib/firebaseSync');
@@ -24,13 +25,17 @@ export const POST = withAdminAuth(async (_user, req: NextRequest) => {
       ? await sharp(buffer).webp({ quality: 90 }).toBuffer()
       : buffer;
 
-    const fileName = convertToWebp ? 'home-default.webp' : 'home-default.' + file.type.split('/')[1];
+    const fileName = convertToWebp
+      ? `home-default-${Date.now()}.webp`
+      : `home-default-${Date.now()}.${file.type.split('/')[1]}`;
+
     const relativePath = `home/${fileName}`;
     const filePath = getUploadsPath(relativePath);
     const publicUrl = `/uploads/${relativePath}`;
 
     console.log(publicUrl);
-    
+
+    deleteOldHomeDefaultImages();
 
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, finalBuffer);

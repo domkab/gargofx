@@ -2,36 +2,59 @@ import fs from 'fs';
 import path from 'path';
 import { connect } from '../mongodb/mongoose';
 import LogoSliderModel from '../models/LogoSliderModel';
+import { getUploadsBaseDir, getUploadsPath } from '@/utils/uploadPath';
 
 export async function getCarouselImages(): Promise<string[]> {
-  const uploadsDir = path.join(process.cwd(), 'public/uploads');
+  const uploadsDir = getUploadsBaseDir();
+
+  const homeDir = path.join(uploadsDir, 'home');
+  const postsDir = path.join(uploadsDir, 'posts');
+
+  const postImages: string[] = [];
 
   if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true });
   }
 
-  const first = fs.readdirSync(`${uploadsDir}/home`).find(name =>
-    name.includes('home-default')
-  );
+  const first = fs.existsSync(homeDir)
+    ? fs.readdirSync(homeDir).find((name) => name.includes('home-default'))
+    : undefined;
 
-  const postsDir = path.join(uploadsDir, 'posts');
-  const postDirs = fs.readdirSync(postsDir).filter(name => {
-    const fullPath = path.join(postsDir, name);
-    return !name.startsWith('.') && fs.statSync(fullPath).isDirectory();
-  });
+  if (fs.existsSync(postsDir)) {
+    const postDirs = fs.readdirSync(postsDir).filter((name) => {
+      const fullPath = path.join(postsDir, name);
+      return !name.startsWith('.') && fs.statSync(fullPath).isDirectory();
+    });
 
-  const postImages: string[] = [];
-
-  for (const dir of postDirs) {
-    const files = fs.readdirSync(path.join(postsDir, dir));
-    const mainImg = files.find(f => f.includes('main'));
-    if (mainImg) postImages.push(`/uploads/posts/${dir}/${mainImg}`);
+    for (const dir of postDirs) {
+      const files = fs.readdirSync(path.join(postsDir, dir));
+      const mainImg = files.find((f) => f.includes('main'));
+      if (mainImg) postImages.push(`/uploads/posts/${dir}/${mainImg}`);
+    }
   }
 
   return [
-    first ? `/uploads//home/${first}` : '',
+    first ? `/uploads/home/${first}` : '',
     ...postImages,
   ].filter(Boolean);
+}
+
+export function deleteOldHomeDefaultImages() {
+  const homeDir = path.dirname(getUploadsPath('home/placeholder.tmp'));
+
+  if (!fs.existsSync(homeDir)) return;
+
+  const files = fs.readdirSync(homeDir);
+
+  files
+    .filter((name) => name.startsWith('home-default'))
+    .forEach((name) => {
+      try {
+        fs.unlinkSync(path.join(homeDir, name));
+      } catch (err) {
+        console.error('Failed to delete old home image:', err);
+      }
+    });
 }
 
 

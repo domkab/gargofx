@@ -12,28 +12,27 @@ export async function getCarouselImages(): Promise<string[]> {
   console.log('Uploads Directory:', uploadsDir);
   console.log('Home Directory:', homeDir);
   console.log('Posts Directory:', postsDir);
-  
+
   const shouldSkipWrites =
     process.env.NEXT_PHASE === 'phase-production-build' ||
     process.env.NODE_ENV === 'production';
 
   const postImages: string[] = [];
 
-  if (!shouldSkipWrites && !fs.existsSync(uploadsDir)) {
+  if (!fs.existsSync(uploadsDir) && !shouldSkipWrites) {
     fs.mkdirSync(uploadsDir, { recursive: true });
   }
 
   let first: string | undefined = undefined;
-  if (!shouldSkipWrites && fs.existsSync(homeDir)) {
+  if (fs.existsSync(homeDir)) {
     first = fs.readdirSync(homeDir).find((name) =>
       name.includes('home-default')
     );
   }
 
-  if (!shouldSkipWrites && fs.existsSync(postsDir)) {
+  if (fs.existsSync(postsDir)) {
     const postDirs = fs.readdirSync(postsDir).filter((name) => {
       const fullPath = path.join(postsDir, name);
-
       return !name.startsWith('.') && fs.statSync(fullPath).isDirectory();
     });
 

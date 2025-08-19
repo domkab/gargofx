@@ -11,13 +11,14 @@ import {
 import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import axios from 'axios';
+import clsx from 'clsx';
 
 export default function DashHomeSettings() {
   const { user } = useUser();
 
   const [file, setFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [convertToWebp, setConvertToWebp] = useState(true);
+  const [convertToWebp, setConvertToWebp] = useState(false);
   const [loading, setLoading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
 
@@ -30,10 +31,12 @@ export default function DashHomeSettings() {
       try {
         const { data } = await axios.get('/api/carousel/get-settings');
 
-        if (data.settings) {
-          setImageUrl(data.settings.heroImageUrl);
-          setLoop(data.settings.carouselOptions?.loop ?? true);
-          setTransitionTime(data.settings.carouselOptions?.transitionTime ?? 3000);
+        console.log('data:', data);
+
+        if (data) {
+          setImageUrl(data.heroImageUrl);
+          setLoop(data.carouselOptions?.loop ?? true);
+          setTransitionTime(data.carouselOptions?.transitionTime ?? 3000);
         }
 
       } catch (err) {
@@ -93,84 +96,91 @@ export default function DashHomeSettings() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-semibold mb-4">Main Image Settings</h1>
+    <div className='flex flex-col w-full'>
+      <h1 className="text-2xl font-semibold m-4">Main Image Settings</h1>
 
-      {imageUrl && (
-        <div className="mb-6 border border-gray-200 rounded shadow-sm overflow-hidden">
-          <Image
-            src={imageUrl}
-            alt="Current homepage image"
-            width={800}
-            height={400}
-            className="w-full h-auto object-cover"
-            unoptimized
-          />
-        </div>
-      )}
-
-      <div className="flex flex-col gap-4 mb-4">
-        <div>
-          <Label htmlFor="file" value="Upload new image" />
-          <FileInput
-            id="file"
-            onChange={(e) => {
-              const f = e.target.files?.[0];
-              if (f) setFile(f);
-            }}
-          />
-        </div>
-
-        <div className="flex items-center justify-between">
-          <Label htmlFor="webp-toggle" value="Convert to WebP" />
-          <ToggleSwitch
-            id="webp-toggle"
-            checked={convertToWebp}
-            onChange={setConvertToWebp}
-          />
-        </div>
-
-        <Button onClick={handleUpload} disabled={loading || !file}>
-          {loading ? 'Uploading...' : 'Upload Image'}
-        </Button>
-
-        {uploaded && (
-          <p className="text-green-600 mt-2">Image uploaded successfully ✅</p>
+      <div className="w-full px-4 lg:px-8 mb-6">
+        {imageUrl && (
+          <div className="border border-gray-200 shadow-sm overflow-hidden rounded">
+            <Image
+              src={imageUrl}
+              alt="Homepage hero image"
+              width={2150}
+              height={772}
+              className={clsx(
+                'w-full h-96 object-cover',
+                { 'opacity-50': loading }
+              )}
+              unoptimized
+            />
+          </div>
         )}
       </div>
 
-      <hr className="my-6" />
+      <div className="max-w-4xl mx-auto p-6">
+        <div className="flex flex-col gap-4 mb-4">
+          <div>
+            <Label htmlFor="file" value="Upload new image" />
+            <FileInput
+              id="file"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) setFile(f);
+              }}
+            />
+          </div>
 
-      <h2 className="text-xl font-semibold mb-4">Carousel Settings</h2>
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between">
-          <Label htmlFor="loop-toggle" value="Loop carousel" />
-          <ToggleSwitch
-            id="loop-toggle"
-            checked={loop}
-            onChange={setLoop}
-          />
+          <div className="flex items-center justify-between">
+            <Label htmlFor="webp-toggle" value="Convert to WebP" />
+            <ToggleSwitch
+              id="webp-toggle"
+              checked={convertToWebp}
+              onChange={setConvertToWebp}
+            />
+          </div>
+
+          <Button onClick={handleUpload} disabled={loading || !file}>
+            {loading ? 'Uploading...' : 'Upload Image'}
+          </Button>
+
+          {uploaded && (
+            <p className="text-green-600 mt-2">Image uploaded successfully ✅</p>
+          )}
         </div>
 
-        <div>
-          <Label htmlFor="transitionTime" value="Transition time (ms)" />
-          <TextInput
-            id="transitionTime"
-            type="number"
-            value={transitionTime}
-            onChange={(e) => setTransitionTime(Number(e.target.value))}
-            min={500}
-            step={100}
-          />
+        <hr className="my-6" />
+
+        <h2 className="text-xl font-semibold mb-4">Carousel Settings</h2>
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="loop-toggle" value="Loop carousel" />
+            <ToggleSwitch
+              id="loop-toggle"
+              checked={loop}
+              onChange={setLoop}
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="transitionTime" value="Transition time (ms)" />
+            <TextInput
+              id="transitionTime"
+              type="number"
+              value={transitionTime}
+              onChange={(e) => setTransitionTime(Number(e.target.value))}
+              min={500}
+              step={100}
+            />
+          </div>
+
+          <Button onClick={handleSaveSettings}>
+            Save Carousel Settings
+          </Button>
+
+          {settingsSaved && (
+            <p className="text-green-600 mt-2">Settings saved ✅</p>
+          )}
         </div>
-
-        <Button onClick={handleSaveSettings}>
-          Save Carousel Settings
-        </Button>
-
-        {settingsSaved && (
-          <p className="text-green-600 mt-2">Settings saved ✅</p>
-        )}
       </div>
     </div>
   );

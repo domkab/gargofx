@@ -44,6 +44,8 @@ export async function getCarouselImages(): Promise<string[]> {
     }
   }
 
+  console.log('postImages:', postImages);
+
   return [
     first ? `/uploads/home/${first}` : '',
     ...postImages,

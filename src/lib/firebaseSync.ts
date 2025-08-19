@@ -64,7 +64,7 @@ export async function syncFromFirebase() {
 
 export async function cleanupUnusedImagesFromFirebaseAndFilestore() {
   const bucket = adminStorage.bucket();
-  const [files] = await bucket.getFiles(); // no prefix needed
+  const [files] = await bucket.getFiles();
 
   const usedImagePaths = new Set<string>();
 
@@ -123,7 +123,6 @@ export async function cleanupUnusedImagesFromFirebaseAndFilestore() {
     }
   }
 
-  // ✅ Delete unused images
   let deletedCount = 0;
 
   for (const file of files) {

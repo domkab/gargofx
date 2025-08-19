@@ -6,6 +6,7 @@ import featuredLayoutModel from './models/featuredLayoutModel';
 import postModel from './models/postModel';
 import homePageLayoutModel from './models/homePageLayoutModel';
 import LogoSliderModel from './models/LogoSliderModel';
+import { ImageCarousel } from './models/ImageCarouselModel';
 
 export async function uploadToFirebase(localPath: string, destination: string) {
   const bucket = adminStorage.bucket();
@@ -82,6 +83,20 @@ export async function cleanupUnusedImagesFromFirebaseAndFilestore() {
         if (match?.[1]) usedImagePaths.add(match[1]);
       });
     }
+  }
+
+  // ✅ Collect image URLs from Home Carousel
+  const homeCarousel = await ImageCarousel.findOne({});
+  if (homeCarousel) {
+    const urls = [
+      homeCarousel.heroImageUrl,
+      ...(homeCarousel.carouselImages || []),
+    ].filter(Boolean);
+
+    urls.forEach((url: string) => {
+      const match = url.match(/(home\/.+)/);
+      if (match?.[1]) usedImagePaths.add(match[1]);
+    });
   }
 
   // ✅ Collect image URLs from Posts

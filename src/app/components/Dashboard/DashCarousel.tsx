@@ -101,7 +101,7 @@ export default function DashHomeSettings() {
 
       <div className="w-full px-4 lg:px-8 mb-6">
         {imageUrl && (
-          <div className="border border-gray-200 shadow-sm overflow-hidden rounded">
+          <div className="shadow-sm overflow-hidden rounded">
             <Image
               src={imageUrl}
               alt="Homepage hero image"

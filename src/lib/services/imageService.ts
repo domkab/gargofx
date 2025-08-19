@@ -4,7 +4,6 @@ import { connect } from '../mongodb/mongoose';
 import LogoSliderModel from '../models/LogoSliderModel';
 import Post from '../models/postModel';
 import {
-  // getUploadsBaseDir,
   getUploadsPath
 } from '@/utils/uploadPath';
 
@@ -36,53 +35,6 @@ export async function getCarouselImages(): Promise<string[]> {
 
   return images;
 }
-
-// export async function getCarouselImages(): Promise<string[]> {
-//   const uploadsDir = getUploadsBaseDir();
-//   const homeDir = path.join(uploadsDir, 'home');
-//   const postsDir = path.join(uploadsDir, 'posts');
-
-//   console.log('Uploads Directory:', uploadsDir);
-//   console.log('Home Directory:', homeDir);
-//   console.log('Posts Directory:', postsDir);
-
-//   const shouldSkipWrites =
-//     process.env.NEXT_PHASE === 'phase-production-build' ||
-//     process.env.NODE_ENV === 'production';
-
-//   const postImages: string[] = [];
-
-//   if (!fs.existsSync(uploadsDir) && !shouldSkipWrites) {
-//     fs.mkdirSync(uploadsDir, { recursive: true });
-//   }
-
-//   let first: string | undefined = undefined;
-//   if (fs.existsSync(homeDir)) {
-//     first = fs.readdirSync(homeDir).find((name) =>
-//       name.includes('home-default')
-//     );
-//   }
-
-//   if (fs.existsSync(postsDir)) {
-//     const postDirs = fs.readdirSync(postsDir).filter((name) => {
-//       const fullPath = path.join(postsDir, name);
-//       return !name.startsWith('.') && fs.statSync(fullPath).isDirectory();
-//     });
-
-//     for (const dir of postDirs) {
-//       const files = fs.readdirSync(path.join(postsDir, dir));
-//       const mainImg = files.find((f) => f.includes('main'));
-//       if (mainImg) postImages.push(`/uploads/posts/${dir}/${mainImg}`);
-//     }
-//   }
-
-//   console.log('postImages:', postImages);
-
-//   return [
-//     first ? `/uploads/home/${first}` : '',
-//     ...postImages,
-//   ].filter(Boolean);
-// }
 
 export function deleteOldHomeDefaultImages() {
   const homeDir = path.dirname(getUploadsPath('home/placeholder.tmp'));

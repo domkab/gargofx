@@ -6,6 +6,15 @@ const ImageCarouselSchema = new Schema({
   carouselOptions: {
     loop: { type: Boolean, default: false },
     transitionTime: { type: Number, default: 3000 },
+    effect: {
+      type: String,
+      enum: ['fade', 'slide', 'cube'],
+      default: 'fade',
+    },
+    autoplay: {
+      enabled: { type: Boolean, default: true },
+      delay: { type: Number, default: 5000 },
+    },
   },
   updatedAt: { type: Date, default: Date.now },
 });

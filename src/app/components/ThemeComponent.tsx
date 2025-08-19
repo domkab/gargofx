@@ -13,7 +13,7 @@ function ThemeContent({ children }: { children: React.ReactNode }) {
       className={`min-h-screen ${
         theme === 'dark'
           ? 'bg-gray-900 text-gray-200'
-          : 'bg-transparent text-gray-700'
+          : 'bg-white text-gray-700'
       }`}
     >
       {children}

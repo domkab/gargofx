@@ -56,17 +56,17 @@ jobs:
 
             echo "== getfacl =="
             getfacl /var/www/gargofx | sed -n '1,80p'
-      - name: Upload home-default.jpg
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          source: public/uploads/home-default.jpg
-          target: /var/www/gargofx/uploads
-          overwrite: true
-          strip_components: 3
-          debug: true
+      # - name: Upload home-default.jpg
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.VPS_HOST }}
+      #     username: ${{ secrets.VPS_USER }}
+      #     key: ${{ secrets.VPS_SSH_KEY }}
+      #     source: public/uploads/home-default.jpg
+      #     target: /var/www/gargofx/uploads
+      #     overwrite: true
+      #     strip_components: 3
+      #     debug: true
 
 
   # --- 2) Build in CI ---

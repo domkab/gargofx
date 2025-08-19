@@ -12,8 +12,12 @@
     }
 
     &-image {
-      z-index: 0;
+      // z-index: 0;
       max-height: 772px;
+
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.75);
 
       filter: brightness(0.75);
 
@@ -30,7 +34,7 @@
       padding: 0 20px;
 
       @include onLaptop {
-        padding: 0 60px;
+        padding: 0 $header-title-container-padding;
       }
     }
 
@@ -40,8 +44,8 @@
       font-weight: bold;
 
       @include onLaptop {
-        font-size: 66px;
-        line-height: 80px;
+        font-size: $hero-title-font-size;
+        line-height: $hero-title-line-height;
       }
     }
 
@@ -53,8 +57,8 @@
       font-style: italic;
 
       @include onLaptop {
-        font-size: 40px;
-        line-height: 40px;
+        font-size: $hero-subtitle-font-size;
+        line-height: $hero-subtitle-line-height;
       }
     }
   }
@@ -64,9 +68,10 @@
     flex-direction: column;
     align-items: center;
 
-    margin: 20px;
+    padding: 20px;
     @include onLaptop {
-      margin: 140px 60px 0 60px;
+      // margin: 140px 60px 0 60px;
+      padding: 60px $header-title-container-padding;
     }
   }
 
@@ -78,9 +83,9 @@
     font-weight: 600;
 
     @include onLaptop {
-      text-align: start;
-      font-size: 60px;
-      line-height: 80px;
+      text-align: center;
+      font-size: 36px;
+      line-height: 68px;
     }
   }
 
@@ -92,9 +97,9 @@
     line-height: 24px;
 
     @include onLaptop {
-      font-size: 40px;
+      font-size: 24px;
       line-height: 80px;
-      margin-top: 80px;
+      margin-top: 20px;
     }
   }
 
@@ -106,22 +111,23 @@
 
   &__content {
     &-wrapper {
-      margin: 0 20px;
+      padding: 0 20px;
+      margin-bottom: 80px;
       @include onLaptop {
-        margin: 0 60px
+        padding: 0 $header-title-container-padding;
       }
 
-      @include onLaptopL {
-        max-width: 1440px;
-        margin: 0 auto;
-      }
+      // @include onLaptopL {
+      //   max-width: 1440px;
+      //   margin: 0 auto;
+      // }
     }
 
     &-block {
-      height: 200px;
-      @include onLaptop {
-        height: 600px;
-      }
+      // height: 200px;
+      // @include onLaptop {
+      //   height: 600px;
+      // }
 
       &-image {
         border: 1px solid transparent;
@@ -148,10 +154,10 @@
 
 
     @include onLaptop {
-      font-size: 40px;
-      line-height: 80px;
-      margin-top: 80px;
-      margin-bottom: 160px;
+      font-size: 24px;
+      line-height: 50px;
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
   }
 }

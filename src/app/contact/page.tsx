@@ -15,7 +15,8 @@ export default async function ContactPage() {
   return (
     <main
       className={clsx(
-        contactPage['contact'], 'contact max-h-full'
+        contactPage['contact'], 'contact max-h-full',
+        'flex flex-col items-center justify-center',
       )}>
 
       <section className={clsx('contact__hero', 'relative', 'w-full')}>
@@ -25,7 +26,7 @@ export default async function ContactPage() {
           className={clsx(
             contactPage['contact__hero-text-container'],
             'text-start',
-            'text-white',
+            'text-white/95',
             'z-10',
           )}
         >

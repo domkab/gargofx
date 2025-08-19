@@ -25,7 +25,7 @@ export default function HomeImageCarousel({ images }: Props) {
       <Swiper
         modules={[EffectFade, Autoplay]}
         effect="fade"
-        // autoplay={{ delay: 23000, disableOnInteraction: false }}
+        // autoplay={{ delay: 5000, disableOnInteraction: false }}
         fadeEffect={{ crossFade: true }}
         speed={1800}
         // loop
@@ -39,6 +39,7 @@ export default function HomeImageCarousel({ images }: Props) {
               fill
               quality={90}
               priority={idx === 0}
+              unoptimized
               className='object-cover'
             />
           </SwiperSlide>

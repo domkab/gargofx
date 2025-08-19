@@ -23,8 +23,11 @@
 
   &__text {
     position: absolute;
-    top: 50%;
+    // top: 50%;
     line-height: 24px;
+
+    top: 68%;
+    left: 3%;
 
     @include onLaptop {
       font-size: 65px;

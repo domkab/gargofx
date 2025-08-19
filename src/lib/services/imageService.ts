@@ -2,36 +2,56 @@ import fs from 'fs';
 import path from 'path';
 import { connect } from '../mongodb/mongoose';
 import LogoSliderModel from '../models/LogoSliderModel';
+import Post from '../models/postModel';
+import {
+  getUploadsPath
+} from '@/utils/uploadPath';
+
+
+import { ImageCarousel } from '@/lib/models/ImageCarouselModel';
 
 export async function getCarouselImages(): Promise<string[]> {
-  const uploadsDir = path.join(process.cwd(), 'public/uploads');
+  await connect();
 
-  if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true });
+  const images: string[] = [];
+
+  // Get main home image
+  const main = await ImageCarousel.findOne().lean() as { heroImageUrl?: string };
+
+  if (main?.heroImageUrl) {
+    images.push(main.heroImageUrl);
+  } else {
+    console.warn('No main home image found in ImageCarousel');
   }
 
-  const first = fs.readdirSync(uploadsDir).find(name =>
-    name.includes('home-default')
-  );
+  // Get post main images
+  const posts = await Post.find({}, { heroImage: 1 }).lean();
 
-  const postsDir = path.join(uploadsDir, 'posts');
-  const postDirs = fs.readdirSync(postsDir).filter(name => {
-    const fullPath = path.join(postsDir, name);
-    return !name.startsWith('.') && fs.statSync(fullPath).isDirectory();
-  });
-
-  const postImages: string[] = [];
-
-  for (const dir of postDirs) {
-    const files = fs.readdirSync(path.join(postsDir, dir));
-    const mainImg = files.find(f => f.includes('main'));
-    if (mainImg) postImages.push(`/uploads/posts/${dir}/${mainImg}`);
+  for (const post of posts) {
+    if (post.heroImage?.url) {
+      images.push(post.heroImage.url);
+    }
   }
 
-  return [
-    first ? `/uploads/${first}` : '',
-    ...postImages,
-  ].filter(Boolean);
+  return images;
+}
+
+export function deleteOldHomeDefaultImages() {
+  const homeDir = path.dirname(getUploadsPath('home/placeholder.tmp'));
+
+  if (!fs.existsSync(homeDir)) return;
+
+  const files = fs.readdirSync(homeDir);
+
+  files
+    .filter((name) => name.startsWith('home-default'))
+    .forEach((name) => {
+      try {
+        fs.unlinkSync(path.join(homeDir, name));
+      } catch (err) {
+        console.error('Failed to delete old home image:', err);
+      }
+    });
 }
 
 

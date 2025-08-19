@@ -215,7 +215,7 @@ export default function DashPosts() {
                     {new Date(post.updatedAt).toLocaleDateString()}
                   </TableCell>
                   <TableCell>
-                    <Link href={`/post/${post.slug}`}>
+                    <Link href={`/projects/${post.slug}`}>
                       <Image
                         src={post.heroImage?.url || '/images/placeholder/placeholder.png'}
                         alt={post.title.regular
@@ -230,8 +230,8 @@ export default function DashPosts() {
                   </TableCell>
                   <TableCell>
                     <Link
-                      className="font-medium text-gray-900 dark:text-white"
-                      href={`/post/${post.slug}`}
+                      className="font-medium text-gray-900 dark:text-white/95"
+                      href={`/projects/${post.slug}`}
                     >
                       <span>
                         {post.title.regular

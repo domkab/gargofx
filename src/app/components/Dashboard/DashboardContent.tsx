@@ -12,6 +12,7 @@ import DashImageSettings from './DashImageSettings';
 import DashFeaturedPosts from './FeaturedPosts/DashFeaturedPosts';
 import DashHomeLayout from './DashHomeLayout';
 import DashLogoSlider from './DashLogoSlider';
+import DashCarousel from './DashCarousel';
 
 export default function DashboardContent() {
   const searchParams = useSearchParams();
@@ -41,6 +42,7 @@ export default function DashboardContent() {
         <DashSidebar />
       </div>
       {tab === 'profile' && <DashProfile />}
+      {tab === 'image-slider' && <DashCarousel />}
       {tab === 'home-settings' && <DashHomeLayout />}
       {tab === 'posts' && <DashPosts />}
       {tab === 'featured-posts' && <DashFeaturedPosts />}

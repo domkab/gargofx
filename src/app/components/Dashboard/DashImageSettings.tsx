@@ -58,7 +58,7 @@ export default function DashImageSettings() {
       {toast && (
         <div className="fixed top-4 right-4 z-50">
           <div
-            className={`p-4 rounded-lg shadow-md text-white ${toast.type === 'success' ? 'bg-green-600' : 'bg-red-600'
+            className={`p-4 rounded-lg shadow-md text-white/95 ${toast.type === 'success' ? 'bg-green-600' : 'bg-red-600'
               }`}
           >
             {toast.message}
@@ -72,7 +72,7 @@ export default function DashImageSettings() {
         <button
           onClick={handleSync}
           disabled={loading}
-          className="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 disabled:opacity-50"
+          className="px-4 py-2 bg-teal-600 text-white/95 rounded hover:bg-teal-700 disabled:opacity-50"
         >
           {loading ? 'Syncing...' : '📥 Sync Images from Firebase'}
         </button>
@@ -80,7 +80,7 @@ export default function DashImageSettings() {
         <button
           onClick={handleCleanup}
           disabled={loading}
-          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
+          className="px-4 py-2 bg-red-600 text-white/95 rounded hover:bg-red-700 disabled:opacity-50"
         >
           {loading ? 'Cleaning up...' : '🗑 Cleanup Unused Images'}
         </button>

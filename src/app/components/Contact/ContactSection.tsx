@@ -3,6 +3,7 @@ import styles from '@/styles/components/contact.module.scss';
 import ContactForm from './ContactForm';
 import { JSX } from 'react';
 import { facebook, instagram, x } from '@/lib/constants';
+import { Divider } from '../Divider';
 
 type ContactSectionProps = {
   as?: keyof JSX.IntrinsicElements;
@@ -17,13 +18,16 @@ export default function ContactSection({
 
   return (
     <Component className={clsx(styles.contact, className)}>
+      <Divider
+        className={styles['contact__divider']}
+      />
       <div
         className={clsx(
           styles['contact__header'],
           'flex flex-col md:flex-row md:items-center md:justify-between mb-10'
         )}
       >
-        <h2 className={clsx(styles['contact__title'], 'text-white mb-4 md:mb-0')}>
+        <h2 className={clsx(styles['contact__title'], 'text-white/95 mb-4 md:mb-0')}>
           contact
         </h2>
 

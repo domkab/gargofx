@@ -124,7 +124,7 @@ export default function DashLogoSlider() {
       {toast && (
         <div className="fixed top-4 right-4 z-50">
           <div
-            className={`p-4 rounded-lg shadow-md text-white 
+            className={`p-4 rounded-lg shadow-md text-white/95 
               ${toast.type === 'success' ? 'bg-green-600' : 'bg-red-600'}`
             }
           >

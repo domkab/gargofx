@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [metadata, main]
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Bootstrap uploads dir / ACLs (deploy+domka write, caddy read)
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -31,7 +34,7 @@ jobs:
             sudo apt-get install -y acl
 
             # Create tree (edit this for project-specific cases)
-            sudo mkdir -p /var/www/gargofx/uploads/{posts,featured-posts,logo-slider}
+            sudo mkdir -p /var/www/gargofx/uploads/{home,posts,featured-posts,logo-slider}
 
             # Base ownership & perms
             sudo chown -R deploy:deploy /var/www/gargofx
@@ -53,6 +56,18 @@ jobs:
 
             echo "== getfacl =="
             getfacl /var/www/gargofx | sed -n '1,80p'
+      # - name: Upload home-default.jpg
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.VPS_HOST }}
+      #     username: ${{ secrets.VPS_USER }}
+      #     key: ${{ secrets.VPS_SSH_KEY }}
+      #     source: public/uploads/home-default.jpg
+      #     target: /var/www/gargofx/uploads
+      #     overwrite: true
+      #     strip_components: 3
+      #     debug: true
+
 
   # --- 2) Build in CI ---
   build:
@@ -73,6 +88,7 @@ jobs:
 
       - name: Prepare upload folders
         run: |
+          mkdir -p public/uploads/home
           mkdir -p public/uploads/posts
           mkdir -p public/uploads/featured-posts
           mkdir -p public/uploads/logo-slider

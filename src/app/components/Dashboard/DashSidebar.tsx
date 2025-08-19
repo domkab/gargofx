@@ -49,6 +49,12 @@ export default function DashSidebar() {
                 </SidebarItem>
               </Link>
 
+              <Link href="/dashboard?tab=image-slider">
+                <SidebarItem active={tab === 'image-slider'} icon={FiFilm} as="div">
+                  Image Slider
+                </SidebarItem>
+              </Link>
+
               <Link href="/dashboard?tab=home-settings">
                 <SidebarItem active={tab === 'home-settings'} icon={HiHome} as="div">
                   Home Page

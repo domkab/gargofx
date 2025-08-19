@@ -58,7 +58,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {/* Descriptions */}
 
-        <div className={styles['project__desc-container']}>
+        <section className={styles['project__desc-container']}>
           {post.description && <p className={styles['project__desc']}>{post.description}</p>}
 
           {post.optionalDescription && (
@@ -70,7 +70,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               {post.optionalDescription}
             </p>
           )}
-        </div>
+        </section>
 
         <Divider marginBottom={30} className={styles['project__separator']} />
 
@@ -97,11 +97,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   )}
                 >
                   <Image
+                    className={clsx(styles['project__content-block-image'])}
                     src={getImageUrl(block.url)}
                     alt={block.alt || ''}
-                    fill
+                    width={2150}
+                    height={772}
                     unoptimized
-                    className={clsx(styles['project__content-block-image'])}
                   />
                 </div>
               ) : block.type === 'video' ? (
@@ -122,11 +123,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {/* Credits */}
 
-        <div className={clsx(styles['project__credits'])}>
-          {post.credits?.split('\n').map((line, i) => (
-            <p key={i}>{line}</p>
-          ))}
-        </div>
+        {post.credits && post.credits.trim() !== '' && (
+          <div className={clsx(styles['project__credits'])}>
+            {post.credits.split('\n').map((line, i) => (
+              <p key={i}>{line}</p>
+            ))}
+          </div>
+        )}
       </main>
     </>
 

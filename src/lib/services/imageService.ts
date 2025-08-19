@@ -9,6 +9,10 @@ export async function getCarouselImages(): Promise<string[]> {
   const homeDir = path.join(uploadsDir, 'home');
   const postsDir = path.join(uploadsDir, 'posts');
 
+  console.log('Uploads Directory:', uploadsDir);
+  console.log('Home Directory:', homeDir);
+  console.log('Posts Directory:', postsDir);
+  
   const shouldSkipWrites =
     process.env.NEXT_PHASE === 'phase-production-build' ||
     process.env.NODE_ENV === 'production';

@@ -16,8 +16,6 @@ export default async function FeaturedProjectsLayout() {
   const layout: FeaturedLayoutRow[] = await getFeaturedLayout();
   const images = await getCarouselImages();
 
-  console.log('Featured Projects Layout - Images:', images);
-
   if (!layout?.length) return null;
 
   return (

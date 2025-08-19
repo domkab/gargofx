@@ -10,7 +10,7 @@ export async function getCarouselImages(): Promise<string[]> {
     fs.mkdirSync(uploadsDir, { recursive: true });
   }
 
-  const first = fs.readdirSync(uploadsDir).find(name =>
+  const first = fs.readdirSync(`${uploadsDir}/home`).find(name =>
     name.includes('home-default')
   );
 
@@ -29,7 +29,7 @@ export async function getCarouselImages(): Promise<string[]> {
   }
 
   return [
-    first ? `/uploads/${first}` : '',
+    first ? `/uploads//home/${first}` : '',
     ...postImages,
   ].filter(Boolean);
 }

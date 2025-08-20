@@ -14,6 +14,7 @@ import PageViewTracker from './components/Tracking/PageViewTracker';
 import { LayoutMetadata } from './metadata';
 import SiteJsonLd from './SiteJsonLd';
 import Footer from './components/Footer/Footer';
+import Script from 'next/script';
 
 export const metadata = LayoutMetadata;
 
@@ -51,6 +52,14 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={bodyClassName}>
+          {/* umami analytics */}
+          <Script
+            src="https://cloud.umami.is/script.js"
+            data-website-id="165a502b-ddf3-4886-8356-69ace46f9514"
+            strategy="afterInteractive"
+            defer
+          />
+
           <SiteJsonLd />
           <BodyFontManager />
           <ReduxProvider>
@@ -62,8 +71,6 @@ export default function RootLayout({
                 <NavigationLoader />
                 <PageViewTracker />
                 <GA />
-                {/* <LoadingComp /> */}
-
                 <CookieBannerToggle />
                 {children}
                 <Footer />

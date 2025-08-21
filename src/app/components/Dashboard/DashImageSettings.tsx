@@ -15,31 +15,13 @@ export default function DashImageSettings() {
     setToast(null);
 
     try {
-      const { data } = await axios.post('/api/image/sync-fb');
+      const { data } = await axios.post('/api/image/full-sync');
       setToast({ type: 'success', message: data.message || 'Images synced successfully!' });
     } catch (err) {
       const message =
         axios.isAxiosError(err) && err.response?.data?.message
           ? err.response.data.message
           : 'Sync failed. Please try again.';
-      setToast({ type: 'error', message });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleCleanup = async () => {
-    setLoading(true);
-    setToast(null);
-
-    try {
-      const { data } = await axios.post('/api/image/cleanup-featured');
-      setToast({ type: 'success', message: data.message || 'Cleanup successful!' });
-    } catch (err) {
-      const message =
-        axios.isAxiosError(err) && err.response?.data?.message
-          ? err.response.data.message
-          : 'Cleanup failed.';
       setToast({ type: 'error', message });
     } finally {
       setLoading(false);
@@ -75,14 +57,6 @@ export default function DashImageSettings() {
           className="px-4 py-2 bg-teal-600 text-white/95 rounded hover:bg-teal-700 disabled:opacity-50"
         >
           {loading ? 'Syncing...' : '📥 Sync Images from Firebase'}
-        </button>
-
-        <button
-          onClick={handleCleanup}
-          disabled={loading}
-          className="px-4 py-2 bg-red-600 text-white/95 rounded hover:bg-red-700 disabled:opacity-50"
-        >
-          {loading ? 'Cleaning up...' : '🗑 Cleanup Unused Images'}
         </button>
       </div>
     </div>

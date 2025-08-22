@@ -117,10 +117,10 @@
         padding: 0 $header-title-container-padding;
       }
 
-      // @include onLaptopL {
-      //   max-width: 1440px;
-      //   margin: 0 auto;
-      // }
+      @include onDekstop {
+        max-width: 2500px;
+        margin: 0 auto 80px auto;
+      }
     }
 
     &-block {

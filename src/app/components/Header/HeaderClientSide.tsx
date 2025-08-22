@@ -146,22 +146,19 @@ export default function HeaderClientSide() {
           )}
         >
           <Logo />
-
-          <Image
-            src="/icons/close.svg"
-            alt='close icon'
-            width={32}
-            height={32}
-            unoptimized
-            onClick={closeMenu}
-            className={clsx(
-              'cursor-pointer',
-              'text-white/95 text-3xl leading-none',
-              styles['header__burger-close'],
-            )}
-            aria-label="Close menu"
-          />
-
+          <button onClick={closeMenu} aria-label="close Menu" >
+            <Image
+              src="/icons/close.svg"
+              alt='close icon'
+              width={32}
+              height={32}
+              unoptimized
+              className={clsx(
+                'text-white/95 text-3xl leading-none',
+                styles['header__burger-close'],
+              )}
+            />
+          </button>
         </div>
 
         {/* Mobile Navigation */}
@@ -170,7 +167,7 @@ export default function HeaderClientSide() {
             'header__nav-mobile',
             styles['header__nav-mobile'],
             'flex flex-col items-center gap-8 flex-1 justify-start',
-            'mt-12'
+            'pt-12'
           )}
         >
           {navItems.map((item) => {

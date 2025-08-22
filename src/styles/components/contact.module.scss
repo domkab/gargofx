@@ -2,8 +2,15 @@
 @use '@/styles/_mixins' as *;
 
 .contact {
-  // margin-top: 48px auto;
+  &__divider {
+    @include onMobile {
+      // display: none;
+      margin-top: 24px !important;
+    }
+  }
+
   margin-bottom: 80px;
+  padding: 0 20px;
 
   &__header {
     flex-direction: column;

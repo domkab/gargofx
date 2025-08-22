@@ -41,13 +41,7 @@
     padding: 20px;
 
     @include onLaptop {
-
       margin: 24px auto 72px auto;
     }
-
-    // @include onLaptopL {
-    //   margin: 0 auto 60px auto;
-    //   max-width: 1200px;
-    // }
   }
 }

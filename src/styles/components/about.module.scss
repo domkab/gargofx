@@ -36,23 +36,24 @@
   }
 
   &__content {
+    margin-top: 68px;
     margin-bottom: 68px;
+
+    @include onMobile {
+      margin-top: 36px;
+      margin-bottom: 36px;
+    }
+
     @include onLaptop {
       padding: 0 $header-title-container-padding
     }
-
-    // @include onLaptopL {
-    //   max-width: 1440px;
-    //   margin: 102px auto 0 auto;
-    // }
 
     &-title {
       font-weight: 400;
       line-height: 26px;
       text-align: center;
-      // font-style: italic;
 
-      margin-top: 68px;
+      padding: 0 20px;
 
       @include onMobile {
         font-size: 14px;
@@ -61,7 +62,6 @@
       @include onLaptop {
         font-size: 36px;
         line-height: 68px;
-        // padding: 0 200px;
         padding: 0 15%;
       }
     }
@@ -105,6 +105,12 @@
 
       @include onMobile {
         font-size: 14px;
+      }
+    }
+
+    &-divider-bottom {
+      @include onMobile {
+        margin-bottom: 24px !important;
       }
     }
   }

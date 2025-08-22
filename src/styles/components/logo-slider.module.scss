@@ -34,8 +34,9 @@
         margin-right: 140px;
 
         @include onMobile {
-          height: 80px;
-          max-width: 80px;
+          height: 60px;
+          max-width: 60px;
+          margin-right: 40px;
         }
       }
     }

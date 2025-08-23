@@ -100,8 +100,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     className={clsx(styles['project__content-block-image'])}
                     src={getImageUrl(block.url)}
                     alt={block.alt || ''}
-                    width={2150}
-                    height={772}
+                    // width={2150}
+                    // height={400}
+                    fill
                     unoptimized
                   />
                 </div>

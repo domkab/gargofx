@@ -13,6 +13,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { DeleteMainImageButton } from '@/app/components/Dashboard/DeleteImage/DeleteMainImageButton';
 import { generateSlug, getSlugSource } from '@/utils/generateSlug';
 import ContentBlockEditor from '@/app/components/PostEditor/ContentBlockEditor';
+import router from 'next/router';
 
 export default function CreatePostPage() {
   const { isSignedIn, user, isLoaded } = useUser();
@@ -52,10 +53,9 @@ export default function CreatePostPage() {
         return;
       }
 
-      localStorage.setItem('publishSuccess', 'Post published successfully!');
       setPublishSuccess('Post published successfully!');
 
-      // setTimeout(() => window.location.reload(), 2000);
+      setTimeout(() => router.push(`/dashboard?tab=posts`), 3000);
     } catch (error: unknown) {
       setPublishError(`Something went wrong: ${error}`);
     }

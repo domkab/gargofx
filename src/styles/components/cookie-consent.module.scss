@@ -1,0 +1,81 @@
+@use '@/styles/_mixins' as *;
+@use '@/styles/vars' as *;
+
+.banner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: black;
+  opacity: 0.90;
+  color: white;
+  padding: 1rem;
+  z-index: 9999;
+
+  flex-wrap: wrap;
+
+  @include onLaptop {
+    height: 80px;
+  }
+}
+
+.content {
+  font-size: 0.875rem;
+
+  @include onMobile {
+    text-align: center;
+  }
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  gap: 1rem;
+
+  .accept,
+  .decline {
+    opacity: 1 !important;
+    border-radius: 9999px;
+    padding: 0.1625rem 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  @include onMobile {
+    margin-top: 1rem;
+  }
+}
+
+.accept {
+  background: $color-secondary;
+  color: white;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: darken($color-secondary, 10%);
+    transform: scale(1.05);
+  }
+}
+
+.decline {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: white;
+    color: black;
+    transform: scale(1.02);
+  }
+}
+
+.link {
+  color: $color-secondary;
+  text-decoration: underline;
+}

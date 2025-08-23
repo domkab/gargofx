@@ -8,7 +8,7 @@
 
 @use '../styles/components/Dashboard/DashProfile.module.scss';
 @use '../styles/components/Navigation/nprogress-custom.scss';
-@use '../styles/components/home.module.scss';
+@use '../styles/components/spinner.scss';
 
 //  font settings
 
@@ -18,8 +18,4 @@ body.front {
 
 body.dashboard {
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.text-hero {
-  
 }

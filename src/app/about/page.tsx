@@ -66,9 +66,9 @@ export default async function AboutPage() {
           <h2 className={clsx(styles['about__slider-title'])}>
             Selected clients & collaborations
           </h2>
-          <Divider />
+          <Divider className={clsx(styles['about__slider-divider-top'])} />
           <LogoSlider />
-          <Divider marginBottom={80} />
+          <Divider className={clsx(styles['about__slider-divider-bottom'])} marginBottom={80} />
         </section>
 
         <section className={clsx(styles['about__content'])}>

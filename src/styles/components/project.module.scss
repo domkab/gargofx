@@ -114,29 +114,39 @@
       padding: 0 20px;
       margin-bottom: 80px;
       @include onLaptop {
-        padding: 0 $header-title-container-padding;
+        padding: 0 200px;
       }
 
-      // @include onLaptopL {
-      //   max-width: 1440px;
-      //   margin: 0 auto;
-      // }
+      @include onDekstop {
+        max-width: 2500px;
+        margin: 0 auto 80px auto;
+      }
     }
 
     &-block {
-      // height: 200px;
-      // @include onLaptop {
-      //   height: 600px;
-      // }
+      height: 200px;
+      @include onLaptop {
+        height: 400px;
+      }
 
       &-image {
         border: 1px solid transparent;
         border-radius: 14px;
+
+        @include onLaptop {
+          // object-fit: cover;
+          // object-fit: contain;
+          // object-fit: fill;
+        }
       }
 
       &-video {
         border: 1px solid transparent;
         border-radius: 14px;
+
+        @include onLaptop {
+          height: 400px;
+        }
       }
     }
   }

@@ -30,7 +30,7 @@ export const POST = withAdminAuth(async (_user, req: NextRequest) => {
     const fileName = `${target}-${Date.now()}-${uuidv4()}.webp`;
     const relativePath =
       target === 'featured'
-        ? `featured-posts/${fileName}`
+        ? `featured-posts/${slug}-${fileName}`
         : `posts/${slug}/${fileName}`;
 
     const filePath = getUploadsPath(relativePath);

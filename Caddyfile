@@ -24,6 +24,10 @@ gargofx.com {
   }
 }
 
+staging.gargofx.com {
+  reverse_proxy localhost:3100
+}
+
 analytics.gargofx.com {
   encode zstd gzip
 

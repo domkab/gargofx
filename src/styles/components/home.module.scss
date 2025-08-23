@@ -90,33 +90,33 @@
         @include blocks.blocks-image-base();
       }
     }
-  }
 
-  .home__featured-all {
-    // margin-top: 24px;
-    // margin-bottom: 24px;
+    &-all {
+      @include onLaptop {
+        margin-top: 36px;
+        margin-bottom: 36px;
+      }
 
-    @include onLaptop {
-      margin-top: 36px;
-      margin-bottom: 36px;
-    }
-  }
+      &-link {
+        font-size: 24px;
+        line-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        transition: color 0.3s ease;
 
-  .home__featured-all-link {
-    font-size: 24px;
-    line-height: 48px;
-    display: inline-flex;
-    align-items: center;
-    transition: color 0.3s ease;
+        @include onMobile {
+          margin: 18px 0;
+        }
 
-    &:hover {
-      color: $color-secondary;
+        &:hover {
+          color: $color-secondary;
 
-      img {
-        filter: brightness(0) saturate(100%) invert(34%) sepia(97%) saturate(636%) hue-rotate(142deg) brightness(88%) contrast(92%);
-        transition: filter 0.3s ease;
+          img {
+            filter: brightness(0) saturate(100%) invert(34%) sepia(97%) saturate(636%) hue-rotate(142deg) brightness(88%) contrast(92%);
+            transition: filter 0.3s ease;
+          }
+        }
       }
     }
   }
-
 }

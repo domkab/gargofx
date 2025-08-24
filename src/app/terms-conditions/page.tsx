@@ -69,43 +69,10 @@ const TermsAndConditions = () => {
             </p>
           </section>
 
-          {/* 4 Ads & Affiliate */}
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
-              4. Advertising &amp; Affiliate Disclosure
-            </h2>
-
-            <p className="mb-3">
-              The Site is monetised through:
-            </p>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                <strong>Affiliate links</strong> (e.g.&nbsp;Amazon Associates). If you click a link and purchase,
-                we may earn a commission at no extra cost to you.
-              </li>
-              <li>
-                <strong>Google AdSense</strong> display ads. Google and its partners use cookies or identifiers to
-                serve personalised or contextual ads and measure performance.&nbsp;
-                <a
-                  href="https://policies.google.com/technologies/ads"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-teal-600 dark:text-teal-400 hover:underline"
-                >
-                  Learn more <FiExternalLink className="ml-1" size={14} />
-                </a>
-              </li>
-            </ul>
-            <p className="mt-4">
-              Sponsored articles or paid placements will always be labelled “Sponsored”, “Advertisement” or
-              “Promotion”. Opinions remain our own.
-            </p>
-          </section>
-
           {/* 5 Third-Party Links */}
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
-              5. Third-Party Links &amp; Services
+              4. Third-Party Links &amp; Services
             </h2>
             <p>
               We may link to or embed third-party sites (e.g.&nbsp;YouTube). We are not responsible for their
@@ -115,7 +82,7 @@ const TermsAndConditions = () => {
 
           {/* 6 No Advice */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">6. No Professional Advice</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">5. No Professional Advice</h2>
             <p>
               Content is for general information only and is not professional, financial, legal or technical
               advice. You act on any information at your own discretion.
@@ -124,7 +91,7 @@ const TermsAndConditions = () => {
 
           {/* 7 Disclaimer */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">7. Disclaimer of Warranties</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">6. Disclaimer of Warranties</h2>
             <p>
               The Site and its content are provided “as is” and “as available” without warranties of any kind,
               express or implied (including merchantability, fitness for a particular purpose or non-infringement).
@@ -133,7 +100,7 @@ const TermsAndConditions = () => {
 
           {/* 8 Liability */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">8. Limitation of Liability</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">7. Limitation of Liability</h2>
             <p>
               To the maximum extent permitted by law, we are not liable for indirect, incidental, special,
               consequential or punitive damages, or loss of profits/revenues, arising from your use of the Site.
@@ -142,7 +109,7 @@ const TermsAndConditions = () => {
 
           {/* 9 Indemnity */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">9. Indemnification</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">8. Indemnification</h2>
             <p>
               You agree to indemnify and hold us harmless from any claims, losses or expenses (including reasonable
               attorneys’ fees) arising out of your violation of these Terms or misuse of the Site.
@@ -152,7 +119,7 @@ const TermsAndConditions = () => {
           {/* 10 Law */}
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
-              10. Governing Law&nbsp;&amp; Jurisdiction
+              9. Governing Law&nbsp;&amp; Jurisdiction
             </h2>
             <p>
               These Terms are governed by the laws of Lithuania and, where applicable, EU consumer-protection law.
@@ -204,9 +171,9 @@ const TermsAndConditions = () => {
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">1. Who We Are</h2>
             <p>
-              <span className="font-semibold">{SITE_TITLE}</span> (&quot;we&quot;, &quot;us&quot; or &quot;our&quot;) is a technology-focused blog operated from [Vilnius, Lithuania].
-              This Policy explains how we collect, use, store and share your information and how we use cookies and similar technologies.
-              It applies to www.{DOMAIN_NAME} and any sub-domains (collectively, the &quot;Site&quot;).
+              <span className="font-semibold">{SITE_NAME}</span> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is a creative studio and blog based in Vilnius, Lithuania, specializing in <strong>3D animation</strong>, <strong>visual effects (VFX)</strong>, and <strong>product renderings</strong>.
+              This Policy outlines how we collect, use, and manage your information—including how we use cookies and similar technologies.
+              It applies to www.{DOMAIN_NAME} and all of its sub-domains (collectively, the &quot;Site&quot;).
             </p>
           </section>
 
@@ -232,12 +199,6 @@ const TermsAndConditions = () => {
                     </tr>
 
                     <tr>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Newsletter Data</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">E-mail address, marketing preferences</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">&quot;Subscribe&quot; form</td>
-                    </tr>
-
-                    <tr>
                       <td className="py-2 px-4 border-b dark:border-gray-600">Usage Data</td>
                       <td className="py-2 px-4 border-b dark:border-gray-600">Pages viewed, clicks, referring URL, time on page</td>
                       <td className="py-2 px-4 border-b dark:border-gray-600">Google Analytics cookies</td>
@@ -255,7 +216,7 @@ const TermsAndConditions = () => {
                         Ad impressions, ad clicks, coarse location <br />(country/region), device identifiers
                       </td>
                       <td className="py-2 px-4 border-b dark:border-gray-600">
-                        Google AdSense cookies &amp; tags <span className="italic">(future)</span>
+                        Google AdSense cookies &amp; tags
                       </td>
                     </tr>
 
@@ -288,28 +249,11 @@ const TermsAndConditions = () => {
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Provide the Site & respond to enquiries</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Legitimate interest / Contract</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Enable you to read articles, contact us & receive replies</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Send newsletters & promotions</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Consent</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Only after you opt-in; each e-mail includes an unsubscribe link</td>
-                    </tr>
-                    <tr>
                       <td className="py-2 px-4 border-b dark:border-gray-600">Analytics & performance</td>
                       <td className="py-2 px-4 border-b dark:border-gray-600">Consent (EU/UK) / Legitimate interest (elsewhere)</td>
                       <td className="py-2 px-4 border-b dark:border-gray-600">Understand traffic, improve content & UX</td>
                     </tr>
                     <tr>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Advertising &amp; monetisation</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">
-                        Consent<span className="hidden sm:inline"> (EU/UK)</span> / Legitimate interest
-                      </td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">
-                        Serve personalised or contextual ads, measure ad performance
-                      </td>
                     </tr>
 
                     <tr>
@@ -423,20 +367,6 @@ const TermsAndConditions = () => {
                         </a>
                       </td>
                     </tr>
-                    <tr>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Amazon Associates</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Affiliate programme (future)</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">
-                        <a
-                          href="https://affiliate-program.amazon.com/help/operating/agreement"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-teal-600 dark:text-teal-400 hover:underline flex items-center"
-                        >
-                          View <FiExternalLink className="ml-1" size={14} />
-                        </a>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -476,11 +406,6 @@ const TermsAndConditions = () => {
                       <td className="py-2 px-4 border-b dark:border-gray-600">Functional</td>
                       <td className="py-2 px-4 border-b dark:border-gray-600">Persist theme (dark/light) preference</td>
                       <td className="py-2 px-4 border-b dark:border-gray-600">up to 12 months</td>
-                    </tr>
-                    <tr>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Marketing / Affiliate</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">Track outbound clicks to commerce partners</td>
-                      <td className="py-2 px-4 border-b dark:border-gray-600">up to 30 days</td>
                     </tr>
                     <tr>
                       <td className="py-2 px-4 border-b dark:border-gray-600">Advertising / AdSense</td>

@@ -2,12 +2,7 @@
 @use '@/styles/_mixins' as *;
 
 .contact {
-  &__divider {
-    @include onMobile {
-      // display: none;
-      margin-top: 24px !important;
-    }
-  }
+  // &__divider {}
 
   margin-bottom: 80px;
   padding: 0 20px;
@@ -98,7 +93,6 @@
       width: 100%;
       margin-top: 1px;
       background-color: #1E1E1E;
-      // border: 1px solid white;
       border-top: none;
       border-radius: 0px 0px 4px 4px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
@@ -110,7 +104,6 @@
         font-size: 16px;
         line-height: 24px;
         border-bottom: 1px solid white;
-        // background-color: #1E1E1E;
         cursor: pointer;
         transition: background-color 0.2s ease, color 0.2s ease;
 

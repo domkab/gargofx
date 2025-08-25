@@ -1,4 +1,3 @@
-// app/about/opengraph-image.tsx
 import { ImageResponse } from 'next/og'
 import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/constants'
 

@@ -60,30 +60,46 @@
       }
 
       @include onLaptop {
-        font-size: 36px;
-        line-height: 68px;
+        font-size: 28px;
+        line-height: 48px;
         padding: 0 15%;
       }
     }
   }
 
   &__article {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+
+
     padding: 0 40px;
     margin-bottom: 24px;
+
+    @include onLaptop {
+      max-width: 700px;
+      margin-bottom: 42px;
+      margin: 0 auto 42px auto;
+    }
   }
 
   &__subheading {
     font-size: 14px;
     font-weight: 700;
     line-height: 28px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 12px;
 
     @include onLaptop {
-      font-size: 24px;
+      font-size: 28px;
       line-height: 60px;
+      margin-bottom: 12px;
     }
   }
 
   &__paragraph {
+    text-align: center;
     font-size: 14px;
     font-weight: 100;
     line-height: 28px;
@@ -96,7 +112,7 @@
 
   &__slider {
     &-title {
-      font-size: 24px;
+      font-size: 18px;
       line-height: 80px;
       font-weight: 400;
       color: #848586;

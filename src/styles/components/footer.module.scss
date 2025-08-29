@@ -2,6 +2,7 @@
 @use '@/styles/vars' as *;
 
 .footer {
+  z-index: 10;
   background-color: $color-secondary;
   color: #1E1E1E;
 
@@ -55,7 +56,6 @@
 
     @include onLaptop {
       font-size: 18px;
-      // line-height: 60px;
     }
 
     &:hover {

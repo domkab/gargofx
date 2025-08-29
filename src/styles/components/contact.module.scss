@@ -2,13 +2,15 @@
 @use '@/styles/_mixins' as *;
 
 .contact {
-  // &__divider {}
-
   margin-bottom: 80px;
   padding: 0 20px;
 
   &__header {
     flex-direction: column;
+
+    &-if-primary {
+      justify-content: center;
+    }
 
     @include onLaptop {
       flex-direction: row;
@@ -30,6 +32,10 @@
   &__socials {
     display: flex;
     justify-content: center;
+
+    &-if-primary {
+      margin-top: 1.75rem;
+    }
   }
 
   &__socials a {

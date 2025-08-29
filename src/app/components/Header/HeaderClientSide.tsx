@@ -167,7 +167,7 @@ export default function HeaderClientSide() {
             'header__nav-mobile',
             styles['header__nav-mobile'],
             'flex flex-col items-center gap-8 flex-1 justify-start',
-            'pt-12'
+            'pt-8'
           )}
         >
           {navItems.map((item) => {

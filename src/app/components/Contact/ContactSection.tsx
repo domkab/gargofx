@@ -8,30 +8,36 @@ import { Divider } from '../Divider';
 type ContactSectionProps = {
   as?: keyof JSX.IntrinsicElements;
   className?: string;
+  displayFormTitle?: boolean;
 };
 
 export default function ContactSection({
   as = 'section',
   className,
+  displayFormTitle = true,
 }: ContactSectionProps) {
   const Component = as;
 
   return (
     <Component className={clsx(styles.contact, className)}>
-      <Divider
-        className={styles['contact__divider']}
-      />
       <div
         className={clsx(
           styles['contact__header'],
-          'flex flex-col md:flex-row md:items-center md:justify-between mb-10'
+          'flex flex-col md:flex-row md:items-center md:justify-between mb-10',
+          displayFormTitle ? '': styles['contact__header-if-primary']
         )}
       >
-        <h2 className={clsx(styles['contact__title'], 'text-white/95 mb-4 md:mb-0')}>
-          contact
-        </h2>
+        {displayFormTitle && (
+          <h2 className={clsx(styles['contact__title'], 'text-white/95 mb-4 md:mb-0')}>
+            contact
+          </h2>
+        )}
 
-        <div className={clsx(styles['contact__socials'], 'gap-8 text-secondary')}>
+        <div className={clsx(
+          styles['contact__socials'], 'gap-8 text-secondary',
+          displayFormTitle ? '' : styles['contact__socials-if-primary'],
+        )}
+        >
           <a href={facebook} target="_blank">facebook</a>
           <a href={instagram} target="_blank">instagram</a>
           <a href={x} target="_blank">x</a>
@@ -39,6 +45,6 @@ export default function ContactSection({
       </div>
 
       <ContactForm />
-    </Component>
+    </Component >
   );
 }

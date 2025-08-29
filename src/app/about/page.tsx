@@ -7,6 +7,8 @@ import LogoSlider from '../components/LogoSlider/LogoSlider';
 import { Divider } from '../components/Divider';
 import FeaturedLayout from '../components/Layout/FeaturedLayout';
 import AboutJsonLd from './AboutJsonLd';
+import ParticleClient from '../components/ParticleClient';
+
 
 export const revalidate = 300;
 export const metadata = AboutMetadata;
@@ -72,6 +74,7 @@ export default async function AboutPage() {
         </section>
 
         <section className={clsx(styles['about__content'])}>
+          <ParticleClient />
           <article className={clsx(styles['about__article'])}>
             <h3 className={clsx(styles['about__subheading'])}>
               3D Modeling

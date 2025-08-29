@@ -3,7 +3,6 @@ import styles from '@/styles/components/contact.module.scss';
 import ContactForm from './ContactForm';
 import { JSX } from 'react';
 import { facebook, instagram, x } from '@/lib/constants';
-import { Divider } from '../Divider';
 
 type ContactSectionProps = {
   as?: keyof JSX.IntrinsicElements;

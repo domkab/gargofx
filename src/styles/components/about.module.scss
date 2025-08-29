@@ -90,6 +90,7 @@
     font-size: 14px;
     font-weight: 700;
     line-height: 28px;
+    margin-bottom: 12px;
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 12px;
@@ -117,14 +118,14 @@
   &__slider {
     &-title {
       font-size: 18px;
-      line-height: 80px;
+      line-height: 36px;
       font-weight: 400;
       color: #848586;
       text-transform: uppercase;
       text-align: center;
 
       @include onMobile {
-        font-size: 14px;
+        font-size: 10px;
       }
     }
 

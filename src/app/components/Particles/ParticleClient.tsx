@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import type { ISourceOptions } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
+import { loadEmittersPlugin } from '@tsparticles/plugin-emitters'
 
 export default function ParticlesClient() {
   const [ready, setReady] = useState(false);
@@ -11,7 +12,10 @@ export default function ParticlesClient() {
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
+      await loadEmittersPlugin(engine);
+
     }).then(() => setReady(true));
+
   }, []);
 
   const options: ISourceOptions = useMemo(

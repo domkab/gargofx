@@ -7,7 +7,7 @@ import LogoSlider from '../components/LogoSlider/LogoSlider';
 import { Divider } from '../components/Divider';
 import FeaturedLayout from '../components/Layout/FeaturedLayout';
 import AboutJsonLd from './AboutJsonLd';
-import ParticleClient from '../components/ParticleClient';
+import ParticleClient from '../components/Particles/ParticleClient';
 
 
 export const revalidate = 300;

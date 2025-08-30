@@ -4,7 +4,9 @@
 
 .home {
   &__carousel {
-    z-index: 10;
+    position: relative;
+    width: 100%;
+    z-index: 0;
     height: 284px;
 
     @include onLaptop {
@@ -13,7 +15,7 @@
   }
 
   &__text-container {
-    bottom: 20%;
+    // bottom: 0%;
     right: 40px;
     padding: 0 20px;
 
@@ -24,10 +26,9 @@
 
   &__text {
     position: absolute;
-    // top: 50%; 
     line-height: 24px;
 
-    top: 68%;
+    top: 66%;
     left: 3%;
 
     @include onLaptop {

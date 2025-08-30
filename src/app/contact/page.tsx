@@ -50,7 +50,10 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      <ContactSection className={clsx(contactPage['contact__section'])} />
+      <ContactSection
+        displayFormTitle={false}
+        className={clsx(contactPage['contact__section'])}
+      />
     </main>
   );
 }

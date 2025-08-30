@@ -24,7 +24,6 @@ export default async function FeaturedProjectsLayout() {
       <main
         className={clsx(
           'flex flex-col items-center justify-center',
-          // 'min-h-[70vh]',
         )}>
 
         <section className={clsx(
@@ -61,13 +60,11 @@ export default async function FeaturedProjectsLayout() {
             </p>
           </div>
 
-          {/* Divider line */}
           <Divider
             marginTop={44}
             marginLeft={20}
             marginRight={20}
           />
-
         </section>
 
         <FeaturedLayout />

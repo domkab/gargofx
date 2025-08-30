@@ -23,7 +23,7 @@ export default async function Home() {
         )}
       >
         <section className={clsx('relative', 'w-full')}>
-          <HomeImageCarousel images={images} />
+          <HomeImageCarousel images={images}/>
 
           <div
             className={clsx(

@@ -52,7 +52,6 @@ export default function Footer() {
                 href={phoneRef}
                 className="uppercase tracking-wide text-sm font-normal"
               >
-                {/* <b>TEL:</b>  */}
                 {phone}
               </Link>
             </div>

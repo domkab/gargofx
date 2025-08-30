@@ -19,16 +19,16 @@ export default function HomeImageCarousel({ images }: Props) {
     <div
       className={clsx(
         styles['home__carousel'],
-        'w-full relative z-0'
       )}
     >
       <Swiper
         modules={[EffectFade, Autoplay]}
         effect="fade"
-        // autoplay={{ delay: 5000, disableOnInteraction: false }}
+        autoplay={{ delay: 10000, disableOnInteraction: false }}
         fadeEffect={{ crossFade: true }}
-        speed={1800}
-        // loop
+        speed={3000}
+        allowTouchMove={false}
+        loop
         className="h-full"
       >
         {images.map((img, idx) => (

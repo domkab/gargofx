@@ -12,7 +12,6 @@
     }
 
     &-image {
-      // z-index: 0;
       max-height: 772px;
 
       object-fit: cover;
@@ -70,7 +69,6 @@
 
     padding: 20px;
     @include onLaptop {
-      // margin: 140px 60px 0 60px;
       padding: 60px $header-title-container-padding;
     }
   }
@@ -114,12 +112,9 @@
       padding: 0 20px;
       margin-bottom: 80px;
       @include onLaptop {
-        padding: 0 200px;
-      }
-
-      @include onDekstop {
-        max-width: 2500px;
+        max-width: 1440px;
         margin: 0 auto 80px auto;
+        padding: 0 200px;
       }
     }
 
@@ -132,12 +127,7 @@
       &-image {
         border: 1px solid transparent;
         border-radius: 14px;
-
-        @include onLaptop {
-          // object-fit: cover;
-          // object-fit: contain;
-          // object-fit: fill;
-        }
+        object-fit: cover;
       }
 
       &-video {

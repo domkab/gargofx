@@ -134,6 +134,17 @@ export default function ContentBlockItem({
               />
             </div>
           )}
+
+          <div>
+            <label className="block mb-1 text-sm text-gray-600 dark:text-gray-300">Layout</label>
+            <Select
+              value={block.layout}
+              onChange={(e) => handleChange('layout', e.target.value as 'full' | 'half')}
+            >
+              <option value="full">Full Width</option>
+              <option value="half">Half Width</option>
+            </Select>
+          </div>
         </>
       )}
 

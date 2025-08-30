@@ -40,7 +40,7 @@ export default async function FeaturedLayout() {
                 }
               )}
             >
-              <Link href={`/post/${block.post?.slug}`}>
+              <Link href={`/projects/${block.post?.slug}`}>
                 <picture>
                   {block.image?.mobile?.url && (
                     <source

@@ -14,9 +14,10 @@ import 'react-circular-progressbar/dist/styles.css';
 import { DeleteMainImageButton } from '@/app/components/Dashboard/DeleteImage/DeleteMainImageButton';
 import { generateSlug, getSlugSource } from '@/utils/generateSlug';
 import ContentBlockEditor from '@/app/components/PostEditor/ContentBlockEditor';
-import router from 'next/router';
+
 
 export default function UpdatePost() {
+  // const router = useRouter();
   const { isSignedIn, user, isLoaded } = useUser();
   const [publishError, setPublishError] = useState<string | null>(null);
   const [publishSuccess, setPublishSuccess] = useState<string | null>(null);
@@ -57,7 +58,7 @@ export default function UpdatePost() {
 
       setPublishSuccess('Post updated successfully!');
 
-      router.push(`/dashboard?tab=posts`);
+      // router.push(`/dashboard?tab=posts`);
     } catch (error: unknown) {
       setPublishError(`Something went wrong: ${error}`);
     }

@@ -82,16 +82,19 @@ export default async function HomePageLayout() {
       >
         <Link
           href="/projects"
-          className={styles['home__featured-all-link']}
+          className={clsx(
+            styles['home__featured-all-link'],
+            'mr-3'
+          )}
         >
-          <img
+          {/* <img
             src="/icons/chevron-right.svg"
             alt="View all projects"
             width={22}
             height={22}
             className="inline-block mr-3"
-          />
-          View all projects
+          /> */}
+          View All Projects
         </Link>
       </div>
     </section >

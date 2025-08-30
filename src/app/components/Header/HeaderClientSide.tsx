@@ -167,7 +167,7 @@ export default function HeaderClientSide() {
             'header__nav-mobile',
             styles['header__nav-mobile'],
             'flex flex-col items-center gap-8 flex-1 justify-start',
-            'pt-12'
+            'pt-8'
           )}
         >
           {navItems.map((item) => {
@@ -242,17 +242,11 @@ export default function HeaderClientSide() {
                   'mt-3 md:mt-0'
                 )}
                 >
-                  <span
-                    className={footerStyles['footer__followus']}
-                  >
-                    FOLLOW US
-                  </span>
-
                   <Link href={facebook} target="_blank">
                     <Image src="/icons/social/facebook.svg"
                       alt="facebook"
-                      width={48}
-                      height={48}
+                      width={30}
+                      height={30}
                       unoptimized
                     />
                   </Link>
@@ -260,8 +254,8 @@ export default function HeaderClientSide() {
                   <Link href={instagram} target="_blank">
                     <Image src="/icons/social/instagram.svg"
                       alt="instagram"
-                      width={48}
-                      height={48}
+                      width={30}
+                      height={30}
                       unoptimized
                     />
                   </Link>
@@ -269,8 +263,8 @@ export default function HeaderClientSide() {
                   <Link href={x} target="_blank">
                     <Image src="/icons/social/x.svg"
                       alt="x"
-                      width={48}
-                      height={48}
+                      width={30}
+                      height={30}
                       unoptimized
                     />
                   </Link>

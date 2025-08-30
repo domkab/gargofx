@@ -51,6 +51,7 @@
 }
 
 .accept {
+  width: 140px;
   background: $color-secondary;
   color: white;
   transition: background 0.2s ease, transform 0.2s ease;
@@ -62,6 +63,7 @@
 }
 
 .decline {
+  width: 140px;
   border: 1px solid white;
   background: transparent;
   color: white;

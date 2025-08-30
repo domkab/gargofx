@@ -7,6 +7,8 @@ import LogoSlider from '../components/LogoSlider/LogoSlider';
 import { Divider } from '../components/Divider';
 import FeaturedLayout from '../components/Layout/FeaturedLayout';
 import AboutJsonLd from './AboutJsonLd';
+import ParticleClient from '../components/Particles/ParticleClient';
+
 
 export const revalidate = 300;
 export const metadata = AboutMetadata;
@@ -57,9 +59,9 @@ export default async function AboutPage() {
 
         <section className={clsx(styles['about__content'])}>
           <h2 className={clsx(styles['about__content-title'])}>
-            We’re a creative team specializing in 3D design, animation, and visual effects. From stylized content to photorealistic renders, we help brands and studios bring ideas to life.
+            We’re a <em>creative</em> team specializing in <em>3D design</em>, <em>animation</em>, and <em>visual</em> <em>effects</em>.
+            From stylized content to photorealistic renders, we help brands and studios bring <em>ideas</em> <em>to</em> <em>life</em>.
           </h2>
-
         </section>
 
         <section className={clsx(styles['about__slider'])}>
@@ -72,6 +74,7 @@ export default async function AboutPage() {
         </section>
 
         <section className={clsx(styles['about__content'])}>
+          <ParticleClient />
           <article className={clsx(styles['about__article'])}>
             <h3 className={clsx(styles['about__subheading'])}>
               3D Modeling

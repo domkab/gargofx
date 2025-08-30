@@ -100,8 +100,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     className={clsx(styles['project__content-block-image'])}
                     src={getImageUrl(block.url)}
                     alt={block.alt || ''}
-                    // width={2150}
-                    // height={400}
                     fill
                     unoptimized
                   />
@@ -123,7 +121,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </section>
 
         {/* Credits */}
-
         {post.credits && post.credits.trim() !== '' && (
           <div className={clsx(styles['project__credits'])}>
             {post.credits.split('\n').map((line, i) => (

@@ -21,7 +21,6 @@ $dim-sat: .9 !default;
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, .15);
     opacity: 0;
     transition: opacity .4s ease;
     pointer-events: none;

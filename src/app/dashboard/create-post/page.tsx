@@ -31,7 +31,6 @@ export default function CreatePostPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('calling handleSubmit with formData:', formData);
 
     try {
       const { data, status } = await axios.post(
@@ -55,10 +54,12 @@ export default function CreatePostPage() {
       }
 
       setPublishSuccess('Post published successfully!');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
       setTimeout(() => router.push(`/dashboard?tab=posts`), 3000);
     } catch (error: unknown) {
       setPublishError(`Something went wrong: ${error}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

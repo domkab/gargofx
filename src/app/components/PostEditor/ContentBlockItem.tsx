@@ -18,7 +18,9 @@ type Props = {
 };
 
 function convertYouTubeUrlToEmbed(url: string) {
-  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+  const match = url.match(
+    /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  );
   return match ? `https://www.youtube.com/embed/${match[1]}` : url;
 }
 

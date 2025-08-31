@@ -34,6 +34,7 @@ export default function UpdatePost() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
       const { data, status } = await axios.put(
         '/api/post/update',
@@ -57,10 +58,12 @@ export default function UpdatePost() {
       }
 
       setPublishSuccess('Post updated successfully!');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
       // router.push(`/dashboard?tab=posts`);
     } catch (error: unknown) {
       setPublishError(`Something went wrong: ${error}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

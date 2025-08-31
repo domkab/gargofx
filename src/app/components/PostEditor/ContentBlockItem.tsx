@@ -17,11 +17,28 @@ type Props = {
   isLast: boolean;
 };
 
+// function convertYouTubeUrlToEmbed(url: string) {
+//   const match = url.match(
+//     /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+//   );
+//   return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+// }
+
 function convertYouTubeUrlToEmbed(url: string) {
-  const match = url.match(
+  const idMatch = url.match(
     /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
   );
-  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+  const id = idMatch?.[1];
+  if (!id) return url;
+
+  const params = new URLSearchParams({
+    rel: '0',
+    modestbranding: '1',
+    playsinline: '1',
+    iv_load_policy: '3',
+  });
+
+  return `https://www.youtube.com/embed/${id}?${params.toString()}`;
 }
 
 export default function ContentBlockItem({

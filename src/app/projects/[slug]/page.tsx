@@ -102,6 +102,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     alt={block.alt || ''}
                     fill
                     unoptimized
+                    draggable={false}
                   />
                 </div>
               ) : block.type === 'video' ? (

@@ -20,12 +20,12 @@ body {
   background: var(--background);
 }
 
-img {
-  -webkit-user-drag: none; /* Safari, Chrome */
-  -khtml-user-drag: none;  /* Old Konqueror */
-  -moz-user-drag: none;    /* Firefox (behind a pref, not always working) */
-  -o-user-drag: none;      /* Old Opera */
-  user-drag: none;         /* Standard (not widely supported yet) */
-  user-select: none;       /* Prevent text selection ghost image */
-  pointer-events: none;    /* optional: if you also want clicks disabled */
+img, picture, figure img {
+  -webkit-user-drag: none; /* Chrome / Safari / Edge */
+  user-select: none;       /* avoid ghost highlight */
+  -webkit-user-select: none;
+}
+
+a img {
+  -webkit-user-drag: none;
 }

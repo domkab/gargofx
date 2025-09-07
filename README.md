@@ -25,7 +25,9 @@ dashboard variables for dark mode:
 
 updating packgaes:
 
-npx npm-check-updates --reject tailwindcss,flowbite-react
+  to update bulk of most packages without breaking the core dependancies:
+
+    npx npm-check-updates --reject tailwindcss,flowbite-react
 
 then:
 

@@ -17,13 +17,6 @@ type Props = {
   isLast: boolean;
 };
 
-// function convertYouTubeUrlToEmbed(url: string) {
-//   const match = url.match(
-//     /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-//   );
-//   return match ? `https://www.youtube.com/embed/${match[1]}` : url;
-// }
-
 function convertYouTubeUrlToEmbed(url: string) {
   const idMatch = url.match(
     /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
@@ -33,6 +26,8 @@ function convertYouTubeUrlToEmbed(url: string) {
 
   const params = new URLSearchParams({
     rel: '0',
+    loop: '1',
+    playlist: id,
     modestbranding: '1',
     playsinline: '1',
     iv_load_policy: '3',

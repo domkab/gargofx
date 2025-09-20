@@ -88,14 +88,14 @@
   }
 
   &__opt-desc {
-    max-width: 1440px;
+    max-width: 774px;
     text-align: center;
     text-transform: uppercase;
     font-size: 12px;
     line-height: 24px;
 
     @include onLaptop {
-      font-size: 24px;
+      font-size: 18px;
       line-height: 80px;
       margin-top: 20px;
     }

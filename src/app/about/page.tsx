@@ -64,14 +64,16 @@ export default async function AboutPage() {
           </h2>
         </section>
 
-        <section className={clsx(styles['about__slider'])}>
+        <Divider />
+
+        {/* <section className={clsx(styles['about__slider'])}>
           <h2 className={clsx(styles['about__slider-title'])}>
             Selected clients & collaborations
           </h2>
           <Divider className={clsx(styles['about__slider-divider-top'])} />
           <LogoSlider />
           <Divider className={clsx(styles['about__slider-divider-bottom'])} marginBottom={80} />
-        </section>
+        </section> */}
 
         <section className={clsx(styles['about__content'])}>
           <ParticleClient />
@@ -140,7 +142,16 @@ export default async function AboutPage() {
           </article>
         </section>
 
-        <Divider />
+        <section className={clsx(styles['about__slider'])}>
+          <h2 className={clsx(styles['about__slider-title'])}>
+            Selected clients & collaborations
+          </h2>
+          <Divider className={clsx(styles['about__slider-divider-top'])} />
+          <LogoSlider />
+          <Divider className={clsx(styles['about__slider-divider-bottom'])} marginBottom={80} />
+        </section>
+
+        {/* <Divider /> */}
 
         <FeaturedLayout />
       </main >

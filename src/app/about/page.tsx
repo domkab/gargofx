@@ -77,6 +77,16 @@ export default async function AboutPage() {
 
         <section className={clsx(styles['about__content'])}>
           <ParticleClient />
+
+          <article className={clsx(styles['about__article'])}>
+            <h3 className={clsx(styles['about__subheading'])}>
+              3D Animation
+            </h3>
+            <p className={clsx(styles['about__paragraph'])}>
+              Full-service animation including character animation, motion graphics, and explainer animations.<br /> Ideal for film, games, and branded content.
+            </p>
+          </article>
+
           <article className={clsx(styles['about__article'])}>
             <h3 className={clsx(styles['about__subheading'])}>
               3D Modeling
@@ -84,15 +94,6 @@ export default async function AboutPage() {
             <p className={clsx(styles['about__paragraph'])}>
               Custom-built characters, environments, props, and product models <br /> for animation,
               games, and visualizations.
-            </p>
-          </article>
-
-          <article className={clsx(styles['about__article'])}>
-            <h3 className={clsx(styles['about__subheading'])}>
-              3D animation
-            </h3>
-            <p className={clsx(styles['about__paragraph'])}>
-              Full-service animation including character animation, motion graphics, and explainer animations.<br /> Ideal for film, games, and branded content.
             </p>
           </article>
 

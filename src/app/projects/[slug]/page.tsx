@@ -7,21 +7,49 @@ import clsx from 'clsx';
 import { Divider } from '@/app/components/Divider';
 import { getImageUrl } from '@/utils/getImageUrl';
 import ProjectJsonLd from './ProjectJsonLd';
-import { generateProjectMetadata } from './generateProjectMetadata';
 import { Metadata } from 'next';
 
 export const revalidate = 120;
 
-export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> }
-): Promise<Metadata> {
-  const { slug } = await params;
+export const dynamic = 'force-dynamic';
 
-  return generateProjectMetadata(slug);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata(args: any): Promise<Metadata> {
+  const slug = args?.params?.slug as string;
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    return {
+      title: { absolute: 'Not found' },
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const titleText = [post.title?.bold, post.title?.regular].filter(Boolean).join(' ').trim();
+  const desc = post.description || post.optionalDescription || 'Project';
+  const heroUrl = post.heroImage?.url ? getImageUrl(post.heroImage.url) : undefined;
+
+  return {
+    title: { absolute: `${titleText} — YourSite` },
+    description: desc,
+    openGraph: {
+      type: 'article',
+      title: titleText,
+      description: desc,
+      ...(heroUrl ? { images: [{ url: heroUrl, width: 1200, height: 630 }] } : {}),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: titleText,
+      description: desc,
+      ...(heroUrl ? { images: [heroUrl] } : {}),
+    },
+  };
 }
 
-export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function PostPage(props: any) {
+  const { slug } = await props.params;
   const post: IPost | null = await getPostBySlug(slug);
 
   if (!post) {

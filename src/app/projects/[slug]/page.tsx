@@ -8,6 +8,7 @@ import { Divider } from '@/app/components/Divider';
 import { getImageUrl } from '@/utils/getImageUrl';
 import ProjectJsonLd from './ProjectJsonLd';
 import { Metadata } from 'next';
+import { SITE_NAME } from '@/lib/constants';
 
 export const revalidate = 120;
 
@@ -30,7 +31,7 @@ export async function generateMetadata(args: any): Promise<Metadata> {
   const heroUrl = post.heroImage?.url ? getImageUrl(post.heroImage.url) : undefined;
 
   return {
-    title: { absolute: `${titleText} — YourSite` },
+    title: { absolute: `${titleText} — ${SITE_NAME}` },
     description: desc,
     openGraph: {
       type: 'article',

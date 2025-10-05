@@ -55,14 +55,12 @@
   &__featured {
     max-width: 1440px;
     padding: 0 20px;
-    // margin: 0 auto;
 
     &-title-container {
       margin-top: 24px;
       margin-bottom: 24px;
 
       @include onLaptop {
-        // margin-bottom: 36px;
         margin-top: 36px;
         margin-bottom: 36px;
       }

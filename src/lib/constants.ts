@@ -14,9 +14,9 @@ export const phone = '+370 6 155 0539';
 
 // refs
 export const phoneRef = 'tel:+37061550539';
-export const mailRef = 'mailto:laurynas.gargasas@gmail.com'
-export const mail = 'laurynas.gargasas@gmail.com';
+export const mailRef = 'mailto:laurynas.gargofx@gmail.com'
+export const mail = 'laurynas.gargofx@gmail.com';
 
 //  metadata
 
-export const HOME_DESCRIPTION = 'GargoFX is a 3D animation and VFX studio delivering game trailers, product visualization, and cinematic content for brands and studios.'
+export const HOME_DESCRIPTION = 'GargoFX is a 3D animation studio creating cinematic ads, product films, and realistic visual content that helps brands stand out.'

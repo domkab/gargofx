@@ -6,12 +6,13 @@ export const projectsMetadata: Metadata = {
   ...seoDefaults,
   title: { absolute: `${SITE_NAME} | Featured Projects` },
   description:
-    'Explore our featured 3D animation, VFX, and product render projects from 2024–2025.',
+    'Discover GargoFX projects — cinematic 3D animations, product films, and realistic renders crafted for brands and studios worldwide.',
   keywords: [
-    'featured 3D projects',
-    'VFX portfolio',
-    'product render showcase',
-    'animation highlights',
+    '3D animation projects',
+    'product film portfolio',
+    'cinematic ads',
+    '3D renders showcase',
+    'GargoFX work',
   ],
   alternates: { canonical: '/projects' },
 }

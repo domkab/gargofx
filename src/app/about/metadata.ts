@@ -6,13 +6,13 @@ export const revalidate = 300
 export const AboutMetadata: Metadata = {
   title: { absolute: `${SITE_NAME} | About Us` },
   description:
-    'Meet the GargoFX team — a creative collective specializing in 3D design, animation, VFX, and product visualization for brands, games, and studios worldwide.',
+    'GargoFX is a 3D animation studio built on precision, creativity, and storytelling. We craft cinematic visuals — from product films to full 3D ads — driven by a passion for design and detail.',
   keywords: [
-    'About GargoFX',
-    '3D animation studio team',
-    'VFX artists',
-    'product visualization experts',
-    'game cinematic creators',
+    'GargoFX studio',
+    '3D animation studio',
+    'cinematic product films',
+    '3D ads',
+    '3D design and animation',
   ],
   alternates: { canonical: '/about' },
 }

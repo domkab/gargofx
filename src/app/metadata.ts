@@ -8,17 +8,18 @@ import { Metadata } from 'next';
 export const LayoutMetadata: Metadata = {
   ...seoDefaults,
   title: {
-    default: `${SITE_NAME} | 3D Animation, VFX & Product Renders`,
-    template: `%s — ${SITE_NAME} | 3D Animation, VFX & Product Renders`,
+    default: `${SITE_NAME} | Cinematic 3D Animation & Product Films`,
+    template: `%s — ${SITE_NAME} | Cinematic 3D Animation & Product Films`,
   },
   description: HOME_DESCRIPTION,
   keywords: [
-    '3D animation',
-    'VFX studio',
-    'game trailers',
+    '3D animation studio',
+    'product animation',
+    'cinematic ads',
     'product visualization',
-    'cinematics',
-    'motion graphics',
+    '3D rendering',
+    'commercial animation',
+    'GargoFX',
   ],
-    alternates: { canonical: '/'},
-}
+  alternates: { canonical: '/' },
+};

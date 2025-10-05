@@ -14,9 +14,10 @@ export const revalidate = 120;
 
 export const dynamic = 'force-dynamic';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function generateMetadata(args: any): Promise<Metadata> {
-  const slug = args?.params?.slug as string;
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post) {
@@ -48,9 +49,9 @@ export async function generateMetadata(args: any): Promise<Metadata> {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function PostPage(props: any) {
-  const { slug } = await props.params;
+
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const post: IPost | null = await getPostBySlug(slug);
 
   if (!post) {

@@ -82,8 +82,11 @@
     @include onLaptop {
       display: flex;
       justify-content: space-around;
-      padding: 0 15%;
       margin-bottom: 42px;
+    }
+
+    @include onLaptopL {
+      padding: 0 15%;
     }
 
 
@@ -96,6 +99,7 @@
 
       @include onTablet {
         width: 200px;
+        height: 80px;
         margin: 36px auto 0;
       }
 

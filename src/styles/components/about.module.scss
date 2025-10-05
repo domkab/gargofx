@@ -71,19 +71,22 @@
   }
 
   &__article {
-    padding: 0;
-    margin-bottom: 24px;
+    padding: 0 40px;
 
     @include onLaptop {
       display: flex;
       justify-content: space-between;
 
       max-width: 700px;
-      margin-bottom: 42px;
+      padding: 0;
       margin: 0 auto 42px auto;
     }
 
     &-logo {
+      @include onMobile {
+        width: 200px;
+        margin:  36px auto 0;
+      }
 
       @include onLaptop {
         // display: block;
@@ -116,10 +119,13 @@
     font-size: 14px;
     font-weight: 100;
     line-height: 28px;
+    text-align: center;
 
     @include onLaptop {
+      text-align: left;
       font-size: 24px;
       line-height: 48px;
+      padding-right: 2rem;
     }
   }
 

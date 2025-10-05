@@ -7,7 +7,7 @@ import AgreeCheckbox from './AgreeCheckbox';
 export default async function ContactForm() {
   return (
     <form
-      action="https://formspree.io/f/mnndyryb"
+      action="https://formspree.io/f/xyzdlwoe"
       method="POST"
       className={styles['contact__form']}
     >

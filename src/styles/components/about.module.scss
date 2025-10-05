@@ -71,17 +71,27 @@
   }
 
   &__article {
-    padding: 0 40px;
+    padding: 0;
     margin-bottom: 24px;
 
     @include onLaptop {
       display: flex;
-      flex-flow: column wrap;
-      align-items: center;
+      justify-content: space-between;
 
       max-width: 700px;
       margin-bottom: 42px;
       margin: 0 auto 42px auto;
+    }
+
+    &-logo {
+
+      @include onLaptop {
+        // display: block;
+        // width: 200px;
+        // height: auto;
+        // margin-left: 40px;
+        // flex-shrink: 0;
+      }
     }
   }
 
@@ -108,7 +118,6 @@
     line-height: 28px;
 
     @include onLaptop {
-      text-align: center;
       font-size: 24px;
       line-height: 48px;
     }

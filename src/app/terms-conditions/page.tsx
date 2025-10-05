@@ -56,23 +56,38 @@ const TermsAndConditions = () => {
 
           {/* 3 Acceptable Use */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">3. Acceptable Use</h2>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>Follow all applicable laws and regulations.</li>
-              <li>No unlawful, defamatory, harassing or obscene material.</li>
-              <li>No scraping, crawling or automated copying without consent.</li>
-              <li>No viruses, malware or harmful code.</li>
-              <li>No interference with Site security or access controls.</li>
-            </ul>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
+              3. Acceptable Use
+            </h2>
             <p className="mt-4">
-              We may suspend or terminate access for violations or conduct harmful to the Site or its users.
+              You may use this website for lawful purposes only. You may not misuse the website, attempt to gain unauthorized access, or interfere with its functionality.
             </p>
           </section>
 
-          {/* 5 Third-Party Links */}
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
-              4. Third-Party Links &amp; Services
+              4. Client Work and Portfolio
+            </h2>
+            <p>
+              The showcased work represents projects completed by Gargofx and its collaborators. Such work may include projects created under client contracts. Display of client work does not grant permission for its reuse.
+            </p>
+          </section>
+
+          {/* 5. Limitation of Liability */}
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
+              5. Limitation of Liability
+            </h2>
+            <p>
+              To the maximum extent permitted by law, Gargofx and Laurynas Gargasas shall not be liable for any damages, losses, or claims arising out of or related to your use of the website.
+
+            </p>
+          </section>
+
+          {/* 6 Third-Party Links */}
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
+              6. Third-Party Links &amp; Services
             </h2>
             <p>
               We may link to or embed third-party sites (e.g.&nbsp;YouTube). We are not responsible for their
@@ -80,27 +95,32 @@ const TermsAndConditions = () => {
             </p>
           </section>
 
-          {/* 6 No Advice */}
+          {/* 7 International Use */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">5. No Professional Advice</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
+              7. International Use
+            </h2>
             <p>
-              Content is for general information only and is not professional, financial, legal or technical
-              advice. You act on any information at your own discretion.
+              We make no representation that this website or its content is appropriate or available for use outside Lithuania. Accessing the website from territories where its content is unlawful is prohibited. If you access the website from outside Lithuania, you do so at your own risk and responsibility.
             </p>
           </section>
 
-          {/* 7 Disclaimer */}
+          {/* 8 Disclaimer */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">6. Disclaimer of Warranties</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">8. Disclaimer of Warranties</h2>
             <p>
               The Site and its content are provided “as is” and “as available” without warranties of any kind,
               express or implied (including merchantability, fitness for a particular purpose or non-infringement).
             </p>
           </section>
 
+
+
           {/* 8 Liability */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">7. Limitation of Liability</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
+              9. Limitation of Liability
+            </h2>
             <p>
               To the maximum extent permitted by law, we are not liable for indirect, incidental, special,
               consequential or punitive damages, or loss of profits/revenues, arising from your use of the Site.
@@ -109,7 +129,9 @@ const TermsAndConditions = () => {
 
           {/* 9 Indemnity */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">8. Indemnification</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
+              10. Indemnification
+            </h2>
             <p>
               You agree to indemnify and hold us harmless from any claims, losses or expenses (including reasonable
               attorneys’ fees) arising out of your violation of these Terms or misuse of the Site.
@@ -119,7 +141,7 @@ const TermsAndConditions = () => {
           {/* 10 Law */}
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
-              9. Governing Law&nbsp;&amp; Jurisdiction
+              11. Governing Law&nbsp;&amp; Jurisdiction
             </h2>
             <p>
               These Terms are governed by the laws of Lithuania and, where applicable, EU consumer-protection law.
@@ -130,8 +152,14 @@ const TermsAndConditions = () => {
 
           {/* 11 Contact */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">11. Contact</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">
+              12. Contact
+            </h2>
             <ul className="space-y-2">
+
+              <li className="flex items-center">
+                Laurynas Gargasas
+              </li>
               <li className="flex items-center">
                 <FiMail className="mr-2" />
                 E-mail:&nbsp;
@@ -141,9 +169,6 @@ const TermsAndConditions = () => {
                 >
                   contact@{SITE_NAME}.com
                 </a>
-              </li>
-              <li>
-                Postal: [Company Name], [Street Address], [City], [Postcode], Lithuania.
               </li>
             </ul>
           </section>
@@ -163,23 +188,13 @@ const TermsAndConditions = () => {
         </h1>
 
         <div className="text-sm text-gray-500 dark:text-gray-400 mb-8 text-center">
-          Last updated: 3 August 2025
+          Last updated: 3 October 2025
         </div>
 
         <div className=" max-w-none">
-          {/* Section 1 */}
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">1. Who We Are</h2>
-            <p>
-              <span className="font-semibold">{SITE_NAME}</span> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is a creative studio and blog based in Vilnius, Lithuania, specializing in <strong>3D animation</strong>, <strong>visual effects (VFX)</strong>, and <strong>product renderings</strong>.
-              This Policy outlines how we collect, use, and manage your information—including how we use cookies and similar technologies.
-              It applies to www.{DOMAIN_NAME} and all of its sub-domains (collectively, the &quot;Site&quot;).
-            </p>
-          </section>
-
           {/* Section 2 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">2. The Data We Collect</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">1. The Data We Collect</h2>
 
             <figure className="rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
               <div className="overflow-x-auto">
@@ -216,7 +231,7 @@ const TermsAndConditions = () => {
                         Ad impressions, ad clicks, coarse location <br />(country/region), device identifiers
                       </td>
                       <td className="py-2 px-4 border-b dark:border-gray-600">
-                        Google AdSense cookies &amp; tags
+                        Google AdSense cookies &amp; tags, Meta Pixel
                       </td>
                     </tr>
 
@@ -235,7 +250,7 @@ const TermsAndConditions = () => {
 
           {/* Section 3 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">3. How & Why We Collect It</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">2. How & Why We Collect It</h2>
 
             <figure className="rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
               <div className="overflow-x-auto">
@@ -274,7 +289,7 @@ const TermsAndConditions = () => {
 
           {/* Section 4 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">4. Where & How We Store Your Data</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">3. Where & How We Store Your Data</h2>
 
             <ul className="list-disc pl-5 mb-4 space-y-2">
               <li>
@@ -297,7 +312,7 @@ const TermsAndConditions = () => {
 
           {/* Section 5 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">5. Third-Party Services</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">4. Third-Party Services</h2>
 
             <figure className="rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
               <div className="overflow-x-auto">
@@ -375,7 +390,7 @@ const TermsAndConditions = () => {
 
           {/* Section 6 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">6. Cookies & Similar Technologies</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">5. Cookies & Similar Technologies</h2>
 
             <p className="mb-4">
               <span className="font-semibold">What are cookies?</span> Cookies are small text files stored on your device when you visit a website. We use:
@@ -422,7 +437,7 @@ const TermsAndConditions = () => {
 
           {/* Section 7 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">7. Your Rights (GDPR & similar laws)</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">6. Your Rights (GDPR & similar laws)</h2>
 
             <p className="mb-4">
               You may, at any time:
@@ -463,7 +478,7 @@ const TermsAndConditions = () => {
 
           {/* Section 8 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">8. International Transfers</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">7. International Transfers</h2>
             <p>
               Your data may be processed in countries outside the EEA/UK (e.g., US). We rely on EU–US Data Privacy Framework or Standard Contractual Clauses to protect it.
             </p>
@@ -471,7 +486,7 @@ const TermsAndConditions = () => {
 
           {/* Section 9 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">9. Changes to This Policy</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">8. Changes to This Policy</h2>
             <p>
               We may update this Policy periodically. We will post the new version and, if changes are significant, notify subscribers by e-mail. Check &quot;Last updated&quot; date for current version.
             </p>
@@ -479,20 +494,22 @@ const TermsAndConditions = () => {
 
           {/* Section 10 */}
           <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">10. Contact Us</h2>
+            <h2 className="text-2xl font-bold mb-4 text-teal-600 dark:text-teal-400">9. Contact Us</h2>
             <p className="mb-4">
-              If you have questions about privacy or cookies, reach us at:
+              For privacy-related inquiries, please contact:
             </p>
             <ul className="space-y-2">
+
+              <li className="flex items-center">
+                Laurynas Gargasas
+              </li>
+
               <li className="flex items-center">
                 <FiMail className="mr-2" />
                 E-mail:
                 <a href={`mailto:contact@${SITE_NAME}.com`}
                   className="text-teal-600 dark:text-teal-400 hover:underline ml-1">contact@{SITE_NAME}.com
                 </a>
-              </li>
-              <li>
-                Postal: [Company Name], [Street Address], [City], [Postcode], Lithuania.
               </li>
             </ul>
           </section>

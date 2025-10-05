@@ -36,6 +36,8 @@
   }
 
   &__content {
+    display: flex;
+    justify-content: center;
     position: relative;
     overflow: hidden;
     margin-top: 68px;
@@ -73,14 +75,18 @@
   &__article {
     padding: 0 40px;
 
+    @include onTablet {
+      padding: 0;
+    }
+
     @include onLaptop {
       display: flex;
-      justify-content: space-between;
-
-      max-width: 700px;
-      padding: 0;
-      margin: 0 auto 42px auto;
+      justify-content: space-around;
+      padding: 0 15%;
+      margin-bottom: 42px;
     }
+
+
 
     &-logo {
       @include onMobile {
@@ -94,11 +100,9 @@
       }
 
       @include onLaptop {
-        // display: block;
-        // width: 200px;
-        // height: auto;
-        // margin-left: 40px;
-        // flex-shrink: 0;
+        width: 300px;
+        height: 100px;
+        margin: auto 0;
       }
     }
   }
@@ -129,7 +133,7 @@
     @include onLaptop {
       text-align: left;
       font-size: 24px;
-      line-height: 48px;
+      line-height: 40px;
       padding-right: 2rem;
     }
   }

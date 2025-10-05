@@ -2,6 +2,17 @@
 @use '@/styles/vars' as *;
 @use '@/styles/components/blocks-shared' as blocks;
 
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-600px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .home {
   &__carousel {
     position: relative;
@@ -30,6 +41,10 @@
 
     top: 66%;
     left: 3%;
+
+    opacity: 0;
+    animation: slideInFromLeft 1.2s ease-out forwards;
+    animation-delay: 0.7s;
 
     @include onLaptop {
       font-size: 65px;

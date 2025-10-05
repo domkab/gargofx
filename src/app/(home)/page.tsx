@@ -38,12 +38,12 @@ export default async function Home() {
               )}
             >
 
-              Elevating{' '}
-              <span className='font-bold italic'>storytelling</span>
+              We create{' '}
+              <span className='font-bold italic'>3D</span>
               <br />
-              through <span className="font-bold">the</span> power
+              animation for ads
               <br />
-              <span className='italic font-semibold'>of CGI.</span>
+              <span className='italic font-semibold'>products and brands</span>
             </h1>
           </div>
         </section>

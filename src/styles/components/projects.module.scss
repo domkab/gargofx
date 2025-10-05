@@ -37,7 +37,11 @@
   }
 
   &__featured {
-    @include onLaptop {
+    @include onTablet {
+      padding: 0 40px;
+    }
+
+    @include onLaptopL {
       padding: 0 $header-title-container-padding;
     }
 

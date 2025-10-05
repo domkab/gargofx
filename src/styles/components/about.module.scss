@@ -85,7 +85,12 @@
     &-logo {
       @include onMobile {
         width: 200px;
-        margin:  36px auto 0;
+        margin: 36px auto 0;
+      }
+
+      @include onTablet {
+        width: 200px;
+        margin: 36px auto 0;
       }
 
       @include onLaptop {

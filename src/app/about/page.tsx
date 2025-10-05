@@ -8,6 +8,7 @@ import { Divider } from '../components/Divider';
 import FeaturedLayout from '../components/Layout/FeaturedLayout';
 import AboutJsonLd from './AboutJsonLd';
 import ParticleClient from '../components/Particles/ParticleClient';
+import Image from 'next/image';
 
 
 export const revalidate = 300;
@@ -25,7 +26,8 @@ export default async function AboutPage() {
         <section className={clsx(
           'about__hero',
           'relative',
-          'w-full'
+          'w-full',
+          'z-20'
         )}
         >
           <HomeImageCarousel images={images} />
@@ -59,87 +61,27 @@ export default async function AboutPage() {
 
         <section className={clsx(styles['about__content'])}>
           <h2 className={clsx(styles['about__content-title'])}>
-            We’re a <em>creative</em> team specializing in <em>3D design</em>, <em>animation</em>, and <em>visual</em> <em>effects</em>.
-            From stylized content to photorealistic renders, we help brands and studios bring <em>ideas</em> <em>to</em> <em>life</em>.
+            GargoFX is a 3D animation studio based in Vilnius, Lithuania. We create high-quality product films, commercials, and cinematic 3D visuals that help brands stand out.
           </h2>
         </section>
 
         <Divider />
 
-        {/* <section className={clsx(styles['about__slider'])}>
-          <h2 className={clsx(styles['about__slider-title'])}>
-            Selected clients & collaborations
-          </h2>
-          <Divider className={clsx(styles['about__slider-divider-top'])} />
-          <LogoSlider />
-          <Divider className={clsx(styles['about__slider-divider-bottom'])} marginBottom={80} />
-        </section> */}
-
         <section className={clsx(styles['about__content'])}>
           <ParticleClient />
 
           <article className={clsx(styles['about__article'])}>
-            <h3 className={clsx(styles['about__subheading'])}>
-              3D Animation
-            </h3>
             <p className={clsx(styles['about__paragraph'])}>
-              Full-service animation including character animation, motion graphics, and explainer animations.<br /> Ideal for film, games, and branded content.
+              From product films and commercials to high-end visuals with simulations, lighting, and realistic rendering — our work helps brands stand out and sell.
             </p>
-          </article>
 
-          <article className={clsx(styles['about__article'])}>
-            <h3 className={clsx(styles['about__subheading'])}>
-              3D Modeling
-            </h3>
-            <p className={clsx(styles['about__paragraph'])}>
-              Custom-built characters, environments, props, and product models <br /> for animation,
-              games, and visualizations.
-            </p>
-          </article>
-
-          <article className={clsx(styles['about__article'])}>
-            <h3 className={clsx(styles['about__subheading'])}>
-              Game trailers & Cinematics
-            </h3>
-            <p className={clsx(styles['about__paragraph'])}>
-              High-impact trailers, teaser videos, and in-game cinematics that bring your game’s story and style to life.<br /> Perfect for launches, Steam pages, and social media campaigns.
-            </p>
-          </article>
-
-          <article className={clsx(styles['about__article'])}>
-            <h3 className={clsx(styles['about__subheading'])}>
-              Product visualization
-            </h3>
-            <p className={clsx(styles['about__paragraph'])}>
-              Photorealistic or stylized 3D renders of products for ads, websites, and e-commerce platforms.
-            </p>
-          </article>
-
-          <article className={clsx(styles['about__article'])}>
-            <h3 className={clsx(styles['about__subheading'])}>
-              Commercial & Advertising Animation
-            </h3>
-            <p className={clsx(styles['about__paragraph'])}>
-              3D commercials tailored for online, TV, or social platforms.<br />Includes stylized ads, animated promos, and branded storytelling.
-            </p>
-          </article>
-
-          <article className={clsx(styles['about__article'])}>
-            <h3 className={clsx(styles['about__subheading'])}>
-              Visual Effects (VFX)
-            </h3>
-            <p className={clsx(styles['about__paragraph'])}>
-              Smoke, fire, fluid simulations, destruction, particle effects, and compositing for dynamic video projects.
-            </p>
-          </article>
-
-          <article className={clsx(styles['about__article'])}>
-            <h3 className={clsx(styles['about__subheading'])}>
-              3D for AR/VR
-            </h3>
-            <p className={clsx(styles['about__paragraph'])}>
-              Optimized 3D assets and immersive environments for augmented and virtual reality platforms.
-            </p>
+            <Image
+              src="/icons/Logo.svg"
+              alt="Description of image"
+              width={700}
+              height={100}
+              className={clsx(styles['about__article-logo'])}
+            />
           </article>
         </section>
 

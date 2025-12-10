@@ -3,6 +3,7 @@
 import Script from 'next/script';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const ADS_ID = 'AW-17588667984';
 
 /**
  * Loads gtag.js immediately but starts with Consent Mode = denied.
@@ -44,6 +45,7 @@ export default function GA() {
               ad_personalization: 'granted'
             });
             gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+            ${ADS_ID ? `gtag('config', '${ADS_ID}');` : ''}
           }
         `}
       </Script>

@@ -11,27 +11,32 @@ import {
   HiHome,
 } from 'react-icons/hi';
 import { FiImage, FiFilm } from 'react-icons/fi';
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+// import { useEffect, useState } from 'react';
+// import { useSearchParams } from 'next/navigation';
 import { SignOutButton, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
+
+interface DashSidebarProps {
+  tab: string;
+  onTabChange: (tab: string) => void;
+}
 
 type PublicMetadata = {
   isAdmin?: boolean;
 };
 
-export default function DashSidebar() {
-  const [tab, setTab] = useState<string>('');
-  const searchParams = useSearchParams();
+export default function DashSidebar({ tab, onTabChange }: DashSidebarProps) {
+  // const [tab, setTab] = useState<string>('');
+  // const searchParams = useSearchParams();
   const { user, isSignedIn } = useUser();
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(searchParams);
-    const tabFromUrl = urlParams.get('tab');
-    if (tabFromUrl) {
-      setTab(tabFromUrl);
-    }
-  }, [searchParams]);
+  // useEffect(() => {
+  //   const urlParams = new URLSearchParams(searchParams);
+  //   const tabFromUrl = urlParams.get('tab');
+  //   if (tabFromUrl) {
+  //     setTab(tabFromUrl);
+  //   }
+  // }, [searchParams]);
 
   if (!isSignedIn) return null;
 

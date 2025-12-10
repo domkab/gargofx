@@ -15,6 +15,7 @@ import { LayoutMetadata } from './metadata';
 import SiteJsonLd from './SiteJsonLd';
 import Footer from './components/Footer/Footer';
 import Script from 'next/script';
+import { GTMPageView } from './components/Tracking/GTMPageView';
 
 export const metadata = LayoutMetadata;
 
@@ -59,7 +60,7 @@ export default function RootLayout({
             strategy="afterInteractive"
             defer
           />
-
+          <GTMPageView />
           <SiteJsonLd />
           <BodyFontManager />
           <ReduxProvider>

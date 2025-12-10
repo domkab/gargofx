@@ -65,6 +65,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        fetch-depth: 0
+        ref: main
+
+      - name: Show package.json in CI
+        run: |
+          echo "=== package.json in CI ==="
+          cat package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -111,6 +118,11 @@ jobs:
           tar -czf release.tgz \
             --exclude='public/uploads/**' \
             .next public package.json package-lock.json
+
+      - name: Verify tar contents
+        run: |
+          echo "=== contents of release.tgz ==="
+          tar -tf release.tgz | sed -n '1,20p'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

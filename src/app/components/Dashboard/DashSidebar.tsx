@@ -48,49 +48,49 @@ export default function DashSidebar({ tab, onTabChange }: DashSidebarProps) {
         <SidebarItemGroup className="flex flex-col gap-1">
           {isAdmin && (
             <>
-              <Link href="/dashboard?tab=dash">
+              <Link href="/dashboard?tab=dash" onClick={() => onTabChange('dash')}>
                 <SidebarItem active={tab === 'dash' || !tab} icon={HiChartPie} as="div">
                   Dashboard
                 </SidebarItem>
               </Link>
 
-              <Link href="/dashboard?tab=image-slider">
+              <Link href="/dashboard?tab=image-slider" onClick={() => onTabChange('image-slider')}>
                 <SidebarItem active={tab === 'image-slider'} icon={FiFilm} as="div">
                   Image Slider
                 </SidebarItem>
               </Link>
 
-              <Link href="/dashboard?tab=home-settings">
+              <Link href="/dashboard?tab=home-settings" onClick={() => onTabChange('home-settings')}>
                 <SidebarItem active={tab === 'home-settings'} icon={HiHome} as="div">
                   Home Page
                 </SidebarItem>
               </Link>
 
-              <Link href="/dashboard?tab=posts">
+              <Link href="/dashboard?tab=posts" onClick={() => onTabChange('posts')}>
                 <SidebarItem active={tab === 'posts'} icon={HiDocumentText} as="div">
                   Posts
                 </SidebarItem>
               </Link>
 
-              <Link href="/dashboard?tab=featured-posts">
+              <Link href="/dashboard?tab=featured-posts" onClick={() => onTabChange('featured-posts')}>
                 <SidebarItem active={tab === 'featured-posts'} icon={HiStar} as="div">
                   Featured Posts
                 </SidebarItem>
               </Link>
 
-              <Link href="/dashboard?tab=logo-slider">
+              <Link href="/dashboard?tab=logo-slider" onClick={() => onTabChange('logo-slider')}>
                 <SidebarItem active={tab === 'logo-slider'} icon={FiFilm} as="div">
                   Logo Slider
                 </SidebarItem>
               </Link>
 
-              <Link href="/dashboard?tab=image-settings">
+              <Link href="/dashboard?tab=image-settings" onClick={() => onTabChange('image-settings')}>
                 <SidebarItem active={tab === 'image-settings'} icon={FiImage} as="div">
                   Image Settings
                 </SidebarItem>
               </Link>
 
-              <Link href="/dashboard?tab=users">
+              <Link href="/dashboard?tab=users" onClick={() => onTabChange('users')}>
                 <SidebarItem active={tab === 'users'} icon={HiOutlineUserGroup} as="div">
                   Users
                 </SidebarItem>

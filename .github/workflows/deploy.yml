@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Bootstrap uploads dir / ACLs (deploy+domka write, caddy read)
+      - name: Bootstrap uploads dir / ACLs (deploy write, caddy read)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -43,14 +43,12 @@ jobs:
             # ACLs (existing files/dirs)
             sudo setfacl -R  \
               -m u:deploy:rwx \
-              -m u:domka:rwx  \
               -m u:${CADDY_USER}:rx \
               /var/www/gargofx
 
             # Default ACLs (inherit for NEW files/dirs)
             sudo setfacl -dR \
               -m u:deploy:rwx \
-              -m u:domka:rwx  \
               -m u:${CADDY_USER}:rx \
               /var/www/gargofx
 

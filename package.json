@@ -7,7 +7,7 @@
     "build": "next build && echo \"✅ Build success\"",
     "clean": "rm -rf node_modules .next package-lock.json && echo 'Cleaned up project files.'",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --ext .ts,.tsx",
     "dev:debug": "node --inspect-brk node_modules/next/dist/bin/next dev",
     "type-check": "tsc --noEmit"
   },

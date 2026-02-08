@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { clerkClient, UserJSON, WebhookEvent } from '@clerk/nextjs/server'

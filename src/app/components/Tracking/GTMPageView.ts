@@ -9,7 +9,6 @@ export function GTMPageView() {
     const { pathname, search } = window.location;
     const url = search ? `${pathname}${search}` : pathname;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).dataLayer?.push({
       event: 'page_view',
       page_path: url,

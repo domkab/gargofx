@@ -23,7 +23,7 @@ export default async function Home() {
         )}
       >
         <section className={clsx('relative', 'w-full')}>
-          <HomeImageCarousel images={images}/>
+          <HomeImageCarousel images={images} />
 
           <div
             className={clsx(
@@ -38,12 +38,16 @@ export default async function Home() {
               )}
             >
 
-              We create{' '}
+              {/* We create{' '}
               <span className='font-bold italic'>3D</span>
               <br />
               animation for ads
               <br />
-              <span className='italic font-semibold'>products and brands</span>
+              <span className='italic font-semibold'>products and brands</span> */}
+              <span className='font-bold'>
+                3D animation for <br />
+                  products and brands
+              </span>
             </h1>
           </div>
         </section>

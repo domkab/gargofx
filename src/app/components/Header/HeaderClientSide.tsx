@@ -59,7 +59,11 @@ export default function HeaderClientSide() {
     return () => window.removeEventListener('resize', setWidth);
   }, []);
 
-  const navItems = ['projects', 'about', 'contact'];
+  const navItems = [
+    'projects',
+    // 'about',
+    'contact'
+  ];
 
   return (
     <header

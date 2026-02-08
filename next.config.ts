@@ -21,15 +21,12 @@ const nextConfig: NextConfig = {
         hostname: 'laurynogargasoapiserver.xyz',
         pathname: '/uploads/**',
       },
-            {
+      {
         protocol: 'http',
         hostname: 'localhost',
         pathname: '/uploads/**',
       },
     ],
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
 };
 

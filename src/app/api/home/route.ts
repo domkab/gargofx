@@ -23,7 +23,7 @@ export const POST = withAdminAuth(async (_user, body: { rows: HomePageLayoutRow[
     await homePageLayoutModel.deleteMany();
     await homePageLayoutModel.insertMany(body.rows);
 
-    revalidateTag('home');
+    revalidateTag('home', 'default');
     revalidatePath('/');
 
     return new Response('Layout saved', { status: 200 });

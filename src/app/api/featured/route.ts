@@ -23,7 +23,7 @@ export const POST = withAdminAuth(async (_user, body: { rows: FeaturedLayoutRow[
     await featuredLayoutModel.deleteMany();
     await featuredLayoutModel.insertMany(body.rows);
 
-    revalidateTag('projects');
+    revalidateTag('projects', 'default');
     revalidatePath('/projects');
 
     return new Response('Layout saved', { status: 200 });

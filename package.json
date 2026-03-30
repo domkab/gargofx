@@ -42,7 +42,7 @@
     "scss": "^0.2.4",
     "sharp": "^0.34.4",
     "svix": "^1.76.1",
-    "swiper": "^12.0.2",
+    "swiper": "^12.1.2",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
